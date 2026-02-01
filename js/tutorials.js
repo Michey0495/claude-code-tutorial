@@ -8,12 +8,12 @@
 // 公式リソースリンク
 const OFFICIAL_RESOURCES = {
     docs: {
-        url: "https://docs.anthropic.com/ja/docs/claude-code/overview",
+        url: "https://code.claude.com/docs/ja/overview",
         title: "Claude Code 公式ドキュメント",
         description: "Anthropicが提供する公式ドキュメント。最新の機能とベストプラクティス。"
     },
     bestPractices: {
-        url: "https://docs.anthropic.com/ja/docs/claude-code/best-practices",
+        url: "https://code.claude.com/docs/en/best-practices",
         title: "公式ベストプラクティス",
         description: "Anthropicが推奨する7つのベストプラクティスと失敗パターン。"
     },
@@ -648,44 +648,193 @@ const TUTORIALS = {
             icon: "zap",
             tags: ["Skills", "ワークフロー", "自動化"],
             content: {
-                summary: "Skillsは特定のワークフローを定義するマークダウンファイル。Progressive Disclosureで効率的に読み込まれます。",
+                summary: "Skillsは特定のワークフローを定義するマークダウンファイルです。Progressive Disclosure（必要なときだけ読み込む）により、コンテキストを効率的に使用します。Claudeはdescriptionを読んで、関連するタスクが来たときに自動でスキルの内容を読み込みます。",
                 keyPoints: [
-                    "~/.claude/skills/ または .claude/skills/ に配置",
-                    "nameとdescriptionのメタデータを記載",
-                    "Claudeが必要と判断したら自動で読み込む",
-                    "disable-model-invocation: true でスラッシュコマンド専用に"
+                    "~/.claude/skills/（グローバル）または .claude/skills/（プロジェクト）に配置",
+                    "YAML Front Matterでname、description、globs等のメタデータを記載",
+                    "Claudeがdescriptionを見て、必要と判断したら自動で本文を読み込む",
+                    "globs指定で特定ファイル編集時に自動読み込み",
+                    "user-invocable: true でスラッシュコマンド化（/skill-name で呼び出し）",
+                    "/learn コマンドで会話から自動的にSkillを生成可能"
                 ],
+                skillStructure: {
+                    title: "Skillファイルの構造",
+                    structure: `---
+name: skill-name                    # スキル名（必須）
+description: |                      # 説明（必須）- Claudeがこれを見て読み込むか判断
+  このスキルが何をするか、
+  いつ使うべきかを記載
+globs:                              # 特定ファイル編集時に自動読み込み
+  - "*.py"
+  - "tests/**/*.py"
+user-invocable: true                # trueで /skill-name コマンド化
+disable-model-invocation: false     # trueでスラッシュコマンド専用に
+---
+
+# スキル本文
+
+ここにワークフローの詳細手順を記載。
+Claudeはこの内容に従って作業を行う。`
+                },
+                skillExamples: [
+                    {
+                        name: "コードレビュー",
+                        description: "PRレビュー時の観点と手順を定義",
+                        code: `---
+name: code-review
+description: |
+  コードレビューを依頼されたとき、または
+  「レビューして」と言われたときに使用。
+  セキュリティ、パフォーマンス、可読性の観点でレビュー。
+globs:
+  - "src/**/*.ts"
+  - "src/**/*.tsx"
+---
+
+# コードレビュー手順
+
+## 1. 変更の概要を把握
+- git diff で変更内容を確認
+- 影響範囲を特定
+
+## 2. レビュー観点
+### セキュリティ
+- 入力バリデーション
+- 認証・認可チェック
+- SQLインジェクション/XSS対策
+
+### パフォーマンス
+- N+1クエリ
+- 不要な再レンダリング
+- メモリリーク
+
+### 可読性
+- 命名の適切さ
+- 関数の単一責任
+- コメントの必要性
+
+## 3. フィードバック形式
+- 🔴 Critical: 必ず修正
+- 🟡 Suggestion: 修正推奨
+- 💭 Question: 確認したい点`
+                    },
+                    {
+                        name: "テスト作成",
+                        description: "テストコード作成のルールを定義",
+                        code: `---
+name: write-tests
+description: |
+  テストを書くよう依頼されたとき、または
+  新機能実装後にテストが必要なときに使用。
+globs:
+  - "tests/**/*.py"
+  - "**/*_test.py"
+---
+
+# テスト作成ガイドライン
+
+## 命名規則
+- test_<機能>_<条件>_<期待結果>
+- 例: test_login_invalid_password_returns_401
+
+## 構造（AAA パターン）
+1. Arrange: テストデータの準備
+2. Act: テスト対象の実行
+3. Assert: 結果の検証
+
+## カバレッジ目標
+- 正常系: 必須
+- 境界値: 必須
+- 異常系: 主要なもの
+- エッジケース: 可能な限り`
+                    },
+                    {
+                        name: "ドキュメント生成",
+                        description: "READMEやドキュメント作成時のテンプレート",
+                        code: `---
+name: generate-docs
+description: |
+  READMEの作成・更新、ドキュメント生成を
+  依頼されたときに使用。
+user-invocable: true
+---
+
+# ドキュメント生成テンプレート
+
+## README.md 構成
+1. プロジェクト名とバッジ
+2. 概要（3行以内）
+3. 主要機能（箇条書き）
+4. インストール方法
+5. クイックスタート
+6. 設定オプション
+7. ライセンス
+
+## APIドキュメント構成
+- エンドポイント一覧
+- 各エンドポイントの詳細
+  - メソッド・パス
+  - パラメータ
+  - リクエスト例
+  - レスポンス例
+  - エラーコード`
+                    }
+                ],
+                learnCommand: {
+                    title: "/learn コマンド",
+                    description: "会話の中で効果的だったパターンを自動的にSkillとして保存できます。",
+                    usage: `# 使い方
+1. 効果的なワークフローを見つけたら
+2. /learn と入力
+3. Claudeが会話を分析してSkillを提案
+4. 承認すると .claude/skills/ に保存される
+
+# 例
+> /learn
+Claude: "この会話から「売上レポート作成」の
+Skillを作成しますか？"
+> はい
+Claude: ".claude/skills/sales-report.md を
+作成しました"`
+                },
                 code: "---\nname: report-draft\ndescription: 売上レポート作成時、先に要約を出力\n---\n\n# レポート作成手順\n\n売上データのレポートを書くときは、必ず以下の順序で出力すること：\n\n1. **3行要約**\n   - 対象期間\n   - 合計金額\n   - 特記事項\n\n2. **詳細本文**\n   - 月別推移\n   - 地域別分析\n   - 考察",
                 handson: {
-                    title: "レポート用Skillを作成する",
-                    goal: "「売上レポートを書くときは、必ず要約を先に出力する」というワークフローをSkillとして定義",
-                    prerequisites: ["ハンズオンフォルダにCLAUDE.mdがある"],
+                    title: "実践: コードレビューSkillを作成する",
+                    goal: "コードレビュー時に自動適用されるSkillを作成し、実際にレビューで使用する",
+                    prerequisites: ["任意のプロジェクトフォルダをVSCodeで開いている"],
                     steps: [
                         {
                             step: 1,
                             action: "Skillフォルダを作成",
                             prompt: "このプロジェクトに .claude/skills フォルダを作成して",
-                            expected: ".claude/skillsフォルダが作成される"
+                            expected: ".claude/skills フォルダが作成される"
                         },
                         {
                             step: 2,
-                            action: "Skillファイルを作成",
-                            prompt: ".claude/skills/report-draft.md を作成して。内容:\n\n---\nname: report-draft\ndescription: 売上レポート作成時、先に3行の要約を出力してから本文を書く\n---\n\n# レポート作成手順\n\n売上データのレポートを書くときは、必ず以下の順序で出力すること：\n\n1. 3行要約（対象期間、合計金額、特記事項）\n2. 詳細本文",
-                            expected: "Skillファイルが作成される"
+                            action: "コードレビューSkillを作成",
+                            prompt: ".claude/skills/code-review.md を作成して。内容:\n\n---\nname: code-review\ndescription: |\n  コードレビュー、PRレビューを依頼されたときに使用。\n  セキュリティ、パフォーマンス、可読性の3観点でレビューする。\nglobs:\n  - \"*.py\"\n  - \"*.js\"\n  - \"*.ts\"\n---\n\n# コードレビューチェックリスト\n\n## セキュリティ\n- [ ] 入力バリデーションがある\n- [ ] 機密情報がハードコードされていない\n- [ ] SQLインジェクション対策がある\n\n## パフォーマンス\n- [ ] 不要なループがない\n- [ ] N+1クエリがない\n- [ ] メモリリークの可能性がない\n\n## 可読性\n- [ ] 変数名が適切\n- [ ] 関数が単一責任\n- [ ] 適切なコメントがある\n\n## フィードバック形式\n🔴 Critical（必須修正）/ 🟡 Suggestion（推奨）/ 💭 Question（質問）",
+                            expected: "code-review.md が作成される"
                         },
                         {
                             step: 3,
-                            action: "Skillが効いているか試す",
-                            prompt: "data/sales_2025.csv の内容に基づいて、2025年Q1の売上レポートをMarkdownで書いて。report-draft の手順に従って。",
-                            expected: "要約が先に出力され、その後に詳細が続く"
+                            action: "テスト用Pythonファイルを作成",
+                            prompt: "test_sample.py というファイルを作成して、意図的にいくつかの問題があるコードを書いて（例：ハードコードされたパスワード、未使用変数など）",
+                            expected: "問題のあるコードが作成される"
+                        },
+                        {
+                            step: 4,
+                            action: "Skillを使ってレビュー",
+                            prompt: "test_sample.py をレビューして",
+                            expected: "code-review Skillが自動で読み込まれ、チェックリストに従ったレビューが行われる"
                         }
                     ],
                     checkpoints: [
-                        "Skillのdescriptionがロードされている",
-                        "指定した手順に従ってレポートが作成される"
+                        "Skillファイルの構造（YAML Front Matter + 本文）を理解した",
+                        "globs指定でファイルタイプに応じた自動読み込みを確認",
+                        "Skillの内容に従ったレビューが実行された"
                     ],
                     files: {
-                        created: [".claude/skills/report-draft.md"]
+                        created: [".claude/skills/code-review.md", "test_sample.py"]
                     }
                 }
             }
@@ -698,44 +847,199 @@ const TUTORIALS = {
             icon: "anchor",
             tags: ["Hooks", "自動化", "トリガー"],
             content: {
-                summary: "Hooksはイベント駆動の自動化機構。ファイル保存時、コミット前などにスクリプトを自動実行します。",
+                summary: "Hooksはイベント駆動の自動化機構です。ファイル保存時のフォーマット、機密情報の検出、テスト自動実行など、Claude Codeの操作に応じてスクリプトを自動実行できます。.claude.json（プロジェクト）または ~/.claude/settings.json（グローバル）で設定します。",
                 keyPoints: [
-                    "PreToolUse: ツール実行前にチェック",
+                    "SessionStart/SessionStop: セッション開始・終了時に実行",
+                    "PreToolUse: ツール実行前にチェック（ブロック可能）",
                     "PostToolUse: ツール実行後に処理",
-                    ".claude.json に設定を記載",
-                    "例: Python保存時に自動フォーマット"
+                    "Notification: Claudeの応答を加工して表示",
+                    "$EVENT: イベント種別、$FILE: 対象ファイル、$CONTENT: 内容などの変数が使用可能",
+                    "終了コード0以外でツール実行をブロック"
                 ],
+                configStructure: {
+                    title: ".claude.json の構造",
+                    structure: `{
+  "hooks": {
+    "SessionStart": [
+      {
+        "command": "echo 'Session started at $(date)' >> .claude-log"
+      }
+    ],
+    "PreToolUse": [
+      {
+        "event": "Write",
+        "pattern": "*.env*",
+        "command": "echo '⚠️ .envファイルの編集はブロックされました' && exit 1"
+      }
+    ],
+    "PostToolUse": [
+      {
+        "event": "Write",
+        "pattern": "*.py",
+        "command": "black $FILE && isort $FILE"
+      },
+      {
+        "event": "Write",
+        "pattern": "*.{ts,tsx,js,jsx}",
+        "command": "prettier --write $FILE"
+      }
+    ],
+    "Notification": [
+      {
+        "pattern": ".*",
+        "command": "say 'Claude finished'"
+      }
+    ]
+  }
+}`
+                },
                 events: [
-                    { event: "SessionStart", desc: "セッション開始時" },
-                    { event: "SessionStop", desc: "セッション終了時" },
-                    { event: "PreToolUse", desc: "ツール実行前" },
-                    { event: "PostToolUse", desc: "ツール実行後" }
+                    { event: "SessionStart", desc: "セッション開始時に実行。環境変数設定、ログ記録など", variables: ["$SESSION_ID"] },
+                    { event: "SessionStop", desc: "セッション終了時に実行。クリーンアップ、レポート生成など", variables: ["$SESSION_ID"] },
+                    { event: "PreToolUse", desc: "ツール実行前に実行。exit 1でブロック可能。セキュリティチェックに最適", variables: ["$EVENT", "$FILE", "$CONTENT"] },
+                    { event: "PostToolUse", desc: "ツール実行後に実行。フォーマット、リント、テストに最適", variables: ["$EVENT", "$FILE", "$CONTENT"] },
+                    { event: "Notification", desc: "Claudeの応答時に実行。通知、音声読み上げなど", variables: ["$MESSAGE"] }
+                ],
+                practicalPatterns: [
+                    {
+                        name: "Python自動フォーマット",
+                        description: "Python保存時にblack + isortを実行",
+                        code: `{
+  "hooks": {
+    "PostToolUse": [{
+      "event": "Write",
+      "pattern": "*.py",
+      "command": "black $FILE && isort $FILE"
+    }]
+  }
+}`
+                    },
+                    {
+                        name: "機密情報検出（ブロック）",
+                        description: ".envファイルや秘密鍵の編集をブロック",
+                        code: `{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "event": "Write",
+        "pattern": "*.env*",
+        "command": "echo '⛔ .envファイルは直接編集禁止です' && exit 1"
+      },
+      {
+        "event": "Write",
+        "pattern": "**/secrets/**",
+        "command": "echo '⛔ secretsフォルダは編集禁止です' && exit 1"
+      }
+    ]
+  }
+}`
+                    },
+                    {
+                        name: "テスト自動実行",
+                        description: "テストファイル更新時に該当テストを実行",
+                        code: `{
+  "hooks": {
+    "PostToolUse": [{
+      "event": "Write",
+      "pattern": "**/test_*.py",
+      "command": "pytest $FILE -v --tb=short"
+    }]
+  }
+}`
+                    },
+                    {
+                        name: "TypeScript型チェック",
+                        description: "TS/TSXファイル保存時に型チェック",
+                        code: `{
+  "hooks": {
+    "PostToolUse": [{
+      "event": "Write",
+      "pattern": "*.{ts,tsx}",
+      "command": "npx tsc --noEmit"
+    }]
+  }
+}`
+                    },
+                    {
+                        name: "コミット前検証",
+                        description: "Bashでgit commit実行前にテストを強制",
+                        code: `{
+  "hooks": {
+    "PreToolUse": [{
+      "event": "Bash",
+      "pattern": "git commit*",
+      "command": "npm test || (echo '❌ テスト失敗。コミットをブロックします' && exit 1)"
+    }]
+  }
+}`
+                    },
+                    {
+                        name: "セッションログ",
+                        description: "セッション開始・終了を記録",
+                        code: `{
+  "hooks": {
+    "SessionStart": [{
+      "command": "echo '=== Session Start: $(date) ===' >> .claude-sessions.log"
+    }],
+    "SessionStop": [{
+      "command": "echo '=== Session End: $(date) ===' >> .claude-sessions.log"
+    }]
+  }
+}`
+                    }
+                ],
+                variables: [
+                    { var: "$EVENT", desc: "イベントの種類（Write, Bash, Read等）" },
+                    { var: "$FILE", desc: "操作対象のファイルパス" },
+                    { var: "$CONTENT", desc: "書き込まれた内容（Writeイベント時）" },
+                    { var: "$SESSION_ID", desc: "現在のセッションID" },
+                    { var: "$MESSAGE", desc: "Claudeの応答メッセージ（Notification時）" }
                 ],
                 code: '{\n  "hooks": {\n    "PostToolUse": [\n      {\n        "event": "Write",\n        "pattern": "*.py",\n        "command": "black $FILE"\n      }\n    ]\n  }\n}',
                 handson: {
-                    title: "Python自動フォーマットHookを追加",
-                    goal: "Pythonファイル編集後に自動でblackフォーマッターを実行",
-                    prerequisites: ["blackがインストールされている（pip install black）"],
+                    title: "実践: セキュリティ + フォーマットHookを構築",
+                    goal: "機密ファイル編集をブロックし、Python保存時に自動フォーマットする総合的なHook設定を作成",
+                    prerequisites: ["pip install black isort でフォーマッターをインストール済み"],
                     steps: [
                         {
                             step: 1,
-                            action: ".claude.jsonを作成",
-                            prompt: "プロジェクトルートに .claude.json を作成して、以下の内容を設定して：\n\n{\n  \"hooks\": {\n    \"PostToolUse\": [\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"*.py\",\n        \"command\": \"black $FILE\"\n      }\n    ]\n  }\n}",
-                            expected: ".claude.jsonが作成される"
+                            action: "テスト用フォルダ構造を作成",
+                            prompt: "以下のフォルダ構造を作成して：\nhooks-demo/\n├── src/\n├── secrets/\n│   └── api_keys.json\n└── .env.example",
+                            expected: "フォルダ構造が作成される"
                         },
                         {
                             step: 2,
-                            action: "Hookをテスト",
-                            prompt: "scripts/test_hook.py というファイルを作成して、フォーマットされていないPythonコードを書いて",
-                            expected: "ファイル作成後、blackが自動実行されてフォーマットされる"
+                            action: "総合的なHook設定を作成",
+                            prompt: ".claude.json を作成して、以下の設定を記載：\n\n{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"*.env*\",\n        \"command\": \"echo '⛔ .envファイルの直接編集は禁止されています' && exit 1\"\n      },\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"**/secrets/**\",\n        \"command\": \"echo '⛔ secretsフォルダは編集禁止です' && exit 1\"\n      }\n    ],\n    \"PostToolUse\": [\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"*.py\",\n        \"command\": \"black $FILE && isort $FILE && echo '✅ フォーマット完了'\"\n      }\n    ],\n    \"SessionStart\": [\n      {\n        \"command\": \"echo 'Session: $(date)' >> .claude-log\"\n      }\n    ]\n  }\n}",
+                            expected: ".claude.json が作成される"
+                        },
+                        {
+                            step: 3,
+                            action: "セキュリティHookをテスト（ブロック確認）",
+                            prompt: "secrets/api_keys.json に何か書き込んで",
+                            expected: "「secretsフォルダは編集禁止」というメッセージが表示され、書き込みがブロックされる"
+                        },
+                        {
+                            step: 4,
+                            action: "フォーマットHookをテスト",
+                            prompt: "src/sample.py を作成して、以下の未フォーマットコードを書いて：\n\ndef hello(   name ):\n    print(    f'Hello, {name}!'   )\n\nif __name__=='__main__':\n    hello('World')",
+                            expected: "ファイル作成後、自動でblack/isortが実行され、コードがフォーマットされる"
+                        },
+                        {
+                            step: 5,
+                            action: "フォーマット結果を確認",
+                            prompt: "src/sample.py の内容を表示して",
+                            expected: "適切にフォーマットされたコードが表示される"
                         }
                     ],
                     checkpoints: [
-                        "Pythonファイル作成後にblackが自動実行される",
-                        "コードが自動でフォーマットされる"
+                        "PreToolUseでブロック機能が動作した（exit 1）",
+                        "PostToolUseで自動フォーマットが実行された",
+                        "パターンマッチング（*.py, *.env*, **/secrets/**）を理解した",
+                        "$FILE変数が正しく展開された"
                     ],
                     files: {
-                        created: [".claude.json"]
+                        created: [".claude.json", "src/sample.py", ".claude-log"]
                     }
                 }
             }
@@ -748,39 +1052,113 @@ const TUTORIALS = {
             icon: "users",
             tags: ["Subagents", "委譲", "並列処理"],
             content: {
-                summary: "Taskツールを使って、専門性の高いサブエージェントにタスクを委譲します。大規模な探索や並列処理に有効です。",
+                summary: "Subagents（サブエージェント）は、特定のタスクを専門のエージェントに委譲する仕組みです。大規模なコードベース探索、複数ファイルの同時処理、長時間タスクのバックグラウンド実行など、メインエージェントでは効率が悪い作業を分散処理できます。",
                 keyPoints: [
-                    "Task(prompt, type) でサブエージェントを起動",
-                    "Explore、Plan、Bash など専門エージェント",
-                    "run_in_background: true で並列実行",
-                    "結果は親エージェントに返される"
+                    "Taskツールで専門サブエージェントを起動",
+                    "Explore: コードベース探索に特化（ファイル検索、パターン検出）",
+                    "Plan: 実装計画の設計に特化（アーキテクチャ分析）",
+                    "Bash: コマンド実行に特化（ビルド、テスト、デプロイ）",
+                    "run_in_background: true で並列実行（複数タスク同時処理）",
+                    "結果は親エージェントに集約されて報告"
                 ],
                 agentTypes: [
-                    { type: "Explore", desc: "コードベースの探索に特化" },
-                    { type: "Plan", desc: "実装計画の設計" },
-                    { type: "Bash", desc: "コマンド実行に特化" }
+                    {
+                        type: "Explore",
+                        desc: "コードベースの探索・検索に特化",
+                        useCases: [
+                            "特定の関数やクラスの使用箇所を全検索",
+                            "プロジェクト全体のアーキテクチャを把握",
+                            "依存関係の調査",
+                            "特定パターン（エラーハンドリング等）の検出"
+                        ],
+                        example: "「認証に関連するすべてのファイルを探索して、どのような認証方式が使われているか調査して」"
+                    },
+                    {
+                        type: "Plan",
+                        desc: "実装計画・設計に特化",
+                        useCases: [
+                            "新機能の実装計画を立案",
+                            "リファクタリング戦略の策定",
+                            "アーキテクチャの改善提案",
+                            "影響範囲の分析"
+                        ],
+                        example: "「ログイン機能をOAuth対応にする計画を立てて。影響範囲と必要な変更をリストアップして」"
+                    },
+                    {
+                        type: "Bash",
+                        desc: "コマンド実行に特化",
+                        useCases: [
+                            "ビルドプロセスの実行",
+                            "テストスイートの実行",
+                            "デプロイスクリプトの実行",
+                            "環境セットアップ"
+                        ],
+                        example: "「全テストを実行して、失敗したテストの詳細を報告して」"
+                    }
+                ],
+                parallelExecution: {
+                    title: "並列実行パターン",
+                    description: "run_in_background: true で複数タスクを同時に実行し、処理時間を短縮できます。",
+                    examples: [
+                        {
+                            name: "複数ファイルの同時分析",
+                            scenario: "フロントエンドとバックエンドを同時にレビュー",
+                            prompt: "以下の2つのタスクを並列で実行して：\n1. src/frontend/ のReactコンポーネントを分析\n2. src/backend/ のAPIエンドポイントを分析"
+                        },
+                        {
+                            name: "テストと型チェックの同時実行",
+                            scenario: "CIの各ステップを並列化",
+                            prompt: "以下を並列で実行して結果を報告して：\n1. npm test\n2. npm run type-check\n3. npm run lint"
+                        },
+                        {
+                            name: "複数リポジトリの調査",
+                            scenario: "マイクロサービス間の整合性チェック",
+                            prompt: "以下の各サービスのAPI定義を同時に調査して、不整合がないか確認して：\n- user-service/api\n- order-service/api\n- payment-service/api"
+                        }
+                    ]
+                },
+                bestPractices: [
+                    "大規模探索（100+ファイル）はExploreサブエージェントに委譲",
+                    "独立したタスクは並列実行で時間短縮",
+                    "計画フェーズはPlanサブエージェントで慎重に",
+                    "長時間コマンド（ビルド等）はバックグラウンドで実行",
+                    "結果を待つ間に他のタスクを進める"
                 ],
                 handson: {
-                    title: "レビュー用サブエージェントでスクリプトをレビュー",
-                    goal: "サブエージェントを使ってコードレビューを行う",
-                    prerequisites: ["scripts/summary_by_month.pyが存在する"],
+                    title: "実践: 並列サブエージェントで複数ファイルを同時分析",
+                    goal: "Exploreサブエージェントを使った大規模検索と、並列実行による効率化を体験",
+                    prerequisites: ["ある程度のサイズのプロジェクトフォルダがある"],
                     steps: [
                         {
                             step: 1,
-                            action: "コードレビューを依頼",
-                            prompt: "scripts/summary_by_month.py をコードレビューして。以下の観点で確認：\n- エラーハンドリング\n- 可読性\n- パフォーマンス\n\nサブエージェントを使って詳細に探索してレビューして。",
-                            expected: "サブエージェントが起動し、詳細なレビューが行われる"
+                            action: "プロジェクト全体の探索を依頼",
+                            prompt: "このプロジェクト全体を探索して、以下を調査して報告して：\n- プロジェクトの構造と主要なファイル\n- 使用している言語・フレームワーク\n- エントリーポイント（main関数等）\n\nExploreサブエージェントを使って詳細に調査して。",
+                            expected: "Exploreサブエージェントが起動し、プロジェクト全体を探索して構造を報告"
                         },
                         {
                             step: 2,
-                            action: "指摘事項を修正",
-                            prompt: "レビューで指摘された問題を修正して",
-                            expected: "指摘事項が修正される"
+                            action: "複数の観点で並列分析を依頼",
+                            prompt: "以下の3つの分析を並列で実行して：\n1. セキュリティ観点: 機密情報のハードコード、入力バリデーション漏れを検索\n2. パフォーマンス観点: N+1クエリ、不要なループを検索\n3. コード品質観点: 未使用変数、重複コードを検索",
+                            expected: "3つのサブエージェントが並列で起動し、各観点での分析結果が報告される"
+                        },
+                        {
+                            step: 3,
+                            action: "改善計画の策定を依頼",
+                            prompt: "分析結果をもとに、優先度の高い改善項目のリストと実装計画を作成して。Planサブエージェントで詳細な計画を立てて。",
+                            expected: "Planサブエージェントが起動し、優先度付きの改善計画が提示される"
+                        },
+                        {
+                            step: 4,
+                            action: "最優先の改善を実施",
+                            prompt: "計画の中で最も優先度が高い1つを実装して",
+                            expected: "改善が実装される"
                         }
                     ],
                     checkpoints: [
-                        "サブエージェントが起動している",
-                        "詳細なレビュー結果が返される"
+                        "Exploreサブエージェントがプロジェクト全体を効率的に探索した",
+                        "並列実行で複数の分析が同時に行われた",
+                        "Planサブエージェントで実装計画が策定された",
+                        "サブエージェントの使い分け（探索 vs 計画 vs 実行）を理解した"
                     ]
                 }
             }
@@ -833,28 +1211,167 @@ const TUTORIALS = {
             icon: "plug",
             tags: ["MCP", "外部連携", "API"],
             content: {
-                summary: "MCPはClaudeを外部サービスと接続するプロトコルです。GitHub、Slack、データベース等と連携できます。",
+                summary: "MCP（Model Context Protocol）は、Claudeを外部サービスやデータソースと安全に接続するための標準プロトコルです。GitHub、Slack、データベース、Webブラウザなど、様々なサービスとの連携が可能になります。MCPサーバーを設定することで、Claudeが直接外部APIにアクセスできるようになります。",
                 keyPoints: [
-                    "MCP Serverを設定してサービス連携",
-                    "GitHub、Slack、PostgreSQL等と接続可能",
-                    "セキュアな認証・認可",
-                    "双方向のデータアクセス"
+                    "~/.claude/settings.json でMCPサーバーを設定",
+                    "npx/node/pythonでMCPサーバーを起動",
+                    "公式・コミュニティ提供の多数のMCPサーバーが利用可能",
+                    "ファイルシステム、GitHub、Slack、データベース等と連携",
+                    "セキュアな認証・スコープ制限",
+                    "Claude Codeセッション内で直接外部データにアクセス"
                 ],
+                mcpConcept: {
+                    title: "MCPの仕組み",
+                    description: "MCPサーバーは、Claudeと外部サービスの間の「通訳」として機能します。",
+                    flow: [
+                        "1. ユーザーが「GitHubのIssueを確認して」と依頼",
+                        "2. Claude Codeが設定済みのMCPサーバーを呼び出し",
+                        "3. MCPサーバーがGitHub APIにアクセス",
+                        "4. 結果がClaudeに返され、ユーザーに報告"
+                    ]
+                },
+                configStructure: {
+                    title: "settings.json の構造",
+                    structure: `// ~/.claude/settings.json
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": [
+        "-y",
+        "@anthropic-ai/mcp-server-filesystem",
+        "/Users/yourname/Documents"
+      ]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-github"],
+      "env": {
+        "GITHUB_TOKEN": "ghp_xxxxxxxxxxxx"
+      }
+    },
+    "postgres": {
+      "command": "npx",
+      "args": ["-y", "@anthropic-ai/mcp-server-postgres"],
+      "env": {
+        "DATABASE_URL": "postgresql://user:pass@localhost:5432/mydb"
+      }
+    }
+  }
+}`
+                },
+                popularServers: [
+                    {
+                        name: "@anthropic-ai/mcp-server-filesystem",
+                        desc: "ローカルファイルシステムへのアクセス",
+                        install: "npx -y @anthropic-ai/mcp-server-filesystem /path/to/folder",
+                        useCase: "特定フォルダ内のファイルを読み書き"
+                    },
+                    {
+                        name: "@anthropic-ai/mcp-server-github",
+                        desc: "GitHub APIとの連携",
+                        install: "GITHUB_TOKEN=xxx npx -y @anthropic-ai/mcp-server-github",
+                        useCase: "Issue/PR操作、リポジトリ管理"
+                    },
+                    {
+                        name: "@anthropic-ai/mcp-server-postgres",
+                        desc: "PostgreSQLデータベース接続",
+                        install: "DATABASE_URL=xxx npx -y @anthropic-ai/mcp-server-postgres",
+                        useCase: "SQLクエリ実行、データ分析"
+                    },
+                    {
+                        name: "@anthropic-ai/mcp-server-slack",
+                        desc: "Slack APIとの連携",
+                        install: "SLACK_TOKEN=xxx npx -y @anthropic-ai/mcp-server-slack",
+                        useCase: "メッセージ送信、チャンネル管理"
+                    },
+                    {
+                        name: "@anthropic-ai/mcp-server-puppeteer",
+                        desc: "Webブラウザ自動操作",
+                        install: "npx -y @anthropic-ai/mcp-server-puppeteer",
+                        useCase: "Webスクレイピング、UI自動テスト"
+                    }
+                ],
+                securityTips: [
+                    "環境変数でトークンを管理（設定ファイルに直書きしない）",
+                    "最小限のスコープでトークンを発行",
+                    "信頼できるMCPサーバーのみを使用",
+                    "アクセス可能なパスを制限（filesystemの場合）"
+                ],
+                cliAlternative: {
+                    title: "CLIツールによる代替",
+                    description: "MCPを設定しなくても、CLIツール（gh, curl等）で外部サービスと連携できます。",
+                    examples: [
+                        { tool: "gh", desc: "GitHub CLI", example: "gh issue list --limit 5" },
+                        { tool: "curl", desc: "HTTP API呼び出し", example: "curl https://api.example.com/data" },
+                        { tool: "psql", desc: "PostgreSQL CLI", example: "psql -c 'SELECT * FROM users'" }
+                    ]
+                },
                 handson: {
-                    title: "CLIで代替する",
-                    goal: "MCPなしでもCLIで外部サービスと連携できることを確認",
-                    prerequisites: ["ghコマンドがインストールされている"],
+                    title: "実践: GitHub MCP設定 + Issue管理",
+                    goal: "GitHub MCPサーバーを設定し、Claude CodeからIssueを直接操作する",
+                    prerequisites: [
+                        "GitHubアカウントがある",
+                        "Personal Access Token（PAT）を取得済み（repo, read:org スコープ）",
+                        "Node.js v18以上がインストール済み"
+                    ],
                     steps: [
                         {
                             step: 1,
-                            action: "GitHub CLIを使う",
-                            prompt: "gh repo view の結果を表示して",
-                            expected: "GitHubリポジトリの情報が表示される"
+                            action: "GitHub PATを取得（まだの場合）",
+                            prompt: "GitHub Settings > Developer settings > Personal access tokens > Generate new token で、repo と read:org スコープを持つトークンを作成してください。",
+                            expected: "ghp_xxxx 形式のトークンが発行される（これは安全に保管）"
+                        },
+                        {
+                            step: 2,
+                            action: "MCP設定ファイルを作成",
+                            prompt: "~/.claude/settings.json を作成して、以下の内容を設定：\n\n{\n  \"mcpServers\": {\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@anthropic-ai/mcp-server-github\"],\n      \"env\": {\n        \"GITHUB_TOKEN\": \"ghp_YOUR_TOKEN_HERE\"\n      }\n    }\n  }\n}\n\n※ ghp_YOUR_TOKEN_HERE を実際のトークンに置き換え",
+                            expected: "settings.json が作成される"
+                        },
+                        {
+                            step: 3,
+                            action: "Claude Codeを再起動",
+                            prompt: "Claude Codeを一度終了し、再度起動してください。MCPサーバーが読み込まれます。",
+                            expected: "MCPサーバーが初期化される"
+                        },
+                        {
+                            step: 4,
+                            action: "GitHubリポジトリのIssueを確認",
+                            prompt: "GitHubの <owner>/<repo> リポジトリのオープンなIssueを5件表示して",
+                            expected: "MCPサーバー経由でGitHub APIが呼び出され、Issue一覧が表示される"
+                        },
+                        {
+                            step: 5,
+                            action: "新しいIssueを作成（オプション）",
+                            prompt: "「テスト用Issue - Claude Codeから作成」というタイトルで新しいIssueを作成して",
+                            expected: "GitHubに新しいIssueが作成される"
                         }
                     ],
+                    alternativeWithCLI: {
+                        title: "MCPなしでCLIで代替する場合",
+                        steps: [
+                            {
+                                step: 1,
+                                action: "GitHub CLIをインストール",
+                                prompt: "brew install gh && gh auth login",
+                                expected: "gh コマンドが使用可能になる"
+                            },
+                            {
+                                step: 2,
+                                action: "CLIでIssueを操作",
+                                prompt: "gh issue list -R owner/repo --limit 5 の結果を表示して",
+                                expected: "Issue一覧が表示される（BashツールでCLIを実行）"
+                            }
+                        ]
+                    },
                     checkpoints: [
-                        "CLIツールでも外部サービス連携が可能"
-                    ]
+                        "settings.json でMCPサーバーが設定できた",
+                        "Claude CodeからGitHub APIに直接アクセスできた",
+                        "MCPとCLIツールの違いを理解した"
+                    ],
+                    files: {
+                        created: ["~/.claude/settings.json"]
+                    }
                 }
             }
         },
@@ -866,28 +1383,119 @@ const TUTORIALS = {
             icon: "package",
             tags: ["Plugins", "拡張", "コミュニティ"],
             content: {
-                summary: "Pluginsはスキル、フック、MCPサーバーをパッケージ化したもの。コミュニティで共有できます。",
+                summary: "Pluginsは、Skills、Hooks、MCPサーバーをまとめたパッケージです。プロジェクトテンプレートのように、一度のインストールで複数の機能を追加できます。チームやコミュニティで共有することで、ベストプラクティスを標準化できます。",
                 keyPoints: [
                     "claude plugin install <name> でインストール",
                     "スキル、フック、MCPをまとめて提供",
                     "manifest.json で構成を定義",
-                    "コミュニティで共有可能"
+                    "ローカルまたはGitリポジトリから配布可能",
+                    "チーム開発のオンボーディングを効率化"
+                ],
+                pluginStructure: {
+                    title: "Pluginの構造",
+                    structure: `my-plugin/
+├── manifest.json          # プラグイン定義
+├── skills/                # スキルファイル群
+│   ├── code-review.md
+│   └── testing.md
+├── hooks/                 # フック設定
+│   └── hooks.json
+└── mcp/                   # MCP設定（オプション）
+    └── servers.json`,
+                    manifestExample: `{
+  "name": "my-team-plugin",
+  "version": "1.0.0",
+  "description": "チーム標準のClaude Code設定",
+  "author": "Your Team",
+  "skills": [
+    "skills/code-review.md",
+    "skills/testing.md"
+  ],
+  "hooks": "hooks/hooks.json",
+  "mcp": "mcp/servers.json"
+}`
+                },
+                installMethods: [
+                    {
+                        method: "ローカルフォルダから",
+                        command: "claude plugin install ./my-plugin",
+                        description: "ローカルに作成したプラグインをインストール"
+                    },
+                    {
+                        method: "Gitリポジトリから",
+                        command: "claude plugin install https://github.com/user/my-plugin",
+                        description: "GitHubなどからプラグインをインストール"
+                    },
+                    {
+                        method: "npmパッケージから",
+                        command: "claude plugin install @scope/claude-plugin-name",
+                        description: "npmで公開されたプラグインをインストール"
+                    }
+                ],
+                useCases: [
+                    {
+                        name: "チームオンボーディング",
+                        description: "新メンバーがすぐにチームのコーディング規約に従えるよう、標準スキルとフックを一括配布"
+                    },
+                    {
+                        name: "言語特化環境",
+                        description: "Python/TypeScript/Rust等の言語別に最適化されたスキル・フックのセット"
+                    },
+                    {
+                        name: "プロジェクトテンプレート",
+                        description: "新規プロジェクト作成時にベストプラクティスを自動適用"
+                    }
+                ],
+                managementCommands: [
+                    { cmd: "claude plugin list", desc: "インストール済みプラグイン一覧" },
+                    { cmd: "claude plugin install <name>", desc: "プラグインをインストール" },
+                    { cmd: "claude plugin uninstall <name>", desc: "プラグインをアンインストール" },
+                    { cmd: "claude plugin update <name>", desc: "プラグインを更新" }
                 ],
                 handson: {
-                    title: "プラグインの確認",
-                    goal: "利用可能なプラグインを確認",
-                    prerequisites: [],
+                    title: "実践: シンプルなプラグインを作成する",
+                    goal: "Skills + Hooksをまとめたプラグインを作成し、インストールする",
+                    prerequisites: ["任意のプロジェクトフォルダで作業"],
                     steps: [
                         {
                             step: 1,
-                            action: "プラグイン一覧を確認",
-                            prompt: "現在インストールされているプラグインを確認して",
-                            expected: "プラグイン一覧が表示される"
+                            action: "プラグインのフォルダ構造を作成",
+                            prompt: "以下の構造でプラグインフォルダを作成して:\n\nmy-plugin/\n├── manifest.json\n├── skills/\n│   └── quick-test.md\n└── hooks/\n    └── hooks.json",
+                            expected: "フォルダ構造が作成される"
+                        },
+                        {
+                            step: 2,
+                            action: "manifest.json を作成",
+                            prompt: "my-plugin/manifest.json に以下の内容を書いて:\n\n{\n  \"name\": \"my-quick-plugin\",\n  \"version\": \"1.0.0\",\n  \"description\": \"テスト用プラグイン\",\n  \"skills\": [\"skills/quick-test.md\"],\n  \"hooks\": \"hooks/hooks.json\"\n}",
+                            expected: "manifest.json が作成される"
+                        },
+                        {
+                            step: 3,
+                            action: "スキルファイルを作成",
+                            prompt: "my-plugin/skills/quick-test.md に、テスト実行時のガイドラインを記載したスキルを作成して",
+                            expected: "quick-test.md が作成される"
+                        },
+                        {
+                            step: 4,
+                            action: "フック設定を作成",
+                            prompt: "my-plugin/hooks/hooks.json に、Pythonファイル保存時にフォーマットするフックを設定して",
+                            expected: "hooks.json が作成される"
+                        },
+                        {
+                            step: 5,
+                            action: "プラグインをインストール",
+                            prompt: "作成したプラグインをインストールして: claude plugin install ./my-plugin",
+                            expected: "プラグインがインストールされる"
                         }
                     ],
                     checkpoints: [
-                        "プラグインの仕組みを理解"
-                    ]
+                        "manifest.json でプラグインの構成を定義できた",
+                        "複数のファイル（Skills + Hooks）を1つにまとめられた",
+                        "プラグインのインストールが完了した"
+                    ],
+                    files: {
+                        created: ["my-plugin/manifest.json", "my-plugin/skills/quick-test.md", "my-plugin/hooks/hooks.json"]
+                    }
                 }
             }
         },
@@ -899,41 +1507,98 @@ const TUTORIALS = {
             icon: "minimize-2",
             tags: ["/compact", "圧縮", "最適化"],
             content: {
-                summary: "/compactはコンテキストを要約して圧縮します。タイミングが重要です。",
+                summary: "/compactはコンテキストを要約して圧縮するコマンドです。コンテキストウィンドウは有限リソースであり、適切なタイミングで圧縮することで、長時間のセッションでも品質を維持できます。ただし、タイミングを間違えると重要な文脈を失うリスクがあります。",
                 keyPoints: [
                     "70%を超えたら圧縮を検討",
-                    "フェーズの切れ目で実行",
+                    "フェーズの切れ目（探索完了→実装開始など）で実行",
                     "重要な情報はファイルに書き出してから圧縮",
-                    "圧縮後は重要な文脈を再確認"
+                    "圧縮後は重要な文脈を再確認",
+                    "/compact <カスタム指示> で圧縮内容をカスタマイズ可能"
+                ],
+                compactTiming: {
+                    title: "圧縮のタイミング",
+                    good: [
+                        { timing: "フェーズ完了時", example: "探索フェーズ完了後、実装に移る前" },
+                        { timing: "大きなファイル読み込み後", example: "10000行のログを分析した後" },
+                        { timing: "試行錯誤の終了後", example: "複数のアプローチを試して解決策が見つかった後" },
+                        { timing: "中間成果物の保存後", example: "分析結果をファイルに書き出した後" }
+                    ],
+                    bad: [
+                        { timing: "実装途中", example: "コードの半分を書いた段階" },
+                        { timing: "デバッグ中", example: "エラーの原因を探っている最中" },
+                        { timing: "重要な決定直後", example: "アーキテクチャ選定の直後（理由が失われる）" }
+                    ]
+                },
+                compactStrategies: [
+                    {
+                        name: "Write-before-Compact",
+                        description: "重要な情報をファイルに書き出してから圧縮",
+                        example: "分析結果をdocs/analysis.mdに保存してから/compactを実行",
+                        benefit: "情報が永続化され、圧縮後も参照可能"
+                    },
+                    {
+                        name: "Checkpoint Compact",
+                        description: "作業の区切りでチェックポイントとして圧縮",
+                        example: "機能Aの実装完了後に/compactし、機能Bの実装を開始",
+                        benefit: "各フェーズが独立し、文脈の混乱を防ぐ"
+                    },
+                    {
+                        name: "Custom Summary Compact",
+                        description: "カスタム指示で圧縮内容を指定",
+                        example: "/compact 認証機能の設計決定と理由を重点的に残して",
+                        benefit: "重要な文脈を確実に保持"
+                    }
+                ],
+                commands: [
+                    { cmd: "/context", desc: "現在のコンテキスト使用量を確認" },
+                    { cmd: "/compact", desc: "デフォルト設定で圧縮" },
+                    { cmd: "/compact <指示>", desc: "カスタム指示で圧縮内容を調整" },
+                    { cmd: "/clear", desc: "コンテキストを完全にクリア（新しいセッション開始）" }
                 ],
                 handson: {
-                    title: "区切りで/compactを実行する",
-                    goal: "適切なタイミングで圧縮を行う",
+                    title: "実践: 戦略的なコンパクト化",
+                    goal: "Write-before-Compact戦略を使って、情報を失わずに圧縮する",
                     prerequisites: ["ある程度のやり取りを行った後"],
                     steps: [
                         {
                             step: 1,
                             action: "使用量を確認",
                             prompt: "/context",
-                            expected: "使用量が表示される"
+                            expected: "使用量が表示される（例: 45% used, 90K/200K tokens）"
                         },
                         {
                             step: 2,
-                            action: "圧縮を実行",
-                            prompt: "/compact",
-                            expected: "コンテキストが圧縮される"
+                            action: "重要な情報をファイルに書き出し",
+                            prompt: "これまでの分析結果と決定事項を docs/session_summary.md に保存して",
+                            expected: "重要な情報がファイルに永続化される"
                         },
                         {
                             step: 3,
+                            action: "カスタム指示で圧縮",
+                            prompt: "/compact プロジェクト構造の理解と、未完了タスクのリストを残して",
+                            expected: "指定した内容を重視して圧縮される"
+                        },
+                        {
+                            step: 4,
                             action: "圧縮後の確認",
                             prompt: "/context",
-                            expected: "使用量が減少している"
+                            expected: "使用量が大幅に減少している"
+                        },
+                        {
+                            step: 5,
+                            action: "文脈の維持を確認",
+                            prompt: "このプロジェクトの概要と、次にやるべきことを教えて",
+                            expected: "圧縮前の重要な文脈が維持されている"
                         }
                     ],
                     checkpoints: [
-                        "圧縮前後で使用量が変化",
-                        "重要な文脈は維持されている"
-                    ]
+                        "圧縮前にファイル書き出しで情報を保護できた",
+                        "カスタム指示で圧縮内容をコントロールできた",
+                        "圧縮後も重要な文脈が維持されている"
+                    ],
+                    files: {
+                        created: ["docs/session_summary.md"]
+                    }
                 }
             }
         },
@@ -945,28 +1610,111 @@ const TUTORIALS = {
             icon: "git-fork",
             tags: ["並列処理", "効率化", "設計"],
             content: {
-                summary: "独立したタスクは並列で実行し、処理時間を短縮します。",
+                summary: "Claude Codeは内部的にSubagentsを使って並列処理を行います。独立したタスクを特定し、並列実行することで処理時間を大幅に短縮できます。また、ヘッドレスモードで複数のCLIセッションを同時に実行することも可能です。",
                 keyPoints: [
-                    "依存関係のないタスクを特定",
-                    "run_in_background: true で並列起動",
-                    "結果を統合して次のステップへ",
-                    "ヘッドレスモードで複数セッション"
+                    "依存関係のないタスクを特定して並列化",
+                    "Subagentsが自動的に並列実行を判断",
+                    "明示的に「並列で」と指示して強制も可能",
+                    "ヘッドレスモード（-p）で複数セッション起動",
+                    "結果を統合して次のステップへ"
                 ],
+                parallelPatterns: [
+                    {
+                        name: "分析の並列化",
+                        description: "同じデータに対する複数の分析を同時実行",
+                        example: "「このCSVの月別集計と地域別集計を並列で実行して」",
+                        benefit: "分析時間を半減"
+                    },
+                    {
+                        name: "ファイル処理の並列化",
+                        description: "複数のファイルに対する同じ処理を同時実行",
+                        example: "「src/以下の全てのPythonファイルにdocstringを追加して（並列で）」",
+                        benefit: "大量ファイルの処理を高速化"
+                    },
+                    {
+                        name: "テストの並列化",
+                        description: "独立したテストスイートを同時実行",
+                        example: "「ユニットテストとE2Eテストを並列で実行して」",
+                        benefit: "CI/CDパイプラインの高速化"
+                    },
+                    {
+                        name: "調査の並列化",
+                        description: "複数の観点からの調査を同時実行",
+                        example: "「セキュリティ観点とパフォーマンス観点でこのコードをレビューして（並列で）」",
+                        benefit: "包括的なレビューを短時間で"
+                    }
+                ],
+                headlessMode: {
+                    title: "ヘッドレスモードでの並列実行",
+                    description: "CLIの -p オプションでプロンプトを直接渡し、複数のタスクを並列起動できます。",
+                    examples: [
+                        {
+                            title: "複数タスクの同時実行",
+                            code: `# ターミナル1
+claude -p "src/auth/ のコードをレビューして" > auth_review.txt &
+
+# ターミナル2
+claude -p "src/api/ のコードをレビューして" > api_review.txt &
+
+# 両方の完了を待機
+wait`
+                        },
+                        {
+                            title: "ループで大量タスク",
+                            code: `# 複数のフォルダを並列でレビュー
+for dir in src/*/; do
+  claude -p "\${dir} のコードをレビューして" > "\${dir}review.txt" &
+done
+wait`
+                        }
+                    ]
+                },
+                dependencyAnalysis: {
+                    title: "依存関係の判断",
+                    description: "並列化できるかどうかは、タスク間の依存関係で決まります。",
+                    parallelizable: [
+                        "異なるファイルへの読み取り専用アクセス",
+                        "独立したモジュールの分析",
+                        "互いに影響しないテストの実行"
+                    ],
+                    notParallelizable: [
+                        "同じファイルへの書き込み",
+                        "前の処理結果を使う計算",
+                        "順序に意味があるDB操作"
+                    ]
+                },
                 handson: {
-                    title: "別タスクを並行する",
-                    goal: "複数のタスクを並列で実行",
-                    prerequisites: [],
+                    title: "実践: 分析タスクを並列実行",
+                    goal: "2つの独立した分析を並列で実行し、処理時間の短縮を体験",
+                    prerequisites: ["data/sales_2025.csv が存在する"],
                     steps: [
                         {
                             step: 1,
-                            action: "並列タスクを依頼",
-                            prompt: "以下の2つのタスクを並列で実行して：\n1. data/sales_2025.csv の月別集計\n2. data/sales_2025.csv の地域別集計",
-                            expected: "両方のタスクが並列で実行される"
+                            action: "並列分析を依頼",
+                            prompt: "data/sales_2025.csv に対して以下の2つの分析を並列で実行して：\n1. 月別売上トレンド分析（増減率含む）\n2. カテゴリ別売上構成比分析\n\n結果はそれぞれ別のMarkdownファイルに保存して",
+                            expected: "2つのSubagentが並列で実行され、それぞれの分析結果が別ファイルに保存される"
+                        },
+                        {
+                            step: 2,
+                            action: "結果を統合",
+                            prompt: "2つの分析結果を統合して、経営サマリーレポートを作成して",
+                            expected: "両方の分析結果が統合されたレポートが生成される"
+                        },
+                        {
+                            step: 3,
+                            action: "（オプション）ヘッドレスモードを試す",
+                            prompt: "ターミナルで以下を実行:\nclaude -p \"data/sales_2025.csv の月別売上を表示して\" &\nclaude -p \"data/sales_2025.csv の地域別売上を表示して\" &\nwait",
+                            expected: "2つのCLIセッションが並列で実行される"
                         }
                     ],
                     checkpoints: [
-                        "複数のタスクが同時に進行"
-                    ]
+                        "並列実行により処理が効率化された",
+                        "独立したタスクを正しく並列化できた",
+                        "結果を統合して活用できた"
+                    ],
+                    files: {
+                        created: ["reports/monthly_trend.md", "reports/category_analysis.md", "reports/executive_summary.md"]
+                    }
                 }
             }
         }
@@ -980,34 +1728,139 @@ const TUTORIALS = {
             icon: "trending-down",
             tags: ["トークン", "最適化", "コスト"],
             content: {
-                summary: "必要最小限のトークンで最大の効果を得る方法を学びます。",
+                summary: "Claude Codeのコストはトークン消費に直結します。必要最小限のトークンで最大の効果を得ることで、コスト削減とパフォーマンス向上の両方を実現できます。WSCEフレームワーク（Write/Summarize/Compress/Extract）を使いこなしましょう。",
                 keyPoints: [
-                    "不要なファイル読み込みを避ける",
-                    "結果はファイルに書き出す",
-                    "Grepで必要な部分だけ抽出",
-                    "プロンプトを簡潔に"
+                    "WSCEフレームワーク: Write → Summarize → Compress → Extract",
+                    "不要なファイル読み込みを避ける（@指定で必要部分のみ）",
+                    "結果はファイルに書き出してコンテキストから解放",
+                    "Grepで必要な部分だけ抽出してから渡す",
+                    "モデル選択: 簡単なタスクはHaiku、複雑なタスクはSonnet/Opus"
+                ],
+                wsceFramework: {
+                    title: "WSCEフレームワーク",
+                    description: "トークン最適化の4つの基本戦略",
+                    strategies: [
+                        {
+                            name: "Write（書き出す）",
+                            description: "中間結果をファイルに書き出し、コンテキストから解放",
+                            example: "分析結果を results.md に保存してから次の処理へ",
+                            saving: "大きな中間データをコンテキストに残さない"
+                        },
+                        {
+                            name: "Summarize（要約する）",
+                            description: "大きなファイルを要約してから渡す",
+                            example: "10000行のログを100行の要約にしてから分析",
+                            saving: "入力トークンを1/100に削減"
+                        },
+                        {
+                            name: "Compress（圧縮する）",
+                            description: "/compactで会話履歴を圧縮",
+                            example: "フェーズ完了時に/compactを実行",
+                            saving: "累積コンテキストを削減"
+                        },
+                        {
+                            name: "Extract（抽出する）",
+                            description: "必要な部分だけを抽出して渡す",
+                            example: "grep -A5 'エラー' でエラー箇所のみ抽出",
+                            saving: "関係ない行を渡さない"
+                        }
+                    ]
+                },
+                modelSelection: {
+                    title: "タスク別モデル選択ガイド",
+                    models: [
+                        {
+                            model: "Claude 3.5 Haiku",
+                            cost: "低",
+                            useCase: "単純な変換、フォーマット、簡単なリファクタリング",
+                            examples: ["JSONの整形", "変数名の一括置換", "簡単なコメント追加"]
+                        },
+                        {
+                            model: "Claude 3.5 Sonnet",
+                            cost: "中",
+                            useCase: "一般的なコーディング、分析、レビュー",
+                            examples: ["新機能の実装", "コードレビュー", "バグ修正"]
+                        },
+                        {
+                            model: "Claude 3 Opus",
+                            cost: "高",
+                            useCase: "複雑な設計、アーキテクチャ、難解な問題",
+                            examples: ["システム設計", "複雑なアルゴリズム", "セキュリティ分析"]
+                        }
+                    ]
+                },
+                optimizationTips: [
+                    {
+                        tip: "@ 指定で必要なファイルのみ参照",
+                        bad: "このプロジェクトのコードを全部読んで",
+                        good: "@src/auth/login.ts を読んで"
+                    },
+                    {
+                        tip: "行番号指定で必要な部分のみ",
+                        bad: "このファイルのバグを直して",
+                        good: "@src/api.ts:45-60 のエラーハンドリングを修正して"
+                    },
+                    {
+                        tip: "出力形式を簡潔に指定",
+                        bad: "詳しく説明して",
+                        good: "3行で要約して"
+                    },
+                    {
+                        tip: "不要な確認を省略",
+                        bad: "まず計画を説明して、それから実行して",
+                        good: "計画なしで直接実行して"
+                    }
+                ],
+                commands: [
+                    { cmd: "/model", desc: "現在のモデルを確認" },
+                    { cmd: "/model <name>", desc: "モデルを変更（haiku, sonnet, opus）" },
+                    { cmd: "/cost", desc: "このセッションのコスト概算を表示" },
+                    { cmd: "/context", desc: "コンテキスト使用量を確認" }
                 ],
                 handson: {
-                    title: "モデル選択を意識する",
-                    goal: "タスクに応じた適切なモデルを選択",
-                    prerequisites: [],
+                    title: "実践: WSCEフレームワークでトークン最適化",
+                    goal: "大きなデータを効率的に処理し、トークン消費を最小化する",
+                    prerequisites: ["data/sales_2025.csv が存在する"],
                     steps: [
                         {
                             step: 1,
-                            action: "現在のモデルを確認",
-                            prompt: "/model",
-                            expected: "現在のモデルが表示される"
+                            action: "現在のコンテキストとモデルを確認",
+                            prompt: "/context\n/model",
+                            expected: "使用量とモデルが表示される"
                         },
                         {
                             step: 2,
-                            action: "簡単なタスクには軽量モデルを使用",
-                            prompt: "（軽量なタスクの場合はHaikuを検討）",
-                            expected: "コスト効率の良いモデルを選択"
+                            action: "Extract: 必要な部分のみ抽出",
+                            prompt: "data/sales_2025.csv から東京地域のデータのみ抽出して表示して（全データは渡さないで）",
+                            expected: "フィルタされたデータのみが処理される"
+                        },
+                        {
+                            step: 3,
+                            action: "Summarize: 要約してから分析",
+                            prompt: "data/sales_2025.csv を10行以内に要約して、その要約をもとに傾向を分析して",
+                            expected: "要約→分析の2段階で効率的に処理"
+                        },
+                        {
+                            step: 4,
+                            action: "Write: 結果をファイルに書き出し",
+                            prompt: "分析結果を reports/analysis.md に保存して。保存後は結果をコンテキストに残さないで",
+                            expected: "ファイルに保存され、コンテキストが解放される"
+                        },
+                        {
+                            step: 5,
+                            action: "コンテキスト使用量の変化を確認",
+                            prompt: "/context",
+                            expected: "効率的な処理によりコンテキスト消費が抑えられている"
                         }
                     ],
                     checkpoints: [
-                        "タスクの複雑さに応じたモデル選択"
-                    ]
+                        "必要な部分のみを抽出して処理できた",
+                        "要約を活用して入力トークンを削減できた",
+                        "ファイル書き出しでコンテキストを解放できた"
+                    ],
+                    files: {
+                        created: ["reports/analysis.md"]
+                    }
                 }
             }
         },
@@ -1019,36 +1872,155 @@ const TUTORIALS = {
             icon: "refresh-cw",
             tags: ["継続学習", "蓄積", "改善"],
             content: {
-                summary: "効果的なパターンをCLAUDE.mdやSkillsに蓄積し、チームで共有します。",
+                summary: "Claude Codeのセッションは独立していますが、CLAUDE.mdとSkillsを使えば学習を蓄積できます。プロジェクト固有のルール、効果的なプロンプトパターン、失敗から学んだ教訓を永続化し、チーム全体で共有しましょう。",
                 keyPoints: [
-                    "うまくいったプロンプトをSkill化",
-                    "失敗パターンをCLAUDE.mdに記載",
-                    "定期的にルールを見直し",
-                    "チームで知見を共有"
+                    "/learn コマンドで会話から自動的にSkillを生成",
+                    "CLAUDE.md に「やってはいけないこと」を記録",
+                    "成功パターンは即座にSkill化",
+                    "定期的（週1回など）にルールを見直し・整理",
+                    "チームでCLAUDE.mdとSkillsをバージョン管理"
                 ],
+                learningCycle: {
+                    title: "継続学習サイクル",
+                    steps: [
+                        {
+                            step: "1. 発見",
+                            description: "効果的なプロンプトや、避けるべきパターンを発見",
+                            example: "「このプロジェクトではPythonよりTypeScriptの方がうまくいく」"
+                        },
+                        {
+                            step: "2. 記録",
+                            description: "発見をCLAUDE.mdまたはSkillとして記録",
+                            example: "CLAUDE.mdに「# 言語選択\\nTypeScriptを優先すること」を追加"
+                        },
+                        {
+                            step: "3. 検証",
+                            description: "次のセッションでルールが適用されるか確認",
+                            example: "新しいセッションでTypeScriptが優先されることを確認"
+                        },
+                        {
+                            step: "4. 改善",
+                            description: "ルールを洗練し、不要なものは削除",
+                            example: "例外ケースを追記、または過度に制限的なルールを緩和"
+                        }
+                    ]
+                },
+                recordingPatterns: [
+                    {
+                        type: "CLAUDE.md に記録するもの",
+                        items: [
+                            "プロジェクト固有の命名規則",
+                            "使用禁止のライブラリ・パターン",
+                            "必須のコーディングスタイル",
+                            "テスト要件・カバレッジ目標",
+                            "特定のファイル/フォルダへの制限"
+                        ],
+                        example: `# プロジェクトルール
+
+## 命名規則
+- コンポーネント: PascalCase
+- 関数: camelCase
+- 定数: SCREAMING_SNAKE_CASE
+
+## 禁止事項
+- moment.js は使用禁止（date-fnsを使う）
+- any型は禁止
+
+## テスト要件
+- 新機能には必ずテストを追加
+- カバレッジ80%以上を維持`
+                    },
+                    {
+                        type: "Skill に記録するもの",
+                        items: [
+                            "繰り返し使うワークフロー",
+                            "レビュー観点のチェックリスト",
+                            "ドキュメント生成テンプレート",
+                            "特定タスクの手順書"
+                        ],
+                        example: `---
+name: deploy-checklist
+description: デプロイ前チェックリスト
+user-invocable: true
+---
+
+# デプロイ前チェックリスト
+
+1. [ ] 全テストがパス
+2. [ ] lint エラーなし
+3. [ ] 環境変数の確認
+4. [ ] マイグレーション確認
+5. [ ] ロールバック手順の確認`
+                    }
+                ],
+                learnCommand: {
+                    title: "/learn コマンドの活用",
+                    description: "会話中に効果的なパターンを見つけたら、/learn で自動的にSkill化できます。",
+                    usage: [
+                        { step: "1", action: "効果的なワークフローを実行" },
+                        { step: "2", action: "/learn と入力" },
+                        { step: "3", action: "Claudeが会話を分析してSkillを提案" },
+                        { step: "4", action: "承認すると .claude/skills/ に保存" }
+                    ]
+                },
+                teamSharing: {
+                    title: "チームでの共有",
+                    description: "CLAUDE.mdとSkillsをバージョン管理に含め、チーム全体で共有します。",
+                    benefits: [
+                        "新メンバーが即座にベストプラクティスを適用",
+                        "チーム全体の品質基準を統一",
+                        "学習がチーム資産として蓄積"
+                    ],
+                    gitignore: `# .gitignore の例
+# 個人設定は除外、チーム共有は含める
+.claude/settings.json  # 個人設定は除外
+!.claude/skills/       # Skillsは共有
+!CLAUDE.md             # プロジェクトルールは共有`
+                },
                 handson: {
-                    title: "このプロジェクトの知見をSkill化",
-                    goal: "学んだパターンをSkillとして保存",
-                    prerequisites: ["いくつかのハンズオンを完了"],
+                    title: "実践: 学習サイクルを回す",
+                    goal: "効果的なパターンを発見し、Skill化して永続化する",
+                    prerequisites: ["いくつかのハンズオンを完了していること"],
                     steps: [
                         {
                             step: 1,
                             action: "効果的だったパターンを振り返る",
-                            prompt: "これまでのセッションで効果的だったプロンプトパターンをリストアップして",
-                            expected: "効果的なパターンがリストアップされる"
+                            prompt: "これまでのセッションで効果的だったプロンプトパターンを5つリストアップして。各パターンについて、なぜ効果的だったかも説明して",
+                            expected: "効果的なパターンとその理由がリストアップされる"
                         },
                         {
                             step: 2,
-                            action: "Skillとして保存",
-                            prompt: "リストアップしたパターンを .claude/skills/learned-patterns.md として保存して",
-                            expected: "Skillファイルが作成される"
+                            action: "/learnでSkill化を試す",
+                            prompt: "/learn",
+                            expected: "Claudeが会話を分析してSkillを提案する"
+                        },
+                        {
+                            step: 3,
+                            action: "手動でSkillを作成",
+                            prompt: ".claude/skills/my-workflow.md を作成して。内容は、効果的だったパターンをまとめたもので、次回から自動適用されるように",
+                            expected: "カスタムSkillファイルが作成される"
+                        },
+                        {
+                            step: 4,
+                            action: "CLAUDE.mdにルールを追加",
+                            prompt: "CLAUDE.md に「このプロジェクトで学んだ教訓」セクションを追加して",
+                            expected: "プロジェクトルールが更新される"
+                        },
+                        {
+                            step: 5,
+                            action: "新しいセッションで確認",
+                            prompt: "（新しいセッションを開始して、作成したSkillとCLAUDE.mdが読み込まれることを確認）",
+                            expected: "次回セッションから学習内容が反映される"
                         }
                     ],
                     checkpoints: [
-                        "学習がファイルとして永続化される"
+                        "効果的なパターンを言語化できた",
+                        "Skillファイルとして永続化できた",
+                        "CLAUDE.mdにルールを追加できた"
                     ],
                     files: {
-                        created: [".claude/skills/learned-patterns.md"]
+                        created: [".claude/skills/my-workflow.md"],
+                        modified: ["CLAUDE.md"]
                     }
                 }
             }
@@ -1061,28 +2033,127 @@ const TUTORIALS = {
             icon: "file-edit",
             tags: ["非技術者", "文書", "分析"],
             content: {
-                summary: "Claude Codeはコーディングツールではなく「ローカルアシスタント」です。プログラミング知識なしでも活用できます。",
+                summary: "Claude Codeはコーディングツールではなく「ローカルアシスタント」です。プログラミング知識がなくても、ファイル整理、レポート作成、データ分析、議事録処理など、日常業務の多くをAIに任せることができます。専門用語は不要、自然な日本語で依頼するだけです。",
                 keyPoints: [
-                    "ファイル整理・リネーム",
-                    "レポート・資料作成",
-                    "データ分析・可視化",
-                    "議事録の要約・タスク抽出"
+                    "「〜して」という自然な日本語で依頼できる",
+                    "ファイル操作・整理を自動化",
+                    "CSVやExcelのデータを分析・グラフ化",
+                    "議事録から次のアクションを自動抽出",
+                    "複数ファイルの一括処理も可能"
+                ],
+                mindset: {
+                    title: "非技術者向けマインドセット",
+                    points: [
+                        "専門用語を知らなくても大丈夫。やりたいことを日本語で伝えれば、Claudeが方法を考えます",
+                        "「どうやって」ではなく「何をしたいか」を伝えましょう",
+                        "うまくいかなければ言い換えて再度依頼すればOK",
+                        "途中経過が理解できなくても、最終結果を確認すれば十分"
+                    ]
+                },
+                useCaseCategories: [
+                    {
+                        category: "ファイル操作・整理",
+                        examples: [
+                            { task: "ファイルの一括リネーム", prompt: "このフォルダのファイル名を「日付_タイトル」形式に変更して" },
+                            { task: "重複ファイルの検出", prompt: "このフォルダに重複しているファイルがあれば教えて" },
+                            { task: "フォルダ整理", prompt: "ダウンロードフォルダを種類別（画像、PDF、音楽）に整理して" },
+                            { task: "ファイル検索", prompt: "先週作成したExcelファイルを全部リストアップして" }
+                        ]
+                    },
+                    {
+                        category: "文書作成・編集",
+                        examples: [
+                            { task: "報告書作成", prompt: "このデータをもとに週次報告書を作成して" },
+                            { task: "メール下書き", prompt: "この内容を丁寧なビジネスメールにして" },
+                            { task: "議事録整形", prompt: "この走り書きメモを正式な議事録にまとめて" },
+                            { task: "プレゼン骨子", prompt: "この企画書の内容をスライド用の箇条書きにして" }
+                        ]
+                    },
+                    {
+                        category: "データ分析・可視化",
+                        examples: [
+                            { task: "CSV分析", prompt: "このCSVファイルの売上推移を分析して、グラフも作って" },
+                            { task: "アンケート集計", prompt: "このアンケート結果を集計して、傾向を教えて" },
+                            { task: "比較表作成", prompt: "これらの製品を比較表にまとめて" },
+                            { task: "統計サマリー", prompt: "このデータの平均、最大、最小を教えて" }
+                        ]
+                    },
+                    {
+                        category: "情報抽出・変換",
+                        examples: [
+                            { task: "アクション抽出", prompt: "この議事録から「誰が・いつまでに・何をする」を抽出して" },
+                            { task: "翻訳", prompt: "この英語ドキュメントを日本語に翻訳して" },
+                            { task: "要約", prompt: "この長いレポートを3行で要約して" },
+                            { task: "形式変換", prompt: "このWordファイルをMarkdownに変換して" }
+                        ]
+                    }
+                ],
+                promptTemplates: [
+                    {
+                        name: "シンプル依頼",
+                        template: "〜して",
+                        example: "このフォルダのファイル一覧を見せて"
+                    },
+                    {
+                        name: "形式指定",
+                        template: "〜を○○形式で作って",
+                        example: "この売上データを表形式でまとめて"
+                    },
+                    {
+                        name: "条件付き",
+                        template: "〜のうち、○○なものだけ〜して",
+                        example: "このフォルダのうち、PDFファイルだけを別フォルダに移動して"
+                    },
+                    {
+                        name: "複数処理",
+                        template: "まず〜して、次に〜して",
+                        example: "まずこのCSVを読んで、次に月別にグラフを作って"
+                    }
                 ],
                 handson: {
-                    title: "3行で要約して",
-                    goal: "自然な日本語で要約を依頼",
-                    prerequisites: ["data/sales_2025.csvがある"],
+                    title: "実践: コードを書かずにデータ分析",
+                    goal: "プログラミング知識なしで、CSVデータの分析からレポート作成まで行う",
+                    prerequisites: ["data/sales_2025.csv が存在する"],
                     steps: [
                         {
                             step: 1,
-                            action: "シンプルな要約を依頼",
-                            prompt: "data/sales_2025.csv の内容を3行で要約して",
-                            expected: "簡潔な3行の要約が表示される"
+                            action: "データの中身を確認",
+                            prompt: "data/sales_2025.csv の中身を見せて。何のデータか説明して",
+                            expected: "データの内容と各列の意味が説明される"
+                        },
+                        {
+                            step: 2,
+                            action: "簡単な集計を依頼",
+                            prompt: "このデータの合計金額を教えて",
+                            expected: "売上合計が計算されて表示される"
+                        },
+                        {
+                            step: 3,
+                            action: "グラフ化を依頼",
+                            prompt: "月別の売上をグラフにして、reports/monthly_chart.png として保存して",
+                            expected: "グラフ画像が生成・保存される"
+                        },
+                        {
+                            step: 4,
+                            action: "レポート作成を依頼",
+                            prompt: "ここまでの分析結果を、上司に報告するレポートとしてまとめて。専門用語は使わないで",
+                            expected: "ビジネス向けのわかりやすいレポートが作成される"
+                        },
+                        {
+                            step: 5,
+                            action: "メール形式で出力",
+                            prompt: "このレポートをメール本文として送れる形に整えて",
+                            expected: "メール形式に整形されて出力される"
                         }
                     ],
                     checkpoints: [
-                        "専門用語なしで依頼できる"
-                    ]
+                        "プログラミング用語を使わずに依頼できた",
+                        "データ分析からグラフ作成まで実行できた",
+                        "ビジネス向けレポートを生成できた"
+                    ],
+                    files: {
+                        created: ["reports/monthly_chart.png", "reports/sales_report.md"]
+                    }
                 }
             }
         },
@@ -1094,35 +2165,144 @@ const TUTORIALS = {
             icon: "list",
             tags: ["ユースケース", "活用例", "実践"],
             content: {
-                summary: "Claude Codeの可能性は無限大。日常のあらゆる場面で活用可能です。",
+                summary: "Claude Codeの活用範囲はコーディングだけではありません。日常業務、創作活動、学習、調査など、あらゆる場面で活用できます。ここでは実際に使える50のユースケースを10カテゴリに分けて紹介します。",
                 keyPoints: [
-                    "資料作成: プレゼン、レポート、提案書",
-                    "情報整理: ブックマーク、メモ、ファイル",
-                    "分析: 売上、アンケート、ログ",
-                    "創作: 記事、小説、脚本",
-                    "学習: 要約、翻訳、解説"
+                    "資料作成: プレゼン、レポート、提案書、マニュアル",
+                    "情報整理: ファイル、ブックマーク、メモ、連絡先",
+                    "分析: 売上、アンケート、ログ、市場調査",
+                    "創作: 記事、小説、脚本、企画",
+                    "学習: 要約、翻訳、解説、問題作成"
                 ],
-                examples: [
-                    "このフォルダのファイルを更新日順に整理して",
-                    "この議事録から次のアクションを抽出して",
-                    "このCSVをグラフ化して",
-                    "このレポートをメール用に要約して",
-                    "この英語ドキュメントを日本語に翻訳して"
+                categories: [
+                    {
+                        name: "📊 データ分析・レポート",
+                        examples: [
+                            "売上CSVを分析してグラフ付きレポートを作成",
+                            "アンケート結果を集計してクロス分析",
+                            "ログファイルからエラー傾向を抽出",
+                            "競合製品の価格表を比較分析",
+                            "Webアクセスログからユーザー行動を分析"
+                        ]
+                    },
+                    {
+                        name: "📝 文書作成・編集",
+                        examples: [
+                            "議事録から次のアクションを抽出してToDo化",
+                            "走り書きメモを正式なドキュメントに整形",
+                            "プレゼン資料の骨子を箇条書きで作成",
+                            "製品マニュアルのドラフトを作成",
+                            "FAQ集を質問・回答形式で整理"
+                        ]
+                    },
+                    {
+                        name: "📧 コミュニケーション",
+                        examples: [
+                            "報告書をメール用に3行で要約",
+                            "クレーム対応メールの丁寧な返信文を作成",
+                            "英語メールを日本語に翻訳して返信案を作成",
+                            "社内通知のお知らせ文を作成",
+                            "複数の連絡先をBCCリストに整形"
+                        ]
+                    },
+                    {
+                        name: "📁 ファイル・フォルダ管理",
+                        examples: [
+                            "散らばったファイルを種類別にフォルダ分け",
+                            "ファイル名を「日付_タイトル」形式に一括リネーム",
+                            "重複ファイルを検出してリストアップ",
+                            "1ヶ月以上更新のないファイルをアーカイブ",
+                            "スクリーンショットを日付別フォルダに整理"
+                        ]
+                    },
+                    {
+                        name: "🔍 調査・リサーチ",
+                        examples: [
+                            "競合サービスの機能比較表を作成",
+                            "業界レポートから重要ポイントを抽出",
+                            "特許文書から技術要素をリストアップ",
+                            "法改正のポイントをQ&A形式でまとめ",
+                            "論文のアブストラクトを平易な日本語で解説"
+                        ]
+                    },
+                    {
+                        name: "📚 学習・教育",
+                        examples: [
+                            "専門書の内容を初心者向けに要約",
+                            "英語ドキュメントを日本語に翻訳",
+                            "学習内容から確認テストの問題を作成",
+                            "難しい概念をたとえ話で説明",
+                            "勉強ノートをフラッシュカード形式に変換"
+                        ]
+                    },
+                    {
+                        name: "✍️ 創作・コンテンツ",
+                        examples: [
+                            "ブログ記事のアウトラインを作成",
+                            "SNS投稿用にキャッチーな文章を作成",
+                            "製品紹介のキャッチコピー案を10個作成",
+                            "社内報の記事ネタをブレインストーミング",
+                            "イベント告知文のドラフトを作成"
+                        ]
+                    },
+                    {
+                        name: "📅 スケジュール・タスク管理",
+                        examples: [
+                            "複数の予定を時系列で整理",
+                            "プロジェクトのマイルストーンをガントチャート風に",
+                            "会議の決定事項から担当者別タスクリストを作成",
+                            "来週の予定を優先度順に並べ替え",
+                            "定期タスクのリマインダーリストを作成"
+                        ]
+                    },
+                    {
+                        name: "🔄 形式変換・整形",
+                        examples: [
+                            "ExcelデータをMarkdownテーブルに変換",
+                            "名刺情報をCSV形式に整形",
+                            "JSONデータを見やすい表形式に変換",
+                            "複数のテキストファイルを1つに結合",
+                            "HTMLをプレーンテキストに変換"
+                        ]
+                    },
+                    {
+                        name: "🎯 その他の便利活用",
+                        examples: [
+                            "領収書の内容をまとめて経費精算表を作成",
+                            "商品レビューから評価ポイントを抽出",
+                            "契約書の重要条項をハイライト",
+                            "自己紹介文を場面に合わせて複数パターン作成",
+                            "引っ越しチェックリストを作成"
+                        ]
+                    }
                 ],
                 handson: {
-                    title: "レポートをメール用に要約させる",
-                    goal: "既存のレポートをメール用の短い文章に変換",
-                    prerequisites: ["reports/q1_report.mdがある"],
+                    title: "実践: 3つのユースケースを試す",
+                    goal: "実際に非コーディング活用を体験し、日常業務での活用イメージを掴む",
+                    prerequisites: ["任意のフォルダで作業可能"],
                     steps: [
                         {
                             step: 1,
-                            action: "メール用に要約",
-                            prompt: "@reports/q1_report.md をメール用に要約して。件名と本文（3-5行）の形式で。",
-                            expected: "メール形式の簡潔な要約が生成される"
+                            action: "ファイル整理を試す",
+                            prompt: "このフォルダにあるファイルを、拡張子別にサブフォルダに整理して。まず現状を見せてから、整理計画を提案して",
+                            expected: "ファイル一覧が表示され、整理計画が提案される"
+                        },
+                        {
+                            step: 2,
+                            action: "議事録処理を試す",
+                            prompt: "以下の議事録メモからアクションアイテムを抽出して、担当者・期限・タスク内容の表形式でまとめて:\n\n---\n今日の会議で決まったこと\n・田中さんが来週までにデザイン案を出す\n・佐藤さんは見積もりを金曜日までに\n・鈴木さんがテスト環境を今週中に準備\n・次回会議は来月1日の10時から\n---",
+                            expected: "担当者・期限・タスク内容の表が生成される"
+                        },
+                        {
+                            step: 3,
+                            action: "レポート作成を試す",
+                            prompt: "以下のデータから、上司向けの簡潔な報告書（A4半分程度）を作成して:\n\n今月の成果:\n- 新規顧客: 15社\n- 売上: 1,200万円（目標比105%）\n- クレーム: 2件（先月比-3件）\n- 新サービス: 来月リリース予定で順調",
+                            expected: "ビジネス向けの整形された報告書が生成される"
                         }
                     ],
                     checkpoints: [
-                        "用途に応じた形式で出力される"
+                        "ファイル整理の自動化を体験できた",
+                        "議事録からの情報抽出を体験できた",
+                        "自然な日本語でレポート作成を依頼できた"
                     ]
                 }
             }
