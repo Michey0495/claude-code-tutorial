@@ -89,6 +89,7 @@
         renderTutorials(state.currentLevel);
         renderHandson(state.currentHandsonType);
         renderBestPractices();
+        renderBorisTips();
         renderPromptTips();
     }
 
@@ -382,6 +383,24 @@
                             公式ドキュメントを見る ${icons['external-link']}
                         </a>
                     ` : ''}
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function renderBorisTips() {
+        const borisGrid = document.getElementById('borisGrid');
+        if (!borisGrid || !window.BORIS_TIPS) return;
+
+        borisGrid.innerHTML = window.BORIS_TIPS.map((tip, index) => `
+            <div class="tip-card" style="animation-delay: ${index * 0.05}s">
+                <div class="tip-header">
+                    <span class="tip-number">${tip.number}</span>
+                    <span class="tip-category">${tip.category}</span>
+                </div>
+                <div class="tip-content">
+                    <h3 class="tip-title">${tip.title}</h3>
+                    <p class="tip-description">${tip.description}</p>
                 </div>
             </div>
         `).join('');

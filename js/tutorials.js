@@ -2332,7 +2332,7 @@ const HANDSON = {
                 difficulty: "初級",
                 // 準備セクション
                 preparation: {
-                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "ハンズオンを始める前に、以下のフォルダ構造とファイルを作成してください。",
                     folderStructure: `handson-1-sales/
 ├── data/
 │   └── sales_2025.csv
@@ -2448,7 +2448,7 @@ const HANDSON = {
                 estimatedTime: "10-15分",
                 difficulty: "初級",
                 preparation: {
-                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "以下のフォルダ構造と散らばったファイルを作成してください。",
                     folderStructure: `handson-2-organize/
 ├── 議事録0115.txt
 ├── report_q1.docx
@@ -2573,7 +2573,7 @@ Action items:
                 estimatedTime: "15-20分",
                 difficulty: "中級",
                 preparation: {
-                    description: "以下のフォルダ構造・API仕様を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "以下のAPI仕様ファイルを作成してください。",
                     folderStructure: `handson-3-docs/
 ├── api_spec.yaml
 ├── config_sample.json
@@ -2780,7 +2780,7 @@ components:
                 estimatedTime: "10-15分",
                 difficulty: "初級",
                 preparation: {
-                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "以下の議事録テキストを作成してください。",
                     folderStructure: `handson-4-meeting/
 ├── meeting_notes.txt
 └── summary/
@@ -2916,7 +2916,7 @@ components:
                 estimatedTime: "25-30分",
                 difficulty: "中級",
                 preparation: {
-                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "Python環境とFlaskをセットアップしてください。",
                     folderStructure: `handson-5-api/
 ├── api_spec.yaml
 ├── app/
@@ -3076,7 +3076,7 @@ requests>=2.28.0`
                 estimatedTime: "20-25分",
                 difficulty: "中級",
                 preparation: {
-                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "以下の機能仕様書を作成してください。",
                     folderStructure: `handson-6-web/
 ├── FEATURE_SPEC.md
 ├── index.html (生成される)
@@ -3223,7 +3223,7 @@ requests>=2.28.0`
                 estimatedTime: "20-25分",
                 difficulty: "中級",
                 preparation: {
-                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
+                    description: "Python環境とCLI仕様書を用意してください。",
                     folderStructure: `handson-7-cli/
 ├── CLI_SPEC.md
 ├── taskman.py (生成される)
@@ -3352,81 +3352,6 @@ taskman remove <id>
                     "エラーハンドリングの実装"
                 ]
             }
-        },
-        {
-            id: 8,
-            number: 8,
-            title: "外部スキル・テンプレートの探し方と読み込み（注意事項付き）",
-            description: "非公式のスキル・テンプレートを探し、内容を確認したうえで自身の環境に読み込む手順。リスクを理解したうえで自己責任で行う。",
-            folder: "8_external_skills",
-            badge: "スキル・拡張",
-            skills: ["SKILL.md", "外部リソース", "セキュリティ確認"],
-            relatedTutorials: [
-                { id: "02_06", title: "Plugins", reason: "拡張の読み込み方" },
-                { id: "01_07", title: "自動化・生産性向上", reason: "Skills の位置づけ" }
-            ],
-            details: {
-                goal: "外部のスキル・テンプレートを探し、リスクを理解したうえで読み込み・動作確認まで行う",
-                estimatedTime: "15-20分",
-                difficulty: "初級",
-                preparation: {
-                    description: "必ず docs/External_Skills_Hands-on.md の「リスクについて（必読）」を読んだうえで、以下のハンズオンに取り組んでください。非公式リソースの利用は自己責任です。",
-                    setupSteps: [
-                        "docs/External_Skills_Hands-on.md を開き、リスク注意を読む",
-                        "Claude Code が利用可能な環境（学習・検証用を推奨）を用意する",
-                        "本番・機密環境では導入を特に慎重に判断する"
-                    ]
-                },
-                steps: [
-                    {
-                        step: 1,
-                        title: "リスク注意の確認",
-                        description: "外部スキルは公式未検証であること、セキュリティ・品質・ライセンスを自分で確認する必要があることを理解する",
-                        prompt: "このプロジェクトの docs/External_Skills_Hands-on.md を読んで、外部スキル利用時のリスクをまとめて",
-                        expected: "公式でないこと、中身の確認が必要なこと、環境分離の推奨が整理される",
-                        tips: "導入前に必ず目を通す"
-                    },
-                    {
-                        step: 2,
-                        title: "スキル・テンプレートを探す",
-                        description: "aitmpl.com/skills、skillsmp.com/ja、awesome-claude-agents などの入口から目的に近いスキルを検索・閲覧する",
-                        prompt: "External_Skills_Hands-on.md に書いてある3つのリソースのURLを開き、自分が使いたいカテゴリのスキルを1つ選んで。選んだ理由を簡潔に",
-                        expected: "該当サイトを開き、1つスキルを選び理由が説明される",
-                        tips: "README や SKILL.md の説明で用途を確認"
-                    },
-                    {
-                        step: 3,
-                        title: "中身を確認してから導入する",
-                        description: "選んだスキルの SKILL.md および同梱スクリプトを読み、不審なコマンド・ネットワーク・ファイル操作がないか確認する",
-                        prompt: "選んだスキルの GitHub リポジトリの SKILL.md（または README）の内容を要約して。実行されるコマンドやファイル操作があれば列挙して",
-                        expected: "スキルの概要と、実行され得る操作の一覧が提示される",
-                        tips: "不明な記述は導入を見送る"
-                    },
-                    {
-                        step: 4,
-                        title: "ローカルで試す",
-                        description: "本番と分離した環境でスキルを配置し、Claude Code で読み込まれるか・意図したとおりにのみ動作するかを確認する",
-                        prompt: "そのスキルの公式または README のインストール手順に従って、~/.claude/skills/ または ~/.cursor/skills/ に配置して、Claude Code で一覧に表示されるか確認して",
-                        expected: "配置後、スキルが認識され一覧に表示される（または README 通りの確認結果が得られる）",
-                        tips: "問題があればすぐに削除・無効化する"
-                    }
-                ],
-                outputs: [
-                    { file: "docs/External_Skills_Hands-on.md", description: "リスク注意と手順の参照先" },
-                    { file: "（選んだスキルの配置先）", description: "読み込んだスキルの動作確認" }
-                ],
-                checkpoints: [
-                    "リスク注意を読んだ",
-                    "利用するスキルを1つ選び、SKILL.md 等で内容を確認した",
-                    "不審な操作がないことを確認した（または見送った）",
-                    "分離した環境で配置・動作確認した"
-                ],
-                learningPoints: [
-                    "外部スキルは非公式であり、利用は自己責任で行う",
-                    "導入前には必ず中身を読み、セキュリティと品質を自分で確認する",
-                    "公式ドキュメントを正とし、配置場所・読み込み方法は公式に合わせる"
-                ]
-            }
         }
     ]
 };
@@ -3502,6 +3427,33 @@ const BEST_PRACTICES = [
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#7-automate-and-accelerate"
     }
+];
+
+// Boris Cherny氏のClaude Code TIPS（22個）
+// 出典: Claude Code チーム由来、Boris本人がXで公開
+const BORIS_TIPS = [
+    { number: 1, category: "セッション運用", title: "ターミナルで5セッション並列実行", description: "タブに1〜5の番号を振り、システム通知で入力待ちを把握する。1つが処理中の間に別タブで次の指示。シングルスレッドで待つのはもったいない。" },
+    { number: 2, category: "セッション運用", title: "Web/モバイルでさらに5〜10セッション追加", description: "claude.ai/code 上でもセッションを並列で走らせている。朝はスマホからセッションを数個立ち上げることも。ただし10〜20%は想定外で放棄される。" },
+    { number: 3, category: "セッション運用", title: "セッションごとに独立したgit checkoutを使う", description: "ブランチやworktreeではなく、セッションごとに独自のcheckoutを用意する。これで複数セッションが同時に同じファイルを触っても衝突しない。" },
+    { number: 4, category: "セッション運用", title: "&コマンドでローカル→Webへセッション引き継ぎ", description: "ローカルのセッションを&でWeb版に引き渡し、--teleportで戻すことも可能。デスクとモバイルの行き来に便利。" },
+    { number: 5, category: "モデル・設定", title: "Opus 4.5 + thinkingを全てのコーディングに使う", description: "Sonnetより大きくて遅いが、ステアリングが少なく済みツール使用も上手い。結果的にSonnetより速く終わることが多い。「スマートなモデルへの先行投資が後の修正コストを削減する」。" },
+    { number: 6, category: "モデル・設定", title: "CLAUDE.mdをチームでgit管理する", description: "各チームがリポジトリにCLAUDE.mdをチェックイン。Claudeがやらかしたミスをその都度追記して改善サイクルを回す。現在のサイズは約2.5kトークン。" },
+    { number: 7, category: "モデル・設定", title: "PRレビュー時に@.claudeでCLAUDE.mdを更新", description: "コードレビュー中に同僚のPRに@.claudeタグを付けて、学びをCLAUDE.mdに反映させる。GitHub Actionと連携。" },
+    { number: 8, category: "ワークフロー", title: "Plan Modeを最初に使う（Shift+Tab 2回）", description: "いきなりコードを書かせない。まずPlan Modeで計画を反復し、納得したらauto-accept editsモードに切り替えて一発実装。良い計画が一番大事。" },
+    { number: 9, category: "ワークフロー", title: "スラッシュコマンドで繰り返し作業を自動化", description: ".claude/commands/にgitでチェックインして共有。/commit-push-prは1日に何十回も使う。インラインbashでgit status等のコンテキストを事前計算。" },
+    { number: 10, category: "ワークフロー", title: "サブエージェントで定型ワークフローを自動化", description: "code-simplifier（コード簡素化）、verify-app（E2Eテスト）、build-validator（ビルド検証）など。「よくあるPRの大半のワークフローを自動化するもの」として活用。" },
+    { number: 11, category: "ワークフロー", title: "PostToolUseフックでコードフォーマットを自動修正", description: "ClaudeのコードはLだいたい」整形されているが、最後の10%にムラがある。PostToolUseフックで`bun run format || true`を実行し、CI失敗を未然に防止。" },
+    { number: 12, category: "ワークフロー", title: "/permissionsで権限を安全に管理する", description: "--dangerously-skip-permissionsはほぼ使わない。/permissionsで`bun run build:*`や`bun run test:*`など安全なコマンドだけ事前許可する。設定はチーム資産として共有。" },
+    { number: 13, category: "外部連携", title: "MCPでSlack・BigQuery・Sentryなど外部ツール連携", description: ".mcp.jsonで設定を共有。Claude Codeが単なるコードエディタからワークフローハブに変わる。" },
+    { number: 14, category: "外部連携", title: "Chrome拡張でブラウザテストを自動化", description: "claude.ai/codeへの変更は全て、Chrome拡張経由でブラウザを開いてUIをテストし、動作とUXが良くなるまで反復させる。" },
+    { number: 15, category: "品質・検証", title: "検証ループが最重要（品質2〜3倍）", description: "「Claudeに検証手段を与えること」が全TIPSの中で一番大事。bashコマンド実行、テストスイート、ブラウザテスト、シミュレータなど。フィードバックループがあると成果物の品質が2〜3倍になる。" },
+    { number: 16, category: "品質・検証", title: "長時間タスクは検証付きで放置する", description: "バックグラウンドエージェント、Stopフック、プラグインを組み合わせて、完了時に自動検証させる。長時間タスクに限り、サンドボックス内で--dangerously-skip-permissionsを使うこともある。" },
+    { number: 17, category: "チーム運用", title: "259 PR/30日、46/47日連続アクティブ", description: "Boris本人の実績。497コミット、4万行追加・3.8万行削除。Claude Codeを開発プロセスの中核に据えた結果の数字。" },
+    { number: 18, category: "チーム運用", title: "チーム全員がCLAUDE.mdに週次で貢献する", description: "個人のメモではなくチームの集合知にする。スタイル規約、デザインガイドライン、PRテンプレートもここに集約。" },
+    { number: 19, category: "チーム運用", title: "PRレビューで発見した学びを即座にドキュメント化", description: "「このパターンでClaude失敗した」という知見をPRの一部としてCLAUDE.mdに追記。知識が流れない仕組み。" },
+    { number: 20, category: "応用", title: "Ralph Wiggumプラグインで自律長時間セッション", description: "入力待ちでブロックせずに自律的にタスクを続行するプラグイン。夜間バッチ的な使い方に向く。" },
+    { number: 21, category: "応用", title: "10〜20%の放棄を前提に多めにセッションを立てる", description: "全セッションが成功するわけではない。想定外で放棄されるセッションを織り込んで、多めに走らせるのが現実的な運用。" },
+    { number: 22, category: "応用", title: "「正しい唯一の方法はない」を前提にする", description: "Boris本人が繰り返し強調するポイント。Claude Codeは意図的に「好きなように使え、カスタマイズしろ、ハックしろ」という設計思想で作られている。自分のスタイルに合うものを実験して見つけるのが一番。" }
 ];
 
 // Safie記事「Claudeプロンプト10のベストプラクティス」
@@ -3613,5 +3565,6 @@ const PROMPT_TIPS = [
 window.TUTORIALS = TUTORIALS;
 window.HANDSON = HANDSON;
 window.BEST_PRACTICES = BEST_PRACTICES;
+window.BORIS_TIPS = BORIS_TIPS;
 window.PROMPT_TIPS = PROMPT_TIPS;
 window.OFFICIAL_RESOURCES = OFFICIAL_RESOURCES;
