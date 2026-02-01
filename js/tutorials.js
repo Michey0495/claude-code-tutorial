@@ -2332,7 +2332,7 @@ const HANDSON = {
                 difficulty: "初級",
                 // 準備セクション
                 preparation: {
-                    description: "ハンズオンを始める前に、以下のフォルダ構造とファイルを作成してください。",
+                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-1-sales/
 ├── data/
 │   └── sales_2025.csv
@@ -2448,7 +2448,7 @@ const HANDSON = {
                 estimatedTime: "10-15分",
                 difficulty: "初級",
                 preparation: {
-                    description: "以下のフォルダ構造と散らばったファイルを作成してください。",
+                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-2-organize/
 ├── 議事録0115.txt
 ├── report_q1.docx
@@ -2573,7 +2573,7 @@ Action items:
                 estimatedTime: "15-20分",
                 difficulty: "中級",
                 preparation: {
-                    description: "以下のAPI仕様ファイルを作成してください。",
+                    description: "以下のフォルダ構造・API仕様を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-3-docs/
 ├── api_spec.yaml
 ├── config_sample.json
@@ -2780,7 +2780,7 @@ components:
                 estimatedTime: "10-15分",
                 difficulty: "初級",
                 preparation: {
-                    description: "以下の議事録テキストを作成してください。",
+                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-4-meeting/
 ├── meeting_notes.txt
 └── summary/
@@ -2916,7 +2916,7 @@ components:
                 estimatedTime: "25-30分",
                 difficulty: "中級",
                 preparation: {
-                    description: "Python環境とFlaskをセットアップしてください。",
+                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-5-api/
 ├── api_spec.yaml
 ├── app/
@@ -3076,7 +3076,7 @@ requests>=2.28.0`
                 estimatedTime: "20-25分",
                 difficulty: "中級",
                 preparation: {
-                    description: "以下の機能仕様書を作成してください。",
+                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-6-web/
 ├── FEATURE_SPEC.md
 ├── index.html (生成される)
@@ -3223,7 +3223,7 @@ requests>=2.28.0`
                 estimatedTime: "20-25分",
                 difficulty: "中級",
                 preparation: {
-                    description: "Python環境とCLI仕様書を用意してください。",
+                    description: "以下のフォルダ構造を作成・準備のうえ、以下のハンズオンに取り組んでください。",
                     folderStructure: `handson-7-cli/
 ├── CLI_SPEC.md
 ├── taskman.py (生成される)
@@ -3370,7 +3370,7 @@ taskman remove <id>
                 estimatedTime: "15-20分",
                 difficulty: "初級",
                 preparation: {
-                    description: "必ず docs/External_Skills_Hands-on.md の「リスクについて（必読）」を読んでから進めてください。非公式リソースの利用は自己責任です。",
+                    description: "必ず docs/External_Skills_Hands-on.md の「リスクについて（必読）」を読んだうえで、以下のハンズオンに取り組んでください。非公式リソースの利用は自己責任です。",
                     setupSteps: [
                         "docs/External_Skills_Hands-on.md を開き、リスク注意を読む",
                         "Claude Code が利用可能な環境（学習・検証用を推奨）を用意する",
