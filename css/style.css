@@ -236,6 +236,13 @@ body:hover .cursor-glow {
     background: var(--color-accent-subtle);
 }
 
+.nav-link-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+}
+
 .theme-toggle {
     width: 40px;
     height: 40px;
@@ -1030,6 +1037,10 @@ body:hover .cursor-glow {
     transition: transform var(--transition-base);
 }
 
+.modal-content-wide {
+    max-width: 960px;
+}
+
 .modal.active .modal-content {
     transform: translateY(0) scale(1);
 }
@@ -1065,7 +1076,70 @@ body:hover .cursor-glow {
 .modal-body {
     padding: var(--space-2xl);
     overflow-y: auto;
-    max-height: 90vh;
+}
+
+/* 機能一覧（チートシート）モーダル */
+.cheat-sheet-title {
+    font-size: var(--text-2xl);
+    font-weight: 700;
+    margin-bottom: var(--space-md);
+}
+
+.cheat-sheet-desc {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-xl);
+}
+
+.cheat-sheet-desc a {
+    color: var(--color-accent-primary);
+    text-decoration: underline;
+}
+
+.cheat-sheet-scroll {
+    max-height: 65vh;
+    overflow-y: auto;
+}
+
+.cheat-sheet-scroll h3 {
+    font-size: var(--text-lg);
+    font-weight: 600;
+    margin: var(--space-xl) 0 var(--space-md);
+}
+
+.cheat-sheet-scroll h3:first-child {
+    margin-top: 0;
+}
+
+.cheat-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.cheat-table th,
+.cheat-table td {
+    border: 1px solid var(--color-border);
+    padding: var(--space-sm) var(--space-md);
+    text-align: left;
+    vertical-align: top;
+}
+
+.cheat-table th {
+    background: var(--color-bg-tertiary);
+    font-weight: 600;
+}
+
+.cheat-sheet-footer {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    margin-top: var(--space-lg);
+}
+
+.cheat-sheet-footer a {
+    color: var(--color-accent-primary);
+    text-decoration: underline;
 }
 
 .modal-header {
@@ -1828,8 +1902,15 @@ body:hover .cursor-glow {
 .official-resources-banner h3 {
     font-size: var(--text-xl);
     font-weight: 600;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-md);
     text-align: center;
+}
+
+.official-resources-note {
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    text-align: center;
+    margin-bottom: var(--space-lg);
 }
 
 .resources-grid {

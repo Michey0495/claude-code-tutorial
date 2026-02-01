@@ -144,7 +144,12 @@
         // Modal close on Escape
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
-                closeModal();
+                const cheatSheetModal = document.getElementById('cheatSheetModal');
+                if (cheatSheetModal && cheatSheetModal.classList.contains('active')) {
+                    closeCheatSheetModal();
+                } else {
+                    closeModal();
+                }
                 closeMobileMenu();
             }
         });
@@ -765,6 +770,27 @@
     window.closeModal = function() {
         elements.tutorialModal.classList.remove('active');
         document.body.style.overflow = '';
+    };
+
+    // ===================================
+    // 機能一覧（チートシート）モーダル
+    // ===================================
+    window.openCheatSheetModal = function() {
+        const modal = document.getElementById('cheatSheetModal');
+        if (modal) {
+            modal.classList.add('active');
+            modal.setAttribute('aria-hidden', 'false');
+            document.body.style.overflow = 'hidden';
+        }
+    };
+
+    window.closeCheatSheetModal = function() {
+        const modal = document.getElementById('cheatSheetModal');
+        if (modal) {
+            modal.classList.remove('active');
+            modal.setAttribute('aria-hidden', 'true');
+            document.body.style.overflow = '';
+        }
     };
 
     // ===================================

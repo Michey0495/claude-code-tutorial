@@ -47,6 +47,7 @@
                 <a href="#" onclick="showSection('tutorials')" class="nav-link">Tutorials</a>
                 <a href="#" onclick="showSection('handson')" class="nav-link">Hands-on</a>
                 <a href="#" onclick="showSection('bestpractices')" class="nav-link">Best Practices</a>
+                <button type="button" onclick="openCheatSheetModal()" class="nav-link nav-link-btn">機能一覧</button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"/>
@@ -71,6 +72,7 @@
             <a href="#" onclick="showSection('tutorials'); closeMobileMenu()" class="mobile-link">Tutorials</a>
             <a href="#" onclick="showSection('handson'); closeMobileMenu()" class="mobile-link">Hands-on</a>
             <a href="#" onclick="showSection('bestpractices'); closeMobileMenu()" class="mobile-link">Best Practices</a>
+            <a href="#" onclick="openCheatSheetModal(); closeMobileMenu()" class="mobile-link">機能一覧</a>
         </div>
     </div>
 
@@ -218,11 +220,12 @@
                 </p>
             </div>
 
-            <!-- Official Resources Banner -->
+            <!-- Official Resources Banner（Anthropic公式のみ） -->
             <div class="official-resources-banner">
                 <h3>公式リソース</h3>
+                <p class="official-resources-note">掲載するのは Anthropic が公式で公開しているドキュメント・ブログ・Newsroom のみです。第三者の記事は無断で掲載していません。</p>
                 <div class="resources-grid">
-                    <a href="https://docs.anthropic.com/ja/docs/claude-code/overview" target="_blank" rel="noopener" class="resource-card primary">
+                    <a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener" class="resource-card primary">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2L2 7l10 5 10-5-10-5z"/>
@@ -232,7 +235,7 @@
                         </div>
                         <div class="resource-content">
                             <span class="resource-title">Claude Code 公式ドキュメント</span>
-                            <span class="resource-desc">Anthropic提供の公式ガイド</span>
+                            <span class="resource-desc">Anthropic提供の公式ガイド（日本語）</span>
                         </div>
                         <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -240,7 +243,7 @@
                             <line x1="10" y1="14" x2="21" y2="3"/>
                         </svg>
                     </a>
-                    <a href="https://docs.anthropic.com/ja/docs/claude-code/best-practices" target="_blank" rel="noopener" class="resource-card">
+                    <a href="https://docs.anthropic.com/en/docs/claude-code/claude-code-best-practices" target="_blank" rel="noopener" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
@@ -249,7 +252,7 @@
                         </div>
                         <div class="resource-content">
                             <span class="resource-title">公式ベストプラクティス</span>
-                            <span class="resource-desc">7つの原則と失敗パターン</span>
+                            <span class="resource-desc">7つの原則と失敗パターン（英語）</span>
                         </div>
                         <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -257,16 +260,17 @@
                             <line x1="10" y1="14" x2="21" y2="3"/>
                         </svg>
                     </a>
-                    <a href="https://zenn.dev/tmasuyama1114/books/claude_code_basic" target="_blank" rel="noopener" class="resource-card">
+                    <a href="https://www.anthropic.com/news" target="_blank" rel="noopener" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-                                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                                <path d="M4 22h16a2 2 0 0 0 2-2V4a2 2 0 0 0-2-2H8a2 2 0 0 0-2 2v16a2 2 0 0 1-2 2"/>
+                                <path d="M12 11v6"/>
+                                <path d="M9 14h6"/>
                             </svg>
                         </div>
                         <div class="resource-content">
-                            <span class="resource-title">Claude Code 完全ガイド</span>
-                            <span class="resource-desc">Zenn - 全10パート・約50チャプター</span>
+                            <span class="resource-title">Anthropic Newsroom</span>
+                            <span class="resource-desc">公式ブログ・発表</span>
                         </div>
                         <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -274,17 +278,18 @@
                             <line x1="10" y1="14" x2="21" y2="3"/>
                         </svg>
                     </a>
-                    <a href="https://speakerdeck.com/minorun365/claude-codebesutopurakuteisumatome" target="_blank" rel="noopener" class="resource-card">
+                    <a href="https://docs.anthropic.com/en/docs/claude-code" target="_blank" rel="noopener" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
-                                <line x1="8" y1="21" x2="16" y2="21"/>
-                                <line x1="12" y1="17" x2="12" y2="21"/>
+                                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+                                <polyline points="14 2 14 8 20 8"/>
+                                <line x1="16" y1="13" x2="8" y2="13"/>
+                                <line x1="16" y1="17" x2="8" y2="17"/>
                             </svg>
                         </div>
                         <div class="resource-content">
-                            <span class="resource-title">ベストプラクティススライド</span>
-                            <span class="resource-desc">みのるん氏による図解スライド</span>
+                            <span class="resource-title">Claude Code ドキュメント</span>
+                            <span class="resource-desc">英語・詳細（Hooks、リリースノート等）</span>
                         </div>
                         <svg class="external-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
@@ -316,6 +321,71 @@
         </div>
     </section>
 
+    <!-- 機能一覧（チートシート）モーダル -->
+    <div class="modal cheat-sheet-modal" id="cheatSheetModal" role="dialog" aria-modal="true" aria-labelledby="cheatSheetTitle" aria-hidden="true">
+        <div class="modal-backdrop" onclick="closeCheatSheetModal()"></div>
+        <div class="modal-content modal-content-wide">
+            <button class="modal-close" onclick="closeCheatSheetModal()" aria-label="閉じる">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 6L6 18M6 6l12 12"/>
+                </svg>
+            </button>
+            <div class="modal-body">
+                <h2 id="cheatSheetTitle" class="cheat-sheet-title">Claude Code 機能一覧（早見表）</h2>
+                <p class="cheat-sheet-desc">名前・概要・目的・起動タイミング・活用例・サンプル・補足。詳細は <a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">公式ドキュメント</a> を参照してください。</p>
+                <div class="cheat-sheet-scroll">
+                    <h3>スラッシュコマンド</h3>
+                    <table class="cheat-table">
+                        <thead>
+                            <tr>
+                                <th>名前</th>
+                                <th>概要</th>
+                                <th>目的</th>
+                                <th>サンプル</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>/help</td><td>ヘルプ表示</td><td>コマンド・使い方の確認</td><td>/help</td></tr>
+                            <tr><td>/init</td><td>CLAUDE.md 生成</td><td>プロジェクト用 CLAUDE.md を自動生成</td><td>/init</td></tr>
+                            <tr><td>/clear</td><td>会話履歴クリア</td><td>コンテキストをリセット</td><td>/clear</td></tr>
+                            <tr><td>/compact</td><td>コンテキスト圧縮</td><td>過去会話を要約して圧縮</td><td>/compact</td></tr>
+                            <tr><td>/context</td><td>使用量表示</td><td>トークン使用量・内訳を確認</td><td>/context</td></tr>
+                            <tr><td>/rewind</td><td>以前の状態に戻る</td><td>コード・会話を巻き戻す</td><td>Esc Esc でコード復元</td></tr>
+                            <tr><td>/fork</td><td>会話の分岐</td><td>別の会話（タブ）を開く</td><td>/fork</td></tr>
+                            <tr><td>/rename</td><td>セッション名変更</td><td>セッションに名前をつける</td><td>/rename 名前</td></tr>
+                            <tr><td>/plugins</td><td>プラグイン管理</td><td>一覧・インストール・無効化</td><td>/plugins</td></tr>
+                            <tr><td>/tasks</td><td>タスク一覧</td><td>進行中タスクを一覧表示</td><td>/tasks</td></tr>
+                            <tr><td>/learn</td><td>知識の Skill 化</td><td>手順・発見を Skill として保存</td><td>/learn</td></tr>
+                        </tbody>
+                    </table>
+                    <h3>特殊プレフィックス</h3>
+                    <table class="cheat-table">
+                        <thead>
+                            <tr><th>名前</th><th>概要</th><th>サンプル</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>@</td><td>ファイル・フォルダをコンテキストに含める</td><td>@README.md を参照して...</td></tr>
+                            <tr><td>!</td><td>Claude を経由せず Bash を実行</td><td>!npm run build</td></tr>
+                        </tbody>
+                    </table>
+                    <h3>キーボード</h3>
+                    <table class="cheat-table">
+                        <thead>
+                            <tr><th>名前</th><th>概要</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Enter</td><td>メッセージ送信（改行は Shift+Enter）</td></tr>
+                            <tr><td>Esc</td><td>操作中断（コンテキストは保持）</td></tr>
+                            <tr><td>Esc Esc</td><td>コード復元</td></tr>
+                            <tr><td>Shift+Tab</td><td>Plan モード切替</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">Claude Code 公式ドキュメント</a>で全機能を確認できます。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-container">
@@ -330,9 +400,9 @@
             </div>
             <div class="footer-links">
                 <div class="footer-column">
-                    <h4>Resources</h4>
-                    <a href="https://code.claude.com/docs/ja/overview" target="_blank">公式ドキュメント</a>
-                    <a href="https://zenn.dev/tmasuyama1114/books/claude_code_basic" target="_blank">Claude Code完全ガイド</a>
+                    <h4>Resources（公式のみ）</h4>
+                    <a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">Claude Code 公式ドキュメント</a>
+                    <a href="https://www.anthropic.com/news" target="_blank" rel="noopener">Anthropic Newsroom</a>
                 </div>
                 <div class="footer-column">
                     <h4>Learn</h4>
