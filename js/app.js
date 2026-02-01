@@ -17,8 +17,194 @@
         currentLevel: 'intro',
         currentHandsonType: 'non-dev',
         theme: localStorage.getItem('theme') || 'light',
+        lang: localStorage.getItem('lang') || 'ja',
         mobileMenuOpen: false
     };
+
+    // ===================================
+    // Internationalization (i18n)
+    // ===================================
+    const i18n = {
+        ja: {
+            // Navigation
+            navTutorials: 'チュートリアル',
+            navHandson: 'ハンズオン',
+            navBestPractices: 'ベストプラクティス',
+            navHelp: 'ヘルプ',
+            navCheatsheet: '機能一覧',
+            // Hero
+            heroBadge: 'Anthropic Best Practices',
+            heroTitle1: 'Claude Code',
+            heroTitle2: '完全チュートリアル',
+            heroDesc: 'エージェント型AIコーディングの真髄を学ぶ。<br>公式ベストプラクティスに基づいた全31章 + 13種類のハンズオン。',
+            heroStatChapters: 'チャプター',
+            heroStatHandson: 'ハンズオン',
+            heroStatTips: 'Tips',
+            heroBtnStart: 'チュートリアルを始める',
+            heroBtnHandson: 'ハンズオンを見る',
+            heroScroll: 'スクロールして探索',
+            // Sections
+            sectionTagLearning: '学習コース',
+            sectionTitleTutorials: 'チュートリアル',
+            sectionDescTutorials: '入門から上級まで、段階的にClaude Codeをマスター',
+            sectionTagPractice: '実践演習',
+            sectionTitleHandson: 'ハンズオン',
+            sectionDescHandson: '13種類のテーマで実践的なスキルを習得',
+            sectionTagGuidelines: '公式ガイドライン',
+            sectionTitleBestPractices: '公式ベストプラクティス',
+            sectionDescBestPractices: 'Anthropicが推奨する7つの原則',
+            sectionTagSupport: 'サポート',
+            sectionTitleHelp: 'ヘルプ・FAQ',
+            sectionDescHelp: 'よくある問題の解決策とFAQ',
+            // Level tabs
+            levelIntro: '入門',
+            levelBasic: '基礎',
+            levelIntermediate: '中級',
+            levelAdvanced: '上級',
+            // Handson tabs
+            tabNonDev: '非開発系',
+            tabDev: '開発系',
+            // Help tabs
+            tabTroubleshooting: 'トラブルシューティング',
+            tabFaq: 'FAQ',
+            tabChecklist: 'チェックリスト',
+            // Checklist
+            checklistIntro: 'Claude Codeを効果的に使うためのチェックリスト。各項目を確認してベストプラクティスを実践してください。',
+            checklistComplete: '完了',
+            // Footer
+            footerResources: '公式リソース',
+            footerLearn: '学習コンテンツ',
+            footerCopyright: '© 2026 EZOAI. Built with Claude Code.',
+            // Boris Tips
+            borisTipsTitle: 'Boris Cherny氏のTIPS 22選',
+            borisTipsDesc: 'Claude Code開発者本人が実践する運用テクニック',
+            borisTipsSource: '出典: Boris Cherny (@anthropicaiのClaude Code開発チーム)',
+            // Prompt Tips
+            promptTipsTitle: 'プロンプトTips 10選',
+            promptTipsDesc: 'より良いプロンプトを書くための実践的なテクニック',
+            // Modal
+            modalKeyPoints: 'ポイント',
+            modalOfficial: '公式より',
+            modalCodeExample: 'コード例',
+            modalCommands: 'コマンド一覧',
+            modalRelatedTutorials: '事前に読むべきチュートリアル',
+            modalGoal: '目標',
+            modalPreparation: '準備（重要）',
+            modalExecution: '実行手順',
+            modalOutputs: '成果物',
+            modalChecklist: '完了チェックリスト',
+            modalLearning: '学びのポイント',
+            modalRelatedSkills: '関連スキル',
+            modalSolutions: '解決策',
+            modalPrevention: '予防策',
+            modalRelatedTutorial: '関連チュートリアルを見る'
+        },
+        en: {
+            // Navigation
+            navTutorials: 'Tutorials',
+            navHandson: 'Hands-on',
+            navBestPractices: 'Best Practices',
+            navHelp: 'Help',
+            navCheatsheet: 'Cheat Sheet',
+            // Hero
+            heroBadge: 'Anthropic Best Practices',
+            heroTitle1: 'Claude Code',
+            heroTitle2: 'Complete Tutorial',
+            heroDesc: 'Master agent-based AI coding.<br>31 chapters + 13 hands-on exercises based on official best practices.',
+            heroStatChapters: 'Chapters',
+            heroStatHandson: 'Hands-on',
+            heroStatTips: 'Tips',
+            heroBtnStart: 'Start Tutorials',
+            heroBtnHandson: 'View Hands-on',
+            heroScroll: 'Scroll to explore',
+            // Sections
+            sectionTagLearning: 'Learning Path',
+            sectionTitleTutorials: 'Tutorials',
+            sectionDescTutorials: 'Master Claude Code step by step, from beginner to advanced',
+            sectionTagPractice: 'Practice',
+            sectionTitleHandson: 'Hands-on',
+            sectionDescHandson: '13 themed exercises to build practical skills',
+            sectionTagGuidelines: 'Official Guidelines',
+            sectionTitleBestPractices: 'Official Best Practices',
+            sectionDescBestPractices: '7 principles recommended by Anthropic',
+            sectionTagSupport: 'Support',
+            sectionTitleHelp: 'Help & FAQ',
+            sectionDescHelp: 'Solutions to common problems and FAQ',
+            // Level tabs
+            levelIntro: 'Intro',
+            levelBasic: 'Basic',
+            levelIntermediate: 'Intermediate',
+            levelAdvanced: 'Advanced',
+            // Handson tabs
+            tabNonDev: 'Non-Dev',
+            tabDev: 'Development',
+            // Help tabs
+            tabTroubleshooting: 'Troubleshooting',
+            tabFaq: 'FAQ',
+            tabChecklist: 'Checklist',
+            // Checklist
+            checklistIntro: 'A checklist for using Claude Code effectively. Review each item and practice best practices.',
+            checklistComplete: 'completed',
+            // Footer
+            footerResources: 'Official Resources',
+            footerLearn: 'Learning Content',
+            footerCopyright: '© 2026 EZOAI. Built with Claude Code.',
+            // Boris Tips
+            borisTipsTitle: "Boris Cherny's 22 TIPS",
+            borisTipsDesc: 'Operational techniques practiced by the Claude Code developer himself',
+            borisTipsSource: 'Source: Boris Cherny (Claude Code team @anthropicai)',
+            // Prompt Tips
+            promptTipsTitle: '10 Prompt Tips',
+            promptTipsDesc: 'Practical techniques for writing better prompts',
+            // Modal
+            modalKeyPoints: 'Key Points',
+            modalOfficial: 'From Official',
+            modalCodeExample: 'Code Example',
+            modalCommands: 'Commands',
+            modalRelatedTutorials: 'Prerequisite Tutorials',
+            modalGoal: 'Goal',
+            modalPreparation: 'Preparation (Important)',
+            modalExecution: 'Steps',
+            modalOutputs: 'Outputs',
+            modalChecklist: 'Completion Checklist',
+            modalLearning: 'Learning Points',
+            modalRelatedSkills: 'Related Skills',
+            modalSolutions: 'Solutions',
+            modalPrevention: 'Prevention',
+            modalRelatedTutorial: 'View Related Tutorial'
+        }
+    };
+
+    // ===================================
+    // Localization Helper
+    // ===================================
+    /**
+     * Get localized text from an object with _en suffix fields
+     * @param {Object} obj - The object containing text fields
+     * @param {string} field - The field name (e.g., 'title', 'description')
+     * @returns {string} - The localized text
+     */
+    function getLocalizedText(obj, field) {
+        if (!obj) return '';
+        if (state.lang === 'en' && obj[field + '_en']) {
+            return obj[field + '_en'];
+        }
+        return obj[field] || '';
+    }
+
+    /**
+     * Get localized array from an object with _en suffix fields
+     * @param {Object} obj - The object containing array fields
+     * @param {string} field - The field name (e.g., 'keyPoints', 'tags')
+     * @returns {Array} - The localized array
+     */
+    function getLocalizedArray(obj, field) {
+        if (!obj) return [];
+        if (state.lang === 'en' && obj[field + '_en']) {
+            return obj[field + '_en'];
+        }
+        return obj[field] || [];
+    }
 
     // ===================================
     // DOM Elements
@@ -27,6 +213,7 @@
         cursorGlow: document.getElementById('cursorGlow'),
         mainNav: document.getElementById('mainNav'),
         themeToggle: document.getElementById('themeToggle'),
+        langToggle: document.getElementById('langToggle'),
         navMenuBtn: document.getElementById('navMenuBtn'),
         mobileMenu: document.getElementById('mobileMenu'),
         tutorialsGrid: document.getElementById('tutorialsGrid'),
@@ -83,6 +270,7 @@
     // ===================================
     function init() {
         applyTheme(state.theme);
+        applyLanguage(state.lang);
         setupEventListeners();
         setupCursorGlow();
         animateStats();
@@ -91,6 +279,208 @@
         renderBestPractices();
         renderBorisTips();
         renderPromptTips();
+        renderTroubleshooting();
+        renderFAQ();
+        renderChecklist();
+        setupHelpTabs();
+    }
+
+    // ===================================
+    // Language Management
+    // ===================================
+    function applyLanguage(lang) {
+        state.lang = lang;
+        localStorage.setItem('lang', lang);
+        document.documentElement.setAttribute('data-lang', lang);
+
+        const t = i18n[lang];
+        const langToggle = document.getElementById('langToggle');
+        if (langToggle) {
+            langToggle.querySelector('.lang-label').textContent = lang === 'ja' ? 'EN' : 'JA';
+        }
+
+        // Update navigation
+        const navLinks = document.querySelectorAll('.nav-link');
+        if (navLinks.length >= 4) {
+            navLinks[0].textContent = t.navTutorials;
+            navLinks[1].textContent = t.navHandson;
+            navLinks[2].textContent = t.navBestPractices;
+            navLinks[3].textContent = t.navHelp;
+        }
+        const cheatsheetBtn = document.querySelector('.nav-link-btn');
+        if (cheatsheetBtn) cheatsheetBtn.textContent = t.navCheatsheet;
+
+        // Update mobile menu
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        if (mobileLinks.length >= 5) {
+            mobileLinks[0].textContent = t.navTutorials;
+            mobileLinks[1].textContent = t.navHandson;
+            mobileLinks[2].textContent = t.navBestPractices;
+            mobileLinks[3].textContent = t.navHelp;
+            mobileLinks[4].textContent = t.navCheatsheet;
+        }
+
+        // Update hero section
+        const heroBadge = document.querySelector('.hero-badge');
+        if (heroBadge) {
+            const badgeDot = heroBadge.querySelector('.badge-dot');
+            heroBadge.innerHTML = '';
+            if (badgeDot) heroBadge.appendChild(badgeDot.cloneNode(true));
+            heroBadge.appendChild(document.createTextNode(t.heroBadge));
+        }
+
+        const titleLines = document.querySelectorAll('.title-line');
+        if (titleLines.length >= 2) {
+            titleLines[0].textContent = t.heroTitle1;
+            titleLines[1].textContent = t.heroTitle2;
+        }
+
+        const heroDesc = document.querySelector('.hero-description');
+        if (heroDesc) heroDesc.innerHTML = t.heroDesc;
+
+        const statLabels = document.querySelectorAll('.stat-label');
+        if (statLabels.length >= 3) {
+            statLabels[0].textContent = t.heroStatChapters;
+            statLabels[1].textContent = t.heroStatHandson;
+            statLabels[2].textContent = t.heroStatTips;
+        }
+
+        const btnPrimary = document.querySelector('.btn-primary span');
+        if (btnPrimary) btnPrimary.textContent = t.heroBtnStart;
+
+        const btnSecondary = document.querySelector('.btn-secondary span');
+        if (btnSecondary) btnSecondary.textContent = t.heroBtnHandson;
+
+        const scrollIndicator = document.querySelector('.scroll-indicator span');
+        if (scrollIndicator) scrollIndicator.textContent = t.heroScroll;
+
+        // Update section headers
+        updateSectionTexts(t);
+
+        // Update level tabs
+        const levelTabs = document.querySelectorAll('.level-tab .tab-text');
+        if (levelTabs.length >= 4) {
+            levelTabs[0].textContent = t.levelIntro;
+            levelTabs[1].textContent = t.levelBasic;
+            levelTabs[2].textContent = t.levelIntermediate;
+            levelTabs[3].textContent = t.levelAdvanced;
+        }
+
+        // Update handson tabs
+        const handsonTabs = document.querySelectorAll('.handson-tab');
+        if (handsonTabs.length >= 2) {
+            handsonTabs[0].textContent = t.tabNonDev;
+            handsonTabs[1].textContent = t.tabDev;
+        }
+
+        // Update help tabs (preserve SVG)
+        const helpTabs = document.querySelectorAll('.help-tab');
+        if (helpTabs.length >= 3) {
+            const svg0 = helpTabs[0].querySelector('svg');
+            const svg1 = helpTabs[1].querySelector('svg');
+            const svg2 = helpTabs[2].querySelector('svg');
+            helpTabs[0].innerHTML = '';
+            helpTabs[1].innerHTML = '';
+            helpTabs[2].innerHTML = '';
+            if (svg0) helpTabs[0].appendChild(svg0);
+            if (svg1) helpTabs[1].appendChild(svg1);
+            if (svg2) helpTabs[2].appendChild(svg2);
+            helpTabs[0].appendChild(document.createTextNode(' ' + t.tabTroubleshooting));
+            helpTabs[1].appendChild(document.createTextNode(' ' + t.tabFaq));
+            helpTabs[2].appendChild(document.createTextNode(' ' + t.tabChecklist));
+        }
+
+        // Update checklist intro
+        const checklistIntro = document.querySelector('.checklist-intro p');
+        if (checklistIntro) checklistIntro.textContent = t.checklistIntro;
+
+        // Update footer
+        const footerColumns = document.querySelectorAll('.footer-column h4');
+        if (footerColumns.length >= 2) {
+            footerColumns[0].textContent = t.footerResources;
+            footerColumns[1].textContent = t.footerLearn;
+        }
+
+        const footerCopyright = document.querySelector('.footer-bottom p');
+        if (footerCopyright) footerCopyright.textContent = t.footerCopyright;
+
+        // Update Boris Tips section header
+        const borisTipsTitle = document.querySelector('#borisContainer .tips-section-header h2');
+        const borisTipsDesc = document.querySelector('#borisContainer .tips-section-header p');
+        const borisTipsSource = document.querySelector('#borisContainer .tips-source');
+        if (borisTipsTitle) borisTipsTitle.textContent = t.borisTipsTitle;
+        if (borisTipsDesc) borisTipsDesc.textContent = t.borisTipsDesc;
+        if (borisTipsSource) borisTipsSource.textContent = t.borisTipsSource;
+
+        // Update Prompt Tips section header
+        const promptTipsTitle = document.querySelector('#tipsGrid')?.closest('.tips-container')?.querySelector('.tips-section-header h2');
+        const promptTipsDesc = document.querySelector('#tipsGrid')?.closest('.tips-container')?.querySelector('.tips-section-header p');
+        if (promptTipsTitle) promptTipsTitle.textContent = t.promptTipsTitle;
+        if (promptTipsDesc) promptTipsDesc.textContent = t.promptTipsDesc;
+
+        // Re-render all content sections with localized data
+        renderTutorials(state.currentLevel);
+        renderHandson(state.currentHandsonType);
+        renderBestPractices();
+        renderBorisTips();
+        renderPromptTips();
+        renderTroubleshooting();
+        renderFAQ();
+        renderChecklist();
+    }
+
+    function updateSectionTexts(t) {
+        // Tutorials section
+        const tutorialsSection = document.getElementById('tutorials');
+        if (tutorialsSection) {
+            const tag = tutorialsSection.querySelector('.section-tag');
+            const title = tutorialsSection.querySelector('.section-title');
+            const desc = tutorialsSection.querySelector('.section-description');
+            if (tag) tag.textContent = t.sectionTagLearning;
+            if (title) title.textContent = t.sectionTitleTutorials;
+            if (desc) desc.textContent = t.sectionDescTutorials;
+        }
+
+        // Handson section
+        const handsonSection = document.getElementById('handson');
+        if (handsonSection) {
+            const tag = handsonSection.querySelector('.section-tag');
+            const title = handsonSection.querySelector('.section-title');
+            const desc = handsonSection.querySelector('.section-description');
+            if (tag) tag.textContent = t.sectionTagPractice;
+            if (title) title.textContent = t.sectionTitleHandson;
+            if (desc) desc.textContent = t.sectionDescHandson;
+        }
+
+        // Best Practices section
+        const bpSection = document.getElementById('bestpractices');
+        if (bpSection) {
+            const headers = bpSection.querySelectorAll('.section-header');
+            if (headers[0]) {
+                const tag = headers[0].querySelector('.section-tag');
+                const title = headers[0].querySelector('.section-title');
+                const desc = headers[0].querySelector('.section-description');
+                if (tag) tag.textContent = t.sectionTagGuidelines;
+                if (title) title.textContent = t.sectionTitleBestPractices;
+                if (desc) desc.textContent = t.sectionDescBestPractices;
+            }
+        }
+
+        // Help section
+        const helpSection = document.getElementById('troubleshooting');
+        if (helpSection) {
+            const tag = helpSection.querySelector('.section-header .section-tag');
+            const title = helpSection.querySelector('.section-header .section-title');
+            const desc = helpSection.querySelector('.section-header .section-description');
+            if (tag) tag.textContent = t.sectionTagSupport;
+            if (title) title.textContent = t.sectionTitleHelp;
+            if (desc) desc.textContent = t.sectionDescHelp;
+        }
+    }
+
+    function toggleLanguage() {
+        const newLang = state.lang === 'ja' ? 'en' : 'ja';
+        applyLanguage(newLang);
     }
 
     // ===================================
@@ -113,6 +503,11 @@
     function setupEventListeners() {
         // Theme toggle
         elements.themeToggle.addEventListener('click', toggleTheme);
+
+        // Language toggle
+        if (elements.langToggle) {
+            elements.langToggle.addEventListener('click', toggleLanguage);
+        }
 
         // Mobile menu
         elements.navMenuBtn.addEventListener('click', toggleMobileMenu);
@@ -248,7 +643,8 @@
         // Show target section
         const targetSection = document.getElementById(sectionId);
         if (targetSection) {
-            targetSection.style.display = 'block';
+            // heroセクションはflexbox、他はblock
+            targetSection.style.display = sectionId === 'hero' ? 'flex' : 'block';
             state.currentSection = sectionId;
 
             // Smooth scroll to top
@@ -288,10 +684,10 @@
                     <span class="card-number">${tutorial.number}</span>
                     <div class="card-icon">${icons[tutorial.icon] || icons.rocket}</div>
                 </div>
-                <h3 class="card-title">${tutorial.title}</h3>
-                <p class="card-description">${tutorial.description}</p>
+                <h3 class="card-title">${getLocalizedText(tutorial, 'title')}</h3>
+                <p class="card-description">${getLocalizedText(tutorial, 'description')}</p>
                 <div class="card-tags">
-                    ${tutorial.tags.map(tag => `<span class="card-tag">${tag}</span>`).join('')}
+                    ${getLocalizedArray(tutorial, 'tags').map(tag => `<span class="card-tag">${tag}</span>`).join('')}
                 </div>
             </div>
         `).join('');
@@ -332,11 +728,11 @@
                     <span class="handson-number">${item.number}</span>
                 </div>
                 <div class="handson-content">
-                    <span class="handson-badge ${type === 'dev' ? 'dev' : ''}">${item.badge}</span>
-                    <h3 class="handson-title">${item.title}</h3>
-                    <p class="handson-description">${item.description}</p>
+                    <span class="handson-badge ${type === 'dev' ? 'dev' : ''}">${getLocalizedText(item, 'badge')}</span>
+                    <h3 class="handson-title">${getLocalizedText(item, 'title')}</h3>
+                    <p class="handson-description">${getLocalizedText(item, 'description')}</p>
                     <div class="handson-skills">
-                        ${item.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                        ${getLocalizedArray(item, 'skills').map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
                     </div>
                 </div>
             </div>
@@ -360,27 +756,30 @@
     // Best Practices
     // ===================================
     function renderBestPractices() {
+        const t = i18n[state.lang];
+        const linkText = state.lang === 'en' ? 'View official documentation' : '公式ドキュメントを見る';
+
         elements.practicesGrid.innerHTML = window.BEST_PRACTICES.map((practice, index) => `
             <div class="practice-card" style="animation-delay: ${index * 0.1}s">
                 <span class="practice-number">${practice.number}</span>
                 <div class="practice-content">
-                    <h3 class="practice-title">${practice.title}</h3>
-                    <p class="practice-description">${practice.description}</p>
+                    <h3 class="practice-title">${getLocalizedText(practice, 'title')}</h3>
+                    <p class="practice-description">${getLocalizedText(practice, 'description')}</p>
                     ${practice.example ? `
                         <div class="practice-example">
                             <div class="example-bad">
                                 <span class="example-label">NG</span>
-                                <code>${practice.example.bad}</code>
+                                <code>${getLocalizedText(practice.example, 'bad')}</code>
                             </div>
                             <div class="example-good">
                                 <span class="example-label">OK</span>
-                                <code>${practice.example.good}</code>
+                                <code>${getLocalizedText(practice.example, 'good')}</code>
                             </div>
                         </div>
                     ` : ''}
                     ${practice.officialLink ? `
                         <a href="${practice.officialLink}" target="_blank" rel="noopener" class="practice-link">
-                            公式ドキュメントを見る ${icons['external-link']}
+                            ${linkText} ${icons['external-link']}
                         </a>
                     ` : ''}
                 </div>
@@ -396,11 +795,11 @@
             <div class="tip-card" style="animation-delay: ${index * 0.05}s">
                 <div class="tip-header">
                     <span class="tip-number">${tip.number}</span>
-                    <span class="tip-category">${tip.category}</span>
+                    <span class="tip-category">${getLocalizedText(tip, 'category')}</span>
                 </div>
                 <div class="tip-content">
-                    <h3 class="tip-title">${tip.title}</h3>
-                    <p class="tip-description">${tip.description}</p>
+                    <h3 class="tip-title">${getLocalizedText(tip, 'title')}</h3>
+                    <p class="tip-description">${getLocalizedText(tip, 'description')}</p>
                 </div>
             </div>
         `).join('');
@@ -414,20 +813,20 @@
             <div class="tip-card" style="animation-delay: ${index * 0.05}s">
                 <div class="tip-header">
                     <span class="tip-number">${tip.number}</span>
-                    <span class="tip-category">${tip.category}</span>
+                    <span class="tip-category">${getLocalizedText(tip, 'category')}</span>
                 </div>
                 <div class="tip-content">
-                    <h3 class="tip-title">${tip.title}</h3>
-                    <p class="tip-description">${tip.description}</p>
+                    <h3 class="tip-title">${getLocalizedText(tip, 'title')}</h3>
+                    <p class="tip-description">${getLocalizedText(tip, 'description')}</p>
                     ${tip.example ? `
                         <div class="tip-example">
                             <div class="example-bad">
                                 <span class="example-label">NG</span>
-                                <code>${tip.example.bad}</code>
+                                <code>${getLocalizedText(tip.example, 'bad')}</code>
                             </div>
                             <div class="example-good">
                                 <span class="example-label">OK</span>
-                                <code>${tip.example.good}</code>
+                                <code>${getLocalizedText(tip.example, 'good')}</code>
                             </div>
                         </div>
                     ` : ''}
@@ -461,7 +860,7 @@
         if (tutorial.content.keyPoints) {
             modalContent += `
                 <div class="modal-section">
-                    <h3>Key Points</h3>
+                    <h3>ポイント</h3>
                     <ul>
                         ${tutorial.content.keyPoints.map(point => `<li>${point}</li>`).join('')}
                     </ul>
@@ -701,7 +1100,7 @@
                                 </div>
                                 ${step.tips ? `
                                     <div class="step-tips">
-                                        <span class="tips-label">${icons.info} Tips:</span> ${step.tips}
+                                        <span class="tips-label">${icons.info} ヒント:</span> ${step.tips}
                                     </div>
                                 ` : ''}
                             </div>
@@ -835,6 +1234,247 @@
             setTimeout(() => notification.remove(), 1500);
         });
     };
+
+    // ===================================
+    // Troubleshooting Section
+    // ===================================
+    function renderTroubleshooting() {
+        const grid = document.getElementById('troubleshootingGrid');
+        if (!grid || !window.TROUBLESHOOTING) return;
+
+        const t = i18n[state.lang];
+        const causeLabel = state.lang === 'en' ? 'Cause: ' : '原因: ';
+        const solutionsLabel = state.lang === 'en' ? 'Solutions' : '解決策';
+        const preventionLabel = state.lang === 'en' ? 'Prevention' : '予防策';
+
+        grid.innerHTML = window.TROUBLESHOOTING.map((item, index) => `
+            <div class="troubleshooting-card" style="animation-delay: ${index * 0.05}s">
+                <div class="troubleshooting-header">
+                    <div class="troubleshooting-icon">
+                        ${icons['alert-triangle']}
+                    </div>
+                    <div class="troubleshooting-title-area">
+                        <div class="troubleshooting-symptom">${getLocalizedText(item, 'symptom')}</div>
+                        <span class="troubleshooting-cause">${causeLabel}${getLocalizedText(item, 'cause')}</span>
+                    </div>
+                </div>
+                <div class="troubleshooting-solutions">
+                    <h4>${icons['check-circle']} ${solutionsLabel}</h4>
+                    <ul class="solution-list">
+                        ${getLocalizedArray(item, 'solutions').map(sol => {
+                            const action = typeof sol === 'string' ? sol : getLocalizedText(sol, 'action');
+                            const priority = typeof sol === 'object' && sol.priority ? `<span class="priority-${sol.priority.toLowerCase()}">[${sol.priority}]</span> ` : '';
+                            return `<li>${priority}${action}</li>`;
+                        }).join('')}
+                    </ul>
+                </div>
+                ${item.prevention || item.prevention_en ? `
+                    <div class="troubleshooting-prevention">
+                        <h4>${preventionLabel}</h4>
+                        <p>${getLocalizedText(item, 'prevention')}</p>
+                    </div>
+                ` : ''}
+                ${item.relatedTutorial ? `
+                    <a href="#" class="troubleshooting-link" onclick="openTutorialById('${item.relatedTutorial}'); return false;">
+                        ${t.modalRelatedTutorial} ${icons.chevronRight}
+                    </a>
+                ` : ''}
+            </div>
+        `).join('');
+    }
+
+    // ===================================
+    // FAQ Section
+    // ===================================
+    function renderFAQ() {
+        const filtersContainer = document.getElementById('faqFilters');
+        const grid = document.getElementById('faqGrid');
+        if (!grid || !window.FAQ) return;
+
+        const allLabel = state.lang === 'en' ? 'All' : 'すべて';
+
+        // Get unique categories with localization
+        const categories = [allLabel, ...new Set(window.FAQ.map(item => getLocalizedText(item, 'category')))];
+
+        // Render filter buttons
+        if (filtersContainer) {
+            filtersContainer.innerHTML = categories.map((cat, idx) => `
+                <button class="faq-filter ${idx === 0 ? 'active' : ''}" data-category="${cat}">
+                    ${cat}
+                </button>
+            `).join('');
+
+            // Add click handlers
+            filtersContainer.querySelectorAll('.faq-filter').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    filtersContainer.querySelectorAll('.faq-filter').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    filterFAQ(btn.dataset.category);
+                });
+            });
+        }
+
+        // Render FAQ items
+        renderFAQItems(window.FAQ);
+    }
+
+    function renderFAQItems(items) {
+        const grid = document.getElementById('faqGrid');
+        if (!grid) return;
+
+        const t = i18n[state.lang];
+
+        grid.innerHTML = items.map((item, index) => `
+            <div class="faq-card" data-category="${getLocalizedText(item, 'category')}" style="animation-delay: ${index * 0.03}s">
+                <div class="faq-question" onclick="toggleFAQ(this.parentElement)">
+                    <div class="faq-question-content">
+                        <span class="faq-category-badge">${getLocalizedText(item, 'category')}</span>
+                        <span class="faq-question-text">${getLocalizedText(item, 'question')}</span>
+                    </div>
+                    <div class="faq-toggle">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="faq-answer">
+                    <div class="faq-answer-content">
+                        ${getLocalizedText(item, 'answer')}
+                        ${item.relatedTutorial ? `
+                            <br><br>
+                            <a href="#" class="troubleshooting-link" onclick="openTutorialById('${item.relatedTutorial}'); return false;">
+                                ${t.modalRelatedTutorial} ${icons.chevronRight}
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            </div>
+        `).join('');
+    }
+
+    function filterFAQ(category) {
+        const allLabel = state.lang === 'en' ? 'All' : 'すべて';
+        const items = category === allLabel
+            ? window.FAQ
+            : window.FAQ.filter(item => getLocalizedText(item, 'category') === category);
+        renderFAQItems(items);
+    }
+
+    window.toggleFAQ = function(card) {
+        card.classList.toggle('open');
+    };
+
+    // ===================================
+    // Checklist Section
+    // ===================================
+    function renderChecklist() {
+        const container = document.getElementById('checklistSections');
+        if (!container || !window.CHECKLIST) return;
+
+        const sectionIcons = {
+            beforeSession: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+            duringSession: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>',
+            afterSession: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+            qualityGates: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>'
+        };
+
+        container.innerHTML = Object.entries(window.CHECKLIST).map(([key, section]) => `
+            <div class="checklist-section" data-section="${key}">
+                <div class="checklist-section-header">
+                    <div class="checklist-section-icon">
+                        ${sectionIcons[key] || icons['list-checks']}
+                    </div>
+                    <h3 class="checklist-section-title">${getLocalizedText(section, 'title')}</h3>
+                </div>
+                <div class="checklist-items">
+                    ${section.items.map((item, idx) => `
+                        <div class="checklist-item" data-item="${key}-${idx}">
+                            <input type="checkbox" id="check-${key}-${idx}" onchange="updateChecklistProgress()">
+                            <label for="check-${key}-${idx}">
+                                <span class="checklist-item-text">${getLocalizedText(item, 'text')}</span>
+                                ${item.tip || item.tip_en ? `<span class="checklist-item-tip">${getLocalizedText(item, 'tip')}</span>` : ''}
+                            </label>
+                        </div>
+                    `).join('')}
+                </div>
+            </div>
+        `).join('');
+
+        // Load saved progress
+        loadChecklistProgress();
+    }
+
+    window.updateChecklistProgress = function() {
+        const checkboxes = document.querySelectorAll('#checklistSections input[type="checkbox"]');
+        const checked = document.querySelectorAll('#checklistSections input[type="checkbox"]:checked');
+        const total = checkboxes.length;
+        const completed = checked.length;
+        const percentage = total > 0 ? (completed / total * 100) : 0;
+
+        // Update progress bar
+        const fill = document.getElementById('checklistProgressFill');
+        const text = document.getElementById('checklistProgressText');
+        if (fill) fill.style.width = percentage + '%';
+        if (text) text.textContent = `${completed} / ${total} 完了`;
+
+        // Update item styling
+        checkboxes.forEach(cb => {
+            const item = cb.closest('.checklist-item');
+            if (item) {
+                item.classList.toggle('completed', cb.checked);
+            }
+        });
+
+        // Save to localStorage
+        saveChecklistProgress();
+    };
+
+    function saveChecklistProgress() {
+        const checkboxes = document.querySelectorAll('#checklistSections input[type="checkbox"]');
+        const progress = {};
+        checkboxes.forEach(cb => {
+            progress[cb.id] = cb.checked;
+        });
+        localStorage.setItem('claudeCodeChecklistProgress', JSON.stringify(progress));
+    }
+
+    function loadChecklistProgress() {
+        const saved = localStorage.getItem('claudeCodeChecklistProgress');
+        if (!saved) return;
+
+        try {
+            const progress = JSON.parse(saved);
+            Object.entries(progress).forEach(([id, checked]) => {
+                const cb = document.getElementById(id);
+                if (cb) cb.checked = checked;
+            });
+            updateChecklistProgress();
+        } catch (e) {
+            console.error('Failed to load checklist progress:', e);
+        }
+    }
+
+    // ===================================
+    // Help Tabs Management
+    // ===================================
+    function setupHelpTabs() {
+        const tabs = document.getElementById('helpTabs');
+        if (!tabs) return;
+
+        tabs.querySelectorAll('.help-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                tabs.querySelectorAll('.help-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Show corresponding content
+                const tabName = tab.dataset.tab;
+                document.getElementById('troubleshootingContent').style.display = tabName === 'troubleshooting' ? 'block' : 'none';
+                document.getElementById('faqContent').style.display = tabName === 'faq' ? 'block' : 'none';
+                document.getElementById('checklistContent').style.display = tabName === 'checklist' ? 'block' : 'none';
+            });
+        });
+    }
 
     // ===================================
     // Utility Functions

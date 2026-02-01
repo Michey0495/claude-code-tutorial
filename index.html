@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Tutorial by EZOAI</title>
-    <meta name="description" content="Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全27章 + 7種類のハンズオン。">
+    <meta name="description" content="Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全31章 + 13種類のハンズオン。">
     <meta name="author" content="EZOAI">
 
     <!-- Favicon -->
@@ -12,7 +12,7 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Claude Code Tutorial by EZOAI">
-    <meta property="og:description" content="エージェント型AIコーディングの真髄を学ぶ。全27章の包括的チュートリアル。">
+    <meta property="og:description" content="エージェント型AIコーディングの真髄を学ぶ。全31章 + 13種類のハンズオン。">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ja_JP">
 
@@ -44,10 +44,14 @@
                 <span class="logo-badge">by EZOAI</span>
             </a>
             <div class="nav-links">
-                <a href="#" onclick="showSection('tutorials')" class="nav-link">Tutorials</a>
-                <a href="#" onclick="showSection('handson')" class="nav-link">Hands-on</a>
-                <a href="#" onclick="showSection('bestpractices')" class="nav-link">Best Practices</a>
+                <a href="#" onclick="showSection('tutorials')" class="nav-link">チュートリアル</a>
+                <a href="#" onclick="showSection('handson')" class="nav-link">ハンズオン</a>
+                <a href="#" onclick="showSection('bestpractices')" class="nav-link">ベストプラクティス</a>
+                <a href="#" onclick="showSection('troubleshooting')" class="nav-link">ヘルプ</a>
                 <button type="button" onclick="openCheatSheetModal()" class="nav-link nav-link-btn">機能一覧</button>
+                <button class="lang-toggle" id="langToggle" aria-label="Switch language">
+                    <span class="lang-label">EN</span>
+                </button>
                 <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"/>
@@ -69,9 +73,10 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-content">
-            <a href="#" onclick="showSection('tutorials'); closeMobileMenu()" class="mobile-link">Tutorials</a>
-            <a href="#" onclick="showSection('handson'); closeMobileMenu()" class="mobile-link">Hands-on</a>
-            <a href="#" onclick="showSection('bestpractices'); closeMobileMenu()" class="mobile-link">Best Practices</a>
+            <a href="#" onclick="showSection('tutorials'); closeMobileMenu()" class="mobile-link">チュートリアル</a>
+            <a href="#" onclick="showSection('handson'); closeMobileMenu()" class="mobile-link">ハンズオン</a>
+            <a href="#" onclick="showSection('bestpractices'); closeMobileMenu()" class="mobile-link">ベストプラクティス</a>
+            <a href="#" onclick="showSection('troubleshooting'); closeMobileMenu()" class="mobile-link">ヘルプ</a>
             <a href="#" onclick="openCheatSheetModal(); closeMobileMenu()" class="mobile-link">機能一覧</a>
         </div>
     </div>
@@ -98,22 +103,22 @@
             </h1>
             <p class="hero-description">
                 エージェント型AIコーディングの真髄を学ぶ。<br>
-                公式ベストプラクティスに基づいた全27章 + 7種類のハンズオン。
+                公式ベストプラクティスに基づいた全31章 + 13種類のハンズオン。
             </p>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number" data-count="27">0</span>
-                    <span class="stat-label">Chapters</span>
+                    <span class="stat-number" data-count="31">0</span>
+                    <span class="stat-label">チャプター</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat">
-                    <span class="stat-number" data-count="7">0</span>
-                    <span class="stat-label">Hands-on</span>
+                    <span class="stat-number" data-count="13">0</span>
+                    <span class="stat-label">ハンズオン</span>
                 </div>
                 <div class="stat-divider"></div>
                 <div class="stat">
-                    <span class="stat-number" data-count="17">0</span>
-                    <span class="stat-label">Tips & Practices</span>
+                    <span class="stat-number" data-count="39">0</span>
+                    <span class="stat-label">Tips</span>
                 </div>
             </div>
             <div class="hero-actions">
@@ -132,7 +137,7 @@
             <div class="scroll-mouse">
                 <div class="scroll-wheel"></div>
             </div>
-            <span>Scroll to explore</span>
+            <span>スクロールして探索</span>
         </div>
     </section>
 
@@ -140,7 +145,7 @@
     <section class="section tutorials-section" id="tutorials" style="display: none;">
         <div class="section-container">
             <div class="section-header">
-                <span class="section-tag">Learning Path</span>
+                <span class="section-tag">学習コース</span>
                 <h2 class="section-title">チュートリアル</h2>
                 <p class="section-description">
                     入門から上級まで、段階的にClaude Codeをマスター
@@ -191,10 +196,10 @@
     <section class="section handson-section" id="handson" style="display: none;">
         <div class="section-container">
             <div class="section-header">
-                <span class="section-tag">Practice</span>
+                <span class="section-tag">実践演習</span>
                 <h2 class="section-title">ハンズオン</h2>
                 <p class="section-description">
-                    7種類のテーマで実践的なスキルを習得
+                    13種類のテーマで実践的なスキルを習得
                 </p>
             </div>
 
@@ -213,7 +218,7 @@
     <section class="section bestpractices-section" id="bestpractices" style="display: none;">
         <div class="section-container">
             <div class="section-header">
-                <span class="section-tag">Official Guidelines</span>
+                <span class="section-tag">公式ガイドライン</span>
                 <h2 class="section-title">公式ベストプラクティス</h2>
                 <p class="section-description">
                     Anthropicが推奨する7つの原則
@@ -223,7 +228,6 @@
             <!-- Official Resources Banner（Anthropic公式のみ） -->
             <div class="official-resources-banner">
                 <h3>公式リソース</h3>
-                <p class="official-resources-note">掲載するのは Anthropic が公式で公開しているドキュメント・ブログ・Newsroom のみです。第三者の記事は無断で掲載していません。</p>
                 <div class="resources-grid">
                     <a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener" class="resource-card primary">
                         <div class="resource-icon">
@@ -307,11 +311,11 @@
             <!-- Boris Cherny Tips Section -->
             <div class="prompt-tips-section" id="borisTips">
                 <div class="section-header" style="margin-top: 4rem;">
-                    <span class="section-tag">Community Tips</span>
+                    <span class="section-tag">開発者直伝</span>
                     <h2 class="section-title" style="font-size: 1.75rem;">Boris Cherny氏のTIPS 22選</h2>
                     <p class="section-description">
                         Claude Code開発者本人が実践する運用テクニック<br>
-                        <a href="https://twitter.com/bcherny/status/2017742741636321619" target="_blank" rel="noopener" class="source-link">出典: Boris Cherny (@bcherny) on X</a>
+                        <span class="source-link">出典: Boris Cherny (@anthropicaiのClaude Code開発チーム)</span>
                     </p>
                 </div>
                 <div class="tips-grid" id="borisGrid">
@@ -322,7 +326,7 @@
             <!-- Prompt Tips Section -->
             <div class="prompt-tips-section" id="promptTips">
                 <div class="section-header" style="margin-top: 4rem;">
-                    <span class="section-tag">Prompt Engineering</span>
+                    <span class="section-tag">プロンプト設計</span>
                     <h2 class="section-title" style="font-size: 1.75rem;">プロンプトTips 10選</h2>
                     <p class="section-description">
                         より良いプロンプトを書くための実践的なテクニック<br>
@@ -330,6 +334,78 @@
                     </p>
                 </div>
                 <div class="tips-grid" id="tipsGrid">
+                    <!-- Dynamic content loaded here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Troubleshooting & FAQ Section -->
+    <section class="section help-section" id="troubleshooting" style="display: none;">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">サポート</span>
+                <h2 class="section-title">ヘルプ・FAQ</h2>
+                <p class="section-description">
+                    よくある問題の解決策とFAQ
+                </p>
+            </div>
+
+            <!-- Help Tabs -->
+            <div class="help-tabs" id="helpTabs">
+                <button class="help-tab active" data-tab="troubleshooting">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/>
+                        <path d="M12 9v4"/><path d="M12 17h.01"/>
+                    </svg>
+                    トラブルシューティング
+                </button>
+                <button class="help-tab" data-tab="faq">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"/>
+                        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                        <path d="M12 17h.01"/>
+                    </svg>
+                    FAQ
+                </button>
+                <button class="help-tab" data-tab="checklist">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="m3 17 2 2 4-4"/><path d="m3 7 2 2 4-4"/>
+                        <path d="M13 6h8"/><path d="M13 12h8"/><path d="M13 18h8"/>
+                    </svg>
+                    チェックリスト
+                </button>
+            </div>
+
+            <!-- Troubleshooting Content -->
+            <div class="help-content" id="troubleshootingContent">
+                <div class="troubleshooting-grid" id="troubleshootingGrid">
+                    <!-- Dynamic content loaded here -->
+                </div>
+            </div>
+
+            <!-- FAQ Content -->
+            <div class="help-content" id="faqContent" style="display: none;">
+                <div class="faq-filters" id="faqFilters">
+                    <!-- Dynamic category filters -->
+                </div>
+                <div class="faq-grid" id="faqGrid">
+                    <!-- Dynamic content loaded here -->
+                </div>
+            </div>
+
+            <!-- Checklist Content -->
+            <div class="help-content" id="checklistContent" style="display: none;">
+                <div class="checklist-intro">
+                    <p>Claude Codeを効果的に使うためのチェックリスト。各項目を確認してベストプラクティスを実践してください。</p>
+                    <div class="checklist-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="checklistProgressFill" style="width: 0%"></div>
+                        </div>
+                        <span class="progress-text" id="checklistProgressText">0 / 0 完了</span>
+                    </div>
+                </div>
+                <div class="checklist-sections" id="checklistSections">
                     <!-- Dynamic content loaded here -->
                 </div>
             </div>
@@ -415,19 +491,19 @@
             </div>
             <div class="footer-links">
                 <div class="footer-column">
-                    <h4>Resources（公式のみ）</h4>
+                    <h4>公式リソース</h4>
                     <a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">Claude Code 公式ドキュメント</a>
                     <a href="https://www.anthropic.com/news" target="_blank" rel="noopener">Anthropic Newsroom</a>
                 </div>
                 <div class="footer-column">
-                    <h4>Learn</h4>
+                    <h4>学習コンテンツ</h4>
                     <a href="#" onclick="showSection('tutorials')">チュートリアル</a>
                     <a href="#" onclick="showSection('handson')">ハンズオン</a>
                 </div>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 EZOAI. Built with Claude Code.</p>
+            <p>&copy; 2026 EZOAI. Built with Claude Code.</p>
         </div>
     </footer>
 
