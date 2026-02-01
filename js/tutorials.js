@@ -3352,6 +3352,81 @@ taskman remove <id>
                     "エラーハンドリングの実装"
                 ]
             }
+        },
+        {
+            id: 8,
+            number: 8,
+            title: "外部スキル・テンプレートの探し方と読み込み（注意事項付き）",
+            description: "非公式のスキル・テンプレートを探し、内容を確認したうえで自身の環境に読み込む手順。リスクを理解したうえで自己責任で行う。",
+            folder: "8_external_skills",
+            badge: "スキル・拡張",
+            skills: ["SKILL.md", "外部リソース", "セキュリティ確認"],
+            relatedTutorials: [
+                { id: "02_06", title: "Plugins", reason: "拡張の読み込み方" },
+                { id: "01_07", title: "自動化・生産性向上", reason: "Skills の位置づけ" }
+            ],
+            details: {
+                goal: "外部のスキル・テンプレートを探し、リスクを理解したうえで読み込み・動作確認まで行う",
+                estimatedTime: "15-20分",
+                difficulty: "初級",
+                preparation: {
+                    description: "必ず docs/External_Skills_Hands-on.md の「リスクについて（必読）」を読んでから進めてください。非公式リソースの利用は自己責任です。",
+                    setupSteps: [
+                        "docs/External_Skills_Hands-on.md を開き、リスク注意を読む",
+                        "Claude Code が利用可能な環境（学習・検証用を推奨）を用意する",
+                        "本番・機密環境では導入を特に慎重に判断する"
+                    ]
+                },
+                steps: [
+                    {
+                        step: 1,
+                        title: "リスク注意の確認",
+                        description: "外部スキルは公式未検証であること、セキュリティ・品質・ライセンスを自分で確認する必要があることを理解する",
+                        prompt: "このプロジェクトの docs/External_Skills_Hands-on.md を読んで、外部スキル利用時のリスクをまとめて",
+                        expected: "公式でないこと、中身の確認が必要なこと、環境分離の推奨が整理される",
+                        tips: "導入前に必ず目を通す"
+                    },
+                    {
+                        step: 2,
+                        title: "スキル・テンプレートを探す",
+                        description: "aitmpl.com/skills、skillsmp.com/ja、awesome-claude-agents などの入口から目的に近いスキルを検索・閲覧する",
+                        prompt: "External_Skills_Hands-on.md に書いてある3つのリソースのURLを開き、自分が使いたいカテゴリのスキルを1つ選んで。選んだ理由を簡潔に",
+                        expected: "該当サイトを開き、1つスキルを選び理由が説明される",
+                        tips: "README や SKILL.md の説明で用途を確認"
+                    },
+                    {
+                        step: 3,
+                        title: "中身を確認してから導入する",
+                        description: "選んだスキルの SKILL.md および同梱スクリプトを読み、不審なコマンド・ネットワーク・ファイル操作がないか確認する",
+                        prompt: "選んだスキルの GitHub リポジトリの SKILL.md（または README）の内容を要約して。実行されるコマンドやファイル操作があれば列挙して",
+                        expected: "スキルの概要と、実行され得る操作の一覧が提示される",
+                        tips: "不明な記述は導入を見送る"
+                    },
+                    {
+                        step: 4,
+                        title: "ローカルで試す",
+                        description: "本番と分離した環境でスキルを配置し、Claude Code で読み込まれるか・意図したとおりにのみ動作するかを確認する",
+                        prompt: "そのスキルの公式または README のインストール手順に従って、~/.claude/skills/ または ~/.cursor/skills/ に配置して、Claude Code で一覧に表示されるか確認して",
+                        expected: "配置後、スキルが認識され一覧に表示される（または README 通りの確認結果が得られる）",
+                        tips: "問題があればすぐに削除・無効化する"
+                    }
+                ],
+                outputs: [
+                    { file: "docs/External_Skills_Hands-on.md", description: "リスク注意と手順の参照先" },
+                    { file: "（選んだスキルの配置先）", description: "読み込んだスキルの動作確認" }
+                ],
+                checkpoints: [
+                    "リスク注意を読んだ",
+                    "利用するスキルを1つ選び、SKILL.md 等で内容を確認した",
+                    "不審な操作がないことを確認した（または見送った）",
+                    "分離した環境で配置・動作確認した"
+                ],
+                learningPoints: [
+                    "外部スキルは非公式であり、利用は自己責任で行う",
+                    "導入前には必ず中身を読み、セキュリティと品質を自分で確認する",
+                    "公式ドキュメントを正とし、配置場所・読み込み方法は公式に合わせる"
+                ]
+            }
         }
     ]
 };
