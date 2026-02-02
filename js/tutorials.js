@@ -10,22 +10,30 @@ const OFFICIAL_RESOURCES = {
     docs: {
         url: "https://code.claude.com/docs/ja/overview",
         title: "Claude Code 公式ドキュメント",
-        description: "Anthropicが提供する公式ドキュメント。最新の機能とベストプラクティス。"
+        title_en: "Claude Code Official Documentation",
+        description: "Anthropicが提供する公式ドキュメント。最新の機能とベストプラクティス。",
+        description_en: "Official documentation provided by Anthropic. Latest features and best practices."
     },
     bestPractices: {
         url: "https://code.claude.com/docs/en/best-practices",
         title: "公式ベストプラクティス",
-        description: "Anthropicが推奨する7つのベストプラクティスと失敗パターン。"
+        title_en: "Official Best Practices",
+        description: "Anthropicが推奨する7つのベストプラクティスと失敗パターン。",
+        description_en: "Seven best practices and failure patterns recommended by Anthropic."
     },
     zennGuide: {
         url: "https://zenn.dev/tmasuyama1114/books/claude_code_basic",
         title: "Claude Code 完全ガイド（Zenn）",
-        description: "とまだ氏による包括的な日本語ガイド。全10パート・約50チャプター。"
+        title_en: "Claude Code Complete Guide (Zenn)",
+        description: "とまだ氏による包括的な日本語ガイド。全10パート・約50チャプター。",
+        description_en: "Comprehensive Japanese guide by Tomada. 10 parts with approximately 50 chapters."
     },
     slides: {
         url: "https://speakerdeck.com/minorun365/claude-codebesutopurakuteisumatome",
         title: "ベストプラクティスまとめスライド",
-        description: "みのるん氏による公式ベストプラクティスの図解スライド。"
+        title_en: "Best Practices Summary Slides",
+        description: "みのるん氏による公式ベストプラクティスの図解スライド。",
+        description_en: "Illustrated slides of official best practices by Minorun."
     }
 };
 
@@ -43,41 +51,61 @@ const TUTORIALS = {
             tags_en: ["Overview", "Agent", "Tool Calls"],
             content: {
                 summary: "Claude Codeは、Anthropicが提供する公式CLIツールです。本質は「エージェント型コーディング環境」にあります。従来のAIチャットボットとは根本的に異なり、ファイルを読み、コマンドを実行し、変更を加え、問題を自律的に解決します。",
+                summary_en: "Claude Code is an official CLI tool provided by Anthropic. Its essence is an 'agent-based coding environment.' Fundamentally different from traditional AI chatbots, it reads files, executes commands, makes changes, and autonomously solves problems.",
                 keyPoints: [
                     "ファイルを読み、コマンドを実行し、変更を加え、問題を自律的に解決",
                     "ローカルで動くため、あなたのPCのファイルやプログラムを直接操作可能",
                     "Read、Write、Edit、Bash、Glob、Grep等のツールを自律的に使い分ける",
                     "「Claude Codeという名前を忘れろ。Claude Agentだと思ってください」"
                 ],
+                keyPoints_en: [
+                    "Reads files, executes commands, makes changes, and autonomously solves problems",
+                    "Runs locally, directly operating on files and programs on your PC",
+                    "Autonomously uses tools like Read, Write, Edit, Bash, Glob, Grep",
+                    "'Forget the name Claude Code. Think of it as Claude Agent'"
+                ],
                 tools: [
-                    { name: "Read", desc: "ファイルを読む" },
-                    { name: "Write", desc: "ファイルを書く" },
-                    { name: "Edit", desc: "ファイルを編集する" },
-                    { name: "Bash", desc: "コマンドを実行する" },
-                    { name: "Glob", desc: "ファイルパターンで検索する" },
-                    { name: "Grep", desc: "ファイル内容を検索する" }
+                    { name: "Read", desc: "ファイルを読む", desc_en: "Read files" },
+                    { name: "Write", desc: "ファイルを書く", desc_en: "Write files" },
+                    { name: "Edit", desc: "ファイルを編集する", desc_en: "Edit files" },
+                    { name: "Bash", desc: "コマンドを実行する", desc_en: "Execute commands" },
+                    { name: "Glob", desc: "ファイルパターンで検索する", desc_en: "Search by file patterns" },
+                    { name: "Grep", desc: "ファイル内容を検索する", desc_en: "Search file contents" }
                 ],
                 handson: {
                     title: "エージェントを体感する",
+                    title_en: "Experience the Agent",
                     goal: "Claude Codeが「ローカルで動き、ファイルを自分で読む」ことを体験",
+                    goal_en: "Experience that Claude Code 'runs locally and reads files on its own'",
                     prerequisites: ["VSCodeでプロジェクトフォルダを開いている", "Claude Code拡張がインストール済み"],
+                    prerequisites_en: ["Project folder open in VSCode", "Claude Code extension installed"],
                     steps: [
                         {
                             step: 1,
                             action: "Claude Codeを起動し、以下のプロンプトを入力",
+                            action_en: "Launch Claude Code and enter the following prompt",
                             prompt: "このフォルダの中身を教えて。READMEとdataフォルダの役割を簡潔に説明して。",
-                            expected: "Claudeが Read / Glob などでフォルダを読み、ファイル構造を説明する"
+                            prompt_en: "Tell me what's in this folder. Briefly explain the roles of README and data folder.",
+                            expected: "Claudeが Read / Glob などでフォルダを読み、ファイル構造を説明する",
+                            expected_en: "Claude reads the folder using Read/Glob and explains the file structure"
                         },
                         {
                             step: 2,
                             action: "続けて以下を入力",
+                            action_en: "Continue with the following input",
                             prompt: "data フォルダにあるCSVの先頭5行の内容を要約して",
-                            expected: "ファイルを読んで要約する一連の動作が自律的に進む"
+                            prompt_en: "Summarize the first 5 rows of the CSV in the data folder",
+                            expected: "ファイルを読んで要約する一連の動作が自律的に進む",
+                            expected_en: "A series of autonomous actions to read and summarize the file"
                         }
                     ],
                     checkpoints: [
                         "質問に答えるだけでなく、必要なファイルを自分で開いている",
                         "内容に基づいて回答している（これが「エージェント」の振る舞い）"
+                    ],
+                    checkpoints_en: [
+                        "Opens necessary files on its own, not just answering questions",
+                        "Responds based on actual content (this is 'agent' behavior)"
                     ]
                 }
             }
@@ -94,37 +122,59 @@ const TUTORIALS = {
             tags_en: ["Agent", "Autonomy", "Feedback Loop"],
             content: {
                 summary: "エージェントは、チャットボットとは根本的に異なります。目標を与えれば、自分で考え、自分で動きます。探索→計画→実行→検証のフィードバックループを自律的に回し続けます。",
+                summary_en: "Agents are fundamentally different from chatbots. Given a goal, they think and act on their own. They continuously run the explore→plan→execute→verify feedback loop autonomously.",
                 keyPoints: [
                     "チャットボット: 質問→回答→待機（受動的）",
                     "エージェント: 目標→計画→実行→検証→改善（能動的）",
                     "フィードバックループを自律的に回し続ける",
                     "人間は「何を達成したいか」を伝えるだけでよい"
                 ],
+                keyPoints_en: [
+                    "Chatbot: Question→Answer→Wait (passive)",
+                    "Agent: Goal→Plan→Execute→Verify→Improve (active)",
+                    "Continuously runs feedback loop autonomously",
+                    "Humans only need to communicate 'what they want to achieve'"
+                ],
                 comparison: {
                     chatbot: ["質問に答える", "次の質問を待つ", "完全に受け身"],
-                    agent: ["目標を理解する", "計画を立てる", "実行する", "結果を検証する", "必要なら修正する"]
+                    chatbot_en: ["Answer questions", "Wait for next question", "Completely passive"],
+                    agent: ["目標を理解する", "計画を立てる", "実行する", "結果を検証する", "必要なら修正する"],
+                    agent_en: ["Understand the goal", "Make a plan", "Execute", "Verify results", "Revise if needed"]
                 },
                 handson: {
                     title: "自律的な実行を体感する",
+                    title_en: "Experience Autonomous Execution",
                     goal: "CSVファイルの集計を依頼し、Claudeが読み込み→分析→出力まで自律的に行う様子を確認",
+                    goal_en: "Request CSV aggregation and observe Claude autonomously reading→analyzing→outputting",
                     prerequisites: ["ハンズオンフォルダにdata/sales_2025.csvがある"],
+                    prerequisites_en: ["data/sales_2025.csv exists in hands-on folder"],
                     steps: [
                         {
                             step: 1,
                             action: "以下のプロンプトを入力",
+                            action_en: "Enter the following prompt",
                             prompt: "data/sales_2025.csv を読んで、月別の売上合計を計算して表形式で表示して。",
-                            expected: "Claudeがファイルを読み、Pythonスクリプトを作成・実行し、結果を表示する"
+                            prompt_en: "Read data/sales_2025.csv and calculate monthly sales totals, displaying in table format.",
+                            expected: "Claudeがファイルを読み、Pythonスクリプトを作成・実行し、結果を表示する",
+                            expected_en: "Claude reads the file, creates and executes a Python script, displays results"
                         },
                         {
                             step: 2,
                             action: "続けて依頼",
+                            action_en: "Continue with request",
                             prompt: "地域別の売上も追加して、どの地域が最も売上が高いか教えて。",
-                            expected: "前の文脈を維持しながら追加分析を行う"
+                            prompt_en: "Add regional sales breakdown and tell me which region has the highest sales.",
+                            expected: "前の文脈を維持しながら追加分析を行う",
+                            expected_en: "Performs additional analysis while maintaining previous context"
                         }
                     ],
                     checkpoints: [
                         "こちらが「どうやって」を指示しなくても、Claudeが方法を考えている",
                         "必要なコマンドを自分で実行している"
+                    ],
+                    checkpoints_en: [
+                        "Claude figures out the method without you specifying 'how'",
+                        "Executes necessary commands on its own"
                     ]
                 }
             }
@@ -141,33 +191,51 @@ const TUTORIALS = {
             tags_en: ["Context", "Token", "Optimization"],
             content: {
                 summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。Claude 3.5 Sonnetは約200Kトークン（日本語で約15万字）ですが、効率的に使わなければ性能が劣化します。",
+                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. Claude 3.5 Sonnet has about 200K tokens (~150K Japanese characters), but performance degrades without efficient use.",
                 keyPoints: [
                     "Claude 3.5 Sonnetは約200Kトークン（日本語で約15万字）",
                     "コンテキストが埋まるとAIの性能が劣化（Context Rot）",
                     "不要な情報を送らない、必要な情報を効率的に渡すことが重要",
                     "/context コマンドで使用量を確認できる"
                 ],
+                keyPoints_en: [
+                    "Claude 3.5 Sonnet has ~200K tokens (~150K Japanese characters)",
+                    "AI performance degrades when context fills up (Context Rot)",
+                    "Important to not send unnecessary info, pass needed info efficiently",
+                    "Check usage with /context command"
+                ],
                 handson: {
                     title: "コンテキスト使用量を確認する",
+                    title_en: "Check Context Usage",
                     goal: "やり取りでコンテキストが消費されることを体感",
+                    goal_en: "Experience how context is consumed through interactions",
                     prerequisites: ["Claude Codeでセッションを開始している"],
+                    prerequisites_en: ["Session started in Claude Code"],
                     steps: [
                         {
                             step: 1,
                             action: "以下のコマンドを実行",
+                            action_en: "Execute the following command",
                             prompt: "/context",
-                            expected: "現在のコンテキスト使用量が表示される（例: 5% used）"
+                            expected: "現在のコンテキスト使用量が表示される（例: 5% used）",
+                            expected_en: "Current context usage displayed (e.g., 5% used)"
                         },
                         {
                             step: 2,
                             action: "いくつかの質問をしてから再度確認",
+                            action_en: "Ask several questions then check again",
                             prompt: "/context",
-                            expected: "使用量が増加している"
+                            expected: "使用量が増加している",
+                            expected_en: "Usage has increased"
                         }
                     ],
                     checkpoints: [
                         "やり取りのたびにコンテキストが消費されることを理解",
                         "大きなファイルを読むと一気に消費されることを確認"
+                    ],
+                    checkpoints_en: [
+                        "Understand that context is consumed with each interaction",
+                        "Confirm that reading large files consumes context rapidly"
                     ]
                 }
             }
@@ -184,40 +252,60 @@ const TUTORIALS = {
             tags_en: ["Install", "Setup", "API"],
             content: {
                 summary: "Claude Codeの導入は簡単。npmでインストールし、APIキーを設定すれば準備完了です。",
+                summary_en: "Getting started with Claude Code is easy. Install via npm, set up your API key, and you're ready.",
                 keyPoints: [
                     "npm install -g @anthropic-ai/claude-code でグローバルインストール",
                     "claude --version で動作確認",
                     "VSCode拡張「Claude Code」をインストールして連携",
                     "claude auth login でAPI認証"
                 ],
+                keyPoints_en: [
+                    "Global install with npm install -g @anthropic-ai/claude-code",
+                    "Verify with claude --version",
+                    "Install VSCode extension 'Claude Code' for integration",
+                    "Authenticate with claude auth login"
+                ],
                 code: "# インストール\nnpm install -g @anthropic-ai/claude-code\n\n# バージョン確認\nclaude --version\n\n# 認証\nclaude auth login",
                 handson: {
                     title: "インストールと動作確認",
+                    title_en: "Installation and Verification",
                     goal: "Claude Codeが正しくインストールされ、動作することを確認",
+                    goal_en: "Verify that Claude Code is correctly installed and working",
                     prerequisites: ["Node.js v18以上がインストール済み"],
+                    prerequisites_en: ["Node.js v18 or higher installed"],
                     steps: [
                         {
                             step: 1,
                             action: "ターミナルで以下を実行",
+                            action_en: "Execute in terminal",
                             prompt: "npm install -g @anthropic-ai/claude-code",
-                            expected: "インストールが完了する"
+                            expected: "インストールが完了する",
+                            expected_en: "Installation completes"
                         },
                         {
                             step: 2,
                             action: "バージョン確認",
+                            action_en: "Version check",
                             prompt: "claude --version",
-                            expected: "バージョン番号が表示される（例: 1.0.x）"
+                            expected: "バージョン番号が表示される（例: 1.0.x）",
+                            expected_en: "Version number displayed (e.g., 1.0.x)"
                         },
                         {
                             step: 3,
                             action: "認証",
+                            action_en: "Authentication",
                             prompt: "claude auth login",
-                            expected: "ブラウザが開き、認証フローが開始される"
+                            expected: "ブラウザが開き、認証フローが開始される",
+                            expected_en: "Browser opens and authentication flow begins"
                         }
                     ],
                     checkpoints: [
                         "claude コマンドが認識される",
                         "認証が成功する"
+                    ],
+                    checkpoints_en: [
+                        "claude command is recognized",
+                        "Authentication succeeds"
                     ]
                 }
             }
@@ -234,6 +322,7 @@ const TUTORIALS = {
             tags_en: ["Commands", "Shortcuts", "Basics"],
             content: {
                 summary: "Claude Codeの基本操作は5つのコマンドとショートカットで完結します。",
+                summary_en: "Basic Claude Code operations are covered by 5 commands and shortcuts.",
                 keyPoints: [
                     "/init - CLAUDE.mdを自動生成",
                     "/plan - Planモードで計画してから実装",
@@ -242,45 +331,69 @@ const TUTORIALS = {
                     "Shift+Tab - 自動補完",
                     "/clear - コンテキストをリセット"
                 ],
+                keyPoints_en: [
+                    "/init - Auto-generate CLAUDE.md",
+                    "/plan - Plan before implementing in Plan mode",
+                    "/compact - Compress context",
+                    "Esc - Interrupt processing",
+                    "Shift+Tab - Auto-complete",
+                    "/clear - Reset context"
+                ],
                 commands: [
-                    { cmd: "/init", desc: "プロジェクト構造に基づいたCLAUDE.mdを自動生成" },
-                    { cmd: "/plan", desc: "Planモードを開始。変更なしで探索・計画" },
-                    { cmd: "/compact", desc: "コンテキストを要約して圧縮" },
-                    { cmd: "/clear", desc: "コンテキストをリセット" },
-                    { cmd: "/context", desc: "コンテキスト使用量を確認" },
-                    { cmd: "/model", desc: "使用モデルを変更" }
+                    { cmd: "/init", desc: "プロジェクト構造に基づいたCLAUDE.mdを自動生成", desc_en: "Auto-generate CLAUDE.md based on project structure" },
+                    { cmd: "/plan", desc: "Planモードを開始。変更なしで探索・計画", desc_en: "Start Plan mode. Explore and plan without changes" },
+                    { cmd: "/compact", desc: "コンテキストを要約して圧縮", desc_en: "Summarize and compress context" },
+                    { cmd: "/clear", desc: "コンテキストをリセット", desc_en: "Reset context" },
+                    { cmd: "/context", desc: "コンテキスト使用量を確認", desc_en: "Check context usage" },
+                    { cmd: "/model", desc: "使用モデルを変更", desc_en: "Change model" }
                 ],
                 handson: {
                     title: "CLAUDE.mdを自動生成する",
+                    title_en: "Auto-generate CLAUDE.md",
                     goal: "/init を使ってプロジェクト固有のCLAUDE.mdを生成",
+                    goal_en: "Generate project-specific CLAUDE.md using /init",
                     prerequisites: ["ハンズオンフォルダを開いている"],
+                    prerequisites_en: ["Hands-on folder is open"],
                     steps: [
                         {
                             step: 1,
                             action: "以下のコマンドを実行",
+                            action_en: "Execute the following command",
                             prompt: "/init",
-                            expected: "Claudeがフォルダを探索し、CLAUDE.mdの内容を提案する"
+                            expected: "Claudeがフォルダを探索し、CLAUDE.mdの内容を提案する",
+                            expected_en: "Claude explores the folder and suggests CLAUDE.md content"
                         },
                         {
                             step: 2,
                             action: "提案を確認し、承認する",
+                            action_en: "Review and approve the suggestion",
                             prompt: "（提案された内容を確認してEnter）",
-                            expected: "CLAUDE.mdファイルが作成される"
+                            prompt_en: "(Review suggested content and press Enter)",
+                            expected: "CLAUDE.mdファイルが作成される",
+                            expected_en: "CLAUDE.md file is created"
                         },
                         {
                             step: 3,
                             action: "@参照を試す",
+                            action_en: "Try @ reference",
                             prompt: "@CLAUDE.md の内容を説明して",
-                            expected: "CLAUDE.mdの内容を読んで説明する"
+                            prompt_en: "Explain the contents of @CLAUDE.md",
+                            expected: "CLAUDE.mdの内容を読んで説明する",
+                            expected_en: "Reads and explains CLAUDE.md contents"
                         }
                     ],
                     checkpoints: [
                         "CLAUDE.mdファイルがプロジェクトルートに作成された",
                         "@参照でファイルを直接指定できることを確認"
                     ],
+                    checkpoints_en: [
+                        "CLAUDE.md file created in project root",
+                        "Confirmed @ reference can directly specify files"
+                    ],
                     files: {
                         created: ["CLAUDE.md"],
-                        location: "プロジェクトルート"
+                        location: "プロジェクトルート",
+                        location_en: "Project root"
                     }
                 }
             }
@@ -297,12 +410,20 @@ const TUTORIALS = {
             tags_en: ["Non-Engineer", "Intro", "Use Cases"],
             content: {
                 summary: "プログラミング経験がなくても、日常業務の効率化にClaude Codeは使えます。自然な日本語で依頼するだけで、ファイル操作やデータ分析が可能です。",
+                summary_en: "Even without programming experience, Claude Code can streamline daily tasks. Just request in natural language and perform file operations or data analysis.",
                 keyPoints: [
                     "ファイルの整理・リネーム",
                     "文書の要約・翻訳",
                     "データの集計・分析",
                     "レポートの自動生成",
                     "議事録からタスク抽出"
+                ],
+                keyPoints_en: [
+                    "File organization and renaming",
+                    "Document summarization and translation",
+                    "Data aggregation and analysis",
+                    "Automated report generation",
+                    "Task extraction from meeting notes"
                 ],
                 examples: [
                     "このフォルダの中身を一覧にして",
@@ -311,27 +432,47 @@ const TUTORIALS = {
                     "この議事録から次のアクションを抽出して",
                     "このレポートを3行で要約して"
                 ],
+                examples_en: [
+                    "List the contents of this folder",
+                    "Sort files by modification date",
+                    "Aggregate this CSV by month",
+                    "Extract action items from these meeting notes",
+                    "Summarize this report in 3 lines"
+                ],
                 handson: {
                     title: "ファイル一覧と更新日順",
+                    title_en: "File List and Sorting by Date",
                     goal: "自然な日本語でファイル操作を依頼する",
+                    goal_en: "Request file operations in natural language",
                     prerequisites: ["ハンズオンフォルダを開いている"],
+                    prerequisites_en: ["Hands-on folder is open"],
                     steps: [
                         {
                             step: 1,
                             action: "以下のプロンプトを入力",
+                            action_en: "Enter the following prompt",
                             prompt: "このフォルダ内のすべてのファイルを一覧にして、更新日が新しい順に並べて。",
-                            expected: "ファイル一覧が更新日順で表示される"
+                            prompt_en: "List all files in this folder and sort by most recently modified.",
+                            expected: "ファイル一覧が更新日順で表示される",
+                            expected_en: "File list displayed sorted by modification date"
                         },
                         {
                             step: 2,
                             action: "続けて依頼",
+                            action_en: "Continue with request",
                             prompt: "この中でCSVファイルだけを抽出して、それぞれの行数を教えて。",
-                            expected: "CSVファイルと行数が表示される"
+                            prompt_en: "Extract only CSV files from these and tell me the line count of each.",
+                            expected: "CSVファイルと行数が表示される",
+                            expected_en: "CSV files and their line counts displayed"
                         }
                     ],
                     checkpoints: [
                         "プログラミング用語を使わなくても操作できる",
                         "自然な日本語で依頼が通る"
+                    ],
+                    checkpoints_en: [
+                        "Operations work without using programming terminology",
+                        "Natural language requests are understood"
                     ]
                 }
             }
@@ -350,12 +491,20 @@ const TUTORIALS = {
             tags_en: ["CLAUDE.md", "Config", "Rules"],
             content: {
                 summary: "CLAUDE.mdは「プロジェクトの説明書」です。Claudeはセッション開始時に自動で読み込み、ここに書かれたルールに従います。",
+                summary_en: "CLAUDE.md is the 'project manual.' Claude automatically reads it at session start and follows the rules written there.",
                 keyPoints: [
                     "プロジェクトルートに配置",
                     "コーディング規約、アーキテクチャ、禁止事項を記載",
                     "~/CLAUDE.md でグローバル設定も可能",
                     "/init で自動生成、その後カスタマイズ",
                     "言語標準や自明な指示は含めない（コンテキスト節約）"
+                ],
+                keyPoints_en: [
+                    "Place in project root",
+                    "Document coding conventions, architecture, prohibited actions",
+                    "Global settings possible with ~/CLAUDE.md",
+                    "Auto-generate with /init, then customize",
+                    "Don't include language standards or obvious instructions (saves context)"
                 ],
                 structure: [
                     "## プロジェクト概要",
@@ -364,34 +513,57 @@ const TUTORIALS = {
                     "## 禁止事項",
                     "## テスト方法"
                 ],
+                structure_en: [
+                    "## Project Overview",
+                    "## Tech Stack",
+                    "## Coding Conventions",
+                    "## Prohibited Actions",
+                    "## Testing Methods"
+                ],
                 code: "# CLAUDE.md\n\n## プロジェクト概要\n売上データ分析プロジェクト\n\n## 制約\n- Pythonスクリプトはscripts/に配置\n- 出力形式はCSV\n- コミット前にテスト実行必須\n\n## 禁止事項\n- 本番データの直接編集禁止",
                 handson: {
                     title: "CLAUDE.mdにルールを追加する",
+                    title_en: "Add Rules to CLAUDE.md",
                     goal: "既存のCLAUDE.mdにプロジェクト固有のルールを追加",
+                    goal_en: "Add project-specific rules to existing CLAUDE.md",
                     prerequisites: ["00_05で/initを実行し、CLAUDE.mdが存在する"],
+                    prerequisites_en: ["Ran /init in 00_05, CLAUDE.md exists"],
                     steps: [
                         {
                             step: 1,
                             action: "現在のCLAUDE.mdを確認",
+                            action_en: "Check current CLAUDE.md",
                             prompt: "@CLAUDE.md を表示して",
-                            expected: "現在のCLAUDE.mdの内容が表示される"
+                            prompt_en: "Show @CLAUDE.md",
+                            expected: "現在のCLAUDE.mdの内容が表示される",
+                            expected_en: "Current CLAUDE.md contents displayed"
                         },
                         {
                             step: 2,
                             action: "ルールを追加",
+                            action_en: "Add rules",
                             prompt: "CLAUDE.md に以下のルールを追加して：\n\n## 出力ルール\n- スクリプトは scripts/ フォルダに配置\n- 集計結果は常にCSV形式で出力\n- コメントは日本語で記載",
-                            expected: "CLAUDE.mdにルールが追加される"
+                            prompt_en: "Add the following rules to CLAUDE.md:\n\n## Output Rules\n- Place scripts in scripts/ folder\n- Always output aggregation results in CSV format\n- Write comments in English",
+                            expected: "CLAUDE.mdにルールが追加される",
+                            expected_en: "Rules added to CLAUDE.md"
                         },
                         {
                             step: 3,
                             action: "ルールが適用されるか確認",
+                            action_en: "Verify rules are applied",
                             prompt: "data/sales_2025.csv を月別に集計するスクリプトを作成して",
-                            expected: "scripts/フォルダにスクリプトが作成され、CSV形式で出力される"
+                            prompt_en: "Create a script to aggregate data/sales_2025.csv by month",
+                            expected: "scripts/フォルダにスクリプトが作成され、CSV形式で出力される",
+                            expected_en: "Script created in scripts/ folder, output in CSV format"
                         }
                     ],
                     checkpoints: [
                         "CLAUDE.mdにルールが追加された",
                         "以降のタスクでルールが自動的に適用される"
+                    ],
+                    checkpoints_en: [
+                        "Rules added to CLAUDE.md",
+                        "Rules automatically applied in subsequent tasks"
                     ],
                     files: {
                         modified: ["CLAUDE.md"],
@@ -412,6 +584,7 @@ const TUTORIALS = {
             tags_en: ["Verification", "Test", "Best Practice"],
             content: {
                 summary: "「検証方法を提供せよ」はAnthropicが最も強調するプラクティスです。具体的な入力→期待出力を示すことで、Claudeが自己検証できるようになります。",
+                summary_en: "'Provide verification methods' is the practice Anthropic emphasizes most. By showing specific input→expected output, Claude can self-verify.",
                 keyPoints: [
                     "具体的な入力→期待出力を示す",
                     "テストを書かせて実行させる",
@@ -419,32 +592,55 @@ const TUTORIALS = {
                     "「根本原因に対処して」と指示する",
                     "曖昧な「うまく動くようにして」は避ける"
                 ],
+                keyPoints_en: [
+                    "Show specific input→expected output",
+                    "Have tests written and executed",
+                    "Verify visually with screenshots",
+                    "Instruct to 'address root cause'",
+                    "Avoid vague 'make it work'"
+                ],
                 quote: "テスト、スクリーンショット、期待される出力を含めて、Claudeが自己検証できるようにせよ。これが最もレバレッジの高い一手です。",
+                quote_en: "Include tests, screenshots, expected outputs so Claude can self-verify. This is the highest-leverage move.",
                 comparison: {
                     bad: "メール検証関数を実装して",
-                    good: "validateEmail関数を書いて。test@example.comは真、invalidは偽を返す。実装後テストを実行して"
+                    bad_en: "Implement email validation function",
+                    good: "validateEmail関数を書いて。test@example.comは真、invalidは偽を返す。実装後テストを実行して",
+                    good_en: "Write validateEmail function. test@example.com returns true, invalid returns false. Run tests after implementation"
                 },
                 handson: {
                     title: "期待出力を渡して集計を検証させる",
+                    title_en: "Verify Aggregation with Expected Output",
                     goal: "「期待される出力」を明示して依頼し、Claudeが自分で結果を検証できるようにする",
+                    goal_en: "Make requests with explicit 'expected output' so Claude can verify results itself",
                     prerequisites: ["CLAUDE.mdがある", "data/sales_2025.csvがある"],
+                    prerequisites_en: ["CLAUDE.md exists", "data/sales_2025.csv exists"],
                     steps: [
                         {
                             step: 1,
                             action: "検証付きの依頼文を送る",
+                            action_en: "Send request with verification",
                             prompt: "data/sales_2025.csv を読んで、月別の合計金額を計算するPythonスクリプト scripts/summary_by_month.py を作成して。\n\n条件:\n- 標準入力またはファイルパスでCSVを受け取る\n- date列はYYYY-MM-DD形式で、月は先頭7文字（YYYY-MM）で集計\n- 出力は「月, 合計」のCSV形式で標準出力に出す\n\n作成したら、data/sales_2025.csv に対してスクリプトを実行し、出力された月別合計がCSVの内容と一致するか検算して確認して。",
-                            expected: "スクリプト作成→実行→検証までClaudeが自律的に行う"
+                            prompt_en: "Read data/sales_2025.csv and create Python script scripts/summary_by_month.py to calculate monthly totals.\n\nConditions:\n- Accept CSV via stdin or file path\n- date column is YYYY-MM-DD format, aggregate by first 7 chars (YYYY-MM)\n- Output as 'month, total' CSV format to stdout\n\nAfter creating, run script against data/sales_2025.csv and verify the monthly totals match the CSV content.",
+                            expected: "スクリプト作成→実行→検証までClaudeが自律的に行う",
+                            expected_en: "Claude autonomously creates script→executes→verifies"
                         },
                         {
                             step: 2,
                             action: "不一致があれば修正を依頼",
+                            action_en: "Request fixes if mismatched",
                             prompt: "期待する集計結果と一致するように修正して",
-                            expected: "修正と再実行・再検証が行われる"
+                            prompt_en: "Fix to match expected aggregation results",
+                            expected: "修正と再実行・再検証が行われる",
+                            expected_en: "Fix, re-execute, and re-verify performed"
                         }
                     ],
                     checkpoints: [
                         "「正解」を渡すことで、Claudeが自己検証している",
                         "不一致なら修正するループが回る"
+                    ],
+                    checkpoints_en: [
+                        "Claude self-verifies by being given the 'correct answer'",
+                        "Correction loop runs if there's a mismatch"
                     ],
                     files: {
                         created: ["scripts/summary_by_month.py"]
@@ -464,11 +660,18 @@ const TUTORIALS = {
             tags_en: ["Context Rot", "Degradation", "Countermeasures"],
             content: {
                 summary: "長いセッションでは、古い情報や誤った推論が蓄積し、AIの判断力が低下します。これを「Context Rot（コンテキスト腐敗）」と呼びます。",
+                summary_en: "In long sessions, old information and incorrect reasoning accumulate, degrading AI judgment. This is called 'Context Rot.'",
                 keyPoints: [
                     "初期の誤った推論が後続の判断を歪める",
                     "無関係な情報がコンテキストを圧迫",
                     "対策: /compact、/clear、新規セッション開始",
                     "2回失敗したら /clear と再プロンプトを検討"
+                ],
+                keyPoints_en: [
+                    "Early incorrect reasoning distorts subsequent judgments",
+                    "Irrelevant information fills up context",
+                    "Countermeasures: /compact, /clear, start new session",
+                    "Consider /clear and re-prompt after 2 failures"
                 ],
                 symptoms: [
                     "同じ間違いを繰り返す",
@@ -476,33 +679,53 @@ const TUTORIALS = {
                     "無関係な情報を参照する",
                     "処理が遅くなる"
                 ],
+                symptoms_en: [
+                    "Repeats same mistakes",
+                    "Forgets previous instructions",
+                    "References irrelevant information",
+                    "Processing becomes slow"
+                ],
                 handson: {
                     title: "Context Rotの症状を理解する",
+                    title_en: "Understand Context Rot Symptoms",
                     goal: "/contextで増加を確認し、症状を理解する",
+                    goal_en: "Check increase with /context and understand symptoms",
                     prerequisites: ["いくつかのタスクを実行済み"],
+                    prerequisites_en: ["Several tasks already executed"],
                     steps: [
                         {
                             step: 1,
                             action: "コンテキスト使用量を確認",
+                            action_en: "Check context usage",
                             prompt: "/context",
-                            expected: "現在の使用量が表示される"
+                            expected: "現在の使用量が表示される",
+                            expected_en: "Current usage displayed"
                         },
                         {
                             step: 2,
                             action: "いくつかの質問をする",
+                            action_en: "Ask several questions",
                             prompt: "（複数の質問やファイル読み込みを行う）",
-                            expected: "使用量が増加する"
+                            prompt_en: "(Ask multiple questions or read files)",
+                            expected: "使用量が増加する",
+                            expected_en: "Usage increases"
                         },
                         {
                             step: 3,
                             action: "圧縮を実行",
+                            action_en: "Execute compression",
                             prompt: "/compact",
-                            expected: "コンテキストが圧縮され、使用量が減少する"
+                            expected: "コンテキストが圧縮され、使用量が減少する",
+                            expected_en: "Context compressed, usage decreases"
                         }
                     ],
                     checkpoints: [
                         "コンテキストが増加する仕組みを理解",
                         "/compactで圧縮できることを確認"
+                    ],
+                    checkpoints_en: [
+                        "Understand how context accumulates",
+                        "Confirm /compact can compress"
                     ]
                 }
             }
@@ -519,39 +742,59 @@ const TUTORIALS = {
             tags_en: ["WSCE", "Framework", "Strategy"],
             content: {
                 summary: "コンテキスト管理の4つの柱「WSCE」で、効率的なセッションを実現します。",
+                summary_en: "Achieve efficient sessions with the 4 pillars of context management: 'WSCE'.",
                 keyPoints: [
                     "Write: 結果をファイルに書き出す（コンテキストから外す）",
                     "Structure: CLAUDE.mdで構造化（毎回説明しない）",
                     "Compress: /compactで圧縮（要約して継続）",
                     "Extend: Skills/Hooksで拡張（繰り返しを自動化）"
                 ],
+                keyPoints_en: [
+                    "Write: Write results to files (remove from context)",
+                    "Structure: Structure with CLAUDE.md (don't explain every time)",
+                    "Compress: Compress with /compact (summarize and continue)",
+                    "Extend: Extend with Skills/Hooks (automate repetition)"
+                ],
                 framework: [
-                    { letter: "W", name: "Write", desc: "結果をファイルに書き出してコンテキストから外す" },
-                    { letter: "S", name: "Structure", desc: "CLAUDE.mdでルールを構造化" },
-                    { letter: "C", name: "Compress", desc: "/compactでコンテキストを圧縮" },
-                    { letter: "E", name: "Extend", desc: "Skills/Hooksで機能を拡張" }
+                    { letter: "W", name: "Write", desc: "結果をファイルに書き出してコンテキストから外す", desc_en: "Write results to file, remove from context" },
+                    { letter: "S", name: "Structure", desc: "CLAUDE.mdでルールを構造化", desc_en: "Structure rules with CLAUDE.md" },
+                    { letter: "C", name: "Compress", desc: "/compactでコンテキストを圧縮", desc_en: "Compress context with /compact" },
+                    { letter: "E", name: "Extend", desc: "Skills/Hooksで機能を拡張", desc_en: "Extend features with Skills/Hooks" }
                 ],
                 handson: {
                     title: "Write戦略を試す",
+                    title_en: "Try the Write Strategy",
                     goal: "大きなCSVを要約してファイルに書き出す",
+                    goal_en: "Summarize large CSV and write to file",
                     prerequisites: ["data/sales_2025.csvがある"],
+                    prerequisites_en: ["data/sales_2025.csv exists"],
                     steps: [
                         {
                             step: 1,
                             action: "要約をファイルに書き出す",
+                            action_en: "Write summary to file",
                             prompt: "data/sales_2025.csv の内容を分析し、以下の情報を data/summary.txt に書き出して：\n- 総レコード数\n- 期間（最初と最後の日付）\n- 合計金額\n- カテゴリ別の件数",
-                            expected: "summary.txtが作成され、要約が保存される"
+                            prompt_en: "Analyze data/sales_2025.csv and write the following to data/summary.txt:\n- Total record count\n- Date range (first and last dates)\n- Total amount\n- Count by category",
+                            expected: "summary.txtが作成され、要約が保存される",
+                            expected_en: "summary.txt created with saved summary"
                         },
                         {
                             step: 2,
                             action: "ファイルを参照して作業",
+                            action_en: "Work by referencing file",
                             prompt: "@data/summary.txt を参照して、この売上データの特徴を説明して",
-                            expected: "元のCSV全体ではなく、要約ファイルを参照して回答"
+                            prompt_en: "Reference @data/summary.txt and explain the characteristics of this sales data",
+                            expected: "元のCSV全体ではなく、要約ファイルを参照して回答",
+                            expected_en: "Responds referencing summary file, not entire original CSV"
                         }
                     ],
                     checkpoints: [
                         "ファイルに書き出すことでコンテキストを節約",
                         "@参照で必要な情報だけを読み込む"
+                    ],
+                    checkpoints_en: [
+                        "Save context by writing to files",
+                        "Load only needed info with @ reference"
                     ],
                     files: {
                         created: ["data/summary.txt"]
@@ -565,10 +808,13 @@ const TUTORIALS = {
             title: "探索→計画→実装→コミット",
             title_en: "Explore → Plan → Implement → Commit",
             description: "Planモードで計画を立ててから実装。公式推奨のワークフロー。",
+            description_en: "Plan before implementing in Plan mode. Officially recommended workflow.",
             icon: "git-branch",
             tags: ["Planモード", "ワークフロー", "計画"],
+            tags_en: ["Plan Mode", "Workflow", "Planning"],
             content: {
                 summary: "いきなりコードを書かない。まず探索し、計画を立て、承認を得てから実装。これが公式推奨のワークフローです。",
+                summary_en: "Don't write code immediately. First explore, plan, get approval, then implement. This is the officially recommended workflow.",
                 keyPoints: [
                     "/plan でPlanモードを開始",
                     "Claudeがコードベースを探索し、計画を提案",
@@ -576,39 +822,61 @@ const TUTORIALS = {
                     "実装後はコミットして完了",
                     "計画段階では変更が行われない（安全）"
                 ],
+                keyPoints_en: [
+                    "Start Plan mode with /plan",
+                    "Claude explores codebase and proposes plan",
+                    "Move to implementation phase after user approval",
+                    "Commit after implementation to complete",
+                    "No changes made during planning phase (safe)"
+                ],
                 workflow: [
-                    { phase: "探索", desc: "関連ファイルを読み、現状を把握" },
-                    { phase: "計画", desc: "変更計画を立て、ユーザーに提示" },
-                    { phase: "実装", desc: "承認後、計画に従って変更を実行" },
-                    { phase: "コミット", desc: "変更をGitにコミット" }
+                    { phase: "探索", phase_en: "Explore", desc: "関連ファイルを読み、現状を把握", desc_en: "Read related files, grasp current state" },
+                    { phase: "計画", phase_en: "Plan", desc: "変更計画を立て、ユーザーに提示", desc_en: "Create change plan, present to user" },
+                    { phase: "実装", phase_en: "Implement", desc: "承認後、計画に従って変更を実行", desc_en: "Execute changes according to plan after approval" },
+                    { phase: "コミット", phase_en: "Commit", desc: "変更をGitにコミット", desc_en: "Commit changes to Git" }
                 ],
                 handson: {
                     title: "Planモードで機能追加を計画する",
+                    title_en: "Plan Feature Addition in Plan Mode",
                     goal: "Planモードで「レポートに集計表を追加」を計画・実装",
+                    goal_en: "Plan and implement 'add summary table to report' in Plan mode",
                     prerequisites: ["scripts/summary_by_month.pyが存在する"],
+                    prerequisites_en: ["scripts/summary_by_month.py exists"],
                     steps: [
                         {
                             step: 1,
                             action: "Planモードを開始",
+                            action_en: "Start Plan mode",
                             prompt: "/plan",
-                            expected: "Planモードに入る（プロンプトが変わる）"
+                            expected: "Planモードに入る（プロンプトが変わる）",
+                            expected_en: "Enter Plan mode (prompt changes)"
                         },
                         {
                             step: 2,
                             action: "計画を依頼",
+                            action_en: "Request planning",
                             prompt: "売上データの月別・地域別レポートをMarkdownで出力する機能を追加したい。reports/q1_report.md として出力する。どのように実装すべきか計画して。",
-                            expected: "Claudeが既存コードを探索し、実装計画を提示"
+                            prompt_en: "I want to add a feature to output monthly/regional sales report in Markdown. Output as reports/q1_report.md. Plan how to implement this.",
+                            expected: "Claudeが既存コードを探索し、実装計画を提示",
+                            expected_en: "Claude explores existing code and presents implementation plan"
                         },
                         {
                             step: 3,
                             action: "計画を承認して実装",
+                            action_en: "Approve plan and implement",
                             prompt: "この計画で実装して",
-                            expected: "計画に従って実装が行われる"
+                            prompt_en: "Implement with this plan",
+                            expected: "計画に従って実装が行われる",
+                            expected_en: "Implementation follows the plan"
                         }
                     ],
                     checkpoints: [
                         "Planモードでは変更が行われないことを確認",
                         "計画を確認してから実装できる安心感"
+                    ],
+                    checkpoints_en: [
+                        "Confirm no changes are made in Plan mode",
+                        "Peace of mind from reviewing plan before implementation"
                     ],
                     files: {
                         created: ["reports/q1_report.md"]
@@ -622,50 +890,73 @@ const TUTORIALS = {
             title: "よくある失敗パターン",
             title_en: "Common Failure Patterns",
             description: "公式ドキュメントが警告する失敗パターンと、その対策を学ぶ。",
+            description_en: "Learn failure patterns warned by official documentation and their countermeasures.",
             icon: "x-circle",
             tags: ["失敗パターン", "アンチパターン", "対策"],
+            tags_en: ["Failure Patterns", "Anti-patterns", "Countermeasures"],
             content: {
                 summary: "Anthropic公式が警告する失敗パターンを知り、避けることで生産性を最大化します。",
+                summary_en: "Maximize productivity by knowing and avoiding failure patterns warned by Anthropic officially.",
                 keyPoints: [
                     "曖昧な指示を出す → 具体的なゴールと検証方法を示す",
                     "検証手段を与えない → テスト・期待出力を提供",
                     "コンテキストを肥大化させる → /compact、ファイル書き出し",
                     "計画せずに実装させる → /plan を使う"
                 ],
+                keyPoints_en: [
+                    "Vague instructions → Show specific goals and verification methods",
+                    "No verification means → Provide tests and expected outputs",
+                    "Context bloat → Use /compact, write to files",
+                    "Implementing without planning → Use /plan"
+                ],
                 antiPatterns: [
-                    { name: "キッチンシンク", problem: "無関係タスク混在でコンテキスト散乱", solution: "/clearでリセット" },
-                    { name: "繰り返し修正", problem: "失敗アプローチで汚染", solution: "2回失敗後に/clearと再プロンプト" },
-                    { name: "長すぎるCLAUDE.md", problem: "ルールがノイズに埋没", solution: "容赦なく削除またはフック化" },
-                    { name: "検証なし", problem: "エッジケース未処理", solution: "常に検証手段を提供" },
-                    { name: "無限探索", problem: "大量ファイル読込", solution: "スコープ限定またはサブエージェント" }
+                    { name: "キッチンシンク", name_en: "Kitchen Sink", problem: "無関係タスク混在でコンテキスト散乱", problem_en: "Context scattered by mixing unrelated tasks", solution: "/clearでリセット", solution_en: "Reset with /clear" },
+                    { name: "繰り返し修正", name_en: "Repeated Fixes", problem: "失敗アプローチで汚染", problem_en: "Polluted by failed approaches", solution: "2回失敗後に/clearと再プロンプト", solution_en: "/clear and re-prompt after 2 failures" },
+                    { name: "長すぎるCLAUDE.md", name_en: "Too Long CLAUDE.md", problem: "ルールがノイズに埋没", problem_en: "Rules buried in noise", solution: "容赦なく削除またはフック化", solution_en: "Ruthlessly delete or convert to hooks" },
+                    { name: "検証なし", name_en: "No Verification", problem: "エッジケース未処理", problem_en: "Unhandled edge cases", solution: "常に検証手段を提供", solution_en: "Always provide verification means" },
+                    { name: "無限探索", name_en: "Infinite Exploration", problem: "大量ファイル読込", problem_en: "Loading massive files", solution: "スコープ限定またはサブエージェント", solution_en: "Limit scope or use subagents" }
                 ],
                 handson: {
                     title: "失敗パターンを避ける",
+                    title_en: "Avoid Failure Patterns",
                     goal: "キッチンシンクを避け、/clearのタイミングを学ぶ",
+                    goal_en: "Avoid kitchen sink and learn when to use /clear",
                     prerequisites: ["いくつかのタスクを実行済み"],
+                    prerequisites_en: ["Several tasks already executed"],
                     steps: [
                         {
                             step: 1,
                             action: "コンテキストを確認",
+                            action_en: "Check context",
                             prompt: "/context",
-                            expected: "使用量が表示される"
+                            expected: "使用量が表示される",
+                            expected_en: "Usage displayed"
                         },
                         {
                             step: 2,
                             action: "新しいタスクの前に/clear",
+                            action_en: "Use /clear before new task",
                             prompt: "/clear",
-                            expected: "コンテキストがリセットされる"
+                            expected: "コンテキストがリセットされる",
+                            expected_en: "Context is reset"
                         },
                         {
                             step: 3,
                             action: "クリーンな状態で新タスク開始",
+                            action_en: "Start new task with clean state",
                             prompt: "（新しいタスクを開始）",
-                            expected: "クリーンなコンテキストで作業できる"
+                            prompt_en: "(Start a new task)",
+                            expected: "クリーンなコンテキストで作業できる",
+                            expected_en: "Can work with clean context"
                         }
                     ],
                     checkpoints: [
                         "タスクの切れ目で/clearを使う習慣",
                         "2回失敗したら/clearを検討"
+                    ],
+                    checkpoints_en: [
+                        "Habit of using /clear at task boundaries",
+                        "Consider /clear after 2 failures"
                     ]
                 }
             }
@@ -678,10 +969,13 @@ const TUTORIALS = {
             title: "Skills - ワークフローの定義",
             title_en: "Skills - Workflow Definitions",
             description: "繰り返しの作業をSkillとして定義。Claudeが必要に応じて自動で読み込む。",
+            description_en: "Define repetitive tasks as Skills. Claude auto-loads them when needed.",
             icon: "zap",
             tags: ["Skills", "ワークフロー", "自動化"],
+            tags_en: ["Skills", "Workflow", "Automation"],
             content: {
                 summary: "Skillsは特定のワークフローを定義するマークダウンファイルです。Progressive Disclosure（必要なときだけ読み込む）により、コンテキストを効率的に使用します。Claudeはdescriptionを読んで、関連するタスクが来たときに自動でスキルの内容を読み込みます。",
+                summary_en: "Skills are markdown files that define specific workflows. Through Progressive Disclosure (loading only when needed), context is used efficiently. Claude reads the description and auto-loads skill content when related tasks come up.",
                 keyPoints: [
                     "~/.claude/skills/（グローバル）または .claude/skills/（プロジェクト）に配置",
                     "YAML Front Matterでname、description、globs等のメタデータを記載",
@@ -689,6 +983,14 @@ const TUTORIALS = {
                     "globs指定で特定ファイル編集時に自動読み込み",
                     "user-invocable: true でスラッシュコマンド化（/skill-name で呼び出し）",
                     "/learn コマンドで会話から自動的にSkillを生成可能"
+                ],
+                keyPoints_en: [
+                    "Place in ~/.claude/skills/ (global) or .claude/skills/ (project)",
+                    "Write metadata like name, description, globs in YAML Front Matter",
+                    "Claude reads description, auto-loads content when deemed necessary",
+                    "Auto-load when editing specific files via globs",
+                    "user-invocable: true makes it a slash command (/skill-name)",
+                    "/learn command auto-generates Skills from conversation"
                 ],
                 skillStructure: {
                     title: "Skillファイルの構造",
@@ -833,38 +1135,58 @@ Claude: ".claude/skills/sales-report.md を
                 code: "---\nname: report-draft\ndescription: 売上レポート作成時、先に要約を出力\n---\n\n# レポート作成手順\n\n売上データのレポートを書くときは、必ず以下の順序で出力すること：\n\n1. **3行要約**\n   - 対象期間\n   - 合計金額\n   - 特記事項\n\n2. **詳細本文**\n   - 月別推移\n   - 地域別分析\n   - 考察",
                 handson: {
                     title: "実践: コードレビューSkillを作成する",
+                    title_en: "Practice: Create Code Review Skill",
                     goal: "コードレビュー時に自動適用されるSkillを作成し、実際にレビューで使用する",
+                    goal_en: "Create a Skill that auto-applies during code review and use it in actual reviews",
                     prerequisites: ["任意のプロジェクトフォルダをVSCodeで開いている"],
+                    prerequisites_en: ["Any project folder open in VSCode"],
                     steps: [
                         {
                             step: 1,
                             action: "Skillフォルダを作成",
+                            action_en: "Create Skill folder",
                             prompt: "このプロジェクトに .claude/skills フォルダを作成して",
-                            expected: ".claude/skills フォルダが作成される"
+                            prompt_en: "Create .claude/skills folder in this project",
+                            expected: ".claude/skills フォルダが作成される",
+                            expected_en: ".claude/skills folder is created"
                         },
                         {
                             step: 2,
                             action: "コードレビューSkillを作成",
+                            action_en: "Create code review Skill",
                             prompt: ".claude/skills/code-review.md を作成して。内容:\n\n---\nname: code-review\ndescription: |\n  コードレビュー、PRレビューを依頼されたときに使用。\n  セキュリティ、パフォーマンス、可読性の3観点でレビューする。\nglobs:\n  - \"*.py\"\n  - \"*.js\"\n  - \"*.ts\"\n---\n\n# コードレビューチェックリスト\n\n## セキュリティ\n- [ ] 入力バリデーションがある\n- [ ] 機密情報がハードコードされていない\n- [ ] SQLインジェクション対策がある\n\n## パフォーマンス\n- [ ] 不要なループがない\n- [ ] N+1クエリがない\n- [ ] メモリリークの可能性がない\n\n## 可読性\n- [ ] 変数名が適切\n- [ ] 関数が単一責任\n- [ ] 適切なコメントがある\n\n## フィードバック形式\n🔴 Critical（必須修正）/ 🟡 Suggestion（推奨）/ 💭 Question（質問）",
-                            expected: "code-review.md が作成される"
+                            prompt_en: "Create .claude/skills/code-review.md with content for reviewing code with security, performance, and readability perspectives",
+                            expected: "code-review.md が作成される",
+                            expected_en: "code-review.md is created"
                         },
                         {
                             step: 3,
                             action: "テスト用Pythonファイルを作成",
+                            action_en: "Create test Python file",
                             prompt: "test_sample.py というファイルを作成して、意図的にいくつかの問題があるコードを書いて（例：ハードコードされたパスワード、未使用変数など）",
-                            expected: "問題のあるコードが作成される"
+                            prompt_en: "Create test_sample.py with intentionally problematic code (e.g., hardcoded passwords, unused variables)",
+                            expected: "問題のあるコードが作成される",
+                            expected_en: "Problematic code is created"
                         },
                         {
                             step: 4,
                             action: "Skillを使ってレビュー",
+                            action_en: "Review using Skill",
                             prompt: "test_sample.py をレビューして",
-                            expected: "code-review Skillが自動で読み込まれ、チェックリストに従ったレビューが行われる"
+                            prompt_en: "Review test_sample.py",
+                            expected: "code-review Skillが自動で読み込まれ、チェックリストに従ったレビューが行われる",
+                            expected_en: "code-review Skill auto-loads and review follows checklist"
                         }
                     ],
                     checkpoints: [
                         "Skillファイルの構造（YAML Front Matter + 本文）を理解した",
                         "globs指定でファイルタイプに応じた自動読み込みを確認",
                         "Skillの内容に従ったレビューが実行された"
+                    ],
+                    checkpoints_en: [
+                        "Understood Skill file structure (YAML Front Matter + body)",
+                        "Confirmed auto-loading by file type via globs",
+                        "Review executed according to Skill content"
                     ],
                     files: {
                         created: [".claude/skills/code-review.md", "test_sample.py"]
@@ -878,10 +1200,13 @@ Claude: ".claude/skills/sales-report.md を
             title: "Hooks - 自動化トリガー",
             title_en: "Hooks - Automation Triggers",
             description: "特定のイベントに応じて自動でスクリプトを実行。保存時フォーマット、テスト実行など。",
+            description_en: "Auto-execute scripts on specific events. Format on save, run tests, etc.",
             icon: "anchor",
             tags: ["Hooks", "自動化", "トリガー"],
+            tags_en: ["Hooks", "Automation", "Triggers"],
             content: {
                 summary: "Hooksはイベント駆動の自動化機構です。ファイル保存時のフォーマット、機密情報の検出、テスト自動実行など、Claude Codeの操作に応じてスクリプトを自動実行できます。.claude.json（プロジェクト）または ~/.claude/settings.json（グローバル）で設定します。",
+                summary_en: "Hooks are event-driven automation mechanisms. Auto-execute scripts for formatting on save, detecting sensitive info, auto-running tests, etc. Configure in .claude.json (project) or ~/.claude/settings.json (global).",
                 keyPoints: [
                     "SessionStart/SessionStop: セッション開始・終了時に実行",
                     "PreToolUse: ツール実行前にチェック（ブロック可能）",
@@ -889,6 +1214,14 @@ Claude: ".claude/skills/sales-report.md を
                     "Notification: Claudeの応答を加工して表示",
                     "$EVENT: イベント種別、$FILE: 対象ファイル、$CONTENT: 内容などの変数が使用可能",
                     "終了コード0以外でツール実行をブロック"
+                ],
+                keyPoints_en: [
+                    "SessionStart/SessionStop: Execute on session start/end",
+                    "PreToolUse: Check before tool execution (can block)",
+                    "PostToolUse: Process after tool execution",
+                    "Notification: Process and display Claude's response",
+                    "Variables available: $EVENT (event type), $FILE (target file), $CONTENT (content)",
+                    "Non-zero exit code blocks tool execution"
                 ],
                 configStructure: {
                     title: ".claude.json の構造",
@@ -1032,38 +1365,56 @@ Claude: ".claude/skills/sales-report.md を
                 code: '{\n  "hooks": {\n    "PostToolUse": [\n      {\n        "event": "Write",\n        "pattern": "*.py",\n        "command": "black $FILE"\n      }\n    ]\n  }\n}',
                 handson: {
                     title: "実践: セキュリティ + フォーマットHookを構築",
+                    title_en: "Practice: Build Security + Format Hooks",
                     goal: "機密ファイル編集をブロックし、Python保存時に自動フォーマットする総合的なHook設定を作成",
+                    goal_en: "Create comprehensive Hook settings that block sensitive file edits and auto-format Python on save",
                     prerequisites: ["pip install black isort でフォーマッターをインストール済み"],
+                    prerequisites_en: ["Formatters installed with pip install black isort"],
                     steps: [
                         {
                             step: 1,
                             action: "テスト用フォルダ構造を作成",
+                            action_en: "Create test folder structure",
                             prompt: "以下のフォルダ構造を作成して：\nhooks-demo/\n├── src/\n├── secrets/\n│   └── api_keys.json\n└── .env.example",
-                            expected: "フォルダ構造が作成される"
+                            prompt_en: "Create this folder structure:\nhooks-demo/\n├── src/\n├── secrets/\n│   └── api_keys.json\n└── .env.example",
+                            expected: "フォルダ構造が作成される",
+                            expected_en: "Folder structure is created"
                         },
                         {
                             step: 2,
                             action: "総合的なHook設定を作成",
+                            action_en: "Create comprehensive Hook settings",
                             prompt: ".claude.json を作成して、以下の設定を記載：\n\n{\n  \"hooks\": {\n    \"PreToolUse\": [\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"*.env*\",\n        \"command\": \"echo '⛔ .envファイルの直接編集は禁止されています' && exit 1\"\n      },\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"**/secrets/**\",\n        \"command\": \"echo '⛔ secretsフォルダは編集禁止です' && exit 1\"\n      }\n    ],\n    \"PostToolUse\": [\n      {\n        \"event\": \"Write\",\n        \"pattern\": \"*.py\",\n        \"command\": \"black $FILE && isort $FILE && echo '✅ フォーマット完了'\"\n      }\n    ],\n    \"SessionStart\": [\n      {\n        \"command\": \"echo 'Session: $(date)' >> .claude-log\"\n      }\n    ]\n  }\n}",
-                            expected: ".claude.json が作成される"
+                            prompt_en: "Create .claude.json with PreToolUse (block .env and secrets), PostToolUse (format Python with black/isort), and SessionStart hooks",
+                            expected: ".claude.json が作成される",
+                            expected_en: ".claude.json is created"
                         },
                         {
                             step: 3,
                             action: "セキュリティHookをテスト（ブロック確認）",
+                            action_en: "Test security Hook (verify blocking)",
                             prompt: "secrets/api_keys.json に何か書き込んで",
-                            expected: "「secretsフォルダは編集禁止」というメッセージが表示され、書き込みがブロックされる"
+                            prompt_en: "Write something to secrets/api_keys.json",
+                            expected: "「secretsフォルダは編集禁止」というメッセージが表示され、書き込みがブロックされる",
+                            expected_en: "'secrets folder editing prohibited' message displays, write is blocked"
                         },
                         {
                             step: 4,
                             action: "フォーマットHookをテスト",
+                            action_en: "Test format Hook",
                             prompt: "src/sample.py を作成して、以下の未フォーマットコードを書いて：\n\ndef hello(   name ):\n    print(    f'Hello, {name}!'   )\n\nif __name__=='__main__':\n    hello('World')",
-                            expected: "ファイル作成後、自動でblack/isortが実行され、コードがフォーマットされる"
+                            prompt_en: "Create src/sample.py with unformatted code",
+                            expected: "ファイル作成後、自動でblack/isortが実行され、コードがフォーマットされる",
+                            expected_en: "After file creation, black/isort auto-runs and code is formatted"
                         },
                         {
                             step: 5,
                             action: "フォーマット結果を確認",
+                            action_en: "Verify format result",
                             prompt: "src/sample.py の内容を表示して",
-                            expected: "適切にフォーマットされたコードが表示される"
+                            prompt_en: "Show contents of src/sample.py",
+                            expected: "適切にフォーマットされたコードが表示される",
+                            expected_en: "Properly formatted code is displayed"
                         }
                     ],
                     checkpoints: [
@@ -1071,6 +1422,12 @@ Claude: ".claude/skills/sales-report.md を
                         "PostToolUseで自動フォーマットが実行された",
                         "パターンマッチング（*.py, *.env*, **/secrets/**）を理解した",
                         "$FILE変数が正しく展開された"
+                    ],
+                    checkpoints_en: [
+                        "PreToolUse blocking worked (exit 1)",
+                        "PostToolUse auto-formatting executed",
+                        "Pattern matching (*.py, *.env*, **/secrets/**) understood",
+                        "$FILE variable expanded correctly"
                     ],
                     files: {
                         created: [".claude.json", "src/sample.py", ".claude-log"]
@@ -1084,10 +1441,13 @@ Claude: ".claude/skills/sales-report.md を
             title: "Subagents - タスク委譲の仕組み",
             title_en: "Subagents - Task Delegation",
             description: "複雑なタスクを専門のサブエージェントに委譲。並列処理も可能。",
+            description_en: "Delegate complex tasks to specialized subagents. Parallel processing available.",
             icon: "users",
             tags: ["Subagents", "委譲", "並列処理"],
+            tags_en: ["Subagents", "Delegation", "Parallel Processing"],
             content: {
                 summary: "Subagents（サブエージェント）は、特定のタスクを専門のエージェントに委譲する仕組みです。大規模なコードベース探索、複数ファイルの同時処理、長時間タスクのバックグラウンド実行など、メインエージェントでは効率が悪い作業を分散処理できます。",
+                summary_en: "Subagents delegate specific tasks to specialized agents. Distribute work that's inefficient for the main agent: large-scale codebase exploration, simultaneous multi-file processing, long-running background tasks.",
                 keyPoints: [
                     "Taskツールで専門サブエージェントを起動",
                     "Explore: コードベース探索に特化（ファイル検索、パターン検出）",
@@ -1095,6 +1455,14 @@ Claude: ".claude/skills/sales-report.md を
                     "Bash: コマンド実行に特化（ビルド、テスト、デプロイ）",
                     "run_in_background: true で並列実行（複数タスク同時処理）",
                     "結果は親エージェントに集約されて報告"
+                ],
+                keyPoints_en: [
+                    "Launch specialized subagents with Task tool",
+                    "Explore: Specialized in codebase exploration (file search, pattern detection)",
+                    "Plan: Specialized in implementation planning (architecture analysis)",
+                    "Bash: Specialized in command execution (build, test, deploy)",
+                    "run_in_background: true for parallel execution (simultaneous multi-task processing)",
+                    "Results aggregated and reported to parent agent"
                 ],
                 agentTypes: [
                     {
@@ -1161,32 +1529,47 @@ Claude: ".claude/skills/sales-report.md を
                 ],
                 handson: {
                     title: "実践: 並列サブエージェントで複数ファイルを同時分析",
+                    title_en: "Practice: Analyze Multiple Files in Parallel with Subagents",
                     goal: "Exploreサブエージェントを使った大規模検索と、並列実行による効率化を体験",
+                    goal_en: "Experience large-scale search with Explore subagent and efficiency through parallel execution",
                     prerequisites: ["ある程度のサイズのプロジェクトフォルダがある"],
+                    prerequisites_en: ["Have a reasonably sized project folder"],
                     steps: [
                         {
                             step: 1,
                             action: "プロジェクト全体の探索を依頼",
+                            action_en: "Request full project exploration",
                             prompt: "このプロジェクト全体を探索して、以下を調査して報告して：\n- プロジェクトの構造と主要なファイル\n- 使用している言語・フレームワーク\n- エントリーポイント（main関数等）\n\nExploreサブエージェントを使って詳細に調査して。",
-                            expected: "Exploreサブエージェントが起動し、プロジェクト全体を探索して構造を報告"
+                            prompt_en: "Explore this entire project and investigate:\n- Project structure and main files\n- Languages/frameworks used\n- Entry points (main functions etc.)\n\nUse Explore subagent for detailed investigation.",
+                            expected: "Exploreサブエージェントが起動し、プロジェクト全体を探索して構造を報告",
+                            expected_en: "Explore subagent launches and reports project structure"
                         },
                         {
                             step: 2,
                             action: "複数の観点で並列分析を依頼",
+                            action_en: "Request parallel analysis from multiple perspectives",
                             prompt: "以下の3つの分析を並列で実行して：\n1. セキュリティ観点: 機密情報のハードコード、入力バリデーション漏れを検索\n2. パフォーマンス観点: N+1クエリ、不要なループを検索\n3. コード品質観点: 未使用変数、重複コードを検索",
-                            expected: "3つのサブエージェントが並列で起動し、各観点での分析結果が報告される"
+                            prompt_en: "Execute these 3 analyses in parallel:\n1. Security: Search for hardcoded secrets, missing input validation\n2. Performance: Search for N+1 queries, unnecessary loops\n3. Code quality: Search for unused variables, duplicate code",
+                            expected: "3つのサブエージェントが並列で起動し、各観点での分析結果が報告される",
+                            expected_en: "3 subagents launch in parallel and report analysis results from each perspective"
                         },
                         {
                             step: 3,
                             action: "改善計画の策定を依頼",
+                            action_en: "Request improvement plan",
                             prompt: "分析結果をもとに、優先度の高い改善項目のリストと実装計画を作成して。Planサブエージェントで詳細な計画を立てて。",
-                            expected: "Planサブエージェントが起動し、優先度付きの改善計画が提示される"
+                            prompt_en: "Based on analysis results, create a prioritized improvement list and implementation plan. Use Plan subagent for detailed planning.",
+                            expected: "Planサブエージェントが起動し、優先度付きの改善計画が提示される",
+                            expected_en: "Plan subagent launches and presents prioritized improvement plan"
                         },
                         {
                             step: 4,
                             action: "最優先の改善を実施",
+                            action_en: "Implement top priority improvement",
                             prompt: "計画の中で最も優先度が高い1つを実装して",
-                            expected: "改善が実装される"
+                            prompt_en: "Implement the highest priority item from the plan",
+                            expected: "改善が実装される",
+                            expected_en: "Improvement is implemented"
                         }
                     ],
                     checkpoints: [
@@ -1194,6 +1577,12 @@ Claude: ".claude/skills/sales-report.md を
                         "並列実行で複数の分析が同時に行われた",
                         "Planサブエージェントで実装計画が策定された",
                         "サブエージェントの使い分け（探索 vs 計画 vs 実行）を理解した"
+                    ],
+                    checkpoints_en: [
+                        "Explore subagent efficiently explored entire project",
+                        "Multiple analyses ran simultaneously via parallel execution",
+                        "Implementation plan created with Plan subagent",
+                        "Understood subagent differentiation (explore vs plan vs execute)"
                     ]
                 }
             }
@@ -1204,37 +1593,59 @@ Claude: ".claude/skills/sales-report.md を
             title: "Tasks - セッションを超えるタスク管理",
             title_en: "Tasks - Cross-Session Task Management",
             description: "長期タスクの進捗をファイルで管理。セッションをまたいで継続可能。",
+            description_en: "Manage long-term task progress in files. Continue across sessions.",
             icon: "list-checks",
             tags: ["Tasks", "進捗管理", "永続化"],
+            tags_en: ["Tasks", "Progress Management", "Persistence"],
             content: {
                 summary: "複雑なタスクをTodoリストで管理し、セッションを超えて進捗を追跡します。",
+                summary_en: "Manage complex tasks with Todo lists and track progress across sessions.",
                 keyPoints: [
                     "TodoWrite で構造化されたタスクリストを作成",
                     "pending → in_progress → completed の状態遷移",
                     "複雑なタスクを小さなステップに分解",
                     "ファイルに書き出して永続化"
                 ],
+                keyPoints_en: [
+                    "Create structured task lists with TodoWrite",
+                    "State transitions: pending → in_progress → completed",
+                    "Break complex tasks into small steps",
+                    "Write to files for persistence"
+                ],
                 handson: {
                     title: "タスクリストで「要約」「本文」を管理",
+                    title_en: "Manage 'Summary' and 'Body' with Task List",
                     goal: "複数ステップのタスクをリスト化して進捗管理",
+                    goal_en: "List multi-step tasks and manage progress",
                     prerequisites: ["レポート作成タスクがある"],
+                    prerequisites_en: ["Have a report creation task"],
                     steps: [
                         {
                             step: 1,
                             action: "タスクを分解",
+                            action_en: "Break down tasks",
                             prompt: "Q1売上レポートの作成タスクを以下のステップに分解してリスト化して：\n1. データ読み込みと検証\n2. 月別集計\n3. 地域別集計\n4. 要約の作成\n5. 本文の作成\n6. レビューと修正",
-                            expected: "タスクリストが作成される"
+                            prompt_en: "Break down the Q1 sales report task into these steps:\n1. Data loading and validation\n2. Monthly aggregation\n3. Regional aggregation\n4. Create summary\n5. Create body\n6. Review and revise",
+                            expected: "タスクリストが作成される",
+                            expected_en: "Task list is created"
                         },
                         {
                             step: 2,
                             action: "順番に実行",
+                            action_en: "Execute in order",
                             prompt: "最初のタスクから順番に実行して、完了したらチェックを付けて",
-                            expected: "タスクが順番に実行され、進捗が更新される"
+                            prompt_en: "Execute tasks in order from the first one, check off when complete",
+                            expected: "タスクが順番に実行され、進捗が更新される",
+                            expected_en: "Tasks execute in order, progress is updated"
                         }
                     ],
                     checkpoints: [
                         "タスクが小さなステップに分解されている",
                         "進捗が可視化されている"
+                    ],
+                    checkpoints_en: [
+                        "Tasks broken into small steps",
+                        "Progress is visualized"
                     ]
                 }
             }
@@ -1245,10 +1656,13 @@ Claude: ".claude/skills/sales-report.md を
             title: "MCP - 外部サービス連携",
             title_en: "MCP - External Service Integration",
             description: "Model Context Protocolで外部サービス（Slack、GitHub、DB等）と連携。",
+            description_en: "Connect to external services (Slack, GitHub, DB etc.) via Model Context Protocol.",
             icon: "plug",
             tags: ["MCP", "外部連携", "API"],
+            tags_en: ["MCP", "Integration", "API"],
             content: {
                 summary: "MCP（Model Context Protocol）は、Claudeを外部サービスやデータソースと安全に接続するための標準プロトコルです。GitHub、Slack、データベース、Webブラウザなど、様々なサービスとの連携が可能になります。MCPサーバーを設定することで、Claudeが直接外部APIにアクセスできるようになります。",
+                summary_en: "MCP (Model Context Protocol) is a standard protocol for securely connecting Claude to external services and data sources. Enables integration with GitHub, Slack, databases, web browsers, and more. By configuring MCP servers, Claude can directly access external APIs.",
                 keyPoints: [
                     "~/.claude/settings.json でMCPサーバーを設定",
                     "npx/node/pythonでMCPサーバーを起動",
@@ -1256,6 +1670,14 @@ Claude: ".claude/skills/sales-report.md を
                     "ファイルシステム、GitHub、Slack、データベース等と連携",
                     "セキュアな認証・スコープ制限",
                     "Claude Codeセッション内で直接外部データにアクセス"
+                ],
+                keyPoints_en: [
+                    "Configure MCP servers in ~/.claude/settings.json",
+                    "Start MCP servers with npx/node/python",
+                    "Many official and community MCP servers available",
+                    "Integrate with filesystem, GitHub, Slack, databases, etc.",
+                    "Secure authentication and scope restrictions",
+                    "Access external data directly within Claude Code sessions"
                 ],
                 mcpConcept: {
                     title: "MCPの仕組み",
@@ -1346,42 +1768,64 @@ Claude: ".claude/skills/sales-report.md を
                 },
                 handson: {
                     title: "実践: GitHub MCP設定 + Issue管理",
+                    title_en: "Practice: GitHub MCP Setup + Issue Management",
                     goal: "GitHub MCPサーバーを設定し、Claude CodeからIssueを直接操作する",
+                    goal_en: "Configure GitHub MCP server and operate Issues directly from Claude Code",
                     prerequisites: [
                         "GitHubアカウントがある",
                         "Personal Access Token（PAT）を取得済み（repo, read:org スコープ）",
                         "Node.js v18以上がインストール済み"
                     ],
+                    prerequisites_en: [
+                        "Have a GitHub account",
+                        "Personal Access Token (PAT) obtained (repo, read:org scopes)",
+                        "Node.js v18+ installed"
+                    ],
                     steps: [
                         {
                             step: 1,
                             action: "GitHub PATを取得（まだの場合）",
+                            action_en: "Get GitHub PAT (if not done)",
                             prompt: "GitHub Settings > Developer settings > Personal access tokens > Generate new token で、repo と read:org スコープを持つトークンを作成してください。",
-                            expected: "ghp_xxxx 形式のトークンが発行される（これは安全に保管）"
+                            prompt_en: "Create a token with repo and read:org scopes at GitHub Settings > Developer settings > Personal access tokens > Generate new token.",
+                            expected: "ghp_xxxx 形式のトークンが発行される（これは安全に保管）",
+                            expected_en: "Token in ghp_xxxx format is issued (store securely)"
                         },
                         {
                             step: 2,
                             action: "MCP設定ファイルを作成",
+                            action_en: "Create MCP config file",
                             prompt: "~/.claude/settings.json を作成して、以下の内容を設定：\n\n{\n  \"mcpServers\": {\n    \"github\": {\n      \"command\": \"npx\",\n      \"args\": [\"-y\", \"@anthropic-ai/mcp-server-github\"],\n      \"env\": {\n        \"GITHUB_TOKEN\": \"ghp_YOUR_TOKEN_HERE\"\n      }\n    }\n  }\n}\n\n※ ghp_YOUR_TOKEN_HERE を実際のトークンに置き換え",
-                            expected: "settings.json が作成される"
+                            prompt_en: "Create ~/.claude/settings.json with mcpServers config for github (replace ghp_YOUR_TOKEN_HERE with actual token)",
+                            expected: "settings.json が作成される",
+                            expected_en: "settings.json is created"
                         },
                         {
                             step: 3,
                             action: "Claude Codeを再起動",
+                            action_en: "Restart Claude Code",
                             prompt: "Claude Codeを一度終了し、再度起動してください。MCPサーバーが読み込まれます。",
-                            expected: "MCPサーバーが初期化される"
+                            prompt_en: "Exit Claude Code once and restart. MCP server will be loaded.",
+                            expected: "MCPサーバーが初期化される",
+                            expected_en: "MCP server is initialized"
                         },
                         {
                             step: 4,
                             action: "GitHubリポジトリのIssueを確認",
+                            action_en: "Check GitHub repository Issues",
                             prompt: "GitHubの <owner>/<repo> リポジトリのオープンなIssueを5件表示して",
-                            expected: "MCPサーバー経由でGitHub APIが呼び出され、Issue一覧が表示される"
+                            prompt_en: "Show 5 open Issues from GitHub <owner>/<repo> repository",
+                            expected: "MCPサーバー経由でGitHub APIが呼び出され、Issue一覧が表示される",
+                            expected_en: "GitHub API called via MCP server, Issue list displayed"
                         },
                         {
                             step: 5,
                             action: "新しいIssueを作成（オプション）",
+                            action_en: "Create new Issue (optional)",
                             prompt: "「テスト用Issue - Claude Codeから作成」というタイトルで新しいIssueを作成して",
-                            expected: "GitHubに新しいIssueが作成される"
+                            prompt_en: "Create a new Issue titled 'Test Issue - Created from Claude Code'",
+                            expected: "GitHubに新しいIssueが作成される",
+                            expected_en: "New Issue created on GitHub"
                         }
                     ],
                     alternativeWithCLI: {
@@ -1418,16 +1862,26 @@ Claude: ".claude/skills/sales-report.md を
             title: "Plugins - 拡張パッケージ",
             title_en: "Plugins - Extension Packages",
             description: "コミュニティが作成した拡張機能をインストール。機能を簡単に追加。",
+            description_en: "Install community-created extensions. Easily add functionality.",
             icon: "package",
             tags: ["Plugins", "拡張", "コミュニティ"],
+            tags_en: ["Plugins", "Extensions", "Community"],
             content: {
                 summary: "Pluginsは、Skills、Hooks、MCPサーバーをまとめたパッケージです。プロジェクトテンプレートのように、一度のインストールで複数の機能を追加できます。チームやコミュニティで共有することで、ベストプラクティスを標準化できます。",
+                summary_en: "Plugins are packages bundling Skills, Hooks, and MCP servers. Like project templates, one install adds multiple features. Sharing across teams and communities standardizes best practices.",
                 keyPoints: [
                     "claude plugin install <name> でインストール",
                     "スキル、フック、MCPをまとめて提供",
                     "manifest.json で構成を定義",
                     "ローカルまたはGitリポジトリから配布可能",
                     "チーム開発のオンボーディングを効率化"
+                ],
+                keyPoints_en: [
+                    "Install with claude plugin install <name>",
+                    "Provides skills, hooks, MCP together",
+                    "Define structure in manifest.json",
+                    "Distribute from local or Git repository",
+                    "Streamline team development onboarding"
                 ],
                 pluginStructure: {
                     title: "Pluginの構造",
@@ -1543,16 +1997,26 @@ Claude: ".claude/skills/sales-report.md を
             title: "戦略的コンパクト化",
             title_en: "Strategic Compaction",
             description: "/compact の効果的な使い方。いつ、どのように圧縮するか。",
+            description_en: "Effective use of /compact. When and how to compress.",
             icon: "minimize-2",
             tags: ["/compact", "圧縮", "最適化"],
+            tags_en: ["/compact", "Compression", "Optimization"],
             content: {
                 summary: "/compactはコンテキストを要約して圧縮するコマンドです。コンテキストウィンドウは有限リソースであり、適切なタイミングで圧縮することで、長時間のセッションでも品質を維持できます。ただし、タイミングを間違えると重要な文脈を失うリスクがあります。",
+                summary_en: "/compact is a command that summarizes and compresses context. Context window is a finite resource; compressing at appropriate times maintains quality in long sessions. However, wrong timing risks losing important context.",
                 keyPoints: [
                     "70%を超えたら圧縮を検討",
                     "フェーズの切れ目（探索完了→実装開始など）で実行",
                     "重要な情報はファイルに書き出してから圧縮",
                     "圧縮後は重要な文脈を再確認",
                     "/compact <カスタム指示> で圧縮内容をカスタマイズ可能"
+                ],
+                keyPoints_en: [
+                    "Consider compacting when exceeding 70%",
+                    "Execute at phase boundaries (e.g., exploration complete → start implementation)",
+                    "Write important info to files before compacting",
+                    "Reconfirm important context after compacting",
+                    "Customize with /compact <custom instructions>"
                 ],
                 compactTiming: {
                     title: "圧縮のタイミング",
@@ -1647,16 +2111,26 @@ Claude: ".claude/skills/sales-report.md を
             title: "並列化戦略",
             title_en: "Parallelization Strategies",
             description: "複数のタスクを並列で実行。効率を最大化する設計。",
+            description_en: "Execute multiple tasks in parallel. Design for maximum efficiency.",
             icon: "git-fork",
             tags: ["並列処理", "効率化", "設計"],
+            tags_en: ["Parallel Processing", "Efficiency", "Design"],
             content: {
                 summary: "Claude Codeは内部的にSubagentsを使って並列処理を行います。独立したタスクを特定し、並列実行することで処理時間を大幅に短縮できます。また、ヘッドレスモードで複数のCLIセッションを同時に実行することも可能です。",
+                summary_en: "Claude Code uses Subagents internally for parallel processing. Identify independent tasks and run in parallel to significantly reduce processing time. Multiple CLI sessions can also run simultaneously in headless mode.",
                 keyPoints: [
                     "依存関係のないタスクを特定して並列化",
                     "Subagentsが自動的に並列実行を判断",
                     "明示的に「並列で」と指示して強制も可能",
                     "ヘッドレスモード（-p）で複数セッション起動",
                     "結果を統合して次のステップへ"
+                ],
+                keyPoints_en: [
+                    "Identify tasks without dependencies for parallelization",
+                    "Subagents automatically determine parallel execution",
+                    "Can force with explicit 'in parallel' instruction",
+                    "Launch multiple sessions with headless mode (-p)",
+                    "Integrate results for next steps"
                 ],
                 parallelPatterns: [
                     {
@@ -1766,16 +2240,26 @@ wait`
             title: "トークン最適化",
             title_en: "Token Optimization",
             description: "トークン消費を最小化するテクニック。コスト削減と性能向上を両立。",
+            description_en: "Techniques to minimize token consumption. Achieve both cost reduction and performance improvement.",
             icon: "trending-down",
             tags: ["トークン", "最適化", "コスト"],
+            tags_en: ["Token", "Optimization", "Cost"],
             content: {
                 summary: "Claude Codeのコストはトークン消費に直結します。必要最小限のトークンで最大の効果を得ることで、コスト削減とパフォーマンス向上の両方を実現できます。WSCEフレームワーク（Write/Summarize/Compress/Extract）を使いこなしましょう。",
+                summary_en: "Claude Code costs are directly tied to token consumption. Achieve both cost reduction and performance improvement by getting maximum effect with minimum tokens. Master the WSCE framework (Write/Summarize/Compress/Extract).",
                 keyPoints: [
                     "WSCEフレームワーク: Write → Summarize → Compress → Extract",
                     "不要なファイル読み込みを避ける（@指定で必要部分のみ）",
                     "結果はファイルに書き出してコンテキストから解放",
                     "Grepで必要な部分だけ抽出してから渡す",
                     "モデル選択: 簡単なタスクはHaiku、複雑なタスクはSonnet/Opus"
+                ],
+                keyPoints_en: [
+                    "WSCE Framework: Write → Summarize → Compress → Extract",
+                    "Avoid unnecessary file reads (@ specify only needed parts)",
+                    "Write results to files to release from context",
+                    "Extract only needed parts with Grep before passing",
+                    "Model selection: Haiku for simple tasks, Sonnet/Opus for complex"
                 ],
                 wsceFramework: {
                     title: "WSCEフレームワーク",
@@ -1911,16 +2395,26 @@ wait`
             title: "継続学習パターン",
             title_en: "Continuous Learning Patterns",
             description: "セッション間で学習を蓄積。CLAUDE.mdとSkillsを育てる。",
+            description_en: "Accumulate learning across sessions. Grow CLAUDE.md and Skills.",
             icon: "refresh-cw",
             tags: ["継続学習", "蓄積", "改善"],
+            tags_en: ["Continuous Learning", "Accumulation", "Improvement"],
             content: {
                 summary: "Claude Codeのセッションは独立していますが、CLAUDE.mdとSkillsを使えば学習を蓄積できます。プロジェクト固有のルール、効果的なプロンプトパターン、失敗から学んだ教訓を永続化し、チーム全体で共有しましょう。",
+                summary_en: "Claude Code sessions are independent, but learning can accumulate through CLAUDE.md and Skills. Persist project-specific rules, effective prompt patterns, and lessons from failures, then share across the team.",
                 keyPoints: [
                     "/learn コマンドで会話から自動的にSkillを生成",
                     "CLAUDE.md に「やってはいけないこと」を記録",
                     "成功パターンは即座にSkill化",
                     "定期的（週1回など）にルールを見直し・整理",
                     "チームでCLAUDE.mdとSkillsをバージョン管理"
+                ],
+                keyPoints_en: [
+                    "Auto-generate Skills from conversation with /learn command",
+                    "Record 'things not to do' in CLAUDE.md",
+                    "Immediately convert success patterns to Skills",
+                    "Regularly review and organize rules (e.g., weekly)",
+                    "Version control CLAUDE.md and Skills with team"
                 ],
                 learningCycle: {
                     title: "継続学習サイクル",
@@ -2073,16 +2567,26 @@ user-invocable: true
             title: "非技術者向け - コードを書かない使い方",
             title_en: "For Non-Developers - Using Without Code",
             description: "プログラミング知識なしでClaude Codeを活用。文書作成、分析、整理に。",
+            description_en: "Use Claude Code without programming knowledge. For document creation, analysis, organization.",
             icon: "file-edit",
             tags: ["非技術者", "文書", "分析"],
+            tags_en: ["Non-Developer", "Documents", "Analysis"],
             content: {
                 summary: "Claude Codeはコーディングツールではなく「ローカルアシスタント」です。プログラミング知識がなくても、ファイル整理、レポート作成、データ分析、議事録処理など、日常業務の多くをAIに任せることができます。専門用語は不要、自然な日本語で依頼するだけです。",
+                summary_en: "Claude Code is not just a coding tool but a 'local assistant.' Even without programming knowledge, you can delegate file organization, report creation, data analysis, meeting notes processing, and more to AI. No jargon needed - just request in natural language.",
                 keyPoints: [
                     "「〜して」という自然な日本語で依頼できる",
                     "ファイル操作・整理を自動化",
                     "CSVやExcelのデータを分析・グラフ化",
                     "議事録から次のアクションを自動抽出",
                     "複数ファイルの一括処理も可能"
+                ],
+                keyPoints_en: [
+                    "Request with natural language like 'please do...'",
+                    "Automate file operations and organization",
+                    "Analyze and chart CSV/Excel data",
+                    "Auto-extract action items from meeting notes",
+                    "Batch process multiple files"
                 ],
                 mindset: {
                     title: "非技術者向けマインドセット",
@@ -2206,16 +2710,26 @@ user-invocable: true
             title: "50の非コーディング活用例",
             title_en: "50 Non-Coding Use Cases",
             description: "実際に使える50のユースケース。日常業務から創作活動まで。",
+            description_en: "50 practical use cases from daily work to creative activities.",
             icon: "list",
             tags: ["ユースケース", "活用例", "実践"],
+            tags_en: ["Use Cases", "Examples", "Practical"],
             content: {
                 summary: "Claude Codeの活用範囲はコーディングだけではありません。日常業務、創作活動、学習、調査など、あらゆる場面で活用できます。ここでは実際に使える50のユースケースを10カテゴリに分けて紹介します。",
+                summary_en: "Claude Code's capabilities extend far beyond coding. It can be utilized in daily work, creative activities, learning, research, and many other scenarios. Here we present 50 practical use cases organized into 10 categories.",
                 keyPoints: [
                     "資料作成: プレゼン、レポート、提案書、マニュアル",
                     "情報整理: ファイル、ブックマーク、メモ、連絡先",
                     "分析: 売上、アンケート、ログ、市場調査",
                     "創作: 記事、小説、脚本、企画",
                     "学習: 要約、翻訳、解説、問題作成"
+                ],
+                keyPoints_en: [
+                    "Document Creation: Presentations, reports, proposals, manuals",
+                    "Information Organization: Files, bookmarks, notes, contacts",
+                    "Analysis: Sales, surveys, logs, market research",
+                    "Creative Work: Articles, novels, scripts, planning",
+                    "Learning: Summaries, translations, explanations, quizzes"
                 ],
                 categories: [
                     {
@@ -2357,15 +2871,24 @@ user-invocable: true
             title: "Writer/Reviewerパターン",
             title_en: "Writer/Reviewer Pattern",
             description: "並列セッションで実装とレビューを分離。品質と速度を両立する高度なワークフロー。",
+            description_en: "Separate implementation and review across parallel sessions. Advanced workflow balancing quality and speed.",
             icon: "git-fork",
             tags: ["並列", "品質", "レビュー", "上級"],
+            tags_en: ["Parallel", "Quality", "Review", "Advanced"],
             content: {
                 summary: "Writer/Reviewerパターンは、1つのセッションで実装（Writer）し、別のセッションでレビュー（Reviewer）する手法です。新鮮なコンテキストでレビューすることで、実装者のバイアスを排除し、品質を大幅に向上させます。",
+                summary_en: "Writer/Reviewer pattern implements in one session (Writer) and reviews in another (Reviewer). Fresh context for review eliminates implementer bias, significantly improving quality.",
                 keyPoints: [
                     "Writerセッション: 実装に集中、コードを書く",
                     "Reviewerセッション: 新鮮な目でレビュー、バイアスなし",
                     "並列実行で時間効率も向上",
                     "テスト作成にも応用可能（実装者 vs テスト作成者）"
+                ],
+                keyPoints_en: [
+                    "Writer session: Focus on implementation, write code",
+                    "Reviewer session: Fresh perspective review, no bias",
+                    "Parallel execution improves time efficiency",
+                    "Also applicable to test creation (implementer vs test creator)"
                 ],
                 workflow: {
                     title: "Writer/Reviewerワークフロー",
@@ -2439,16 +2962,26 @@ user-invocable: true
             id: "03_06",
             number: "03_06",
             title: "Fan-outパターン（バッチ処理）",
+            title_en: "Fan-out Pattern (Batch Processing)",
             description: "複数ファイルへの一括処理。ヘッドレスモードで大規模マイグレーションを自動化。",
+            description_en: "Batch processing multiple files. Automate large-scale migrations with headless mode.",
             icon: "layers",
             tags: ["バッチ", "ヘッドレス", "マイグレーション", "上級"],
+            tags_en: ["Batch", "Headless", "Migration", "Advanced"],
             content: {
                 summary: "Fan-outパターンは、多数のファイルに対して同じ処理を並列で適用する手法です。ヘッドレスモード（claude -p）を使い、シェルスクリプトやCIパイプラインから一括実行します。大規模なコードベースのマイグレーション、リファクタリング、フォーマット統一などに威力を発揮します。",
+                summary_en: "The Fan-out pattern applies the same process to many files in parallel. Using headless mode (claude -p), execute batch processing from shell scripts or CI pipelines. Powerful for large-scale codebase migrations, refactoring, and format standardization.",
                 keyPoints: [
                     "claude -p \"prompt\" でヘッドレス実行",
                     "forループで複数ファイルに適用",
                     "--allowedTools で権限を制限",
                     "--output-format json で結果を構造化"
+                ],
+                keyPoints_en: [
+                    "Headless execution with claude -p \"prompt\"",
+                    "Apply to multiple files with for loop",
+                    "Restrict permissions with --allowedTools",
+                    "Structure results with --output-format json"
                 ],
                 code: `# Fan-outパターンの基本形
 for file in $(find src -name "*.ts"); do
@@ -2457,56 +2990,76 @@ for file in $(find src -name "*.ts"); do
     --output-format json
 done`,
                 useCases: [
-                    { name: "大規模マイグレーション", description: "2000ファイルのモジュール形式変更", example: "CommonJS → ES Modules" },
-                    { name: "コードフォーマット統一", description: "全ファイルにフォーマットルールを適用", example: "Prettier設定の一括適用" },
-                    { name: "ドキュメント自動生成", description: "各ファイルにJSDocを追加", example: "型定義からドキュメント生成" },
-                    { name: "セキュリティ監査", description: "全ファイルの脆弱性チェック", example: "SQLインジェクションパターンの検出" }
+                    { name: "大規模マイグレーション", name_en: "Large-scale Migration", description: "2000ファイルのモジュール形式変更", description_en: "Module format conversion for 2000 files", example: "CommonJS → ES Modules", example_en: "CommonJS → ES Modules" },
+                    { name: "コードフォーマット統一", name_en: "Code Format Standardization", description: "全ファイルにフォーマットルールを適用", description_en: "Apply formatting rules to all files", example: "Prettier設定の一括適用", example_en: "Batch Prettier configuration" },
+                    { name: "ドキュメント自動生成", name_en: "Auto Documentation", description: "各ファイルにJSDocを追加", description_en: "Add JSDoc to each file", example: "型定義からドキュメント生成", example_en: "Generate docs from type definitions" },
+                    { name: "セキュリティ監査", name_en: "Security Audit", description: "全ファイルの脆弱性チェック", description_en: "Vulnerability check for all files", example: "SQLインジェクションパターンの検出", example_en: "SQL injection pattern detection" }
                 ],
                 handson: {
                     title: "ヘッドレスモードでバッチ処理を実行",
+                    title_en: "Execute Batch Processing in Headless Mode",
                     goal: "複数のファイルに対して一括でコメントを追加する",
+                    goal_en: "Add comments to multiple files at once",
                     prerequisites: ["ターミナルでclaude -pが実行可能"],
+                    prerequisites_en: ["claude -p executable in terminal"],
                     steps: [
                         {
                             step: 1,
                             action: "対象ファイルをリストアップ",
+                            action_en: "List target files",
                             prompt: "scripts/フォルダ内の.pyファイルを全てリストアップして",
-                            expected: "対象ファイルの一覧が表示される"
+                            prompt_en: "List all .py files in the scripts/ folder",
+                            expected: "対象ファイルの一覧が表示される",
+                            expected_en: "List of target files is displayed"
                         },
                         {
                             step: 2,
                             action: "1ファイルで動作確認",
+                            action_en: "Verify with one file",
                             prompt: "claude -p \"Add a docstring to the main function in scripts/sample.py\"",
-                            expected: "docstringが追加される"
+                            prompt_en: "claude -p \"Add a docstring to the main function in scripts/sample.py\"",
+                            expected: "docstringが追加される",
+                            expected_en: "Docstring is added"
                         },
                         {
                             step: 3,
                             action: "バッチ処理スクリプトを作成",
+                            action_en: "Create batch processing script",
                             prompt: "以下のシェルスクリプトを作成して：全ての.pyファイルにdocstringを追加するバッチ処理",
-                            expected: "バッチ処理スクリプトが作成される"
+                            prompt_en: "Create the following shell script: batch processing to add docstrings to all .py files",
+                            expected: "バッチ処理スクリプトが作成される",
+                            expected_en: "Batch processing script is created"
                         }
                     ],
                     checkpoints: [
                         "ヘッドレスモードの基本構文を理解した",
                         "--allowedToolsで権限を制限できる",
                         "ループで複数ファイルを処理できる"
+                    ],
+                    checkpoints_en: [
+                        "Understood headless mode basic syntax",
+                        "Can restrict permissions with --allowedTools",
+                        "Can process multiple files with loops"
                     ]
                 },
                 advanced: {
                     title: "発展・応用",
+                    title_en: "Advanced Applications",
                     patterns: [
-                        { name: "並列実行", description: "xargsやGNU parallelで並列処理", example: "find . -name '*.py' | xargs -P 4 -I {} claude -p '...'" },
-                        { name: "エラーハンドリング", description: "失敗したファイルをログに記録して後で再処理", example: "|| echo $file >> failed.txt" }
+                        { name: "並列実行", name_en: "Parallel Execution", description: "xargsやGNU parallelで並列処理", description_en: "Parallel processing with xargs or GNU parallel", example: "find . -name '*.py' | xargs -P 4 -I {} claude -p '...'" },
+                        { name: "エラーハンドリング", name_en: "Error Handling", description: "失敗したファイルをログに記録して後で再処理", description_en: "Log failed files for later reprocessing", example: "|| echo $file >> failed.txt" }
                     ],
                     realWorldExamples: [
-                        { scenario: "レガシーコードのモダナイズ", solution: "段階的にファイルを変換、テストで検証", tips: "まず10ファイルでテスト、問題なければ全体に適用" }
+                        { scenario: "レガシーコードのモダナイズ", scenario_en: "Modernizing Legacy Code", solution: "段階的にファイルを変換、テストで検証", solution_en: "Convert files incrementally, verify with tests", tips: "まず10ファイルでテスト、問題なければ全体に適用", tips_en: "Test with 10 files first, apply to all if no issues" }
                     ],
-                    pitfalls: ["一度に大量のファイルを処理するとAPI制限に達する可能性", "必ず少数でテストしてから全体実行"]
+                    pitfalls: ["一度に大量のファイルを処理するとAPI制限に達する可能性", "必ず少数でテストしてから全体実行"],
+                    pitfalls_en: ["Processing too many files at once may hit API limits", "Always test with a few files before full execution"]
                 },
                 nextSteps: {
                     recommended: ["03_08", "03_07"],
                     optional: ["02_08"],
-                    reason: "CI/CD統合でさらに自動化を進めるために"
+                    reason: "CI/CD統合でさらに自動化を進めるために",
+                    reason_en: "To further advance automation with CI/CD integration"
                 }
             }
         },
@@ -2516,29 +3069,46 @@ done`,
             title: "Subagents活用パターン",
             title_en: "Advanced Subagent Patterns",
             description: "調査委譲、専門エージェント設計。コンテキストを汚さずに複雑なタスクを分割。",
+            description_en: "Research delegation, specialized agent design. Split complex tasks without polluting context.",
             icon: "users",
             tags: ["Subagents", "委譲", "専門化", "上級"],
+            tags_en: ["Subagents", "Delegation", "Specialization", "Advanced"],
             content: {
                 summary: "Subagentsは、特定のタスクを専門のエージェントに委譲する仕組みです。メインセッションのコンテキストを汚さずに、大規模な探索や専門的なレビューを実行できます。セキュリティレビュー、アーキテクチャ分析、コード品質チェックなど、専門性の高いタスクに最適です。",
+                summary_en: "Subagents are a mechanism to delegate specific tasks to specialized agents. Execute large-scale exploration and specialized reviews without polluting the main session context. Ideal for highly specialized tasks like security reviews, architecture analysis, and code quality checks.",
                 keyPoints: [
                     "サブエージェントは独立したコンテキストで動作",
                     "結果のみがメインセッションに返される（コンテキスト節約）",
                     "専門性を持たせることで精度向上",
                     "並列実行で時間短縮"
                 ],
+                keyPoints_en: [
+                    "Subagents operate in independent context",
+                    "Only results are returned to main session (saves context)",
+                    "Specialization improves accuracy",
+                    "Parallel execution reduces time"
+                ],
                 agentDesign: {
                     title: "効果的なサブエージェント設計",
+                    title_en: "Effective Subagent Design",
                     principles: [
                         "単一責任: 1つのサブエージェントに1つの専門分野",
                         "最小権限: 必要なツールのみを許可",
                         "明確な出力: 期待する出力形式を定義",
                         "適切なモデル: 軽量タスクにはhaiku、複雑なタスクにはopus"
+                    ],
+                    principles_en: [
+                        "Single Responsibility: One specialty per subagent",
+                        "Least Privilege: Only allow necessary tools",
+                        "Clear Output: Define expected output format",
+                        "Appropriate Model: haiku for light tasks, opus for complex ones"
                     ]
                 },
                 templates: [
                     {
                         name: "security-reviewer",
                         description: "セキュリティ脆弱性を検出",
+                        description_en: "Detect security vulnerabilities",
                         config: `---
 name: security-reviewer
 description: コードのセキュリティ脆弱性を検出
@@ -2549,11 +3119,23 @@ model: opus
 - SQLインジェクション
 - XSS脆弱性
 - 認証・認可の不備
-- 機密情報のハードコード`
+- 機密情報のハードコード`,
+                        config_en: `---
+name: security-reviewer
+description: Detect code security vulnerabilities
+tools: [Read, Grep, Glob]
+model: opus
+---
+Review code for:
+- SQL injection
+- XSS vulnerabilities
+- Authentication/authorization flaws
+- Hardcoded secrets`
                     },
                     {
                         name: "architecture-analyzer",
                         description: "アーキテクチャの問題を分析",
+                        description_en: "Analyze architecture issues",
                         config: `---
 name: architecture-analyzer
 description: アーキテクチャの問題点を分析
@@ -2563,11 +3145,22 @@ model: sonnet
 以下の観点で分析:
 - 循環依存
 - レイヤー違反
-- 責務の分離`
+- 責務の分離`,
+                        config_en: `---
+name: architecture-analyzer
+description: Analyze architecture issues
+tools: [Read, Grep, Glob]
+model: sonnet
+---
+Analyze for:
+- Circular dependencies
+- Layer violations
+- Separation of concerns`
                     },
                     {
                         name: "test-generator",
                         description: "テストケースを自動生成",
+                        description_en: "Auto-generate test cases",
                         config: `---
 name: test-generator
 description: 関数からテストケースを生成
@@ -2577,54 +3170,84 @@ model: sonnet
 以下のパターンでテストを生成:
 - 正常系
 - 境界値
-- 異常系`
+- 異常系`,
+                        config_en: `---
+name: test-generator
+description: Generate test cases from functions
+tools: [Read, Write, Bash]
+model: sonnet
+---
+Generate tests for:
+- Happy path
+- Boundary values
+- Error cases`
                     }
                 ],
                 handson: {
                     title: "専門サブエージェントを設計・活用する",
+                    title_en: "Design and Use Specialized Subagents",
                     goal: "セキュリティレビュー用のサブエージェントを作成し、実際にレビューを実行",
+                    goal_en: "Create a security review subagent and execute an actual review",
                     prerequisites: [".claude/agents/フォルダが作成可能"],
+                    prerequisites_en: [".claude/agents/ folder can be created"],
                     steps: [
                         {
                             step: 1,
                             action: "サブエージェントを定義",
+                            action_en: "Define subagent",
                             prompt: ".claude/agents/security-reviewer.md を作成して。内容はセキュリティ脆弱性を検出する専門エージェント。",
-                            expected: "サブエージェント定義ファイルが作成される"
+                            prompt_en: "Create .claude/agents/security-reviewer.md as a specialized agent for detecting security vulnerabilities.",
+                            expected: "サブエージェント定義ファイルが作成される",
+                            expected_en: "Subagent definition file is created"
                         },
                         {
                             step: 2,
                             action: "サブエージェントを呼び出し",
+                            action_en: "Invoke subagent",
                             prompt: "サブエージェント security-reviewer を使って、src/フォルダのコードをセキュリティレビューして",
-                            expected: "サブエージェントが起動し、レビュー結果が返される"
+                            prompt_en: "Use the security-reviewer subagent to perform a security review of the src/ folder code",
+                            expected: "サブエージェントが起動し、レビュー結果が返される",
+                            expected_en: "Subagent launches and returns review results"
                         },
                         {
                             step: 3,
                             action: "結果を確認",
+                            action_en: "Check results",
                             prompt: "レビュー結果の重要な指摘事項をまとめて",
-                            expected: "メインセッションのコンテキストを使わずにレビュー結果が得られた"
+                            prompt_en: "Summarize the important findings from the review results",
+                            expected: "メインセッションのコンテキストを使わずにレビュー結果が得られた",
+                            expected_en: "Review results obtained without using main session context"
                         }
                     ],
                     checkpoints: [
                         "サブエージェントがメインコンテキストを消費していない",
                         "専門的なレビューが実行された",
                         "結果がサマリとして返された"
+                    ],
+                    checkpoints_en: [
+                        "Subagent did not consume main context",
+                        "Specialized review was executed",
+                        "Results returned as summary"
                     ]
                 },
                 advanced: {
                     title: "発展・応用",
+                    title_en: "Advanced Applications",
                     patterns: [
-                        { name: "Planner-Executor分離", description: "計画を立てるエージェントと実行するエージェントを分離", example: "大規模リファクタリングの計画と実行" },
-                        { name: "レビューチェーン", description: "複数の専門エージェントが順番にレビュー", example: "セキュリティ→パフォーマンス→可読性の順でレビュー" }
+                        { name: "Planner-Executor分離", name_en: "Planner-Executor Separation", description: "計画を立てるエージェントと実行するエージェントを分離", description_en: "Separate planning agent from executing agent", example: "大規模リファクタリングの計画と実行", example_en: "Planning and execution of large-scale refactoring" },
+                        { name: "レビューチェーン", name_en: "Review Chain", description: "複数の専門エージェントが順番にレビュー", description_en: "Multiple specialized agents review in sequence", example: "セキュリティ→パフォーマンス→可読性の順でレビュー", example_en: "Review in order: security → performance → readability" }
                     ],
                     realWorldExamples: [
-                        { scenario: "PRレビュー自動化", solution: "複数のサブエージェントで多角的にレビュー", tips: "重要度でエージェントを選択" }
+                        { scenario: "PRレビュー自動化", scenario_en: "Automated PR Review", solution: "複数のサブエージェントで多角的にレビュー", solution_en: "Multi-faceted review with multiple subagents", tips: "重要度でエージェントを選択", tips_en: "Select agents based on priority" }
                     ],
-                    pitfalls: ["サブエージェントが多すぎるとオーバーヘッドになる", "適切な粒度でタスクを分割"]
+                    pitfalls: ["サブエージェントが多すぎるとオーバーヘッドになる", "適切な粒度でタスクを分割"],
+                    pitfalls_en: ["Too many subagents creates overhead", "Split tasks with appropriate granularity"]
                 },
                 nextSteps: {
                     recommended: ["02_03", "03_05"],
                     optional: ["03_08"],
-                    reason: "サブエージェントの基本を深く理解するために"
+                    reason: "サブエージェントの基本を深く理解するために",
+                    reason_en: "To deeply understand subagent fundamentals"
                 }
             }
         },
@@ -2640,14 +3263,22 @@ model: sonnet
             tags_en: ["CI/CD", "GitHub Actions", "Automation", "Advanced"],
             content: {
                 summary: "Claude Codeはヘッドレスモード（claude -p）でCI/CDパイプラインに統合できます。PRごとの自動コードレビュー、テスト生成、ドキュメント更新など、開発ワークフローを大幅に自動化できます。GitHub Actionsとの連携で、人間の介入なしに品質を担保します。",
+                summary_en: "Claude Code can be integrated into CI/CD pipelines using headless mode (claude -p). Significantly automate development workflows including automatic code review per PR, test generation, and documentation updates. Integration with GitHub Actions ensures quality without human intervention.",
                 keyPoints: [
                     "claude -p でCI/CDパイプラインから実行",
                     "GitHub Actionsワークフローに組み込み",
                     "PRごとに自動レビュー・テスト生成",
                     "環境変数でAPIキーを安全に管理"
                 ],
+                keyPoints_en: [
+                    "Execute from CI/CD pipelines with claude -p",
+                    "Embed in GitHub Actions workflows",
+                    "Automatic review and test generation per PR",
+                    "Safely manage API keys with environment variables"
+                ],
                 githubActionsExample: {
                     title: "GitHub Actions設定例",
+                    title_en: "GitHub Actions Configuration Example",
                     code: `name: Claude Code Review
 on:
   pull_request:
@@ -2684,56 +3315,76 @@ jobs:
             });`
                 },
                 useCases: [
-                    { name: "自動コードレビュー", description: "PRごとにセキュリティ・品質チェック", trigger: "pull_request" },
-                    { name: "テスト自動生成", description: "新しいコードに対してテストを自動生成", trigger: "push" },
-                    { name: "ドキュメント更新", description: "APIの変更に合わせてドキュメントを自動更新", trigger: "push to main" },
-                    { name: "依存関係監査", description: "依存関係の脆弱性をチェック", trigger: "schedule (weekly)" }
+                    { name: "自動コードレビュー", name_en: "Automated Code Review", description: "PRごとにセキュリティ・品質チェック", description_en: "Security and quality check per PR", trigger: "pull_request" },
+                    { name: "テスト自動生成", name_en: "Auto Test Generation", description: "新しいコードに対してテストを自動生成", description_en: "Automatically generate tests for new code", trigger: "push" },
+                    { name: "ドキュメント更新", name_en: "Documentation Update", description: "APIの変更に合わせてドキュメントを自動更新", description_en: "Auto-update docs with API changes", trigger: "push to main" },
+                    { name: "依存関係監査", name_en: "Dependency Audit", description: "依存関係の脆弱性をチェック", description_en: "Check dependencies for vulnerabilities", trigger: "schedule (weekly)" }
                 ],
                 handson: {
                     title: "GitHub Actionsでの自動レビューを設定",
+                    title_en: "Set Up Automated Review with GitHub Actions",
                     goal: "PRに対して自動でコードレビューを実行するワークフローを作成",
+                    goal_en: "Create a workflow that automatically runs code review on PRs",
                     prerequisites: ["GitHubリポジトリがある", "ANTHROPIC_API_KEYをSecretsに設定済み"],
+                    prerequisites_en: ["Have a GitHub repository", "ANTHROPIC_API_KEY configured in Secrets"],
                     steps: [
                         {
                             step: 1,
                             action: "ワークフローファイルを作成",
+                            action_en: "Create workflow file",
                             prompt: ".github/workflows/claude-review.yml を作成して。PRに対してClaude Codeでレビューを実行する内容で",
-                            expected: "GitHub Actionsワークフローファイルが作成される"
+                            prompt_en: "Create .github/workflows/claude-review.yml to run Claude Code review on PRs",
+                            expected: "GitHub Actionsワークフローファイルが作成される",
+                            expected_en: "GitHub Actions workflow file is created"
                         },
                         {
                             step: 2,
                             action: "ローカルでテスト",
+                            action_en: "Test locally",
                             prompt: "ワークフローの核となるclaude -pコマンドをローカルでテスト実行して",
-                            expected: "コマンドが正しく動作することを確認"
+                            prompt_en: "Test run the core claude -p command locally",
+                            expected: "コマンドが正しく動作することを確認",
+                            expected_en: "Confirm the command works correctly"
                         },
                         {
                             step: 3,
                             action: "PRを作成してテスト",
+                            action_en: "Create PR and test",
                             prompt: "テスト用のPRを作成して、ワークフローが実行されることを確認する手順を説明して",
-                            expected: "テスト手順が説明される"
+                            prompt_en: "Create a test PR and explain the steps to verify the workflow runs",
+                            expected: "テスト手順が説明される",
+                            expected_en: "Test procedure is explained"
                         }
                     ],
                     checkpoints: [
                         "ワークフローファイルの構造を理解した",
                         "Secretsでの環境変数管理を理解した",
                         "claude -pの出力をGitHubコメントに投稿する方法を理解した"
+                    ],
+                    checkpoints_en: [
+                        "Understood workflow file structure",
+                        "Understood environment variable management with Secrets",
+                        "Understood how to post claude -p output as GitHub comments"
                     ]
                 },
                 advanced: {
                     title: "発展・応用",
+                    title_en: "Advanced Applications",
                     patterns: [
-                        { name: "条件付きレビュー", description: "変更ファイルに応じてレビュー内容を変更", example: "セキュリティ関連ファイルのみ詳細レビュー" },
-                        { name: "ステージング環境テスト", description: "デプロイ後に自動でE2Eテスト", example: "claude -pでテストシナリオを生成・実行" }
+                        { name: "条件付きレビュー", name_en: "Conditional Review", description: "変更ファイルに応じてレビュー内容を変更", description_en: "Change review content based on modified files", example: "セキュリティ関連ファイルのみ詳細レビュー", example_en: "Detailed review only for security-related files" },
+                        { name: "ステージング環境テスト", name_en: "Staging Environment Tests", description: "デプロイ後に自動でE2Eテスト", description_en: "Auto E2E testing after deployment", example: "claude -pでテストシナリオを生成・実行", example_en: "Generate and execute test scenarios with claude -p" }
                     ],
                     realWorldExamples: [
-                        { scenario: "週次依存関係監査", solution: "スケジュール実行で依存関係の脆弱性をチェック", tips: "結果をSlackに通知" }
+                        { scenario: "週次依存関係監査", scenario_en: "Weekly Dependency Audit", solution: "スケジュール実行で依存関係の脆弱性をチェック", solution_en: "Check dependency vulnerabilities on schedule", tips: "結果をSlackに通知", tips_en: "Notify results to Slack" }
                     ],
-                    pitfalls: ["APIキーの漏洩に注意（必ずSecretsを使用）", "実行時間とAPI使用量のモニタリング"]
+                    pitfalls: ["APIキーの漏洩に注意（必ずSecretsを使用）", "実行時間とAPI使用量のモニタリング"],
+                    pitfalls_en: ["Beware of API key leaks (always use Secrets)", "Monitor execution time and API usage"]
                 },
                 nextSteps: {
                     recommended: ["03_06", "02_05"],
                     optional: ["02_02"],
-                    reason: "自動化をさらに発展させるために"
+                    reason: "自動化をさらに発展させるために",
+                    reason_en: "To further advance automation"
                 }
             }
         }
@@ -2756,26 +3407,36 @@ const HANDSON = {
             skills_en: ["CSV Loading", "Aggregation", "Report Output"],
             // 関連チュートリアル
             relatedTutorials: [
-                { id: "00_01", title: "Claude Codeとは何か", reason: "エージェントの基本動作を理解" },
-                { id: "00_02", title: "エージェントという概念", reason: "自律的な分析の仕組みを理解" },
-                { id: "00_03", title: "コンテキストウィンドウ", reason: "大きなCSVを扱う際の注意点" }
+                { id: "00_01", title: "Claude Codeとは何か", title_en: "What is Claude Code", reason: "エージェントの基本動作を理解", reason_en: "Understand basic agent behavior" },
+                { id: "00_02", title: "エージェントという概念", title_en: "The Concept of Agents", reason: "自律的な分析の仕組みを理解", reason_en: "Understand autonomous analysis mechanism" },
+                { id: "00_03", title: "コンテキストウィンドウ", title_en: "Context Window", reason: "大きなCSVを扱う際の注意点", reason_en: "Cautions when handling large CSV" }
             ],
             details: {
                 goal: "売上CSVデータを分析し、月別・地域別の売上レポートをMarkdownで自動生成する",
+                goal_en: "Analyze sales CSV data and auto-generate monthly/regional sales reports in Markdown",
                 estimatedTime: "15-20分",
+                estimatedTime_en: "15-20 min",
                 difficulty: "初級",
+                difficulty_en: "Beginner",
                 // 準備セクション
                 preparation: {
                     description: "ハンズオンを始める前に、以下のフォルダ構造とファイルを作成してください。",
+                    description_en: "Create the following folder structure and files before starting the hands-on.",
                     folderStructure: `handson-1-sales/
 ├── data/
 │   └── sales_2025.csv
 └── reports/
     └── (ここにレポートが生成される)`,
+                    folderStructure_en: `handson-1-sales/
+├── data/
+│   └── sales_2025.csv
+└── reports/
+    └── (reports will be generated here)`,
                     files: [
                         {
                             path: "data/sales_2025.csv",
                             description: "売上データCSV（以下の内容をコピーして作成）",
+                            description_en: "Sales data CSV (copy the content below to create)",
                             content: `date,order_id,product,category,region,amount,quantity
 2025-01-05,ORD001,ノートPC,電子機器,東京,128000,1
 2025-01-08,ORD002,マウス,周辺機器,大阪,3500,2
@@ -2800,6 +3461,13 @@ const HANDSON = {
                         "上記のCSV内容をコピーして `data/sales_2025.csv` として保存",
                         "VSCodeで `handson-1-sales` フォルダを開く",
                         "Claude Code拡張を起動"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-1-sales` folder in any location",
+                        "Create `data` folder and `reports` folder inside",
+                        "Copy the CSV content above and save as `data/sales_2025.csv`",
+                        "Open `handson-1-sales` folder in VSCode",
+                        "Launch Claude Code extension"
                     ]
                 },
                 // 実行ステップ
@@ -2807,48 +3475,73 @@ const HANDSON = {
                     {
                         step: 1,
                         title: "プロジェクト初期化",
+                        title_en: "Project Initialization",
                         description: "Claude Codeにこのプロジェクトを認識させます",
+                        description_en: "Have Claude Code recognize this project",
                         prompt: "/init",
+                        prompt_en: "/init",
                         expected: "CLAUDE.mdファイルが生成され、プロジェクトの概要が記載される",
-                        tips: "CLAUDE.mdはプロジェクトの「記憶」として機能します"
+                        expected_en: "CLAUDE.md file is generated with project overview",
+                        tips: "CLAUDE.mdはプロジェクトの「記憶」として機能します",
+                        tips_en: "CLAUDE.md functions as the project's 'memory'"
                     },
                     {
                         step: 2,
                         title: "データ構造の確認",
+                        title_en: "Check Data Structure",
                         description: "CSVファイルの内容と構造を確認します",
+                        description_en: "Check the CSV file contents and structure",
                         prompt: "data/sales_2025.csv の先頭10行を表示して、各カラムの意味を説明して",
+                        prompt_en: "Show the first 10 rows of data/sales_2025.csv and explain what each column means",
                         expected: "Claudeがファイルを読み込み、date, order_id, product, category, region, amount, quantityの各カラムを説明",
-                        tips: "Claudeは自律的にファイルを読み込む（Read Tool）"
+                        expected_en: "Claude reads the file and explains date, order_id, product, category, region, amount, quantity columns",
+                        tips: "Claudeは自律的にファイルを読み込む（Read Tool）",
+                        tips_en: "Claude autonomously reads files (Read Tool)"
                     },
                     {
                         step: 3,
                         title: "月別売上集計",
+                        title_en: "Monthly Sales Aggregation",
                         description: "月ごとの売上合計を計算させます",
+                        description_en: "Calculate sales totals by month",
                         prompt: "data/sales_2025.csv を月別に集計して、各月の売上合計を表形式で表示して",
+                        prompt_en: "Aggregate data/sales_2025.csv by month and display monthly sales totals in table format",
                         expected: "1月: 189,300円、2月: 243,200円、3月: 230,300円 のような集計結果が表形式で表示される",
-                        tips: "Claudeは必要に応じてPythonスクリプトを作成・実行する"
+                        expected_en: "Aggregated results like Jan: ¥189,300, Feb: ¥243,200, Mar: ¥230,300 displayed in table format",
+                        tips: "Claudeは必要に応じてPythonスクリプトを作成・実行する",
+                        tips_en: "Claude creates and runs Python scripts as needed"
                     },
                     {
                         step: 4,
                         title: "地域別分析",
+                        title_en: "Regional Analysis",
                         description: "地域ごとの売上を分析します",
+                        description_en: "Analyze sales by region",
                         prompt: "地域別の売上も集計して、どの地域が最も売上が高いか分析して",
+                        prompt_en: "Also aggregate sales by region and analyze which region has the highest sales",
                         expected: "東京、大阪、名古屋、福岡の売上比較と、東京が最も高いという分析結果",
-                        tips: "前の会話の文脈を維持して追加分析を行う"
+                        expected_en: "Sales comparison of Tokyo, Osaka, Nagoya, Fukuoka with analysis showing Tokyo is highest",
+                        tips: "前の会話の文脈を維持して追加分析を行う",
+                        tips_en: "Additional analysis while maintaining previous conversation context"
                     },
                     {
                         step: 5,
                         title: "レポート生成",
+                        title_en: "Report Generation",
                         description: "分析結果をMarkdownレポートとして出力します",
+                        description_en: "Output analysis results as Markdown report",
                         prompt: "ここまでの分析結果を reports/sales_report.md としてMarkdownレポートにまとめて。冒頭に3行の要約を入れて",
+                        prompt_en: "Compile the analysis results so far into a Markdown report as reports/sales_report.md. Include a 3-line summary at the beginning",
                         expected: "reports/sales_report.md が生成され、要約・月別集計・地域別分析・考察が記載される",
-                        tips: "ファイル出力にはWrite Toolが使用される"
+                        expected_en: "reports/sales_report.md is generated with summary, monthly aggregation, regional analysis, and insights",
+                        tips: "ファイル出力にはWrite Toolが使用される",
+                        tips_en: "Write Tool is used for file output"
                     }
                 ],
                 // 成果物
                 outputs: [
-                    { file: "CLAUDE.md", description: "プロジェクト設定ファイル" },
-                    { file: "reports/sales_report.md", description: "生成された売上レポート" }
+                    { file: "CLAUDE.md", description: "プロジェクト設定ファイル", description_en: "Project configuration file" },
+                    { file: "reports/sales_report.md", description: "生成された売上レポート", description_en: "Generated sales report" }
                 ],
                 // 完了チェックリスト
                 checkpoints: [
@@ -2857,11 +3550,22 @@ const HANDSON = {
                     "地域別の売上比較ができた",
                     "Markdownレポートが生成された"
                 ],
+                checkpoints_en: [
+                    "CSV data was read correctly",
+                    "Monthly sales totals were displayed",
+                    "Regional sales comparison was done",
+                    "Markdown report was generated"
+                ],
                 // 学びのポイント
                 learningPoints: [
                     "Claude Codeは「エージェント」としてファイルを自律的に読み込む",
                     "複数のステップを会話形式で進められる",
                     "分析からレポート生成まで一連の流れを自動化できる"
+                ],
+                learningPoints_en: [
+                    "Claude Code autonomously reads files as an 'agent'",
+                    "Multiple steps can be progressed conversationally",
+                    "The entire flow from analysis to report generation can be automated"
                 ]
             }
         },
@@ -2878,15 +3582,19 @@ const HANDSON = {
             skills: ["Glob検索", "リネーム", "フォルダ整理"],
             skills_en: ["Glob Search", "Renaming", "Folder Organization"],
             relatedTutorials: [
-                { id: "00_01", title: "Claude Codeとは何か", reason: "ファイル操作ツールの理解" },
-                { id: "01_05", title: "探索→計画→実装→コミット", reason: "計画を立ててから実行" }
+                { id: "00_01", title: "Claude Codeとは何か", title_en: "What is Claude Code", reason: "ファイル操作ツールの理解", reason_en: "Understanding file operation tools" },
+                { id: "01_05", title: "探索→計画→実装→コミット", title_en: "Explore→Plan→Implement→Commit", reason: "計画を立ててから実行", reason_en: "Plan before execution" }
             ],
             details: {
                 goal: "命名規則に従ってファイルを一括リネーム・整理する",
+                goal_en: "Batch rename and organize files following naming conventions",
                 estimatedTime: "10-15分",
+                estimatedTime_en: "10-15 min",
                 difficulty: "初級",
+                difficulty_en: "Beginner",
                 preparation: {
                     description: "以下のフォルダ構造と散らばったファイルを作成してください。",
+                    description_en: "Create the following folder structure with scattered files.",
                     folderStructure: `handson-2-organize/
 ├── 議事録0115.txt
 ├── report_q1.docx
@@ -2895,10 +3603,19 @@ const HANDSON = {
 ├── sales_data.xlsx
 └── organized/
     └── (ここに整理される)`,
+                    folderStructure_en: `handson-2-organize/
+├── minutes_0115.txt
+├── report_q1.docx
+├── proposal_revised.pdf
+├── meeting_20250120.txt
+├── sales_data.xlsx
+└── organized/
+    └── (files will be organized here)`,
                     files: [
                         {
                             path: "議事録0115.txt",
                             description: "日本語ファイル名の議事録",
+                            description_en: "Meeting minutes with Japanese filename",
                             content: `プロジェクトA 定例会議
 日時: 2025年1月15日 14:00-15:00
 参加者: 田中、佐藤、鈴木
@@ -2914,16 +3631,19 @@ const HANDSON = {
                         {
                             path: "report_q1.docx",
                             description: "Q1レポート（空でOK）",
+                            description_en: "Q1 report (empty is OK)",
                             content: "(Word文書として作成、中身は空でも可)"
                         },
                         {
                             path: "企画書（修正版）.pdf",
                             description: "日本語名のPDF（空でOK）",
+                            description_en: "PDF with Japanese name (empty is OK)",
                             content: "(PDFとして作成、中身は空でも可)"
                         },
                         {
                             path: "meeting_20250120.txt",
                             description: "英語ファイル名の議事録",
+                            description_en: "Meeting minutes with English filename",
                             content: `Weekly Team Meeting
 Date: 2025-01-20
 Attendees: Team A
@@ -2941,45 +3661,71 @@ Action items:
                         "上記のファイルを作成（.docxと.pdfは空ファイルでOK）",
                         "`organized` サブフォルダを作成",
                         "VSCodeでフォルダを開く"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-2-organize` folder",
+                        "Create the files above (.docx and .pdf can be empty)",
+                        "Create `organized` subfolder",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "現状把握",
+                        title_en: "Assess Current State",
                         description: "フォルダ内のファイル一覧を確認します",
+                        description_en: "Check the list of files in the folder",
                         prompt: "このフォルダ内のすべてのファイルを一覧にして、ファイル名の命名パターンを分析して",
+                        prompt_en: "List all files in this folder and analyze the naming patterns",
                         expected: "ファイル一覧と「日本語名」「英語名」「日付形式の違い」などのパターンが報告される",
-                        tips: "Glob Toolでファイル検索が行われる"
+                        expected_en: "File list with patterns like 'Japanese names', 'English names', 'date format differences' are reported",
+                        tips: "Glob Toolでファイル検索が行われる",
+                        tips_en: "Glob Tool is used for file search"
                     },
                     {
                         step: 2,
                         title: "リネーム計画の作成",
+                        title_en: "Create Rename Plan",
                         description: "命名規則に基づいたリネーム計画を立てます",
+                        description_en: "Create a rename plan based on naming conventions",
                         prompt: "ファイル名を「YYYY-MM-DD_カテゴリ_タイトル.拡張子」の形式に統一するリネーム計画を立てて。まだ実行しないで",
+                        prompt_en: "Create a plan to standardize filenames to 'YYYY-MM-DD_category_title.ext' format. Don't execute yet",
                         expected: "各ファイルの「現在の名前 → 新しい名前」の対応表が提示される",
-                        tips: "「まだ実行しないで」で計画のみを確認できる"
+                        expected_en: "Mapping table of 'current name → new name' for each file is presented",
+                        tips: "「まだ実行しないで」で計画のみを確認できる",
+                        tips_en: "'Don't execute yet' lets you review the plan first"
                     },
                     {
                         step: 3,
                         title: "計画の確認と実行",
+                        title_en: "Confirm and Execute Plan",
                         description: "計画を確認してからリネームを実行します",
+                        description_en: "Execute the rename after confirming the plan",
                         prompt: "計画に問題なければ、リネームを実行して",
+                        prompt_en: "If the plan looks good, execute the rename",
                         expected: "ファイルが新しい名前にリネームされる",
-                        tips: "Bash Toolでmvコマンドが実行される"
+                        expected_en: "Files are renamed to new names",
+                        tips: "Bash Toolでmvコマンドが実行される",
+                        tips_en: "mv command is executed via Bash Tool"
                     },
                     {
                         step: 4,
                         title: "整理の確認",
+                        title_en: "Verify Organization",
                         description: "リネーム結果を確認します",
+                        description_en: "Verify the rename results",
                         prompt: "リネーム結果を一覧表示して、正しくリネームされたか確認して",
+                        prompt_en: "Display the rename results and verify correct renaming",
                         expected: "統一された命名規則でファイルが一覧表示される",
-                        tips: "結果を確認することで品質を担保"
+                        expected_en: "Files are listed with unified naming convention",
+                        tips: "結果を確認することで品質を担保",
+                        tips_en: "Verify results to ensure quality"
                     }
                 ],
                 outputs: [
-                    { file: "2025-01-15_議事録_プロジェクトA.txt", description: "リネームされた議事録" },
-                    { file: "2025-01-20_議事録_WeeklyMeeting.txt", description: "リネームされた議事録" }
+                    { file: "2025-01-15_議事録_プロジェクトA.txt", description: "リネームされた議事録", description_en: "Renamed meeting minutes" },
+                    { file: "2025-01-20_議事録_WeeklyMeeting.txt", description: "リネームされた議事録", description_en: "Renamed meeting minutes" }
                 ],
                 checkpoints: [
                     "ファイル一覧が正しく取得できた",
@@ -2987,10 +3733,21 @@ Action items:
                     "命名規則に従ってリネームされた",
                     "すべてのファイルが正しく処理された"
                 ],
+                checkpoints_en: [
+                    "File list was correctly obtained",
+                    "Rename plan was presented",
+                    "Renamed according to naming conventions",
+                    "All files were processed correctly"
+                ],
                 learningPoints: [
                     "「計画→確認→実行」のフローで安全に操作できる",
                     "Glob/Bashツールでファイル操作を自動化",
                     "「まだ実行しないで」で事前確認が可能"
+                ],
+                learningPoints_en: [
+                    "Safely operate with 'plan→confirm→execute' flow",
+                    "Automate file operations with Glob/Bash tools",
+                    "'Don't execute yet' enables prior confirmation"
                 ]
             }
         },
@@ -3007,24 +3764,34 @@ Action items:
             skills: ["YAML解析", "Markdown生成", "テンプレート"],
             skills_en: ["YAML Parsing", "Markdown Generation", "Templates"],
             relatedTutorials: [
-                { id: "00_01", title: "Claude Codeとは何か", reason: "ファイル読み込みの基本" },
-                { id: "01_01", title: "CLAUDE.md - プロジェクトの記憶", reason: "ドキュメントテンプレートの設定" }
+                { id: "00_01", title: "Claude Codeとは何か", title_en: "What is Claude Code", reason: "ファイル読み込みの基本", reason_en: "Basics of file reading" },
+                { id: "01_01", title: "CLAUDE.md - プロジェクトの記憶", title_en: "CLAUDE.md - Project Memory", reason: "ドキュメントテンプレートの設定", reason_en: "Document template configuration" }
             ],
             details: {
                 goal: "YAML/JSON仕様ファイルからMarkdownドキュメントを自動生成する",
+                goal_en: "Auto-generate Markdown documentation from YAML/JSON specification files",
                 estimatedTime: "15-20分",
+                estimatedTime_en: "15-20 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "以下のAPI仕様ファイルを作成してください。",
+                    description_en: "Create the following API specification files.",
                     folderStructure: `handson-3-docs/
 ├── api_spec.yaml
 ├── config_sample.json
 └── docs/
     └── (ここにドキュメントが生成される)`,
+                    folderStructure_en: `handson-3-docs/
+├── api_spec.yaml
+├── config_sample.json
+└── docs/
+    └── (documentation will be generated here)`,
                     files: [
                         {
                             path: "api_spec.yaml",
                             description: "OpenAPI形式のAPI仕様",
+                            description_en: "API specification in OpenAPI format",
                             content: `openapi: 3.0.0
 info:
   title: タスク管理API
@@ -3120,6 +3887,7 @@ components:
                         {
                             path: "config_sample.json",
                             description: "アプリケーション設定ファイル",
+                            description_en: "Application configuration file",
                             content: `{
   "app": {
     "name": "TaskManager",
@@ -3151,46 +3919,73 @@ components:
                         "`config_sample.json` を作成（上記内容をコピー）",
                         "`docs` サブフォルダを作成",
                         "VSCodeでフォルダを開く"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-3-docs` folder",
+                        "Create `api_spec.yaml` (copy content above)",
+                        "Create `config_sample.json` (copy content above)",
+                        "Create `docs` subfolder",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "API仕様の理解",
+                        title_en: "Understand API Specification",
                         description: "YAML仕様を読み込んで概要を把握します",
+                        description_en: "Read the YAML spec to understand the overview",
                         prompt: "@api_spec.yaml を読んで、このAPIの概要を説明して。エンドポイント数、主な機能を教えて",
+                        prompt_en: "Read @api_spec.yaml and explain this API's overview. Tell me the number of endpoints and main features",
                         expected: "4つのエンドポイント（GET/POST /tasks, GET/DELETE /tasks/{id}）とタスク管理機能の説明",
-                        tips: "@記法でファイルを直接参照できる"
+                        expected_en: "Explanation of 4 endpoints (GET/POST /tasks, GET/DELETE /tasks/{id}) and task management features",
+                        tips: "@記法でファイルを直接参照できる",
+                        tips_en: "You can directly reference files with @ notation"
                     },
                     {
                         step: 2,
                         title: "APIドキュメント生成",
+                        title_en: "Generate API Documentation",
                         description: "仕様からMarkdownドキュメントを生成します",
+                        description_en: "Generate Markdown documentation from the specification",
                         prompt: "このAPI仕様から docs/api.md としてMarkdownドキュメントを生成して。各エンドポイントの説明、パラメータ、リクエスト/レスポンス例を含めて",
+                        prompt_en: "Generate Markdown documentation as docs/api.md from this API spec. Include endpoint descriptions, parameters, and request/response examples",
                         expected: "整形されたAPIドキュメントが docs/api.md に生成される",
-                        tips: "Claude Codeはファイル構造を理解してドキュメント化"
+                        expected_en: "Formatted API documentation is generated at docs/api.md",
+                        tips: "Claude Codeはファイル構造を理解してドキュメント化",
+                        tips_en: "Claude Code understands file structure and creates documentation"
                     },
                     {
                         step: 3,
                         title: "設定ドキュメント生成",
+                        title_en: "Generate Config Documentation",
                         description: "JSON設定ファイルのドキュメントを生成します",
+                        description_en: "Generate documentation for the JSON config file",
                         prompt: "@config_sample.json の各設定項目の説明ドキュメントを docs/config.md として生成して。各項目の意味、デフォルト値、許容値を記載して",
+                        prompt_en: "Generate documentation for each setting in @config_sample.json as docs/config.md. Include meaning, default values, and allowed values for each item",
                         expected: "設定項目の説明ドキュメントが生成される",
-                        tips: "JSONの構造を解析してドキュメント化"
+                        expected_en: "Configuration item documentation is generated",
+                        tips: "JSONの構造を解析してドキュメント化",
+                        tips_en: "Parses JSON structure into documentation"
                     },
                     {
                         step: 4,
                         title: "目次ページ作成",
+                        title_en: "Create Table of Contents",
                         description: "ドキュメントの目次ページを作成します",
+                        description_en: "Create a table of contents page for documentation",
                         prompt: "docs/README.md として、api.md と config.md へのリンクを含む目次ページを作成して",
+                        prompt_en: "Create a table of contents page as docs/README.md with links to api.md and config.md",
                         expected: "リンク付きの目次ページが生成される",
-                        tips: "関連ファイルを束ねる目次を作成"
+                        expected_en: "Table of contents page with links is generated",
+                        tips: "関連ファイルを束ねる目次を作成",
+                        tips_en: "Create an index that bundles related files"
                     }
                 ],
                 outputs: [
-                    { file: "docs/api.md", description: "APIドキュメント" },
-                    { file: "docs/config.md", description: "設定ドキュメント" },
-                    { file: "docs/README.md", description: "目次ページ" }
+                    { file: "docs/api.md", description: "APIドキュメント", description_en: "API documentation" },
+                    { file: "docs/config.md", description: "設定ドキュメント", description_en: "Configuration documentation" },
+                    { file: "docs/README.md", description: "目次ページ", description_en: "Table of contents page" }
                 ],
                 checkpoints: [
                     "YAML仕様が正しく解析された",
@@ -3198,10 +3993,21 @@ components:
                     "設定ドキュメントにすべての項目が記載",
                     "目次から各ドキュメントにアクセスできる"
                 ],
+                checkpoints_en: [
+                    "YAML spec was correctly parsed",
+                    "API documentation includes all endpoints",
+                    "Config documentation includes all items",
+                    "Can access each document from table of contents"
+                ],
                 learningPoints: [
                     "@記法でファイルを直接参照できる",
                     "構造化データからドキュメントを自動生成",
                     "複数ファイルを連携させたドキュメント作成"
+                ],
+                learningPoints_en: [
+                    "Can directly reference files with @ notation",
+                    "Auto-generate documentation from structured data",
+                    "Create documentation with multiple file coordination"
                 ]
             }
         },
@@ -3209,28 +4015,41 @@ components:
             id: 4,
             number: 4,
             title: "議事録の要約・タスク抽出",
+            title_en: "Meeting Minutes Summary & Task Extraction",
             description: "議事録テキストを分析し、要約と次のアクションを自動抽出。",
+            description_en: "Analyze meeting notes text and auto-extract summary and action items.",
             folder: "4_meeting_notes_analytics",
             badge: "テキスト分析",
+            badge_en: "Text Analysis",
             skills: ["テキスト解析", "要約", "タスク抽出"],
+            skills_en: ["Text Parsing", "Summarization", "Task Extraction"],
             relatedTutorials: [
-                { id: "00_02", title: "エージェントという概念", reason: "自律的な分析の理解" },
-                { id: "03_03", title: "非技術者向けの使い方", reason: "自然言語での依頼方法" }
+                { id: "00_02", title: "エージェントという概念", title_en: "The Concept of Agents", reason: "自律的な分析の理解", reason_en: "Understanding autonomous analysis" },
+                { id: "03_03", title: "非技術者向けの使い方", title_en: "Usage for Non-Developers", reason: "自然言語での依頼方法", reason_en: "How to make requests in natural language" }
             ],
             details: {
                 goal: "議事録テキストから構造化された要約とタスクリストを抽出する",
+                goal_en: "Extract structured summary and task list from meeting notes text",
                 estimatedTime: "10-15分",
+                estimatedTime_en: "10-15 min",
                 difficulty: "初級",
+                difficulty_en: "Beginner",
                 preparation: {
                     description: "以下の議事録テキストを作成してください。",
+                    description_en: "Create the following meeting notes text.",
                     folderStructure: `handson-4-meeting/
 ├── meeting_notes.txt
 └── summary/
     └── (ここに要約が生成される)`,
+                    folderStructure_en: `handson-4-meeting/
+├── meeting_notes.txt
+└── summary/
+    └── (summary will be generated here)`,
                     files: [
                         {
                             path: "meeting_notes.txt",
                             description: "サンプル議事録",
+                            description_en: "Sample meeting notes",
                             content: `プロジェクトX 週次定例会議
 
 日時: 2025年1月20日（月）14:00-15:30
@@ -3286,44 +4105,70 @@ components:
                         "`meeting_notes.txt` を作成（上記内容をコピー）",
                         "`summary` サブフォルダを作成",
                         "VSCodeでフォルダを開く"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-4-meeting` folder",
+                        "Create `meeting_notes.txt` (copy content above)",
+                        "Create `summary` subfolder",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "議事録の読み込み",
+                        title_en: "Load Meeting Notes",
                         description: "議事録の内容を確認します",
+                        description_en: "Check the meeting notes content",
                         prompt: "@meeting_notes.txt を読んで、この会議の概要を3行で説明して",
+                        prompt_en: "Read @meeting_notes.txt and explain this meeting's overview in 3 lines",
                         expected: "プロジェクトX定例会議、リリース延期決定、各メンバーのアクション設定 などの要約",
-                        tips: "まず全体像を把握してから詳細へ"
+                        expected_en: "Summary including Project X regular meeting, release delay decision, action assignments for each member",
+                        tips: "まず全体像を把握してから詳細へ",
+                        tips_en: "Grasp the big picture first, then go into details"
                     },
                     {
                         step: 2,
                         title: "構造化された要約作成",
+                        title_en: "Create Structured Summary",
                         description: "議事録を構造化して要約します",
+                        description_en: "Structure and summarize the meeting notes",
                         prompt: "この議事録を以下の形式で要約して：\\n- 基本情報（日時・参加者）\\n- 主な決定事項\\n- 重要な変更点\\n- リスク・課題",
+                        prompt_en: "Summarize these meeting notes in the following format:\\n- Basic info (date/attendees)\\n- Key decisions\\n- Important changes\\n- Risks/issues",
                         expected: "構造化された要約が表示される（リリース延期、API問題、予算追加などがまとまる）",
-                        tips: "フォーマットを指定すると構造化される"
+                        expected_en: "Structured summary is displayed (release delay, API issues, additional budget are summarized)",
+                        tips: "フォーマットを指定すると構造化される",
+                        tips_en: "Specifying format structures the output"
                     },
                     {
                         step: 3,
                         title: "タスクリスト抽出",
+                        title_en: "Extract Task List",
                         description: "具体的なタスクを抽出します",
+                        description_en: "Extract specific tasks",
                         prompt: "議事録から「誰が」「何を」「いつまでに」行うかを表形式でタスクリストとして抽出して",
+                        prompt_en: "Extract a task list in table format showing 'who' does 'what' by 'when' from the meeting notes",
                         expected: "| 担当者 | タスク | 期限 | の表形式でタスク一覧",
-                        tips: "表形式を指定すると見やすく整理される"
+                        expected_en: "Task list in table format: | Assignee | Task | Deadline |",
+                        tips: "表形式を指定すると見やすく整理される",
+                        tips_en: "Specifying table format organizes output clearly"
                     },
                     {
                         step: 4,
                         title: "ファイル出力",
+                        title_en: "Output to File",
                         description: "要約とタスクをファイルに保存します",
+                        description_en: "Save summary and tasks to a file",
                         prompt: "ここまでの要約とタスクリストを summary/meeting_summary.md として保存して",
+                        prompt_en: "Save the summary and task list so far as summary/meeting_summary.md",
                         expected: "Markdownファイルが生成される",
-                        tips: "結果をファイルに保存して共有可能に"
+                        expected_en: "Markdown file is generated",
+                        tips: "結果をファイルに保存して共有可能に",
+                        tips_en: "Save results to file for sharing"
                     }
                 ],
                 outputs: [
-                    { file: "summary/meeting_summary.md", description: "議事録要約とタスクリスト" }
+                    { file: "summary/meeting_summary.md", description: "議事録要約とタスクリスト", description_en: "Meeting summary and task list" }
                 ],
                 checkpoints: [
                     "議事録が正しく読み込まれた",
@@ -3331,10 +4176,21 @@ components:
                     "すべてのタスクが抽出された（4件）",
                     "期限が正しく記載されている"
                 ],
+                checkpoints_en: [
+                    "Meeting notes were correctly read",
+                    "Structured summary was created",
+                    "All tasks were extracted (4 items)",
+                    "Deadlines are correctly listed"
+                ],
                 learningPoints: [
                     "自然言語のテキストから情報を抽出",
                     "フォーマット指定で構造化出力",
                     "非定型データから定型フォーマットへの変換"
+                ],
+                learningPoints_en: [
+                    "Extract information from natural language text",
+                    "Structured output by specifying format",
+                    "Convert unstructured data to structured format"
                 ]
             }
         }
@@ -3346,20 +4202,27 @@ components:
             title: "REST APIスタブ開発",
             title_en: "REST API Stub Development",
             description: "API仕様からFlaskスタブサーバーを自動生成。テスト駆動で開発。",
+            description_en: "Auto-generate Flask stub server from API spec. Test-driven development.",
             folder: "5_rest_api_stub_development",
             badge: "バックエンド",
+            badge_en: "Backend",
             skills: ["Flask", "OpenAPI", "テスト"],
+            skills_en: ["Flask", "OpenAPI", "Testing"],
             relatedTutorials: [
-                { id: "01_02", title: "検証の仕組みを与える", reason: "テスト駆動開発の考え方" },
-                { id: "01_05", title: "探索→計画→実装→コミット", reason: "計画を立てて実装" },
-                { id: "02_01", title: "Skills", reason: "再利用可能なパターン" }
+                { id: "01_02", title: "検証の仕組みを与える", title_en: "Provide Verification Methods", reason: "テスト駆動開発の考え方", reason_en: "Test-driven development concept" },
+                { id: "01_05", title: "探索→計画→実装→コミット", title_en: "Explore→Plan→Implement→Commit", reason: "計画を立てて実装", reason_en: "Plan before implementation" },
+                { id: "02_01", title: "Skills", title_en: "Skills", reason: "再利用可能なパターン", reason_en: "Reusable patterns" }
             ],
             details: {
                 goal: "OpenAPI仕様からFlaskスタブサーバーを生成し、テストを通す",
+                goal_en: "Generate Flask stub server from OpenAPI spec and pass tests",
                 estimatedTime: "25-30分",
+                estimatedTime_en: "25-30 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "Python環境とFlaskをセットアップしてください。",
+                    description_en: "Set up Python environment and Flask.",
                     folderStructure: `handson-5-api/
 ├── api_spec.yaml
 ├── app/
@@ -3367,10 +4230,18 @@ components:
 ├── tests/
 │   └── (ここにテストが生成される)
 └── requirements.txt`,
+                    folderStructure_en: `handson-5-api/
+├── api_spec.yaml
+├── app/
+│   └── (Flask app will be generated here)
+├── tests/
+│   └── (tests will be generated here)
+└── requirements.txt`,
                     files: [
                         {
                             path: "api_spec.yaml",
                             description: "OpenAPI仕様（ハンズオン3と同じ）",
+                            description_en: "OpenAPI spec (same as hands-on 3)",
                             content: `openapi: 3.0.0
 info:
   title: タスク管理API
@@ -3428,6 +4299,7 @@ paths:
                         {
                             path: "requirements.txt",
                             description: "Pythonパッケージ依存",
+                            description_en: "Python package dependencies",
                             content: `flask>=2.0.0
 pytest>=7.0.0
 requests>=2.28.0`
@@ -3441,53 +4313,87 @@ requests>=2.28.0`
                         "仮想環境を有効化: `source venv/bin/activate`（Mac/Linux）または `.\\venv\\Scripts\\activate`（Windows）",
                         "依存をインストール: `pip install -r requirements.txt`",
                         "VSCodeでフォルダを開く"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-5-api` folder",
+                        "Create `api_spec.yaml` and `requirements.txt`",
+                        "Create `app` and `tests` subfolders",
+                        "Create virtual environment: `python -m venv venv`",
+                        "Activate virtual environment: `source venv/bin/activate` (Mac/Linux) or `.\\venv\\Scripts\\activate` (Windows)",
+                        "Install dependencies: `pip install -r requirements.txt`",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "API仕様の確認",
+                        title_en: "Check API Specification",
                         description: "実装すべきエンドポイントを確認します",
+                        description_en: "Check the endpoints to implement",
                         prompt: "@api_spec.yaml を読んで、実装すべきエンドポイントとそれぞれのリクエスト/レスポンスをリストアップして",
+                        prompt_en: "Read @api_spec.yaml and list the endpoints to implement with their request/response details",
                         expected: "4つのエンドポイント（GET/POST /tasks, GET/DELETE /tasks/{id}）の詳細",
-                        tips: "仕様を理解してから実装を開始"
+                        expected_en: "Details of 4 endpoints (GET/POST /tasks, GET/DELETE /tasks/{id})",
+                        tips: "仕様を理解してから実装を開始",
+                        tips_en: "Understand the spec before starting implementation"
                     },
                     {
                         step: 2,
                         title: "実装計画の作成",
+                        title_en: "Create Implementation Plan",
                         description: "Planモードで実装計画を立てます",
+                        description_en: "Create implementation plan in Plan mode",
                         prompt: "/plan\\nこのAPI仕様を実装するFlaskアプリを app/main.py に作成したい。インメモリでデータを保持し、テストも tests/test_api.py に作成して。計画を立てて",
+                        prompt_en: "/plan\\nI want to create a Flask app in app/main.py that implements this API spec. Keep data in-memory and create tests in tests/test_api.py. Create the plan",
                         expected: "ファイル構成、実装順序、テスト方針の計画が提示される",
-                        tips: "/plan で計画モードに入り、実装前に確認"
+                        expected_en: "Plan is presented including file structure, implementation order, and test strategy",
+                        tips: "/plan で計画モードに入り、実装前に確認",
+                        tips_en: "Enter plan mode with /plan and confirm before implementation"
                     },
                     {
                         step: 3,
                         title: "Flaskアプリの実装",
+                        title_en: "Implement Flask App",
                         description: "計画に基づいてFlaskアプリを実装します",
+                        description_en: "Implement the Flask app based on the plan",
                         prompt: "計画に従って app/main.py を実装して",
+                        prompt_en: "Implement app/main.py according to the plan",
                         expected: "Flaskアプリが生成され、4つのエンドポイントが実装される",
-                        tips: "Claude Codeがコードを生成・ファイル作成"
+                        expected_en: "Flask app is generated with 4 endpoints implemented",
+                        tips: "Claude Codeがコードを生成・ファイル作成",
+                        tips_en: "Claude Code generates code and creates files"
                     },
                     {
                         step: 4,
                         title: "テストの実装",
+                        title_en: "Implement Tests",
                         description: "APIテストを実装します",
+                        description_en: "Implement API tests",
                         prompt: "tests/test_api.py にAPIのテストを実装して。各エンドポイントの正常系と異常系をテスト",
+                        prompt_en: "Implement API tests in tests/test_api.py. Test happy path and error cases for each endpoint",
                         expected: "pytestで実行可能なテストファイルが生成される",
-                        tips: "検証可能なテストを用意"
+                        expected_en: "Test file executable with pytest is generated",
+                        tips: "検証可能なテストを用意",
+                        tips_en: "Prepare verifiable tests"
                     },
                     {
                         step: 5,
                         title: "テスト実行と確認",
+                        title_en: "Run Tests and Verify",
                         description: "テストを実行して動作を確認します",
+                        description_en: "Run tests and verify behavior",
                         prompt: "pytest tests/test_api.py -v を実行して、すべてのテストがパスすることを確認して",
+                        prompt_en: "Run pytest tests/test_api.py -v and verify all tests pass",
                         expected: "テストが実行され、すべてパスする（または失敗があれば修正）",
-                        tips: "テストで品質を担保"
+                        expected_en: "Tests run and all pass (or fix if any fail)",
+                        tips: "テストで品質を担保",
+                        tips_en: "Ensure quality with tests"
                     }
                 ],
                 outputs: [
-                    { file: "app/main.py", description: "Flaskアプリケーション" },
-                    { file: "tests/test_api.py", description: "APIテスト" }
+                    { file: "app/main.py", description: "Flaskアプリケーション", description_en: "Flask application" },
+                    { file: "tests/test_api.py", description: "APIテスト", description_en: "API tests" }
                 ],
                 checkpoints: [
                     "4つのエンドポイントが実装された",
@@ -3495,10 +4401,21 @@ requests>=2.28.0`
                     "POST /tasks でタスクを作成できる",
                     "すべてのテストがパスする"
                 ],
+                checkpoints_en: [
+                    "4 endpoints are implemented",
+                    "GET /tasks returns task list",
+                    "POST /tasks can create tasks",
+                    "All tests pass"
+                ],
                 learningPoints: [
                     "/plan で事前に計画を立てる重要性",
                     "テスト駆動での開発フロー",
                     "仕様からコードへの自動変換"
+                ],
+                learningPoints_en: [
+                    "Importance of planning ahead with /plan",
+                    "Test-driven development flow",
+                    "Automatic code generation from specification"
                 ]
             }
         },
@@ -3506,21 +4423,28 @@ requests>=2.28.0`
             id: 6,
             number: 6,
             title: "静的Webフロント開発",
+            title_en: "Static Web Frontend Development",
             description: "HTML/CSS/JSで静的Webページを開発。レスポンシブデザインを実装。",
+            description_en: "Develop static web pages with HTML/CSS/JS. Implement responsive design.",
             folder: "6_web_frontend_mini",
             badge: "フロントエンド",
             badge_en: "Frontend",
             skills: ["HTML/CSS", "JavaScript", "レスポンシブ"],
+            skills_en: ["HTML/CSS", "JavaScript", "Responsive"],
             relatedTutorials: [
-                { id: "01_02", title: "検証の仕組みを与える", reason: "ブラウザでの確認方法" },
-                { id: "01_05", title: "探索→計画→実装→コミット", reason: "段階的な開発フロー" }
+                { id: "01_02", title: "検証の仕組みを与える", title_en: "Provide Verification Methods", reason: "ブラウザでの確認方法", reason_en: "How to verify in browser" },
+                { id: "01_05", title: "探索→計画→実装→コミット", title_en: "Explore→Plan→Implement→Commit", reason: "段階的な開発フロー", reason_en: "Incremental development flow" }
             ],
             details: {
                 goal: "機能仕様書に従ってレスポンシブな静的Webページを開発する",
+                goal_en: "Develop a responsive static web page according to feature spec",
                 estimatedTime: "20-25分",
+                estimatedTime_en: "20-25 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "以下の機能仕様書を作成してください。",
+                    description_en: "Create the following feature specification.",
                     folderStructure: `handson-6-web/
 ├── FEATURE_SPEC.md
 ├── index.html (生成される)
@@ -3528,10 +4452,18 @@ requests>=2.28.0`
 │   └── style.css (生成される)
 └── js/
     └── app.js (生成される)`,
+                    folderStructure_en: `handson-6-web/
+├── FEATURE_SPEC.md
+├── index.html (will be generated)
+├── css/
+│   └── style.css (will be generated)
+└── js/
+    └── app.js (will be generated)`,
                     files: [
                         {
                             path: "FEATURE_SPEC.md",
                             description: "機能仕様書",
+                            description_en: "Feature specification",
                             content: `# タスク管理アプリ 機能仕様書
 
 ## 概要
@@ -3585,54 +4517,85 @@ requests>=2.28.0`
                         "`FEATURE_SPEC.md` を作成（上記内容をコピー）",
                         "`css` と `js` サブフォルダを作成",
                         "VSCodeでフォルダを開く"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-6-web` folder",
+                        "Create `FEATURE_SPEC.md` (copy content above)",
+                        "Create `css` and `js` subfolders",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "仕様の確認",
+                        title_en: "Check Specification",
                         description: "実装すべき機能を確認します",
+                        description_en: "Check the features to implement",
                         prompt: "@FEATURE_SPEC.md を読んで、実装すべき機能をチェックリスト形式でまとめて",
+                        prompt_en: "Read @FEATURE_SPEC.md and summarize the features to implement in checklist format",
                         expected: "タスク追加、一覧表示、削除、フィルターの4機能 + デザイン要件がリスト化",
-                        tips: "仕様を明確にしてから実装開始"
+                        expected_en: "4 features (add, list, delete, filter tasks) + design requirements listed",
+                        tips: "仕様を明確にしてから実装開始",
+                        tips_en: "Clarify spec before starting implementation"
                     },
                     {
                         step: 2,
                         title: "HTML作成",
+                        title_en: "Create HTML",
                         description: "基本構造のHTMLを作成します",
+                        description_en: "Create the basic HTML structure",
                         prompt: "仕様に従って index.html を作成して。セマンティックなHTMLで、css/style.css と js/app.js を読み込むように",
+                        prompt_en: "Create index.html according to the spec. Use semantic HTML and load css/style.css and js/app.js",
                         expected: "入力フォーム、タスクリスト、フィルターボタンを含むHTMLが生成",
-                        tips: "構造を先に作り、スタイルは後から"
+                        expected_en: "HTML with input form, task list, and filter buttons is generated",
+                        tips: "構造を先に作り、スタイルは後から",
+                        tips_en: "Build structure first, then add styles"
                     },
                     {
                         step: 3,
                         title: "CSS作成",
+                        title_en: "Create CSS",
                         description: "レスポンシブデザインのCSSを作成します",
+                        description_en: "Create responsive CSS design",
                         prompt: "css/style.css を作成して。仕様書のカラーとタイポグラフィに従い、モバイル・タブレット・デスクトップ対応のレスポンシブデザインで",
+                        prompt_en: "Create css/style.css. Follow the spec's colors and typography with responsive design for mobile, tablet, and desktop",
                         expected: "メディアクエリを含むレスポンシブCSSが生成",
-                        tips: "モバイルファーストで記述"
+                        expected_en: "Responsive CSS with media queries is generated",
+                        tips: "モバイルファーストで記述",
+                        tips_en: "Write mobile-first"
                     },
                     {
                         step: 4,
                         title: "JavaScript作成",
+                        title_en: "Create JavaScript",
                         description: "インタラクティブな機能を実装します",
+                        description_en: "Implement interactive functionality",
                         prompt: "js/app.js を作成して。タスクの追加・完了・削除・フィルター機能を実装。ローカルストレージでデータ永続化",
+                        prompt_en: "Create js/app.js. Implement task add, complete, delete, and filter functions. Persist data with localStorage",
                         expected: "すべての機能が実装されたJavaScriptが生成",
-                        tips: "ローカルストレージで永続化"
+                        expected_en: "JavaScript with all features implemented is generated",
+                        tips: "ローカルストレージで永続化",
+                        tips_en: "Persist with localStorage"
                     },
                     {
                         step: 5,
                         title: "動作確認",
+                        title_en: "Verify Behavior",
                         description: "ブラウザで動作を確認します",
+                        description_en: "Verify behavior in browser",
                         prompt: "index.html をブラウザで開いて動作確認する方法を教えて。また、仕様書の機能がすべて実装されているかチェックして",
+                        prompt_en: "Tell me how to open index.html in a browser and verify. Also check if all spec features are implemented",
                         expected: "確認手順と実装チェックリストが提示される",
-                        tips: "Live Serverなどで確認可能"
+                        expected_en: "Verification steps and implementation checklist are presented",
+                        tips: "Live Serverなどで確認可能",
+                        tips_en: "Can verify with Live Server etc."
                     }
                 ],
                 outputs: [
-                    { file: "index.html", description: "HTMLファイル" },
-                    { file: "css/style.css", description: "スタイルシート" },
-                    { file: "js/app.js", description: "JavaScript" }
+                    { file: "index.html", description: "HTMLファイル", description_en: "HTML file" },
+                    { file: "css/style.css", description: "スタイルシート", description_en: "Stylesheet" },
+                    { file: "js/app.js", description: "JavaScript", description_en: "JavaScript" }
                 ],
                 checkpoints: [
                     "タスクを追加できる",
@@ -3642,10 +4605,23 @@ requests>=2.28.0`
                     "レスポンシブデザインが適用されている",
                     "ローカルストレージでデータが保持される"
                 ],
+                checkpoints_en: [
+                    "Can add tasks",
+                    "Can complete tasks",
+                    "Can delete tasks",
+                    "Filter works",
+                    "Responsive design is applied",
+                    "Data is persisted in localStorage"
+                ],
                 learningPoints: [
                     "仕様書からの実装フロー",
                     "HTML/CSS/JSの段階的な開発",
                     "レスポンシブデザインの実装"
+                ],
+                learningPoints_en: [
+                    "Implementation flow from specification",
+                    "Incremental HTML/CSS/JS development",
+                    "Responsive design implementation"
                 ]
             }
         },
@@ -3655,28 +4631,40 @@ requests>=2.28.0`
             title: "CLIツール開発",
             title_en: "CLI Tool Development",
             description: "Pythonでタスク管理CLIツールを開発。argparseとファイルI/Oを学ぶ。",
+            description_en: "Develop a task management CLI tool in Python. Learn argparse and file I/O.",
             folder: "7_cli_tool_development",
             badge: "CLI開発",
+            badge_en: "CLI Development",
             skills: ["Python", "argparse", "ファイルI/O"],
+            skills_en: ["Python", "argparse", "File I/O"],
             relatedTutorials: [
-                { id: "01_02", title: "検証の仕組みを与える", reason: "CLIテストの方法" },
-                { id: "01_05", title: "探索→計画→実装→コミット", reason: "段階的な開発" },
-                { id: "02_02", title: "Hooks", reason: "CLIとの連携" }
+                { id: "01_02", title: "検証の仕組みを与える", title_en: "Provide Verification Methods", reason: "CLIテストの方法", reason_en: "How to test CLI" },
+                { id: "01_05", title: "探索→計画→実装→コミット", title_en: "Explore→Plan→Implement→Commit", reason: "段階的な開発", reason_en: "Incremental development" },
+                { id: "02_02", title: "Hooks", title_en: "Hooks", reason: "CLIとの連携", reason_en: "Integration with CLI" }
             ],
             details: {
                 goal: "argparseを使ったタスク管理CLIツールを開発する",
+                goal_en: "Develop a task management CLI tool using argparse",
                 estimatedTime: "20-25分",
+                estimatedTime_en: "20-25 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "Python環境とCLI仕様書を用意してください。",
+                    description_en: "Prepare Python environment and CLI specification.",
                     folderStructure: `handson-7-cli/
 ├── CLI_SPEC.md
 ├── taskman.py (生成される)
 └── tasks.json (生成される)`,
+                    folderStructure_en: `handson-7-cli/
+├── CLI_SPEC.md
+├── taskman.py (will be generated)
+└── tasks.json (will be generated)`,
                     files: [
                         {
                             path: "CLI_SPEC.md",
                             description: "CLI仕様書",
+                            description_en: "CLI specification",
                             content: `# taskman CLI 仕様書
 
 ## 概要
@@ -3735,53 +4723,84 @@ taskman remove <id>
                         "`CLI_SPEC.md` を作成（上記内容をコピー）",
                         "Python 3.8以上がインストールされていることを確認",
                         "VSCodeでフォルダを開く"
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-7-cli` folder",
+                        "Create `CLI_SPEC.md` (copy content above)",
+                        "Verify Python 3.8 or higher is installed",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "仕様確認",
+                        title_en: "Check Specification",
                         description: "実装すべきコマンドを確認します",
+                        description_en: "Check the commands to implement",
                         prompt: "@CLI_SPEC.md を読んで、実装すべきコマンドとその引数・オプションをまとめて",
+                        prompt_en: "Read @CLI_SPEC.md and summarize the commands and their arguments/options to implement",
                         expected: "add, list, done, remove の4コマンドと各オプションが整理される",
-                        tips: "仕様を明確にしてから実装"
+                        expected_en: "4 commands (add, list, done, remove) and their options are organized",
+                        tips: "仕様を明確にしてから実装",
+                        tips_en: "Clarify spec before implementation"
                     },
                     {
                         step: 2,
                         title: "基本構造の実装",
+                        title_en: "Implement Basic Structure",
                         description: "argparseでコマンドライン引数を処理する基本構造を作成",
+                        description_en: "Create basic structure for handling command line arguments with argparse",
                         prompt: "CLI_SPEC.md に従って taskman.py の基本構造を作成して。argparseでadd, list, done, removeのサブコマンドを定義",
+                        prompt_en: "Create basic structure of taskman.py according to CLI_SPEC.md. Define add, list, done, remove subcommands with argparse",
                         expected: "argparseのサブパーサー構造が実装される",
-                        tips: "まず骨組みを作ってから詳細を実装"
+                        expected_en: "argparse subparser structure is implemented",
+                        tips: "まず骨組みを作ってから詳細を実装",
+                        tips_en: "Build skeleton first, then implement details"
                     },
                     {
                         step: 3,
                         title: "データ永続化の実装",
+                        title_en: "Implement Data Persistence",
                         description: "JSONファイルでタスクを保存・読み込みする機能を実装",
+                        description_en: "Implement save/load functionality with JSON file",
                         prompt: "tasks.json にタスクを保存・読み込みする関数を追加して。ファイルがない場合は新規作成",
+                        prompt_en: "Add functions to save/load tasks to tasks.json. Create new file if it doesn't exist",
                         expected: "load_tasks(), save_tasks() 関数が実装される",
-                        tips: "try-except でファイル不在を処理"
+                        expected_en: "load_tasks(), save_tasks() functions are implemented",
+                        tips: "try-except でファイル不在を処理",
+                        tips_en: "Handle missing file with try-except"
                     },
                     {
                         step: 4,
                         title: "コマンド実装",
+                        title_en: "Implement Commands",
                         description: "各コマンドの処理を実装",
+                        description_en: "Implement processing for each command",
                         prompt: "add, list, done, remove の各コマンドの処理を実装して。エラー処理も含めて",
+                        prompt_en: "Implement processing for add, list, done, remove commands. Include error handling",
                         expected: "すべてのコマンドが実装される",
-                        tips: "エラーメッセージも仕様通りに"
+                        expected_en: "All commands are implemented",
+                        tips: "エラーメッセージも仕様通りに",
+                        tips_en: "Error messages also as per spec"
                     },
                     {
                         step: 5,
                         title: "動作テスト",
+                        title_en: "Test Behavior",
                         description: "CLIツールの動作を確認します",
+                        description_en: "Verify CLI tool behavior",
                         prompt: "以下のコマンドを順に実行して動作確認して：\\n1. python taskman.py add \"テストタスク\"\\n2. python taskman.py list\\n3. python taskman.py done 1\\n4. python taskman.py list",
+                        prompt_en: "Run these commands in order to verify:\\n1. python taskman.py add \"Test task\"\\n2. python taskman.py list\\n3. python taskman.py done 1\\n4. python taskman.py list",
                         expected: "各コマンドが正しく動作し、tasks.jsonにデータが保存される",
-                        tips: "実際に実行して検証"
+                        expected_en: "Each command works correctly and data is saved to tasks.json",
+                        tips: "実際に実行して検証",
+                        tips_en: "Verify by actually running"
                     }
                 ],
                 outputs: [
-                    { file: "taskman.py", description: "CLIツール本体" },
-                    { file: "tasks.json", description: "タスクデータ" }
+                    { file: "taskman.py", description: "CLIツール本体", description_en: "CLI tool main file" },
+                    { file: "tasks.json", description: "タスクデータ", description_en: "Task data" }
                 ],
                 checkpoints: [
                     "add コマンドでタスクを追加できる",
@@ -3791,10 +4810,23 @@ taskman remove <id>
                     "tasks.json にデータが保存される",
                     "存在しないIDでエラーが表示される"
                 ],
+                checkpoints_en: [
+                    "Can add tasks with add command",
+                    "Task list is displayed with list command",
+                    "Can complete tasks with done command",
+                    "Can delete tasks with remove command",
+                    "Data is saved to tasks.json",
+                    "Error is displayed for non-existent ID"
+                ],
                 learningPoints: [
                     "argparseによるCLI引数処理",
                     "JSONファイルでのデータ永続化",
                     "エラーハンドリングの実装"
+                ],
+                learningPoints_en: [
+                    "CLI argument handling with argparse",
+                    "Data persistence with JSON files",
+                    "Error handling implementation"
                 ]
             }
         },
@@ -3804,24 +4836,35 @@ taskman remove <id>
             title: "デバッグ・トラブルシューティング",
             title_en: "Debugging & Troubleshooting",
             description: "エラーログから原因を特定し、修正、再発防止策まで。実践的なデバッグスキルを習得。",
+            description_en: "Identify causes from error logs, fix issues, and prevent recurrence. Acquire practical debugging skills.",
             folder: "8_debugging",
             badge: "デバッグ",
             badge_en: "Debugging",
             skills: ["ログ分析", "原因特定", "修正", "検証"],
+            skills_en: ["Log Analysis", "Root Cause Analysis", "Bug Fixing", "Verification"],
             relatedTutorials: [
-                { id: "01_02", title: "検証の仕組みを与える", reason: "検証方法の重要性" },
-                { id: "01_06", title: "よくある失敗パターン", reason: "失敗から学ぶ" },
-                { id: "02_03", title: "Subagents", reason: "調査の委譲" }
+                { id: "01_02", title: "検証の仕組みを与える", title_en: "Provide Verification Methods", reason: "検証方法の重要性", reason_en: "Importance of verification methods" },
+                { id: "01_06", title: "よくある失敗パターン", title_en: "Common Failure Patterns", reason: "失敗から学ぶ", reason_en: "Learning from failures" },
+                { id: "02_03", title: "Subagents", title_en: "Subagents", reason: "調査の委譲", reason_en: "Delegating investigation" }
             ],
             details: {
                 goal: "意図的に埋め込まれたバグを発見・修正し、テストで検証する",
+                goal_en: "Discover and fix intentionally embedded bugs, verify with tests",
                 estimatedTime: "20-30分",
+                estimatedTime_en: "20-30 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "バグを含むコードを用意してください。",
+                    description_en: "Prepare code with bugs.",
                     folderStructure: `handson-8-debugging/
 ├── src/
 │   └── calculator.py (バグあり)
+├── tests/
+│   └── test_calculator.py`,
+                    folderStructure_en: `handson-8-debugging/
+├── src/
+│   └── calculator.py (with bugs)
 ├── tests/
 │   └── test_calculator.py
 └── error.log`,
@@ -3829,6 +4872,7 @@ taskman remove <id>
                         {
                             path: "src/calculator.py",
                             description: "バグを含む計算機モジュール",
+                            description_en: "Calculator module with bugs",
                             content: `def add(a, b):
     return a + b
 
@@ -3854,58 +4898,90 @@ def parse_number(text):
                         {
                             path: "error.log",
                             description: "エラーログ",
+                            description_en: "Error log",
                             content: `[2025-01-15 10:23:45] ERROR: ZeroDivisionError in divide()
 [2025-01-15 10:24:12] ERROR: ZeroDivisionError in calculate_average() - empty list
 [2025-01-15 10:25:33] ERROR: ValueError in parse_number() - invalid literal`
                         }
+                    ],
+                    setupSteps_en: [
+                        "Create `handson-8-debugging` folder",
+                        "Create `src/calculator.py` with bugs (copy content above)",
+                        "Create `error.log` (copy content above)",
+                        "Open folder in VSCode"
                     ]
                 },
                 steps: [
                     {
                         step: 1,
                         title: "エラーログ分析",
+                        title_en: "Analyze Error Log",
                         description: "エラーログから問題を特定します",
+                        description_en: "Identify problems from error log",
                         prompt: "@error.log を読んで、発生しているエラーを一覧にして。各エラーの原因と発生箇所を推測して",
+                        prompt_en: "Read @error.log and list the errors. Guess the cause and location of each error",
                         expected: "3つのエラー（ZeroDivisionError x2、ValueError x1）が特定される",
-                        tips: "ログから症状を把握"
+                        expected_en: "3 errors are identified (ZeroDivisionError x2, ValueError x1)",
+                        tips: "ログから症状を把握",
+                        tips_en: "Understand symptoms from logs"
                     },
                     {
                         step: 2,
                         title: "コード調査",
+                        title_en: "Investigate Code",
                         description: "エラーの根本原因を調査します",
+                        description_en: "Investigate the root cause of errors",
                         prompt: "@src/calculator.py を読んで、ログで報告されたエラーの根本原因を特定して。各関数の問題点を説明して",
+                        prompt_en: "Read @src/calculator.py and identify root causes of errors reported in logs. Explain issues in each function",
                         expected: "3つの関数の問題点が特定される",
-                        tips: "コードと症状を照合"
+                        expected_en: "Issues in 3 functions are identified",
+                        tips: "コードと症状を照合",
+                        tips_en: "Match code with symptoms"
                     },
                     {
                         step: 3,
                         title: "修正実装",
+                        title_en: "Implement Fixes",
                         description: "特定した問題を修正します",
+                        description_en: "Fix the identified problems",
                         prompt: "calculator.py の3つのバグを修正して。適切な例外処理を追加して",
+                        prompt_en: "Fix the 3 bugs in calculator.py. Add appropriate exception handling",
                         expected: "ゼロ除算チェック、空リストチェック、ValueError処理が追加される",
-                        tips: "根本原因に対処"
+                        expected_en: "Zero division check, empty list check, ValueError handling are added",
+                        tips: "根本原因に対処",
+                        tips_en: "Address the root cause"
                     },
                     {
                         step: 4,
                         title: "テスト作成・実行",
+                        title_en: "Create and Run Tests",
                         description: "修正を検証するテストを作成します",
+                        description_en: "Create tests to verify the fixes",
                         prompt: "修正した関数のテストを tests/test_calculator.py に作成して。正常系とエラー系の両方をテスト。その後テストを実行して",
+                        prompt_en: "Create tests for fixed functions in tests/test_calculator.py. Test both happy path and error cases. Then run tests",
                         expected: "テストが作成され、すべてパスする",
-                        tips: "エッジケースを網羅"
+                        expected_en: "Tests are created and all pass",
+                        tips: "エッジケースを網羅",
+                        tips_en: "Cover edge cases"
                     },
                     {
                         step: 5,
                         title: "再発防止策",
+                        title_en: "Prevention Measures",
                         description: "今後の再発を防ぐ対策を検討します",
+                        description_en: "Consider measures to prevent recurrence",
                         prompt: "今回のバグの再発を防ぐためのCLAUDE.mdルールを提案して",
+                        prompt_en: "Propose CLAUDE.md rules to prevent recurrence of these bugs",
                         expected: "型チェック、例外処理、テストカバレッジに関するルールが提案される",
-                        tips: "ルール化で再発防止"
+                        expected_en: "Rules for type checking, exception handling, and test coverage are proposed",
+                        tips: "ルール化で再発防止",
+                        tips_en: "Prevent recurrence through rules"
                     }
                 ],
                 outputs: [
-                    { file: "src/calculator.py", description: "修正済みコード" },
-                    { file: "tests/test_calculator.py", description: "テストコード" },
-                    { file: "CLAUDE.md", description: "再発防止ルール" }
+                    { file: "src/calculator.py", description: "修正済みコード", description_en: "Fixed code" },
+                    { file: "tests/test_calculator.py", description: "テストコード", description_en: "Test code" },
+                    { file: "CLAUDE.md", description: "再発防止ルール", description_en: "Prevention rules" }
                 ],
                 checkpoints: [
                     "エラーログから問題を正確に特定できた",
@@ -3914,11 +4990,24 @@ def parse_number(text):
                     "テストがすべてパスした",
                     "再発防止策が文書化された"
                 ],
+                checkpoints_en: [
+                    "Accurately identified problems from error log",
+                    "Identified root cause",
+                    "Appropriate fixes were implemented",
+                    "All tests passed",
+                    "Prevention measures were documented"
+                ],
                 learningPoints: [
                     "ログからの問題特定",
                     "根本原因分析（RCA）",
                     "防御的プログラミング",
                     "テスト駆動の修正"
+                ],
+                learningPoints_en: [
+                    "Problem identification from logs",
+                    "Root Cause Analysis (RCA)",
+                    "Defensive programming",
+                    "Test-driven fixing"
                 ]
             }
         },
@@ -3928,29 +5017,42 @@ def parse_number(text):
             title: "リファクタリング",
             title_en: "Refactoring",
             description: "既存コードの品質改善。可読性、保守性、パフォーマンスを向上させる。",
+            description_en: "Improve existing code quality. Enhance readability, maintainability, and performance.",
             folder: "9_refactoring",
             badge: "リファクタ",
+            badge_en: "Refactor",
             skills: ["設計パターン", "コード整理", "テスト保護"],
+            skills_en: ["Design Patterns", "Code Organization", "Test Protection"],
             relatedTutorials: [
-                { id: "01_05", title: "探索→計画→実装→コミット", reason: "計画的なリファクタ" },
-                { id: "02_01", title: "Skills", reason: "リファクタパターンの定義" },
-                { id: "03_05", title: "Writer/Reviewerパターン", reason: "品質確認" }
+                { id: "01_05", title: "探索→計画→実装→コミット", title_en: "Explore→Plan→Implement→Commit", reason: "計画的なリファクタ", reason_en: "Planned refactoring" },
+                { id: "02_01", title: "Skills", title_en: "Skills", reason: "リファクタパターンの定義", reason_en: "Define refactoring patterns" },
+                { id: "03_05", title: "Writer/Reviewerパターン", title_en: "Writer/Reviewer Pattern", reason: "品質確認", reason_en: "Quality verification" }
             ],
             details: {
                 goal: "スパゲッティコードをクリーンなコードにリファクタリングする",
+                goal_en: "Refactor spaghetti code into clean code",
                 estimatedTime: "25-35分",
+                estimatedTime_en: "25-35 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "リファクタリング対象のコードを用意してください。",
+                    description_en: "Prepare the code to refactor.",
                     folderStructure: `handson-9-refactoring/
 ├── src/
 │   └── order_processor.py (リファクタ対象)
+└── tests/
+    └── test_order_processor.py`,
+                    folderStructure_en: `handson-9-refactoring/
+├── src/
+│   └── order_processor.py (refactor target)
 └── tests/
     └── test_order_processor.py`,
                     files: [
                         {
                             path: "src/order_processor.py",
                             description: "リファクタリング対象のコード",
+                            description_en: "Code to refactor",
                             content: `# 問題: 1つの関数に複数の責務、マジックナンバー、重複コード
 def process_order(order):
     # 割引計算
@@ -3990,47 +5092,72 @@ def process_order(order):
                     {
                         step: 1,
                         title: "コード分析",
+                        title_en: "Analyze Code",
                         description: "リファクタリングすべき問題点を特定します",
+                        description_en: "Identify issues that need refactoring",
                         prompt: "@src/order_processor.py を分析して、リファクタリングすべき問題点をリストアップして。各問題の影響度も評価して",
+                        prompt_en: "Analyze @src/order_processor.py and list issues to refactor. Evaluate the impact of each issue",
                         expected: "単一責任原則違反、マジックナンバー、重複コード等の問題が特定される",
-                        tips: "まず全体像を把握"
+                        expected_en: "Issues like single responsibility violation, magic numbers, duplicate code are identified",
+                        tips: "まず全体像を把握",
+                        tips_en: "Understand the big picture first"
                     },
                     {
                         step: 2,
                         title: "テスト作成（セーフティネット）",
+                        title_en: "Create Tests (Safety Net)",
                         description: "リファクタリング前にテストを作成します",
+                        description_en: "Create tests before refactoring",
                         prompt: "リファクタリング前に、現在の動作を保証するテストを tests/test_order_processor.py に作成して",
+                        prompt_en: "Create tests to guarantee current behavior in tests/test_order_processor.py before refactoring",
                         expected: "現在の動作を検証するテストが作成される",
-                        tips: "リファクタ前にテストで保護"
+                        expected_en: "Tests verifying current behavior are created",
+                        tips: "リファクタ前にテストで保護",
+                        tips_en: "Protect with tests before refactoring"
                     },
                     {
                         step: 3,
                         title: "リファクタリング計画",
+                        title_en: "Refactoring Plan",
                         description: "段階的なリファクタリング計画を立てます",
+                        description_en: "Create an incremental refactoring plan",
                         prompt: "/plan 特定した問題を解決するリファクタリング計画を立てて。1. 定数抽出 2. 関数分割 3. クラス化 の順で",
+                        prompt_en: "/plan Create a refactoring plan to solve identified issues. In order: 1. Extract constants 2. Split functions 3. Create classes",
                         expected: "段階的なリファクタリング計画が提示される",
-                        tips: "小さなステップで進める"
+                        expected_en: "Incremental refactoring plan is presented",
+                        tips: "小さなステップで進める",
+                        tips_en: "Progress in small steps"
                     },
                     {
                         step: 4,
                         title: "リファクタリング実行",
+                        title_en: "Execute Refactoring",
                         description: "計画に従ってリファクタリングします",
+                        description_en: "Refactor according to the plan",
                         prompt: "計画に従ってリファクタリングを実行して。各ステップ後にテストを実行して動作確認",
+                        prompt_en: "Execute refactoring according to the plan. Run tests after each step to verify behavior",
                         expected: "クリーンなコードに変換される",
-                        tips: "テストで動作を確認しながら"
+                        expected_en: "Code is converted to clean code",
+                        tips: "テストで動作を確認しながら",
+                        tips_en: "Verify behavior with tests as you go"
                     },
                     {
                         step: 5,
                         title: "最終確認",
+                        title_en: "Final Review",
                         description: "リファクタリング結果を確認します",
+                        description_en: "Review refactoring results",
                         prompt: "リファクタリング後のコードをレビューして。改善点と残課題をまとめて",
+                        prompt_en: "Review the refactored code. Summarize improvements and remaining issues",
                         expected: "改善点が確認され、コード品質が向上している",
-                        tips: "Before/Afterを比較"
+                        expected_en: "Improvements are confirmed and code quality is improved",
+                        tips: "Before/Afterを比較",
+                        tips_en: "Compare before/after"
                     }
                 ],
                 outputs: [
-                    { file: "src/order_processor.py", description: "リファクタリング済みコード" },
-                    { file: "tests/test_order_processor.py", description: "テストコード" }
+                    { file: "src/order_processor.py", description: "リファクタリング済みコード", description_en: "Refactored code" },
+                    { file: "tests/test_order_processor.py", description: "テストコード", description_en: "Test code" }
                 ],
                 checkpoints: [
                     "問題点が正確に特定された",
@@ -4039,11 +5166,24 @@ def process_order(order):
                     "関数が単一責任に分割された",
                     "テストがすべてパスした"
                 ],
+                checkpoints_en: [
+                    "Issues were accurately identified",
+                    "Tests were created (safety net)",
+                    "Magic numbers were converted to constants",
+                    "Functions were split to single responsibility",
+                    "All tests passed"
+                ],
                 learningPoints: [
                     "コードの問題点の特定方法",
                     "テストによる保護の重要性",
                     "段階的なリファクタリング",
                     "クリーンコードの原則"
+                ],
+                learningPoints_en: [
+                    "How to identify code issues",
+                    "Importance of test protection",
+                    "Incremental refactoring",
+                    "Clean code principles"
                 ]
             }
         },
@@ -4053,30 +5193,44 @@ def process_order(order):
             title: "テスト設計・TDD",
             title_en: "Test Design & TDD",
             description: "テストファーストで開発。ユニットテスト、統合テストの設計と実装。",
+            description_en: "Test-first development. Design and implement unit tests and integration tests.",
             folder: "10_tdd",
             badge: "TDD",
+            badge_en: "TDD",
             skills: ["テスト設計", "Red-Green-Refactor", "モック"],
+            skills_en: ["Test Design", "Red-Green-Refactor", "Mocking"],
             relatedTutorials: [
-                { id: "01_02", title: "検証の仕組みを与える", reason: "検証の基本" },
-                { id: "02_01", title: "Skills", reason: "TDDワークフローの定義" },
-                { id: "03_05", title: "Writer/Reviewerパターン", reason: "テストと実装の分離" }
+                { id: "01_02", title: "検証の仕組みを与える", title_en: "Provide Verification Methods", reason: "検証の基本", reason_en: "Basics of verification" },
+                { id: "02_01", title: "Skills", title_en: "Skills", reason: "TDDワークフローの定義", reason_en: "Define TDD workflow" },
+                { id: "03_05", title: "Writer/Reviewerパターン", title_en: "Writer/Reviewer Pattern", reason: "テストと実装の分離", reason_en: "Separate tests and implementation" }
             ],
             details: {
                 goal: "TDDのRed-Green-Refactorサイクルを実践する",
+                goal_en: "Practice the TDD Red-Green-Refactor cycle",
                 estimatedTime: "25-30分",
+                estimatedTime_en: "25-30 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "TDD対象の仕様書を用意してください。",
+                    description_en: "Prepare the specification for TDD.",
                     folderStructure: `handson-10-tdd/
 ├── SPEC.md
 ├── src/
 │   └── user_validator.py (TDDで作成)
 └── tests/
     └── test_user_validator.py (先に作成)`,
+                    folderStructure_en: `handson-10-tdd/
+├── SPEC.md
+├── src/
+│   └── user_validator.py (created with TDD)
+└── tests/
+    └── test_user_validator.py (created first)`,
                     files: [
                         {
                             path: "SPEC.md",
                             description: "実装仕様書",
+                            description_en: "Implementation specification",
                             content: `# UserValidator 仕様書
 
 ## 概要
@@ -4108,47 +5262,67 @@ def process_order(order):
                     {
                         step: 1,
                         title: "仕様理解",
+                        title_en: "Understand Specification",
                         description: "仕様書からテストケースを洗い出します",
+                        description_en: "Extract test cases from the specification",
                         prompt: "@SPEC.md を読んで、各関数のテストケースを洗い出して。正常系、境界値、異常系を含めて",
                         expected: "各関数につき5〜10のテストケースがリストアップされる",
-                        tips: "テストケースを網羅的に"
+                        expected_en: "5-10 test cases are listed for each function",
+                        tips: "テストケースを網羅的に",
+                        tips_en: "Be comprehensive with test cases"
                     },
                     {
                         step: 2,
                         title: "テスト作成（RED）",
+                        title_en: "Write Tests (RED)",
                         description: "まずテストを作成します（実装前なので失敗する）",
+                        description_en: "Create tests first (they will fail since no implementation exists)",
                         prompt: "tests/test_user_validator.py を作成して、先ほど洗い出したテストケースを実装して。src/user_validator.pyはまだ作成しないで",
                         expected: "テストファイルが作成される（実行すると失敗する）",
-                        tips: "RED: まず失敗するテスト"
+                        expected_en: "Test file is created (running tests will fail)",
+                        tips: "RED: まず失敗するテスト",
+                        tips_en: "RED: Start with failing tests"
                     },
                     {
                         step: 3,
                         title: "最小実装（GREEN）",
+                        title_en: "Minimal Implementation (GREEN)",
                         description: "テストをパスする最小限の実装を作成します",
+                        description_en: "Create minimal implementation to pass the tests",
                         prompt: "src/user_validator.py を作成して、テストがパスする最小限の実装を書いて。テストを実行して確認して",
                         expected: "すべてのテストがパスする",
-                        tips: "GREEN: テストをパスさせる"
+                        expected_en: "All tests pass",
+                        tips: "GREEN: テストをパスさせる",
+                        tips_en: "GREEN: Make tests pass"
                     },
                     {
                         step: 4,
                         title: "リファクタリング（REFACTOR）",
+                        title_en: "Refactoring (REFACTOR)",
                         description: "コードを整理します",
+                        description_en: "Clean up the code",
                         prompt: "テストがパスしたまま、コードをリファクタリングして。重複を排除し、可読性を向上させて",
                         expected: "コードが整理され、テストは引き続きパスする",
-                        tips: "REFACTOR: 品質向上"
+                        expected_en: "Code is cleaned up and tests continue to pass",
+                        tips: "REFACTOR: 品質向上",
+                        tips_en: "REFACTOR: Improve quality"
                     },
                     {
                         step: 5,
                         title: "追加テスト",
+                        title_en: "Additional Tests",
                         description: "エッジケースのテストを追加します",
+                        description_en: "Add tests for edge cases",
                         prompt: "漏れているエッジケースがあれば追加テストを書いて、実装も修正して",
                         expected: "カバレッジが向上する",
-                        tips: "カバレッジを意識"
+                        expected_en: "Coverage improves",
+                        tips: "カバレッジを意識",
+                        tips_en: "Be mindful of coverage"
                     }
                 ],
                 outputs: [
-                    { file: "src/user_validator.py", description: "TDDで作成したコード" },
-                    { file: "tests/test_user_validator.py", description: "テストコード" }
+                    { file: "src/user_validator.py", description: "TDDで作成したコード", description_en: "Code created with TDD" },
+                    { file: "tests/test_user_validator.py", description: "テストコード", description_en: "Test code" }
                 ],
                 checkpoints: [
                     "仕様からテストケースを導出できた",
@@ -4157,11 +5331,24 @@ def process_order(order):
                     "リファクタリングでコードが改善された",
                     "すべてのテストがパスしている"
                 ],
+                checkpoints_en: [
+                    "Derived test cases from specification",
+                    "Tests were created first (RED)",
+                    "Minimum implementation passed tests (GREEN)",
+                    "Code improved with refactoring",
+                    "All tests are passing"
+                ],
                 learningPoints: [
                     "TDDのRed-Green-Refactorサイクル",
                     "テストケースの網羅的な設計",
                     "最小限の実装の考え方",
                     "テストを壊さないリファクタリング"
+                ],
+                learningPoints_en: [
+                    "TDD Red-Green-Refactor cycle",
+                    "Comprehensive test case design",
+                    "Minimum implementation approach",
+                    "Refactoring without breaking tests"
                 ]
             }
         },
@@ -4169,26 +5356,37 @@ def process_order(order):
             id: 11,
             number: 11,
             title: "コードレビュー実践",
+            title_en: "Practical Code Review",
             description: "セキュリティ、パフォーマンス、可読性の3観点で実践的なレビュー。",
+            description_en: "Practical review from 3 perspectives: security, performance, and readability.",
             folder: "11_code_review",
             badge: "レビュー",
             badge_en: "Review",
             skills: ["セキュリティ", "パフォーマンス", "可読性"],
+            skills_en: ["Security", "Performance", "Readability"],
             relatedTutorials: [
-                { id: "02_01", title: "Skills", reason: "レビュースキルの定義" },
-                { id: "02_03", title: "Subagents", reason: "レビューの委譲" },
-                { id: "03_05", title: "Writer/Reviewerパターン", reason: "レビューの分離" }
+                { id: "02_01", title: "Skills", title_en: "Skills", reason: "レビュースキルの定義", reason_en: "Define review skills" },
+                { id: "02_03", title: "Subagents", title_en: "Subagents", reason: "レビューの委譲", reason_en: "Delegate review" },
+                { id: "03_05", title: "Writer/Reviewerパターン", title_en: "Writer/Reviewer Pattern", reason: "レビューの分離", reason_en: "Separate review" }
             ],
             details: {
                 goal: "問題のあるコードをレビューし、改善提案と修正を行う",
+                goal_en: "Review problematic code and make improvement suggestions and fixes",
                 estimatedTime: "20-25分",
+                estimatedTime_en: "20-25 min",
                 difficulty: "中級",
+                difficulty_en: "Intermediate",
                 preparation: {
                     description: "レビュー対象のコードを用意してください。",
+                    description_en: "Prepare the code to review.",
                     folderStructure: `handson-11-review/
 ├── src/
 │   └── user_api.py (レビュー対象)
 └── REVIEW_REPORT.md (生成される)`,
+                    folderStructure_en: `handson-11-review/
+├── src/
+│   └── user_api.py (review target)
+└── REVIEW_REPORT.md (will be generated)`,
                     files: [
                         {
                             path: "src/user_api.py",
@@ -4238,47 +5436,67 @@ PASSWORD = "admin123"  # セキュリティ問題: ハードコードされた�
                     {
                         step: 1,
                         title: "セキュリティレビュー",
+                        title_en: "Security Review",
                         description: "セキュリティ脆弱性を検出します",
+                        description_en: "Detect security vulnerabilities",
                         prompt: "@src/user_api.py をセキュリティの観点でレビューして。SQLインジェクション、認証情報のハードコード、その他の脆弱性を特定して",
                         expected: "SQLインジェクション3箇所、ハードコードされた認証情報が検出される",
-                        tips: "OWASP Top 10を意識"
+                        expected_en: "3 SQL injections and hardcoded credentials are detected",
+                        tips: "OWASP Top 10を意識",
+                        tips_en: "Keep OWASP Top 10 in mind"
                     },
                     {
                         step: 2,
                         title: "パフォーマンスレビュー",
+                        title_en: "Performance Review",
                         description: "パフォーマンス問題を検出します",
+                        description_en: "Detect performance issues",
                         prompt: "パフォーマンスの観点でレビューして。N+1クエリ、不要な処理、最適化の余地を特定して",
                         expected: "N+1クエリ問題が検出される",
-                        tips: "DBアクセスパターンを確認"
+                        expected_en: "N+1 query problem is detected",
+                        tips: "DBアクセスパターンを確認",
+                        tips_en: "Check DB access patterns"
                     },
                     {
                         step: 3,
                         title: "可読性レビュー",
+                        title_en: "Readability Review",
                         description: "可読性の問題を検出します",
+                        description_en: "Detect readability issues",
                         prompt: "可読性の観点でレビューして。ネストの深さ、関数の責務、命名の問題を特定して",
                         expected: "深いネスト、責務の混在が検出される",
-                        tips: "クリーンコードの原則"
+                        expected_en: "Deep nesting and mixed responsibilities are detected",
+                        tips: "クリーンコードの原則",
+                        tips_en: "Clean Code principles"
                     },
                     {
                         step: 4,
                         title: "レビューレポート作成",
+                        title_en: "Create Review Report",
                         description: "レビュー結果をレポートにまとめます",
+                        description_en: "Summarize review results in a report",
                         prompt: "レビュー結果を REVIEW_REPORT.md にまとめて。各問題に 🔴Critical / 🟡Suggestion / 💭Question のラベルを付けて",
                         expected: "構造化されたレビューレポートが生成される",
-                        tips: "重要度でラベル付け"
+                        expected_en: "A structured review report is generated",
+                        tips: "重要度でラベル付け",
+                        tips_en: "Label by severity"
                     },
                     {
                         step: 5,
                         title: "修正実装",
+                        title_en: "Implement Fixes",
                         description: "Criticalな問題を修正します",
+                        description_en: "Fix Critical issues",
                         prompt: "🔴Criticalとラベル付けした問題を修正して。パラメータ化クエリ、認証情報の外部化、ネストの解消を実装",
                         expected: "セキュリティ問題が修正される",
-                        tips: "Criticalを優先"
+                        expected_en: "Security issues are fixed",
+                        tips: "Criticalを優先",
+                        tips_en: "Prioritize Critical"
                     }
                 ],
                 outputs: [
-                    { file: "REVIEW_REPORT.md", description: "レビューレポート" },
-                    { file: "src/user_api.py", description: "修正済みコード" }
+                    { file: "REVIEW_REPORT.md", description: "レビューレポート", description_en: "Review report" },
+                    { file: "src/user_api.py", description: "修正済みコード", description_en: "Fixed code" }
                 ],
                 checkpoints: [
                     "SQLインジェクション脆弱性を検出できた",
@@ -4287,11 +5505,24 @@ PASSWORD = "admin123"  # セキュリティ問題: ハードコードされた�
                     "レビューレポートが構造化されている",
                     "Criticalな問題が修正された"
                 ],
+                checkpoints_en: [
+                    "Detected SQL injection vulnerability",
+                    "Detected N+1 query issue",
+                    "Detected readability issues",
+                    "Review report is structured",
+                    "Critical issues were fixed"
+                ],
                 learningPoints: [
                     "セキュリティ観点のレビュー",
                     "パフォーマンス観点のレビュー",
                     "可読性観点のレビュー",
                     "レビューレポートの書き方"
+                ],
+                learningPoints_en: [
+                    "Security perspective review",
+                    "Performance perspective review",
+                    "Readability perspective review",
+                    "How to write review reports"
                 ]
             }
         },
@@ -4301,21 +5532,27 @@ PASSWORD = "admin123"  # セキュリティ問題: ハードコードされた�
             title: "セキュリティ監査",
             title_en: "Security Audit",
             description: "脆弱性の検出、認証・認可の確認、機密情報の取り扱いチェック。",
+            description_en: "Detect vulnerabilities, verify authentication/authorization, check secret handling.",
             folder: "12_security_audit",
             badge: "セキュリティ",
             badge_en: "Security",
             skills: ["脆弱性検出", "認証・認可", "機密情報管理"],
+            skills_en: ["Vulnerability Detection", "Auth/Authorization", "Secret Management"],
             relatedTutorials: [
-                { id: "02_02", title: "Hooks", reason: "セキュリティチェックの自動化" },
-                { id: "02_03", title: "Subagents", reason: "セキュリティレビューの委譲" },
-                { id: "03_07", title: "Subagents活用パターン", reason: "専門エージェントの活用" }
+                { id: "02_02", title: "Hooks", title_en: "Hooks", reason: "セキュリティチェックの自動化", reason_en: "Automate security checks" },
+                { id: "02_03", title: "Subagents", title_en: "Subagents", reason: "セキュリティレビューの委譲", reason_en: "Delegate security review" },
+                { id: "03_07", title: "Subagents活用パターン", title_en: "Advanced Subagent Patterns", reason: "専門エージェントの活用", reason_en: "Use specialized agents" }
             ],
             details: {
                 goal: "Webアプリケーションのセキュリティ監査を実施する",
+                goal_en: "Conduct security audit of a web application",
                 estimatedTime: "30-40分",
+                estimatedTime_en: "30-40 min",
                 difficulty: "上級",
+                difficulty_en: "Advanced",
                 preparation: {
                     description: "セキュリティ監査対象のコードを用意してください。",
+                    description_en: "Prepare the code for security audit.",
                     folderStructure: `handson-12-security/
 ├── src/
 │   ├── auth.py
@@ -4323,6 +5560,13 @@ PASSWORD = "admin123"  # セキュリティ問題: ハードコードされた�
 │   └── config.py
 ├── .env.example
 └── SECURITY_REPORT.md (生成される)`,
+                    folderStructure_en: `handson-12-security/
+├── src/
+│   ├── auth.py
+│   ├── api.py
+│   └── config.py
+├── .env.example
+└── SECURITY_REPORT.md (will be generated)`,
                     files: [
                         {
                             path: "src/auth.py",
@@ -4361,48 +5605,68 @@ ALLOWED_HOSTS = ["*"]  # 脆弱性: ワイルドカード`
                     {
                         step: 1,
                         title: "機密情報スキャン",
+                        title_en: "Secret Scanning",
                         description: "ハードコードされた機密情報を検出します",
+                        description_en: "Detect hardcoded secrets",
                         prompt: "プロジェクト全体をスキャンして、ハードコードされた機密情報（パスワード、APIキー、トークン）を検出して",
                         expected: "config.py内の機密情報が検出される",
-                        tips: "grep で secrets, password, key を検索"
+                        expected_en: "Secrets in config.py are detected",
+                        tips: "grep で secrets, password, key を検索",
+                        tips_en: "Search for secrets, password, key with grep"
                     },
                     {
                         step: 2,
                         title: "認証・認可監査",
+                        title_en: "Auth/Authorization Audit",
                         description: "認証・認可の実装を監査します",
+                        description_en: "Audit authentication and authorization implementation",
                         prompt: "@src/auth.py を監査して。パスワードハッシュ、トークン生成、検証の脆弱性を特定して",
                         expected: "MD5使用、ソルトなし、予測可能なトークンが検出される",
-                        tips: "OWASP認証ガイドラインを参照"
+                        expected_en: "MD5 usage, no salt, predictable tokens are detected",
+                        tips: "OWASP認証ガイドラインを参照",
+                        tips_en: "Refer to OWASP authentication guidelines"
                     },
                     {
                         step: 3,
                         title: "設定セキュリティ",
+                        title_en: "Configuration Security",
                         description: "設定ファイルのセキュリティを確認します",
+                        description_en: "Verify security of configuration files",
                         prompt: "@src/config.py の設定を監査して。本番環境で問題となる設定を特定して",
                         expected: "DEBUG=True、ALLOWED_HOSTS=*が検出される",
-                        tips: "本番/開発の設定分離を確認"
+                        expected_en: "DEBUG=True, ALLOWED_HOSTS=* are detected",
+                        tips: "本番/開発の設定分離を確認",
+                        tips_en: "Check separation of prod/dev configs"
                     },
                     {
                         step: 4,
                         title: "セキュリティレポート作成",
+                        title_en: "Create Security Report",
                         description: "監査結果をレポートにまとめます",
+                        description_en: "Summarize audit results in a report",
                         prompt: "監査結果を SECURITY_REPORT.md にまとめて。各脆弱性のリスクレベル（Critical/High/Medium/Low）と修正方法を記載して",
                         expected: "構造化されたセキュリティレポートが生成される",
-                        tips: "CVSSスコアを参考に"
+                        expected_en: "A structured security report is generated",
+                        tips: "CVSSスコアを参考に",
+                        tips_en: "Reference CVSS scores"
                     },
                     {
                         step: 5,
                         title: "修正実装",
+                        title_en: "Implement Fixes",
                         description: "Critical/High脆弱性を修正します",
+                        description_en: "Fix Critical/High vulnerabilities",
                         prompt: "Critical/High脆弱性を修正して。bcryptへの移行、環境変数の使用、安全なトークン生成を実装して",
                         expected: "主要な脆弱性が修正される",
-                        tips: "段階的に修正"
+                        expected_en: "Major vulnerabilities are fixed",
+                        tips: "段階的に修正",
+                        tips_en: "Fix incrementally"
                     }
                 ],
                 outputs: [
-                    { file: "SECURITY_REPORT.md", description: "セキュリティ監査レポート" },
-                    { file: "src/auth.py", description: "修正済み認証モジュール" },
-                    { file: ".env.example", description: "環境変数テンプレート" }
+                    { file: "SECURITY_REPORT.md", description: "セキュリティ監査レポート", description_en: "Security audit report" },
+                    { file: "src/auth.py", description: "修正済み認証モジュール", description_en: "Fixed auth module" },
+                    { file: ".env.example", description: "環境変数テンプレート", description_en: "Environment variable template" }
                 ],
                 checkpoints: [
                     "ハードコードされた機密情報を検出できた",
@@ -4411,11 +5675,24 @@ ALLOWED_HOSTS = ["*"]  # 脆弱性: ワイルドカード`
                     "リスクレベル付きレポートが作成された",
                     "Critical脆弱性が修正された"
                 ],
+                checkpoints_en: [
+                    "Detected hardcoded secrets",
+                    "Detected authentication vulnerabilities",
+                    "Detected configuration issues",
+                    "Report with risk levels was created",
+                    "Critical vulnerabilities were fixed"
+                ],
                 learningPoints: [
                     "機密情報のスキャン手法",
                     "認証・認可の監査ポイント",
                     "設定セキュリティの確認",
                     "セキュリティレポートの書き方"
+                ],
+                learningPoints_en: [
+                    "Secret scanning techniques",
+                    "Auth/authorization audit points",
+                    "Configuration security check",
+                    "How to write security reports"
                 ]
             }
         },
@@ -4423,23 +5700,30 @@ ALLOWED_HOSTS = ["*"]  # 脆弱性: ワイルドカード`
             id: 13,
             number: 13,
             title: "フルスタック開発ワークフロー",
+            title_en: "Fullstack Development Workflow",
             description: "API設計→実装→テスト→ドキュメント→デプロイ準備の一連の流れを体験。",
+            description_en: "Experience the full flow: API design → implementation → testing → documentation → deploy preparation.",
             folder: "13_fullstack_workflow",
             badge: "統合",
+            badge_en: "Integration",
             skills: ["API設計", "実装", "テスト", "ドキュメント", "デプロイ"],
+            skills_en: ["API Design", "Implementation", "Testing", "Documentation", "Deployment"],
             relatedTutorials: [
-                { id: "01_05", title: "探索→計画→実装→コミット", reason: "ワークフローの基本" },
-                { id: "02_01", title: "Skills", reason: "ワークフローの自動化" },
-                { id: "03_06", title: "Fan-outパターン",
-            title_en: "Fan-out Pattern", reason: "バッチ処理" },
-                { id: "03_08", title: "Headless CI/CD", reason: "自動化" }
+                { id: "01_05", title: "探索→計画→実装→コミット", title_en: "Explore→Plan→Implement→Commit", reason: "ワークフローの基本", reason_en: "Workflow basics" },
+                { id: "02_01", title: "Skills", title_en: "Skills", reason: "ワークフローの自動化", reason_en: "Workflow automation" },
+                { id: "03_06", title: "Fan-outパターン", title_en: "Fan-out Pattern", reason: "バッチ処理", reason_en: "Batch processing" },
+                { id: "03_08", title: "Headless CI/CD", title_en: "Headless CI/CD", reason: "自動化", reason_en: "Automation" }
             ],
             details: {
                 goal: "タスク管理APIをゼロから設計・実装・テスト・ドキュメント化・デプロイ準備まで行う",
+                goal_en: "Design, implement, test, document, and prepare for deployment of a task management API from scratch",
                 estimatedTime: "60-90分",
+                estimatedTime_en: "60-90 min",
                 difficulty: "上級",
+                difficulty_en: "Advanced",
                 preparation: {
                     description: "新しいプロジェクトフォルダを作成してください。",
+                    description_en: "Create a new project folder.",
                     folderStructure: `handson-13-fullstack/
 ├── api/
 │   ├── main.py
@@ -4468,67 +5752,95 @@ pytest-cov==4.1.0`
                     {
                         step: 1,
                         title: "API設計",
+                        title_en: "API Design",
                         description: "REST APIを設計します",
+                        description_en: "Design the REST API",
                         prompt: "/plan タスク管理REST APIを設計して。CRUD操作、フィルタリング、ページネーションを含めて。OpenAPI形式で設計案を作成して",
                         expected: "OpenAPI形式のAPI設計案が作成される",
-                        tips: "RESTful設計原則に従う"
+                        expected_en: "API design in OpenAPI format is created",
+                        tips: "RESTful設計原則に従う",
+                        tips_en: "Follow RESTful design principles"
                     },
                     {
                         step: 2,
                         title: "モデル実装",
+                        title_en: "Model Implementation",
                         description: "データモデルを実装します",
+                        description_en: "Implement data models",
                         prompt: "設計に基づいて api/models.py を作成して。Task モデルと In-memory ストレージを実装して",
                         expected: "Taskモデルとストレージが実装される",
-                        tips: "シンプルなモデルから開始"
+                        expected_en: "Task model and storage are implemented",
+                        tips: "シンプルなモデルから開始",
+                        tips_en: "Start with simple models"
                     },
                     {
                         step: 3,
                         title: "API実装",
+                        title_en: "API Implementation",
                         description: "REST APIを実装します",
+                        description_en: "Implement REST API",
                         prompt: "api/main.py にFlaskでREST APIを実装して。CRUD操作、エラーハンドリング、入力バリデーションを含めて",
                         expected: "完全なREST APIが実装される",
-                        tips: "ステータスコードを適切に"
+                        expected_en: "Complete REST API is implemented",
+                        tips: "ステータスコードを適切に",
+                        tips_en: "Use appropriate status codes"
                     },
                     {
                         step: 4,
                         title: "テスト作成・実行",
+                        title_en: "Create & Run Tests",
                         description: "APIテストを作成・実行します",
+                        description_en: "Create and run API tests",
                         prompt: "tests/test_api.py を作成して、全エンドポイントのテストを実装して。正常系、異常系、エッジケースを含めて。テストを実行して結果を確認して",
                         expected: "テストが作成され、すべてパスする",
-                        tips: "カバレッジ80%以上を目指す"
+                        expected_en: "Tests are created and all pass",
+                        tips: "カバレッジ80%以上を目指す",
+                        tips_en: "Aim for 80%+ coverage"
                     },
                     {
                         step: 5,
                         title: "ドキュメント生成",
+                        title_en: "Generate Documentation",
                         description: "APIドキュメントを生成します",
+                        description_en: "Generate API documentation",
                         prompt: "docs/API.md を作成して、全エンドポイントのドキュメントを生成して。リクエスト/レスポンス例、エラーコードを含めて",
                         expected: "完全なAPIドキュメントが生成される",
-                        tips: "実行可能な例を含める"
+                        expected_en: "Complete API documentation is generated",
+                        tips: "実行可能な例を含める",
+                        tips_en: "Include executable examples"
                     },
                     {
                         step: 6,
                         title: "Docker化",
+                        title_en: "Dockerization",
                         description: "Docker設定を作成します",
+                        description_en: "Create Docker configuration",
                         prompt: "Dockerfile と docker-compose.yml を作成して。本番環境向けの設定で",
                         expected: "Docker設定が作成される",
-                        tips: "マルチステージビルドを検討"
+                        expected_en: "Docker configuration is created",
+                        tips: "マルチステージビルドを検討",
+                        tips_en: "Consider multi-stage builds"
                     },
                     {
                         step: 7,
                         title: "CI/CD設定",
+                        title_en: "CI/CD Configuration",
                         description: "GitHub Actions設定を作成します",
+                        description_en: "Create GitHub Actions configuration",
                         prompt: ".github/workflows/ci.yml を作成して。テスト実行、カバレッジレポート、Dockerイメージビルドを含めて",
                         expected: "CI/CDパイプラインが設定される",
-                        tips: "キャッシュを活用"
+                        expected_en: "CI/CD pipeline is configured",
+                        tips: "キャッシュを活用",
+                        tips_en: "Leverage caching"
                     }
                 ],
                 outputs: [
-                    { file: "api/main.py", description: "REST API実装" },
-                    { file: "api/models.py", description: "データモデル" },
-                    { file: "tests/test_api.py", description: "テストスイート" },
-                    { file: "docs/API.md", description: "APIドキュメント" },
-                    { file: "Dockerfile", description: "Docker設定" },
-                    { file: ".github/workflows/ci.yml", description: "CI/CD設定" }
+                    { file: "api/main.py", description: "REST API実装", description_en: "REST API implementation" },
+                    { file: "api/models.py", description: "データモデル", description_en: "Data models" },
+                    { file: "tests/test_api.py", description: "テストスイート", description_en: "Test suite" },
+                    { file: "docs/API.md", description: "APIドキュメント", description_en: "API documentation" },
+                    { file: "Dockerfile", description: "Docker設定", description_en: "Docker configuration" },
+                    { file: ".github/workflows/ci.yml", description: "CI/CD設定", description_en: "CI/CD configuration" }
                 ],
                 checkpoints: [
                     "API設計がRESTful原則に従っている",
@@ -4538,12 +5850,27 @@ pytest-cov==4.1.0`
                     "Dockerでビルドできる",
                     "CI/CDパイプラインが設定されている"
                 ],
+                checkpoints_en: [
+                    "API design follows RESTful principles",
+                    "All CRUD operations are implemented",
+                    "Test coverage is 80% or higher",
+                    "Documentation is complete",
+                    "Can build with Docker",
+                    "CI/CD pipeline is configured"
+                ],
                 learningPoints: [
                     "フルスタック開発の流れ",
                     "REST API設計のベストプラクティス",
                     "TDDによる品質担保",
                     "ドキュメント自動生成",
                     "Docker化とCI/CD"
+                ],
+                learningPoints_en: [
+                    "Fullstack development flow",
+                    "REST API design best practices",
+                    "Quality assurance with TDD",
+                    "Automatic documentation generation",
+                    "Dockerization and CI/CD"
                 ]
             }
         }
@@ -4554,70 +5881,98 @@ const BEST_PRACTICES = [
     {
         number: 1,
         title: "検証方法を提供",
+        title_en: "Provide Verification Methods",
         description: "テスト、スクリーンショット、期待出力を示し、Claudeが自己検証できるようにする。これが最もレバレッジの高い一手。",
+        description_en: "Provide tests, screenshots, expected outputs so Claude can self-verify. This is the highest leverage move.",
         example: {
             bad: "メール検証関数を実装して",
-            good: "validateEmail関数を書いて。test@example.comは真、invalidは偽を返す。実装後テストを実行して"
+            bad_en: "Implement an email validation function",
+            good: "validateEmail関数を書いて。test@example.comは真、invalidは偽を返す。実装後テストを実行して",
+            good_en: "Write validateEmail function. test@example.com returns true, invalid returns false. Run tests after implementation"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#1-provide-ways-to-verify"
     },
     {
         number: 2,
         title: "探索→計画→実装の分離",
+        title_en: "Separate Explore → Plan → Implement",
         description: "Planモードで計画を立ててから実装。いきなりコードを書かせない。",
+        description_en: "Plan in Plan mode before implementing. Don't have it write code immediately.",
         example: {
             bad: "この機能を実装して",
-            good: "/plan でまず計画を確認してから実装"
+            bad_en: "Implement this feature",
+            good: "/plan でまず計画を確認してから実装",
+            good_en: "First confirm the plan with /plan, then implement"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#2-be-specific-explore-then-plan-then-code"
     },
     {
         number: 3,
         title: "具体的コンテキスト提供",
+        title_en: "Provide Specific Context",
         description: "@参照、画像、URLを使って曖昧さを排除。具体的なゴールを明示する。",
+        description_en: "Eliminate ambiguity using @ references, images, URLs. State specific goals.",
         example: {
             bad: "あのファイルを修正して",
-            good: "@src/utils.ts の validateEmail関数を修正して"
+            bad_en: "Fix that file",
+            good: "@src/utils.ts の validateEmail関数を修正して",
+            good_en: "Fix the validateEmail function in @src/utils.ts"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#3-give-claude-the-context-it-needs"
     },
     {
         number: 4,
         title: "環境設定（CLAUDE.md）",
+        title_en: "Environment Setup (CLAUDE.md)",
         description: "プロジェクト固有のルール、禁止事項、コーディング規約をCLAUDE.mdに記載。",
+        description_en: "Document project-specific rules, prohibitions, coding conventions in CLAUDE.md.",
         example: {
             bad: "（ルールなしで毎回説明）",
-            good: "CLAUDE.mdに規約を記載し、/init で生成"
+            bad_en: "(Explain rules each time without documentation)",
+            good: "CLAUDE.mdに規約を記載し、/init で生成",
+            good_en: "Document conventions in CLAUDE.md, generate with /init"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#4-set-up-your-environment"
     },
     {
         number: 5,
         title: "会話スキル",
+        title_en: "Conversation Skills",
         description: "先輩エンジニアに聞くような自然な質問をする。曖昧な指示は避ける。",
+        description_en: "Ask natural questions like you would to a senior engineer. Avoid vague instructions.",
         example: {
             bad: "動かないから直して",
-            good: "ログイン時に500エラーが出る。auth.tsの42行目が原因だと思う。確認して"
+            bad_en: "It doesn't work, fix it",
+            good: "ログイン時に500エラーが出る。auth.tsの42行目が原因だと思う。確認して",
+            good_en: "Getting 500 error on login. I think line 42 in auth.ts is the cause. Please verify"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#5-use-your-conversation-skills"
     },
     {
         number: 6,
         title: "セッション管理",
+        title_en: "Session Management",
         description: "Esc、/rewind、/clearで軌道修正。Context Rotを防ぐ。",
+        description_en: "Course correct with Esc, /rewind, /clear. Prevent Context Rot.",
         example: {
             bad: "（エラーを繰り返し修正させる）",
-            good: "2回失敗したら /clear して新しいアプローチで再開"
+            bad_en: "(Keep asking to fix errors repeatedly)",
+            good: "2回失敗したら /clear して新しいアプローチで再開",
+            good_en: "After 2 failures, /clear and restart with a new approach"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#6-manage-your-sessions"
     },
     {
         number: 7,
         title: "自動化・生産性向上",
+        title_en: "Automation & Productivity",
         description: "ヘッドレスモード、並列セッション、Skills、Hooksで自動化を推進。",
+        description_en: "Promote automation with headless mode, parallel sessions, Skills, Hooks.",
         example: {
             bad: "（毎回手動で同じ作業）",
-            good: "繰り返しの作業はSkill化、Hookで自動化"
+            bad_en: "(Do the same work manually each time)",
+            good: "繰り返しの作業はSkill化、Hookで自動化",
+            good_en: "Turn repetitive work into Skills, automate with Hooks"
         },
         officialLink: "https://docs.anthropic.com/ja/docs/claude-code/best-practices#7-automate-and-accelerate"
     }
@@ -4626,52 +5981,28 @@ const BEST_PRACTICES = [
 // Boris Cherny氏のClaude Code TIPS（22個）
 // 出典: Claude Code チーム由来、Boris本人がXで公開
 const BORIS_TIPS = [
-    { number: 1, category: "セッション運用",
-        category_en: "Session Management", title: "ターミナルで5セッション並列実行", description: "タブに1〜5の番号を振り、システム通知で入力待ちを把握する。1つが処理中の間に別タブで次の指示。シングルスレッドで待つのはもったいない。" },
-    { number: 2, category: "セッション運用",
-        category_en: "Session Management", title: "Web/モバイルでさらに5〜10セッション追加", description: "claude.ai/code 上でもセッションを並列で走らせている。朝はスマホからセッションを数個立ち上げることも。ただし10〜20%は想定外で放棄される。" },
-    { number: 3, category: "セッション運用",
-        category_en: "Session Management", title: "セッションごとに独立したgit checkoutを使う", description: "ブランチやworktreeではなく、セッションごとに独自のcheckoutを用意する。これで複数セッションが同時に同じファイルを触っても衝突しない。" },
-    { number: 4, category: "セッション運用",
-        category_en: "Session Management", title: "&コマンドでローカル→Webへセッション引き継ぎ", description: "ローカルのセッションを&でWeb版に引き渡し、--teleportで戻すことも可能。デスクとモバイルの行き来に便利。" },
-    { number: 5, category: "モデル・設定",
-        category_en: "Model & Settings", title: "Opus 4.5 + thinkingを全てのコーディングに使う", description: "Sonnetより大きくて遅いが、ステアリングが少なく済みツール使用も上手い。結果的にSonnetより速く終わることが多い。「スマートなモデルへの先行投資が後の修正コストを削減する」。" },
-    { number: 6, category: "モデル・設定",
-        category_en: "Model & Settings", title: "CLAUDE.mdをチームでgit管理する", description: "各チームがリポジトリにCLAUDE.mdをチェックイン。Claudeがやらかしたミスをその都度追記して改善サイクルを回す。現在のサイズは約2.5kトークン。" },
-    { number: 7, category: "モデル・設定",
-        category_en: "Model & Settings", title: "PRレビュー時に@.claudeでCLAUDE.mdを更新", description: "コードレビュー中に同僚のPRに@.claudeタグを付けて、学びをCLAUDE.mdに反映させる。GitHub Actionと連携。" },
-    { number: 8, category: "ワークフロー",
-        category_en: "Workflow",
-        category_en: "Workflow", title: "Plan Modeを最初に使う（Shift+Tab 2回）", description: "いきなりコードを書かせない。まずPlan Modeで計画を反復し、納得したらauto-accept editsモードに切り替えて一発実装。良い計画が一番大事。" },
-    { number: 9, category: "ワークフロー",
-        category_en: "Workflow",
-        category_en: "Workflow", title: "スラッシュコマンドで繰り返し作業を自動化", description: ".claude/commands/にgitでチェックインして共有。/commit-push-prは1日に何十回も使う。インラインbashでgit status等のコンテキストを事前計算。" },
-    { number: 10, category: "ワークフロー",
-        category_en: "Workflow",
-        category_en: "Workflow", title: "サブエージェントで定型ワークフローを自動化", description: "code-simplifier（コード簡素化）、verify-app（E2Eテスト）、build-validator（ビルド検証）など。「よくあるPRの大半のワークフローを自動化するもの」として活用。" },
-    { number: 11, category: "ワークフロー",
-        category_en: "Workflow",
-        category_en: "Workflow", title: "PostToolUseフックでコードフォーマットを自動修正", description: "ClaudeのコードはLだいたい」整形されているが、最後の10%にムラがある。PostToolUseフックで`bun run format || true`を実行し、CI失敗を未然に防止。" },
-    { number: 12, category: "ワークフロー",
-        category_en: "Workflow",
-        category_en: "Workflow", title: "/permissionsで権限を安全に管理する", description: "--dangerously-skip-permissionsはほぼ使わない。/permissionsで`bun run build:*`や`bun run test:*`など安全なコマンドだけ事前許可する。設定はチーム資産として共有。" },
-    { number: 13, category: "外部連携",
-        category_en: "External Integration", title: "MCPでSlack・BigQuery・Sentryなど外部ツール連携", description: ".mcp.jsonで設定を共有。Claude Codeが単なるコードエディタからワークフローハブに変わる。" },
-    { number: 14, category: "外部連携",
-        category_en: "External Integration", title: "Chrome拡張でブラウザテストを自動化", description: "claude.ai/codeへの変更は全て、Chrome拡張経由でブラウザを開いてUIをテストし、動作とUXが良くなるまで反復させる。" },
-    { number: 15, category: "品質・検証",
-        category_en: "Quality & Verification", title: "検証ループが最重要（品質2〜3倍）", description: "「Claudeに検証手段を与えること」が全TIPSの中で一番大事。bashコマンド実行、テストスイート、ブラウザテスト、シミュレータなど。フィードバックループがあると成果物の品質が2〜3倍になる。" },
-    { number: 16, category: "品質・検証",
-        category_en: "Quality & Verification", title: "長時間タスクは検証付きで放置する", description: "バックグラウンドエージェント、Stopフック、プラグインを組み合わせて、完了時に自動検証させる。長時間タスクに限り、サンドボックス内で--dangerously-skip-permissionsを使うこともある。" },
-    { number: 17, category: "チーム運用",
-        category_en: "Team Operations", title: "259 PR/30日、46/47日連続アクティブ", description: "Boris本人の実績。497コミット、4万行追加・3.8万行削除。Claude Codeを開発プロセスの中核に据えた結果の数字。" },
-    { number: 18, category: "チーム運用",
-        category_en: "Team Operations", title: "チーム全員がCLAUDE.mdに週次で貢献する", description: "個人のメモではなくチームの集合知にする。スタイル規約、デザインガイドライン、PRテンプレートもここに集約。" },
-    { number: 19, category: "チーム運用",
-        category_en: "Team Operations", title: "PRレビューで発見した学びを即座にドキュメント化", description: "「このパターンでClaude失敗した」という知見をPRの一部としてCLAUDE.mdに追記。知識が流れない仕組み。" },
-    { number: 20, category: "応用", title: "Ralph Wiggumプラグインで自律長時間セッション", description: "入力待ちでブロックせずに自律的にタスクを続行するプラグイン。夜間バッチ的な使い方に向く。" },
-    { number: 21, category: "応用", title: "10〜20%の放棄を前提に多めにセッションを立てる", description: "全セッションが成功するわけではない。想定外で放棄されるセッションを織り込んで、多めに走らせるのが現実的な運用。" },
-    { number: 22, category: "応用", title: "「正しい唯一の方法はない」を前提にする", description: "Boris本人が繰り返し強調するポイント。Claude Codeは意図的に「好きなように使え、カスタマイズしろ、ハックしろ」という設計思想で作られている。自分のスタイルに合うものを実験して見つけるのが一番。" }
+    { number: 1, category: "セッション運用", category_en: "Session Management", title: "ターミナルで5セッション並列実行", title_en: "Run 5 sessions in parallel in terminal", description: "タブに1〜5の番号を振り、システム通知で入力待ちを把握する。1つが処理中の間に別タブで次の指示。シングルスレッドで待つのはもったいない。", description_en: "Number tabs 1-5 and use system notifications to track waiting sessions. Give next instruction in another tab while one is processing. Waiting single-threaded is wasteful." },
+    { number: 2, category: "セッション運用", category_en: "Session Management", title: "Web/モバイルでさらに5〜10セッション追加", title_en: "Add 5-10 more sessions on Web/mobile", description: "claude.ai/code 上でもセッションを並列で走らせている。朝はスマホからセッションを数個立ち上げることも。ただし10〜20%は想定外で放棄される。", description_en: "Run parallel sessions on claude.ai/code too. Sometimes start a few sessions from phone in the morning. However, 10-20% are abandoned unexpectedly." },
+    { number: 3, category: "セッション運用", category_en: "Session Management", title: "セッションごとに独立したgit checkoutを使う", title_en: "Use independent git checkout per session", description: "ブランチやworktreeではなく、セッションごとに独自のcheckoutを用意する。これで複数セッションが同時に同じファイルを触っても衝突しない。", description_en: "Instead of branches or worktrees, prepare a unique checkout per session. This prevents conflicts when multiple sessions touch the same file simultaneously." },
+    { number: 4, category: "セッション運用", category_en: "Session Management", title: "&コマンドでローカル→Webへセッション引き継ぎ", title_en: "Transfer local→Web sessions with & command", description: "ローカルのセッションを&でWeb版に引き渡し、--teleportで戻すことも可能。デスクとモバイルの行き来に便利。", description_en: "Hand off local session to web version with &, return with --teleport. Convenient for switching between desk and mobile." },
+    { number: 5, category: "モデル・設定", category_en: "Model & Settings", title: "Opus 4.5 + thinkingを全てのコーディングに使う", title_en: "Use Opus 4.5 + thinking for all coding", description: "Sonnetより大きくて遅いが、ステアリングが少なく済みツール使用も上手い。結果的にSonnetより速く終わることが多い。「スマートなモデルへの先行投資が後の修正コストを削減する」。", description_en: "Bigger and slower than Sonnet, but needs less steering and better at tool use. Often finishes faster than Sonnet. 'Investing in smarter models upfront reduces correction costs later.'" },
+    { number: 6, category: "モデル・設定", category_en: "Model & Settings", title: "CLAUDE.mdをチームでgit管理する", title_en: "Git-manage CLAUDE.md as a team", description: "各チームがリポジトリにCLAUDE.mdをチェックイン。Claudeがやらかしたミスをその都度追記して改善サイクルを回す。現在のサイズは約2.5kトークン。", description_en: "Each team checks in CLAUDE.md to repo. Add Claude's mistakes each time to run improvement cycles. Current size is about 2.5K tokens." },
+    { number: 7, category: "モデル・設定", category_en: "Model & Settings", title: "PRレビュー時に@.claudeでCLAUDE.mdを更新", title_en: "Update CLAUDE.md with @.claude during PR review", description: "コードレビュー中に同僚のPRに@.claudeタグを付けて、学びをCLAUDE.mdに反映させる。GitHub Actionと連携。", description_en: "Tag colleague's PRs with @.claude during code review to reflect learnings in CLAUDE.md. Integrates with GitHub Actions." },
+    { number: 8, category: "ワークフロー", category_en: "Workflow", title: "Plan Modeを最初に使う（Shift+Tab 2回）", title_en: "Use Plan Mode first (Shift+Tab twice)", description: "いきなりコードを書かせない。まずPlan Modeで計画を反復し、納得したらauto-accept editsモードに切り替えて一発実装。良い計画が一番大事。", description_en: "Don't have it write code immediately. Iterate on plan in Plan Mode first, then switch to auto-accept edits mode for one-shot implementation. A good plan is most important." },
+    { number: 9, category: "ワークフロー", category_en: "Workflow", title: "スラッシュコマンドで繰り返し作業を自動化", title_en: "Automate repetitive work with slash commands", description: ".claude/commands/にgitでチェックインして共有。/commit-push-prは1日に何十回も使う。インラインbashでgit status等のコンテキストを事前計算。", description_en: "Check in to .claude/commands/ with git to share. Use /commit-push-pr dozens of times a day. Pre-compute context like git status with inline bash." },
+    { number: 10, category: "ワークフロー", category_en: "Workflow", title: "サブエージェントで定型ワークフローを自動化", title_en: "Automate standard workflows with subagents", description: "code-simplifier（コード簡素化）、verify-app（E2Eテスト）、build-validator（ビルド検証）など。「よくあるPRの大半のワークフローを自動化するもの」として活用。", description_en: "code-simplifier (code simplification), verify-app (E2E tests), build-validator (build validation), etc. Use as 'things that automate most common PR workflows.'" },
+    { number: 11, category: "ワークフロー", category_en: "Workflow", title: "PostToolUseフックでコードフォーマットを自動修正", title_en: "Auto-fix code formatting with PostToolUse hook", description: "Claudeのコードは「だいたい」整形されているが、最後の10%にムラがある。PostToolUseフックで`bun run format || true`を実行し、CI失敗を未然に防止。", description_en: "Claude's code is 'mostly' formatted, but the last 10% is inconsistent. Run `bun run format || true` in PostToolUse hook to prevent CI failures." },
+    { number: 12, category: "ワークフロー", category_en: "Workflow", title: "/permissionsで権限を安全に管理する", title_en: "Manage permissions safely with /permissions", description: "--dangerously-skip-permissionsはほぼ使わない。/permissionsで`bun run build:*`や`bun run test:*`など安全なコマンドだけ事前許可する。設定はチーム資産として共有。", description_en: "Rarely use --dangerously-skip-permissions. Pre-allow only safe commands like `bun run build:*` and `bun run test:*` with /permissions. Share settings as team assets." },
+    { number: 13, category: "外部連携", category_en: "External Integration", title: "MCPでSlack・BigQuery・Sentryなど外部ツール連携", title_en: "Integrate external tools like Slack/BigQuery/Sentry with MCP", description: ".mcp.jsonで設定を共有。Claude Codeが単なるコードエディタからワークフローハブに変わる。", description_en: "Share settings in .mcp.json. Claude Code transforms from just a code editor to a workflow hub." },
+    { number: 14, category: "外部連携", category_en: "External Integration", title: "Chrome拡張でブラウザテストを自動化", title_en: "Automate browser testing with Chrome extension", description: "claude.ai/codeへの変更は全て、Chrome拡張経由でブラウザを開いてUIをテストし、動作とUXが良くなるまで反復させる。", description_en: "All changes to claude.ai/code open browser via Chrome extension to test UI, iterating until behavior and UX improve." },
+    { number: 15, category: "品質・検証", category_en: "Quality & Verification", title: "検証ループが最重要（品質2〜3倍）", title_en: "Verification loop is most important (2-3x quality)", description: "「Claudeに検証手段を与えること」が全TIPSの中で一番大事。bashコマンド実行、テストスイート、ブラウザテスト、シミュレータなど。フィードバックループがあると成果物の品質が2〜3倍になる。", description_en: "'Giving Claude verification means' is the most important of all tips. Bash command execution, test suites, browser tests, simulators. Feedback loops improve deliverable quality 2-3x." },
+    { number: 16, category: "品質・検証", category_en: "Quality & Verification", title: "長時間タスクは検証付きで放置する", title_en: "Leave long tasks running with verification", description: "バックグラウンドエージェント、Stopフック、プラグインを組み合わせて、完了時に自動検証させる。長時間タスクに限り、サンドボックス内で--dangerously-skip-permissionsを使うこともある。", description_en: "Combine background agents, Stop hooks, plugins to auto-verify on completion. For long tasks only, sometimes use --dangerously-skip-permissions in sandbox." },
+    { number: 17, category: "チーム運用", category_en: "Team Operations", title: "259 PR/30日、46/47日連続アクティブ", title_en: "259 PRs in 30 days, active 46/47 consecutive days", description: "Boris本人の実績。497コミット、4万行追加・3.8万行削除。Claude Codeを開発プロセスの中核に据えた結果の数字。", description_en: "Boris's own record. 497 commits, 40K lines added, 38K lines deleted. Numbers from putting Claude Code at the core of development process." },
+    { number: 18, category: "チーム運用", category_en: "Team Operations", title: "チーム全員がCLAUDE.mdに週次で貢献する", title_en: "Entire team contributes to CLAUDE.md weekly", description: "個人のメモではなくチームの集合知にする。スタイル規約、デザインガイドライン、PRテンプレートもここに集約。", description_en: "Make it team's collective knowledge, not personal notes. Consolidate style conventions, design guidelines, PR templates here." },
+    { number: 19, category: "チーム運用", category_en: "Team Operations", title: "PRレビューで発見した学びを即座にドキュメント化", title_en: "Immediately document learnings from PR reviews", description: "「このパターンでClaude失敗した」という知見をPRの一部としてCLAUDE.mdに追記。知識が流れない仕組み。", description_en: "Add insights like 'Claude failed with this pattern' to CLAUDE.md as part of PR. System that prevents knowledge loss." },
+    { number: 20, category: "応用", category_en: "Advanced", title: "Ralph Wiggumプラグインで自律長時間セッション", title_en: "Autonomous long sessions with Ralph Wiggum plugin", description: "入力待ちでブロックせずに自律的にタスクを続行するプラグイン。夜間バッチ的な使い方に向く。", description_en: "Plugin that continues tasks autonomously without blocking on input. Good for overnight batch-style usage." },
+    { number: 21, category: "応用", category_en: "Advanced", title: "10〜20%の放棄を前提に多めにセッションを立てる", title_en: "Start extra sessions assuming 10-20% abandonment", description: "全セッションが成功するわけではない。想定外で放棄されるセッションを織り込んで、多めに走らせるのが現実的な運用。", description_en: "Not all sessions succeed. Realistic operation is running extra, factoring in sessions abandoned unexpectedly." },
+    { number: 22, category: "応用", category_en: "Advanced", title: "「正しい唯一の方法はない」を前提にする", title_en: "Assume 'there is no single right way'", description: "Boris本人が繰り返し強調するポイント。Claude Codeは意図的に「好きなように使え、カスタマイズしろ、ハックしろ」という設計思想で作られている。自分のスタイルに合うものを実験して見つけるのが一番。", description_en: "Point Boris repeatedly emphasizes. Claude Code is intentionally designed with philosophy of 'use it your way, customize it, hack it.' Best to experiment and find what fits your style." }
 ];
 
 // Safie記事「Claudeプロンプト10のベストプラクティス」
@@ -4680,104 +6011,152 @@ const PROMPT_TIPS = [
     {
         number: 1,
         title: "契約書のようにプロンプトを書く",
+        title_en: "Write prompts like contracts",
         description: "フォーマット、スタイル、長さ、ターゲット読者を明確に指定する。曖昧さを残さない。",
+        description_en: "Clearly specify format, style, length, target audience. Leave no ambiguity.",
         example: {
             bad: "React Hooksについての記事を書いて",
-            good: "React Hooksについて、初心者向けに500〜800字で解説記事を書いて。見出しは3つ以内、コード例を含めて"
+            bad_en: "Write an article about React Hooks",
+            good: "React Hooksについて、初心者向けに500〜800字で解説記事を書いて。見出しは3つ以内、コード例を含めて",
+            good_en: "Write an article about React Hooks for beginners in 500-800 characters. Max 3 headings, include code examples"
         },
-        category: "明確性"
+        category: "明確性",
+        category_en: "Clarity"
     },
     {
         number: 2,
         title: "「なぜ」やるのか背景を伝える",
+        title_en: "Communicate the 'why' and background",
         description: "タスクの用途を一言添えることで、出力の深さを適切に調整させる。",
+        description_en: "Adding context about the task's purpose helps adjust output depth appropriately.",
         example: {
             bad: "この四半期レポートの要点をまとめて",
-            good: "この四半期レポートを経営層向けの報告資料として要約して。重要な数値と提言を強調してください"
+            bad_en: "Summarize the key points of this quarterly report",
+            good: "この四半期レポートを経営層向けの報告資料として要約して。重要な数値と提言を強調してください",
+            good_en: "Summarize this quarterly report as a presentation for executives. Emphasize key numbers and recommendations"
         },
         category: "コンテキスト",
-        category_en: "Context",
         category_en: "Context"
     },
     {
         number: 3,
         title: "「例」こそが正義（Few-Shot）",
+        title_en: "Examples are everything (Few-Shot)",
         description: "サンプルを提供すれば、Claudeはその構造を忠実に再現する。期待する出力形式を例で示す。",
+        description_en: "If you provide samples, Claude faithfully reproduces that structure. Show expected output format with examples.",
         example: {
             bad: "商品説明を書いて",
-            good: "以下のフォーマットで商品説明を書いて：\\n【商品名】\\n【特徴】箇条書き3点\\n【価格】\\n---\\n例：\\n【商品名】ワイヤレスイヤホン X1\\n【特徴】・ノイズキャンセリング・8時間再生・防水IPX4\\n【価格】9,800円"
+            bad_en: "Write a product description",
+            good: "以下のフォーマットで商品説明を書いて：\\n【商品名】\\n【特徴】箇条書き3点\\n【価格】\\n---\\n例：\\n【商品名】ワイヤレスイヤホン X1\\n【特徴】・ノイズキャンセリング・8時間再生・防水IPX4\\n【価格】9,800円",
+            good_en: "Write product description in this format:\\n[Product Name]\\n[Features] 3 bullet points\\n[Price]\\n---\\nExample:\\n[Product Name] Wireless Earbuds X1\\n[Features] Noise canceling, 8hr battery, IPX4 waterproof\\n[Price] $98"
         },
-        category: "構造化"
+        category: "構造化",
+        category_en: "Structure"
     },
     {
         number: 4,
         title: "大きなプロジェクトは「小分け」に",
+        title_en: "Break big projects into smaller pieces",
         description: "一気に完了させず、ステップごとに進めるよう強制する。複雑なタスクは分割。",
+        description_en: "Force step-by-step progress instead of completing all at once. Split complex tasks.",
         example: {
             bad: "ECサイトの商品管理、カート、決済機能を実装して",
-            good: "まず商品管理機能の設計案を提示して。承認後に実装を開始します"
+            bad_en: "Implement product management, cart, and payment features for e-commerce site",
+            good: "まず商品管理機能の設計案を提示して。承認後に実装を開始します",
+            good_en: "First present the design for product management. Start implementation after approval"
         },
-        category: "分割統治"
+        category: "分割統治",
+        category_en: "Divide & Conquer"
     },
     {
         number: 5,
         title: "Agentワークフローの宣言",
+        title_en: "Declare Agent workflow",
         description: "長い対話での文脈喪失を防ぐため、進捗まとめ、ToDoリスト、設計決定の記録を指示する。",
+        description_en: "To prevent context loss in long conversations, instruct progress summaries, todo lists, design decision recording.",
         example: {
             bad: "（文脈管理を明記しない）",
-            good: "各ステップ完了時に進捗をまとめ、未解決の課題をリストアップしてください"
+            bad_en: "(Don't specify context management)",
+            good: "各ステップ完了時に進捗をまとめ、未解決の課題をリストアップしてください",
+            good_en: "Summarize progress at each step completion and list unresolved issues"
         },
-        category: "状態管理"
+        category: "状態管理",
+        category_en: "State Management"
     },
     {
         number: 6,
         title: "提案ではなく「行動」させる",
+        title_en: "Make it act, not just suggest",
         description: "アドバイスだけでなく、具体的な実行を明確に要求する。「Do It」と伝える。",
+        description_en: "Clearly request concrete execution, not just advice. Tell it to 'Do It'.",
         example: {
             bad: "このコード、どこか改善できる？",
-            good: "このコードを直接リファクタリングして、改善後のコードを出力して"
+            bad_en: "Can this code be improved anywhere?",
+            good: "このコードを直接リファクタリングして、改善後のコードを出力して",
+            good_en: "Directly refactor this code and output the improved code"
         },
-        category: "実行指示"
+        category: "実行指示",
+        category_en: "Execution"
     },
     {
         number: 7,
         title: "肯定形で書く（否定形を避ける）",
+        title_en: "Write affirmatively (avoid negatives)",
         description: "「〜しないで」より「〜して」のほうがAIは遵守しやすい。",
+        description_en: "AI follows 'do X' better than 'don't do Y'.",
         example: {
             bad: "Markdownを使わないで、長くしないで",
-            good: "短い段落で、プレーンテキスト形式で回答してください"
+            bad_en: "Don't use Markdown, don't make it long",
+            good: "短い段落で、プレーンテキスト形式で回答してください",
+            good_en: "Reply in short paragraphs, plain text format"
         },
-        category: "表現"
+        category: "表現",
+        category_en: "Expression"
     },
     {
         number: 8,
         title: "XMLタグで挙動を制御",
+        title_en: "Control behavior with XML tags",
         description: "軽量なXMLタグで、AIのデフォルト振る舞いを設定できる。",
+        description_en: "Set AI's default behavior with lightweight XML tags.",
         example: {
             bad: "積極的に提案してほしい（曖昧）",
-            good: "<behavior><mode>proactive</mode><verbosity>concise</verbosity></behavior>"
+            bad_en: "I want proactive suggestions (vague)",
+            good: "<behavior><mode>proactive</mode><verbosity>concise</verbosity></behavior>",
+            good_en: "<behavior><mode>proactive</mode><verbosity>concise</verbosity></behavior>"
         },
-        category: "構造化"
+        category: "構造化",
+        category_en: "Structure"
     },
     {
         number: 9,
         title: "ツール利用を強要しすぎない",
+        title_en: "Don't force tool usage too much",
         description: "「絶対に」「必ず」と強く強制すると過剰反応する。穏やかに誘導する。",
+        description_en: "Strong commands like 'always' or 'must' cause overreaction. Guide gently.",
         example: {
             bad: "必ず検索ツールを使え！！",
-            good: "リアルタイム情報が必要な場合は検索ツールの使用を推奨します"
+            bad_en: "You MUST use the search tool!!",
+            good: "リアルタイム情報が必要な場合は検索ツールの使用を推奨します",
+            good_en: "If real-time information is needed, using the search tool is recommended"
         },
-        category: "誘導"
+        category: "誘導",
+        category_en: "Guidance"
     },
     {
         number: 10,
         title: "「Think」という言葉を避ける",
+        title_en: "Avoid the word 'Think'",
         description: "特定モデルで「Think」に敏感な傾向がある。代替表現を使用する。",
+        description_en: "Some models tend to be sensitive to 'Think'. Use alternative expressions.",
         example: {
             bad: "Think about the best approach",
-            good: "Consider the best approach / Evaluate each option"
+            bad_en: "Think about the best approach",
+            good: "Consider the best approach / Evaluate each option",
+            good_en: "Consider the best approach / Evaluate each option"
         },
-        category: "表現"
+        category: "表現",
+        category_en: "Expression"
     }
 ];
 
@@ -4788,13 +6167,16 @@ const TROUBLESHOOTING = [
         symptom: "Claudeが同じ間違いを繰り返す",
         symptom_en: "Claude keeps making the same mistakes",
         cause: "Context Rot（コンテキスト腐敗）",
+        cause_en: "Context Rot",
         description: "長いセッションで古い情報や誤った推論が蓄積し、判断力が低下している状態",
+        description_en: "Old information and incorrect reasoning accumulate in long sessions, degrading judgment",
         solutions: [
-            { action: "/clear でコンテキストをリセット", priority: "高" },
-            { action: "/compact で圧縮してから再開", priority: "中" },
-            { action: "新しいセッションを開始", priority: "高" }
+            { action: "/clear でコンテキストをリセット", action_en: "Reset context with /clear", priority: "高", priority_en: "High" },
+            { action: "/compact で圧縮してから再開", action_en: "Compress with /compact and resume", priority: "中", priority_en: "Med" },
+            { action: "新しいセッションを開始", action_en: "Start a new session", priority: "高", priority_en: "High" }
         ],
         prevention: "2回失敗したら/clearを検討する習慣をつける",
+        prevention_en: "Make a habit of considering /clear after 2 failures",
         relatedTutorial: "01_03"
     },
     {
@@ -4802,182 +6184,237 @@ const TROUBLESHOOTING = [
         symptom: "ファイルが見つからないエラー",
         symptom_en: "File not found error",
         cause: "パス指定の問題またはプロジェクト認識不足",
+        cause_en: "Path specification issue or insufficient project recognition",
         description: "Claude Codeがファイルパスを正しく解決できていない",
+        description_en: "Claude Code cannot resolve file paths correctly",
         solutions: [
-            { action: "@参照で正確なパスを指定", priority: "高" },
-            { action: "/init でプロジェクトを認識させる", priority: "高" },
-            { action: "相対パスではなく絶対パスを使用", priority: "中" }
+            { action: "@参照で正確なパスを指定", action_en: "Specify exact path with @ reference", priority: "高", priority_en: "High" },
+            { action: "/init でプロジェクトを認識させる", action_en: "Use /init to recognize project", priority: "高", priority_en: "High" },
+            { action: "相対パスではなく絶対パスを使用", action_en: "Use absolute paths instead of relative", priority: "中", priority_en: "Med" }
         ],
         prevention: "作業開始時に/initを実行する",
+        prevention_en: "Run /init at the start of work",
         relatedTutorial: "00_05"
     },
     {
         id: 3,
         symptom: "期待と異なるコードが生成される",
+        symptom_en: "Generated code differs from expectations",
         cause: "指示が曖昧または検証手段が不足",
+        cause_en: "Instructions are vague or verification methods are lacking",
         description: "ゴールや制約が明確に伝わっていない",
+        description_en: "Goals and constraints are not clearly communicated",
         solutions: [
-            { action: "具体的な入力→期待出力を示す", priority: "高" },
-            { action: "テストケースを提供して自己検証させる", priority: "高" },
-            { action: "既存のパターンを@参照で示す", priority: "中" }
+            { action: "具体的な入力→期待出力を示す", action_en: "Show specific input → expected output", priority: "高", priority_en: "High" },
+            { action: "テストケースを提供して自己検証させる", action_en: "Provide test cases for self-verification", priority: "高", priority_en: "High" },
+            { action: "既存のパターンを@参照で示す", action_en: "Show existing patterns with @ reference", priority: "中", priority_en: "Med" }
         ],
         prevention: "検証方法を必ず提供する習慣をつける",
+        prevention_en: "Make a habit of always providing verification methods",
         relatedTutorial: "01_02"
     },
     {
         id: 4,
         symptom: "処理が遅くなった・応答が劣化した",
+        symptom_en: "Processing slowed down / Response quality degraded",
         cause: "コンテキストウィンドウの圧迫",
+        cause_en: "Context window pressure",
         description: "大量のファイル読み込みや長い会話でコンテキストが埋まっている",
+        description_en: "Context is filled with many file loads or long conversations",
         solutions: [
-            { action: "/context で使用量を確認", priority: "高" },
-            { action: "/compact で圧縮", priority: "高" },
-            { action: "サブエージェントに調査を委譲", priority: "中" }
+            { action: "/context で使用量を確認", action_en: "Check usage with /context", priority: "高", priority_en: "High" },
+            { action: "/compact で圧縮", action_en: "Compress with /compact", priority: "高", priority_en: "High" },
+            { action: "サブエージェントに調査を委譲", action_en: "Delegate research to subagent", priority: "中", priority_en: "Med" }
         ],
         prevention: "定期的に/contextを確認し、60%超で対策を検討",
+        prevention_en: "Check /context regularly, consider action above 60%",
         relatedTutorial: "00_03"
     },
     {
         id: 5,
         symptom: "計画なしにいきなり実装を始める",
+        symptom_en: "Implementation starts without planning",
         cause: "Planモードを使っていない",
+        cause_en: "Plan mode is not being used",
         description: "間違った問題を解くリスクがある",
+        description_en: "Risk of solving the wrong problem",
         solutions: [
-            { action: "/plan でPlanモードを開始", priority: "高" },
-            { action: "Shift+Tab 2回でPlanモードに切り替え", priority: "高" },
-            { action: "計画を承認してから実装に進む", priority: "高" }
+            { action: "/plan でPlanモードを開始", action_en: "Start Plan mode with /plan", priority: "高", priority_en: "High" },
+            { action: "Shift+Tab 2回でPlanモードに切り替え", action_en: "Press Shift+Tab twice to switch to Plan mode", priority: "高", priority_en: "High" },
+            { action: "計画を承認してから実装に進む", action_en: "Approve the plan before implementing", priority: "高", priority_en: "High" }
         ],
         prevention: "複雑なタスクでは必ずPlanモードから始める",
+        prevention_en: "Always start complex tasks in Plan mode",
         relatedTutorial: "01_05"
     },
     {
         id: 6,
         symptom: "CLAUDE.mdのルールが無視される",
+        symptom_en: "CLAUDE.md rules are being ignored",
         cause: "CLAUDE.mdが長すぎてノイズに埋没",
+        cause_en: "CLAUDE.md is too long and buried in noise",
         description: "重要なルールが他の情報に埋もれている",
+        description_en: "Important rules are buried among other information",
         solutions: [
-            { action: "CLAUDE.mdを簡潔に整理", priority: "高" },
-            { action: "重要なルールにIMPORTANT:を付与", priority: "中" },
-            { action: "詳細はSkillに分離", priority: "中" }
+            { action: "CLAUDE.mdを簡潔に整理", action_en: "Organize CLAUDE.md concisely", priority: "高", priority_en: "High" },
+            { action: "重要なルールにIMPORTANT:を付与", action_en: "Add IMPORTANT: prefix to critical rules", priority: "中", priority_en: "Med" },
+            { action: "詳細はSkillに分離", action_en: "Move details to Skills", priority: "中", priority_en: "Med" }
         ],
         prevention: "CLAUDE.mdは2.5Kトークン以下を目安に維持",
+        prevention_en: "Keep CLAUDE.md under 2.5K tokens as a guideline",
         relatedTutorial: "01_01"
     },
     {
         id: 7,
         symptom: "大量のファイルを読み込んでしまう",
+        symptom_en: "Loading too many files",
         cause: "無限探索パターン",
+        cause_en: "Infinite exploration pattern",
         description: "スコープを限定せずに探索を指示している",
+        description_en: "Exploration is directed without limiting scope",
         solutions: [
-            { action: "探索範囲を明確に限定", priority: "高" },
-            { action: "サブエージェントに探索を委譲", priority: "高" },
-            { action: "Grepで対象を絞ってから読み込み", priority: "中" }
+            { action: "探索範囲を明確に限定", action_en: "Clearly limit exploration scope", priority: "高", priority_en: "High" },
+            { action: "サブエージェントに探索を委譲", action_en: "Delegate exploration to subagent", priority: "高", priority_en: "High" },
+            { action: "Grepで対象を絞ってから読み込み", action_en: "Narrow targets with Grep before loading", priority: "中", priority_en: "Med" }
         ],
         prevention: "「〜を探索して」より「src/auth/内で〜を探して」と具体的に",
+        prevention_en: "Be specific: 'Find X in src/auth/' instead of 'Explore X'",
         relatedTutorial: "02_03"
     },
     {
         id: 8,
         symptom: "テストが失敗する・エッジケースが漏れる",
+        symptom_en: "Tests fail / Edge cases are missed",
         cause: "検証ループの不足",
+        cause_en: "Insufficient verification loop",
         description: "Claudeに自己検証の手段を与えていない",
+        description_en: "Claude is not given means for self-verification",
         solutions: [
-            { action: "テストを実行させて結果を確認させる", priority: "高" },
-            { action: "期待出力を明示する", priority: "高" },
-            { action: "境界値・異常系のテストケースを提供", priority: "中" }
+            { action: "テストを実行させて結果を確認させる", action_en: "Have tests run and verify results", priority: "高", priority_en: "High" },
+            { action: "期待出力を明示する", action_en: "Specify expected output explicitly", priority: "高", priority_en: "High" },
+            { action: "境界値・異常系のテストケースを提供", action_en: "Provide boundary and error test cases", priority: "中", priority_en: "Med" }
         ],
         prevention: "「実装後テストを実行して」を依頼に含める",
+        prevention_en: "Include 'run tests after implementation' in requests",
         relatedTutorial: "01_02"
     },
     {
         id: 9,
         symptom: "複数タスクが混在してカオスになる",
+        symptom_en: "Multiple tasks mixed causing chaos",
         cause: "キッチンシンク問題",
+        cause_en: "Kitchen sink problem",
         description: "無関係なタスクが同一セッションに混在",
+        description_en: "Unrelated tasks mixed in the same session",
         solutions: [
-            { action: "/clear でリセットしてから新タスク", priority: "高" },
-            { action: "タスクごとにセッションを分ける", priority: "高" },
-            { action: "複数タブで並列セッション", priority: "中" }
+            { action: "/clear でリセットしてから新タスク", action_en: "Reset with /clear before new task", priority: "高", priority_en: "High" },
+            { action: "タスクごとにセッションを分ける", action_en: "Separate sessions per task", priority: "高", priority_en: "High" },
+            { action: "複数タブで並列セッション", action_en: "Parallel sessions in multiple tabs", priority: "中", priority_en: "Med" }
         ],
         prevention: "タスクの切れ目で/clearを習慣化",
+        prevention_en: "Make a habit of /clear at task boundaries",
         relatedTutorial: "01_06"
     },
     {
         id: 10,
         symptom: "Hooksが動作しない",
+        symptom_en: "Hooks are not working",
         cause: "設定ファイルの構文エラーまたはパスの問題",
+        cause_en: "Config file syntax error or path issue",
         description: ".claude.jsonの設定が正しくない",
+        description_en: ".claude.json configuration is incorrect",
         solutions: [
-            { action: "JSONの構文をバリデート", priority: "高" },
-            { action: "パターンマッチングを確認（*.pyなど）", priority: "中" },
-            { action: "コマンドが実行可能か単体テスト", priority: "中" }
+            { action: "JSONの構文をバリデート", action_en: "Validate JSON syntax", priority: "高", priority_en: "High" },
+            { action: "パターンマッチングを確認（*.pyなど）", action_en: "Check pattern matching (e.g., *.py)", priority: "中", priority_en: "Med" },
+            { action: "コマンドが実行可能か単体テスト", action_en: "Unit test if command is executable", priority: "中", priority_en: "Med" }
         ],
         prevention: "設定変更後は簡単なテストで動作確認",
+        prevention_en: "Verify with simple test after config changes",
         relatedTutorial: "02_02"
     },
     {
         id: 11,
         symptom: "Skillsが自動で読み込まれない",
+        symptom_en: "Skills are not loaded automatically",
         cause: "descriptionがタスクと一致しない",
+        cause_en: "Description doesn't match the task",
         description: "Claudeがdescriptionを見てSkillを読み込むか判断している",
+        description_en: "Claude decides whether to load Skill by checking description",
         solutions: [
-            { action: "descriptionをより具体的に記載", priority: "高" },
-            { action: "globsパターンを設定してファイルタイプで自動読み込み", priority: "中" },
-            { action: "/skill-name で明示的に呼び出し", priority: "中" }
+            { action: "descriptionをより具体的に記載", action_en: "Write more specific description", priority: "高", priority_en: "High" },
+            { action: "globsパターンを設定してファイルタイプで自動読み込み", action_en: "Set globs pattern for auto-load by file type", priority: "中", priority_en: "Med" },
+            { action: "/skill-name で明示的に呼び出し", action_en: "Call explicitly with /skill-name", priority: "中", priority_en: "Med" }
         ],
         prevention: "descriptionに「いつ使うか」を明記",
+        prevention_en: "Specify 'when to use' in description",
         relatedTutorial: "02_01"
     },
     {
         id: 12,
         symptom: "MCPツールが見つからない・動作しない",
+        symptom_en: "MCP tools not found / not working",
         cause: "MCP設定の問題",
+        cause_en: "MCP configuration issue",
         description: ".mcp.jsonの設定やサーバー起動に問題がある",
+        description_en: "Problem with .mcp.json settings or server startup",
         solutions: [
-            { action: "MCPサーバーが起動しているか確認", priority: "高" },
-            { action: ".mcp.jsonのパスと設定を確認", priority: "高" },
-            { action: "不要なMCPを無効化してコンテキスト節約", priority: "中" }
+            { action: "MCPサーバーが起動しているか確認", action_en: "Check if MCP server is running", priority: "高", priority_en: "High" },
+            { action: ".mcp.jsonのパスと設定を確認", action_en: "Verify .mcp.json path and settings", priority: "高", priority_en: "High" },
+            { action: "不要なMCPを無効化してコンテキスト節約", action_en: "Disable unused MCPs to save context", priority: "中", priority_en: "Med" }
         ],
         prevention: "同時有効化するMCPは10個以下に制限",
+        prevention_en: "Limit simultaneously enabled MCPs to 10 or less",
         relatedTutorial: "02_05"
     },
     {
         id: 13,
         symptom: "セキュリティ関連のエラーが発生",
+        symptom_en: "Security-related errors occur",
         cause: "権限の問題または危険な操作のブロック",
+        cause_en: "Permission issue or dangerous operation blocked",
         description: "Claude Codeのセキュリティ機能が動作している",
+        description_en: "Claude Code security features are active",
         solutions: [
-            { action: "/permissions で安全なコマンドを許可", priority: "高" },
-            { action: "/sandbox で安全な実行環境を確保", priority: "中" },
-            { action: "必要に応じてHooksで危険な操作をブロック", priority: "中" }
+            { action: "/permissions で安全なコマンドを許可", action_en: "Allow safe commands with /permissions", priority: "高", priority_en: "High" },
+            { action: "/sandbox で安全な実行環境を確保", action_en: "Ensure safe environment with /sandbox", priority: "中", priority_en: "Med" },
+            { action: "必要に応じてHooksで危険な操作をブロック", action_en: "Block dangerous operations with Hooks if needed", priority: "中", priority_en: "Med" }
         ],
         prevention: "--dangerously-skip-permissionsは極力使わない",
+        prevention_en: "Avoid using --dangerously-skip-permissions",
         relatedTutorial: "02_02"
     },
     {
         id: 14,
         symptom: "並列セッションで競合が発生",
+        symptom_en: "Conflicts in parallel sessions",
         cause: "同じファイルを複数セッションが編集",
+        cause_en: "Multiple sessions editing the same file",
         description: "ファイルの同時編集による衝突",
+        description_en: "Collision due to simultaneous file editing",
         solutions: [
-            { action: "セッションごとに独立したcheckoutを使用", priority: "高" },
-            { action: "Git worktreesで分離", priority: "中" },
-            { action: "編集対象ファイルを事前に分担", priority: "中" }
+            { action: "セッションごとに独立したcheckoutを使用", action_en: "Use independent checkout per session", priority: "高", priority_en: "High" },
+            { action: "Git worktreesで分離", action_en: "Separate with Git worktrees", priority: "中", priority_en: "Med" },
+            { action: "編集対象ファイルを事前に分担", action_en: "Assign target files in advance", priority: "中", priority_en: "Med" }
         ],
         prevention: "並列セッションでは作業範囲を明確に分離",
+        prevention_en: "Clearly separate work scope in parallel sessions",
         relatedTutorial: "02_08"
     },
     {
         id: 15,
         symptom: "ヘッドレスモードで期待通りに動作しない",
+        symptom_en: "Headless mode doesn't work as expected",
         cause: "インタラクティブな確認が必要な状態",
+        cause_en: "Interactive confirmation is required",
         description: "claude -p では対話的な確認ができない",
+        description_en: "claude -p cannot do interactive confirmation",
         solutions: [
-            { action: "--allowedTools で必要な権限を事前許可", priority: "高" },
-            { action: "プロンプトをより具体的に", priority: "中" },
-            { action: "--output-format json で結果を構造化", priority: "中" }
+            { action: "--allowedTools で必要な権限を事前許可", action_en: "Pre-allow required permissions with --allowedTools", priority: "高", priority_en: "High" },
+            { action: "プロンプトをより具体的に", action_en: "Make prompts more specific", priority: "中", priority_en: "Med" },
+            { action: "--output-format json で結果を構造化", action_en: "Structure results with --output-format json", priority: "中", priority_en: "Med" }
         ],
         prevention: "ヘッドレス実行前にインタラクティブでテスト",
+        prevention_en: "Test interactively before headless execution",
         relatedTutorial: "03_06"
     }
 ];
@@ -4989,105 +6426,149 @@ const FAQ = [
         category: "基本",
         category_en: "Basics",
         question: "Claude CodeとChatGPTの違いは何ですか？",
+        question_en: "What's the difference between Claude Code and ChatGPT?",
         answer: "Claude Codeはローカルで動作する「エージェント型」のツールです。ファイルを直接読み書きし、コマンドを実行し、問題を自律的に解決します。一方、ChatGPTは主にチャット形式でのQ&Aに特化しています。Claude Codeは「ローカルで動く自律的なプログラマー」と考えてください。",
+        answer_en: "Claude Code is an 'agent-type' tool that runs locally. It directly reads and writes files, executes commands, and solves problems autonomously. ChatGPT, on the other hand, specializes mainly in chat-format Q&A. Think of Claude Code as 'an autonomous programmer running locally'.",
         relatedTutorial: "00_01"
     },
     {
         id: 2,
         category: "基本",
+        category_en: "Basics",
         question: "プログラミング経験がなくても使えますか？",
+        question_en: "Can I use it without programming experience?",
         answer: "はい、使えます。ファイル整理、データ分析、レポート作成、議事録処理など、コードを書かなくても多くのタスクに活用できます。自然な日本語で「〜して」と依頼するだけです。",
+        answer_en: "Yes, you can. You can use it for many tasks without writing code - file organization, data analysis, report generation, meeting notes processing, etc. Just ask in natural language.",
         relatedTutorial: "03_03"
     },
     {
         id: 3,
         category: "設定",
+        category_en: "Configuration",
         question: "CLAUDE.mdには何を書けばいいですか？",
+        question_en: "What should I write in CLAUDE.md?",
         answer: "プロジェクト固有のルール、コーディング規約、禁止事項、テスト方法など、Claudeがコードから推測できない情報を書きます。ただし、長すぎると無視されるので、2.5Kトークン以下を目安に簡潔に保ちましょう。言語標準や自明なルールは書く必要がありません。",
+        answer_en: "Write project-specific rules, coding conventions, prohibitions, test methods - information Claude can't infer from code. Keep it concise (under 2.5K tokens) as too long gets ignored. No need to write language standards or obvious rules.",
         relatedTutorial: "01_01"
     },
     {
         id: 4,
         category: "設定",
+        category_en: "Configuration",
         question: "CLAUDE.mdとSkillsの違いは何ですか？",
+        question_en: "What's the difference between CLAUDE.md and Skills?",
         answer: "CLAUDE.mdは毎回自動で読み込まれる「常に適用されるルール」、Skillsは必要なときだけ読み込まれる「状況に応じた知識」です。CLAUDE.mdには共通ルールを、Skillsには特定のワークフロー（コードレビュー、TDDなど）を記載します。",
+        answer_en: "CLAUDE.md is 'always-applied rules' loaded automatically each time. Skills are 'contextual knowledge' loaded only when needed. Put common rules in CLAUDE.md, and specific workflows (code review, TDD, etc.) in Skills.",
         relatedTutorial: "02_01"
     },
     {
         id: 5,
         category: "操作",
+        category_en: "Operations",
         question: "コンテキストウィンドウとは何ですか？なぜ重要ですか？",
+        question_en: "What is the context window? Why is it important?",
         answer: "コンテキストウィンドウは「AIの短期記憶」です。会話、読んだファイル、実行結果がすべてここに蓄積されます。埋まりすぎると性能が劣化（Context Rot）するため、/compactや/clearで管理することが重要です。",
+        answer_en: "The context window is 'AI's short-term memory'. Conversations, read files, and execution results all accumulate here. Performance degrades when full (Context Rot), so managing with /compact or /clear is important.",
         relatedTutorial: "00_03"
     },
     {
         id: 6,
         category: "操作",
+        category_en: "Operations",
         question: "/planと通常モードの違いは何ですか？",
+        question_en: "What's the difference between /plan and normal mode?",
         answer: "Planモードでは、Claudeはファイルを変更せずに探索と計画のみを行います。計画を確認・承認してから実装に進めるため、「間違った問題を解く」リスクを減らせます。複雑なタスクでは必ずPlanモードから始めることをお勧めします。",
+        answer_en: "In Plan mode, Claude only explores and plans without modifying files. You can review and approve the plan before implementation, reducing the risk of 'solving the wrong problem'. For complex tasks, always start with Plan mode.",
         relatedTutorial: "01_05"
     },
     {
         id: 7,
         category: "操作",
+        category_en: "Operations",
         question: "/clearと/compactの違いは何ですか？",
+        question_en: "What's the difference between /clear and /compact?",
         answer: "/clearはコンテキストを完全にリセットします。/compactは要約して圧縮するため、重要な情報は維持されます。タスクの切り替え時は/clear、同じタスクを継続する場合は/compactが適切です。",
+        answer_en: "/clear completely resets the context. /compact summarizes and compresses, preserving important information. Use /clear when switching tasks, /compact when continuing the same task.",
         relatedTutorial: "01_03"
     },
     {
         id: 8,
         category: "ベストプラクティス",
+        category_en: "Best Practices",
         question: "最も重要なベストプラクティスは何ですか？",
+        question_en: "What is the most important best practice?",
         answer: "「検証方法を提供すること」です。テスト、期待出力、スクリーンショットなど、Claudeが自分で結果を確認できる手段を与えると、品質が2〜3倍向上します。「〜を実装して」ではなく「〜を実装して、テストを実行して確認して」と依頼しましょう。",
+        answer_en: "'Providing verification methods'. Tests, expected outputs, screenshots - giving Claude ways to verify results improves quality 2-3x. Don't say 'implement X', say 'implement X, run tests and verify'.",
         relatedTutorial: "01_02"
     },
     {
         id: 9,
         category: "ベストプラクティス",
+        category_en: "Best Practices",
         question: "効果的なプロンプトの書き方は？",
+        question_en: "How to write effective prompts?",
         answer: "1) 具体的なゴールを明示 2) 検証方法を提供 3) @参照でファイルを指定 4) 既存のパターンを示す。曖昧な「うまく動くようにして」ではなく、「validateEmail関数を実装して、test@example.comは真、invalidは偽を返す。テスト実行後に確認して」のように具体的に。",
+        answer_en: "1) State specific goals 2) Provide verification methods 3) Specify files with @ reference 4) Show existing patterns. Instead of vague 'make it work', be specific: 'Implement validateEmail function, test@example.com returns true, invalid returns false. Run tests to verify.'",
         relatedTutorial: "01_02"
     },
     {
         id: 10,
         category: "ベストプラクティス",
+        category_en: "Best Practices",
         question: "失敗したときはどうすればいいですか？",
+        question_en: "What should I do when it fails?",
         answer: "1回目の失敗は修正を依頼、2回目の失敗後は/clearしてアプローチを変えた新しいプロンプトで再開することをお勧めします。失敗したコンテキストで続けると、さらに悪化することがあります。",
+        answer_en: "First failure: request correction. After second failure: /clear and restart with a different approach. Continuing in a failed context often makes things worse.",
         relatedTutorial: "01_06"
     },
     {
         id: 11,
         category: "高度な機能",
+        category_en: "Advanced Features",
         question: "Hooksとは何ですか？どう使いますか？",
+        question_en: "What are Hooks? How do I use them?",
         answer: "Hooksはイベント駆動の自動化機能です。ファイル保存時の自動フォーマット、機密ファイルへの書き込みブロック、テスト自動実行などに使います。.claude.jsonで設定し、PreToolUse（実行前）やPostToolUse（実行後）のタイミングでスクリプトを実行できます。",
+        answer_en: "Hooks are event-driven automation features. Use for auto-formatting on file save, blocking writes to sensitive files, auto-running tests. Configure in .claude.json, execute scripts at PreToolUse (before) or PostToolUse (after) timing.",
         relatedTutorial: "02_02"
     },
     {
         id: 12,
         category: "高度な機能",
+        category_en: "Advanced Features",
         question: "Subagentsとは何ですか？いつ使いますか？",
+        question_en: "What are Subagents? When should I use them?",
         answer: "Subagentsは特定タスクを専門のエージェントに委譲する仕組みです。メインセッションのコンテキストを汚さずに、大規模な探索やセキュリティレビューなどを実行できます。調査タスクや専門的なレビューに最適です。",
+        answer_en: "Subagents delegate specific tasks to specialized agents. Execute large-scale exploration or security reviews without polluting the main session's context. Ideal for research tasks and specialized reviews.",
         relatedTutorial: "02_03"
     },
     {
         id: 13,
         category: "高度な機能",
+        category_en: "Advanced Features",
         question: "MCPとは何ですか？",
+        question_en: "What is MCP?",
         answer: "MCP（Model Context Protocol）は外部ツールやデータソースとの統合プロトコルです。GitHub、Slack、データベース、Figmaなどと連携できます。CLIツール（gh、awsなど）よりもコンテキスト効率が良い場合があります。",
+        answer_en: "MCP (Model Context Protocol) is an integration protocol for external tools and data sources. Connect with GitHub, Slack, databases, Figma, etc. Sometimes more context-efficient than CLI tools (gh, aws, etc.).",
         relatedTutorial: "02_05"
     },
     {
         id: 14,
         category: "高度な機能",
+        category_en: "Advanced Features",
         question: "並列セッションはどう活用しますか？",
+        question_en: "How do I utilize parallel sessions?",
         answer: "複数のターミナルタブでClaude Codeを実行し、異なるタスクを並列処理できます。Writer/Reviewerパターン（実装とレビューの分離）や、調査と実装の並列化に有効です。ただし、同じファイルを同時編集しないよう注意が必要です。",
+        answer_en: "Run Claude Code in multiple terminal tabs to process different tasks in parallel. Useful for Writer/Reviewer pattern (separating implementation and review) or parallelizing research and implementation. Be careful not to edit the same file simultaneously.",
         relatedTutorial: "03_05"
     },
     {
         id: 15,
         category: "高度な機能",
+        category_en: "Advanced Features",
         question: "ヘッドレスモードとは何ですか？",
+        question_en: "What is headless mode?",
         answer: "claude -p \"プロンプト\" でインタラクティブなセッションなしに実行するモードです。CI/CDパイプライン、バッチ処理、自動化スクリプトに組み込めます。--output-format jsonで結果を構造化できます。",
+        answer_en: "A mode that runs without interactive session using claude -p \"prompt\". Can be integrated into CI/CD pipelines, batch processing, automation scripts. Use --output-format json to structure results.",
         relatedTutorial: "03_06"
     },
     {
@@ -5095,14 +6576,19 @@ const FAQ = [
         category: "トラブル",
         category_en: "Troubleshooting",
         question: "Claudeが期待通りに動かないときは？",
+        question_en: "What to do when Claude doesn't work as expected?",
         answer: "1) プロンプトを具体的にする 2) 検証方法を提供する 3) /clearしてやり直す 4) CLAUDE.mdにルールを追加する、の順で試してください。2回失敗したら、アプローチを変えた新しいセッションで再開することをお勧めします。",
+        answer_en: "Try in this order: 1) Make prompts more specific 2) Provide verification methods 3) /clear and retry 4) Add rules to CLAUDE.md. After 2 failures, restart with a different approach in a new session.",
         relatedTutorial: "01_06"
     },
     {
         id: 17,
         category: "トラブル",
+        category_en: "Troubleshooting",
         question: "コンテキストがすぐ埋まってしまいます",
+        question_en: "Context fills up too quickly",
         answer: "1) 結果をファイルに書き出す（Write戦略） 2) サブエージェントに探索を委譲 3) /compactで定期的に圧縮 4) 不要になったら/clear。大きなファイルを読む場合は、必要な部分だけ@参照で指定しましょう。",
+        answer_en: "1) Write results to files (Write strategy) 2) Delegate exploration to subagents 3) Compress regularly with /compact 4) /clear when no longer needed. For large files, specify only needed parts with @ reference.",
         relatedTutorial: "01_04"
     },
     {
@@ -5110,7 +6596,9 @@ const FAQ = [
         category: "料金・制限",
         category_en: "Pricing & Limits",
         question: "API使用量を節約するには？",
+        question_en: "How to save API usage?",
         answer: "1) Haikuを軽量タスクに使用 2) サブエージェントで探索を分離 3) /compactでコンテキストを圧縮 4) CLAUDE.mdを簡潔に保つ 5) MCPでCLIコマンドを代替。特に大規模な探索はサブエージェントに委譲すると効率的です。",
+        answer_en: "1) Use Haiku for light tasks 2) Separate exploration with subagents 3) Compress context with /compact 4) Keep CLAUDE.md concise 5) Replace CLI commands with MCP. Especially efficient to delegate large explorations to subagents.",
         relatedTutorial: "03_01"
     },
     {
@@ -5118,14 +6606,19 @@ const FAQ = [
         category: "チーム",
         category_en: "Team",
         question: "チームでCLAUDE.mdを共有するには？",
+        question_en: "How to share CLAUDE.md with the team?",
         answer: "CLAUDE.mdをGitリポジトリにコミットして共有します。チームメンバーが週次で貢献し、失敗パターンや学びを追記していくと、チームの集合知として価値が高まります。PRレビュー時に@.claudeタグで更新を促すこともできます。",
+        answer_en: "Commit CLAUDE.md to Git repository to share. Team members contribute weekly, adding failure patterns and learnings, increasing value as collective team knowledge. Prompt updates with @.claude tag during PR reviews.",
         relatedTutorial: "01_01"
     },
     {
         id: 20,
         category: "チーム",
+        category_en: "Team",
         question: "Skillsやコマンドをチームで共有するには？",
+        question_en: "How to share Skills and commands with the team?",
         answer: ".claude/フォルダをGitリポジトリにコミットして共有します。skills/、commands/、agents/をバージョン管理することで、チーム全体で同じワークフローを使えます。",
+        answer_en: "Commit the .claude/ folder to Git repository to share. Version control skills/, commands/, agents/ so the entire team uses the same workflows.",
         relatedTutorial: "02_01"
     }
 ];
@@ -5136,49 +6629,53 @@ const CHECKLIST = {
         title: "セッション開始前",
         title_en: "Before Session",
         description: "作業を始める前に確認すべき項目",
+        description_en: "Items to check before starting work",
         items: [
-            { id: "bs1", text: "CLAUDE.mdは最新か？必要なルールが記載されているか？", priority: "高", relatedTutorial: "01_01" },
-            { id: "bs2", text: "ゴールは具体的に定義されているか？", priority: "高", relatedTutorial: "01_02" },
-            { id: "bs3", text: "検証方法（テスト、期待出力）は準備できているか？", priority: "高", relatedTutorial: "01_02" },
-            { id: "bs4", text: "参照すべきファイルやパターンは明確か？", priority: "中", relatedTutorial: "00_05" },
-            { id: "bs5", text: "複雑なタスクの場合、/planで始めるか？", priority: "中", relatedTutorial: "01_05" }
+            { id: "bs1", text: "CLAUDE.mdは最新か？必要なルールが記載されているか？", text_en: "Is CLAUDE.md up to date? Are necessary rules documented?", priority: "高", relatedTutorial: "01_01" },
+            { id: "bs2", text: "ゴールは具体的に定義されているか？", text_en: "Is the goal specifically defined?", priority: "高", relatedTutorial: "01_02" },
+            { id: "bs3", text: "検証方法（テスト、期待出力）は準備できているか？", text_en: "Are verification methods (tests, expected output) prepared?", priority: "高", relatedTutorial: "01_02" },
+            { id: "bs4", text: "参照すべきファイルやパターンは明確か？", text_en: "Are files and patterns to reference clear?", priority: "中", relatedTutorial: "00_05" },
+            { id: "bs5", text: "複雑なタスクの場合、/planで始めるか？", text_en: "For complex tasks, start with /plan?", priority: "中", relatedTutorial: "01_05" }
         ]
     },
     duringSession: {
         title: "セッション中",
         title_en: "During Session",
         description: "作業中に意識すべき項目",
+        description_en: "Items to be aware of during work",
         items: [
-            { id: "ds1", text: "検証手段をClaudeに提供しているか？", priority: "高", relatedTutorial: "01_02" },
-            { id: "ds2", text: "計画を確認してから実装に進んでいるか？", priority: "高", relatedTutorial: "01_05" },
-            { id: "ds3", text: "コンテキスト使用量を確認しているか？（/context）", priority: "中", relatedTutorial: "00_03" },
-            { id: "ds4", text: "2回失敗したら/clearを検討しているか？", priority: "高", relatedTutorial: "01_06" },
-            { id: "ds5", text: "結果をファイルに書き出してコンテキストを節約しているか？", priority: "中", relatedTutorial: "01_04" },
-            { id: "ds6", text: "大規模探索はサブエージェントに委譲しているか？", priority: "中", relatedTutorial: "02_03" }
+            { id: "ds1", text: "検証手段をClaudeに提供しているか？", text_en: "Are you providing verification means to Claude?", priority: "高", relatedTutorial: "01_02" },
+            { id: "ds2", text: "計画を確認してから実装に進んでいるか？", text_en: "Are you confirming the plan before implementing?", priority: "高", relatedTutorial: "01_05" },
+            { id: "ds3", text: "コンテキスト使用量を確認しているか？（/context）", text_en: "Are you checking context usage? (/context)", priority: "中", relatedTutorial: "00_03" },
+            { id: "ds4", text: "2回失敗したら/clearを検討しているか？", text_en: "Are you considering /clear after 2 failures?", priority: "高", relatedTutorial: "01_06" },
+            { id: "ds5", text: "結果をファイルに書き出してコンテキストを節約しているか？", text_en: "Are you writing results to files to save context?", priority: "中", relatedTutorial: "01_04" },
+            { id: "ds6", text: "大規模探索はサブエージェントに委譲しているか？", text_en: "Are you delegating large explorations to subagents?", priority: "中", relatedTutorial: "02_03" }
         ]
     },
     afterSession: {
         title: "セッション終了後",
         title_en: "After Session",
         description: "作業完了後に行うべき項目",
+        description_en: "Items to do after completing work",
         items: [
-            { id: "as1", text: "成果物は検証済みか？テストはパスしているか？", priority: "高", relatedTutorial: "01_02" },
-            { id: "as2", text: "学んだパターンをSkill化したか？（/learn）", priority: "中", relatedTutorial: "03_02" },
-            { id: "as3", text: "失敗パターンをCLAUDE.mdに追記したか？", priority: "中", relatedTutorial: "01_01" },
-            { id: "as4", text: "繰り返しの作業はHooks/Skillsで自動化を検討したか？", priority: "低", relatedTutorial: "02_02" },
-            { id: "as5", text: "チームで共有すべき知見はあるか？", priority: "低", relatedTutorial: "01_01" }
+            { id: "as1", text: "成果物は検証済みか？テストはパスしているか？", text_en: "Are deliverables verified? Do tests pass?", priority: "高", relatedTutorial: "01_02" },
+            { id: "as2", text: "学んだパターンをSkill化したか？（/learn）", text_en: "Have you turned learned patterns into Skills? (/learn)", priority: "中", relatedTutorial: "03_02" },
+            { id: "as3", text: "失敗パターンをCLAUDE.mdに追記したか？", text_en: "Have you added failure patterns to CLAUDE.md?", priority: "中", relatedTutorial: "01_01" },
+            { id: "as4", text: "繰り返しの作業はHooks/Skillsで自動化を検討したか？", text_en: "Have you considered automating repetitive work with Hooks/Skills?", priority: "低", relatedTutorial: "02_02" },
+            { id: "as5", text: "チームで共有すべき知見はあるか？", text_en: "Are there insights to share with the team?", priority: "低", relatedTutorial: "01_01" }
         ]
     },
     qualityGates: {
         title: "品質ゲート",
         title_en: "Quality Gates",
         description: "リリース前に確認すべき品質基準",
+        description_en: "Quality criteria to check before release",
         items: [
-            { id: "qg1", text: "すべてのテストがパスしているか？", priority: "高", relatedTutorial: "01_02" },
-            { id: "qg2", text: "セキュリティレビューは完了しているか？", priority: "高", relatedTutorial: "11" },
-            { id: "qg3", text: "ドキュメントは更新されているか？", priority: "中", relatedTutorial: "02_01" },
-            { id: "qg4", text: "コードレビューは完了しているか？", priority: "高", relatedTutorial: "11" },
-            { id: "qg5", text: "パフォーマンスに問題はないか？", priority: "中", relatedTutorial: "11" }
+            { id: "qg1", text: "すべてのテストがパスしているか？", text_en: "Do all tests pass?", priority: "高", relatedTutorial: "01_02" },
+            { id: "qg2", text: "セキュリティレビューは完了しているか？", text_en: "Is security review complete?", priority: "高", relatedTutorial: "11" },
+            { id: "qg3", text: "ドキュメントは更新されているか？", text_en: "Is documentation updated?", priority: "中", relatedTutorial: "02_01" },
+            { id: "qg4", text: "コードレビューは完了しているか？", text_en: "Is code review complete?", priority: "高", relatedTutorial: "11" },
+            { id: "qg5", text: "パフォーマンスに問題はないか？", text_en: "Are there any performance issues?", priority: "中", relatedTutorial: "11" }
         ]
     }
 };

@@ -97,7 +97,24 @@
             modalRelatedSkills: '関連スキル',
             modalSolutions: '解決策',
             modalPrevention: '予防策',
-            modalRelatedTutorial: '関連チュートリアルを見る'
+            modalRelatedTutorial: '関連チュートリアルを見る',
+            // Additional modal labels
+            copy: 'コピー',
+            copyComplete: 'コピー完了',
+            copied: 'コピーしました',
+            handsonLabel: 'ハンズオン',
+            prerequisites: '前提条件',
+            steps: '手順',
+            inputToClaudeCode: 'Claude Codeに入力:',
+            expectedResult: '期待結果:',
+            checkpoints: '確認ポイント',
+            generatedFiles: '生成されるファイル',
+            prerequisiteTutorialsHint: 'このハンズオンを効果的に進めるために、以下のチュートリアルを先に確認することをお勧めします。',
+            folderStructure: 'フォルダ構造',
+            filesToCreate: '作成するファイル',
+            setupSteps: 'セットアップ手順',
+            cause: '原因',
+            hint: 'ヒント'
         },
         en: {
             // Navigation
@@ -171,7 +188,24 @@
             modalRelatedSkills: 'Related Skills',
             modalSolutions: 'Solutions',
             modalPrevention: 'Prevention',
-            modalRelatedTutorial: 'View Related Tutorial'
+            modalRelatedTutorial: 'View Related Tutorial',
+            // Additional modal labels
+            copy: 'Copy',
+            copyComplete: 'Copied!',
+            copied: 'Copied',
+            handsonLabel: 'Hands-on',
+            prerequisites: 'Prerequisites',
+            steps: 'Steps',
+            inputToClaudeCode: 'Input to Claude Code:',
+            expectedResult: 'Expected Result:',
+            checkpoints: 'Checkpoints',
+            generatedFiles: 'Generated Files',
+            prerequisiteTutorialsHint: 'We recommend reviewing the following tutorials first to make the most of this hands-on exercise.',
+            folderStructure: 'Folder Structure',
+            filesToCreate: 'Files to Create',
+            setupSteps: 'Setup Steps',
+            cause: 'Cause',
+            hint: 'Hint'
         }
     };
 
@@ -842,38 +876,41 @@
         const tutorial = window.TUTORIALS[level][index];
         if (!tutorial) return;
 
+        const t = i18n[state.lang];
         const levelLabels = {
-            intro: '入門',
-            basic: '基礎',
-            intermediate: '中級',
-            advanced: '上級'
+            intro: t.levelIntro,
+            basic: t.levelBasic,
+            intermediate: t.levelIntermediate,
+            advanced: t.levelAdvanced
         };
 
         let modalContent = `
             <div class="modal-header">
                 <span class="modal-level ${level}">${tutorial.number} | ${levelLabels[level]}</span>
-                <h2 class="modal-title">${tutorial.title}</h2>
-                <p class="modal-description">${tutorial.content.summary}</p>
+                <h2 class="modal-title">${getLocalizedText(tutorial, 'title')}</h2>
+                <p class="modal-description">${getLocalizedText(tutorial.content, 'summary')}</p>
             </div>
         `;
 
-        if (tutorial.content.keyPoints) {
+        const keyPoints = getLocalizedArray(tutorial.content, 'keyPoints');
+        if (keyPoints && keyPoints.length > 0) {
             modalContent += `
                 <div class="modal-section">
-                    <h3>ポイント</h3>
+                    <h3>${t.modalKeyPoints}</h3>
                     <ul>
-                        ${tutorial.content.keyPoints.map(point => `<li>${point}</li>`).join('')}
+                        ${keyPoints.map(point => `<li>${point}</li>`).join('')}
                     </ul>
                 </div>
             `;
         }
 
-        if (tutorial.content.quote) {
+        const quote = getLocalizedText(tutorial.content, 'quote');
+        if (quote) {
             modalContent += `
                 <div class="modal-section">
-                    <h3>公式より</h3>
+                    <h3>${t.modalOfficial}</h3>
                     <blockquote class="modal-quote">
-                        "${tutorial.content.quote}"
+                        "${quote}"
                     </blockquote>
                 </div>
             `;
@@ -882,10 +919,10 @@
         if (tutorial.content.code) {
             modalContent += `
                 <div class="modal-section">
-                    <h3>コード例</h3>
+                    <h3>${t.modalCodeExample}</h3>
                     <div class="modal-code">
                         <button class="copy-btn" onclick="copyCode(this)">
-                            ${icons.copy} コピー
+                            ${icons.copy} ${t.copy}
                         </button>
                         <pre>${escapeHtml(tutorial.content.code)}</pre>
                     </div>
@@ -893,15 +930,16 @@
             `;
         }
 
-        if (tutorial.content.commands) {
+        const commands = getLocalizedArray(tutorial.content, 'commands');
+        if (commands && commands.length > 0) {
             modalContent += `
                 <div class="modal-section">
-                    <h3>コマンド一覧</h3>
+                    <h3>${t.modalCommands}</h3>
                     <div class="commands-list">
-                        ${tutorial.content.commands.map(cmd => `
+                        ${commands.map(cmd => `
                             <div class="command-item">
                                 <code class="command-name">${cmd.cmd}</code>
-                                <span class="command-desc">${cmd.desc}</span>
+                                <span class="command-desc">${getLocalizedText(cmd, 'desc')}</span>
                             </div>
                         `).join('')}
                     </div>
@@ -914,25 +952,25 @@
             const ho = tutorial.content.handson;
             modalContent += `
                 <div class="modal-section handson-detail">
-                    <h3>ハンズオン: ${ho.title}</h3>
+                    <h3>${t.handsonLabel}: ${getLocalizedText(ho, 'title')}</h3>
                     <div class="handson-goal">
-                        <strong>目標:</strong> ${ho.goal}
+                        <strong>${t.modalGoal}:</strong> ${getLocalizedText(ho, 'goal')}
                     </div>
                     ${ho.prerequisites && ho.prerequisites.length > 0 ? `
                         <div class="handson-prereq">
-                            <strong>前提条件:</strong>
-                            <ul>${ho.prerequisites.map(p => `<li>${p}</li>`).join('')}</ul>
+                            <strong>${t.prerequisites}:</strong>
+                            <ul>${getLocalizedArray(ho, 'prerequisites').map(p => `<li>${p}</li>`).join('')}</ul>
                         </div>
                     ` : ''}
                     <div class="handson-steps">
-                        <h4>手順</h4>
-                        ${ho.steps.map(step => `
+                        <h4>${t.steps}</h4>
+                        ${getLocalizedArray(ho, 'steps').map(step => `
                             <div class="step-item">
                                 <div class="step-number">${step.step}</div>
                                 <div class="step-content">
-                                    <div class="step-action">${step.action}</div>
+                                    <div class="step-action">${getLocalizedText(step, 'action')}</div>
                                     <div class="step-prompt">
-                                        <div class="prompt-label">Claude Codeに入力:</div>
+                                        <div class="prompt-label">${t.inputToClaudeCode}</div>
                                         <div class="prompt-box">
                                             <code>${escapeHtml(step.prompt)}</code>
                                             <button class="copy-btn-small" onclick="copyText('${escapeHtml(step.prompt).replace(/'/g, "\\'")}')">
@@ -941,7 +979,7 @@
                                         </div>
                                     </div>
                                     <div class="step-expected">
-                                        <span class="expected-label">期待結果:</span> ${step.expected}
+                                        <span class="expected-label">${t.expectedResult}</span> ${getLocalizedText(step, 'expected')}
                                     </div>
                                 </div>
                             </div>
@@ -949,15 +987,15 @@
                     </div>
                     ${ho.checkpoints ? `
                         <div class="handson-checkpoints">
-                            <h4>確認ポイント</h4>
+                            <h4>${t.checkpoints}</h4>
                             <ul>
-                                ${ho.checkpoints.map(cp => `<li>${icons['check-circle']} ${cp}</li>`).join('')}
+                                ${getLocalizedArray(ho, 'checkpoints').map(cp => `<li>${icons['check-circle']} ${cp}</li>`).join('')}
                             </ul>
                         </div>
                     ` : ''}
                     ${ho.files ? `
                         <div class="handson-files">
-                            <h4>生成されるファイル</h4>
+                            <h4>${t.generatedFiles}</h4>
                             <div class="files-list">
                                 ${ho.files.created ? ho.files.created.map(f => `<span class="file-tag created">${f}</span>`).join('') : ''}
                                 ${ho.files.modified ? ho.files.modified.map(f => `<span class="file-tag modified">${f}</span>`).join('') : ''}
@@ -981,32 +1019,33 @@
         const item = items[index];
         if (!item) return;
 
+        const t = i18n[state.lang];
         const details = item.details;
         const prep = details.preparation;
 
         let modalContent = `
             <div class="modal-header">
                 <div class="modal-badges">
-                    <span class="modal-level ${type === 'dev' ? 'intermediate' : 'basic'}">${item.badge}</span>
+                    <span class="modal-level ${type === 'dev' ? 'intermediate' : 'basic'}">${getLocalizedText(item, 'badge')}</span>
                     ${details.difficulty ? `<span class="difficulty-badge ${details.difficulty}">${details.difficulty}</span>` : ''}
                     ${details.estimatedTime ? `<span class="time-badge">${icons.clock} ${details.estimatedTime}</span>` : ''}
                 </div>
-                <h2 class="modal-title">${item.title}</h2>
-                <p class="modal-description">${item.description}</p>
+                <h2 class="modal-title">${getLocalizedText(item, 'title')}</h2>
+                <p class="modal-description">${getLocalizedText(item, 'description')}</p>
             </div>
 
-            <!-- 関連チュートリアル -->
+            <!-- Related Tutorials -->
             ${item.relatedTutorials && item.relatedTutorials.length > 0 ? `
                 <div class="modal-section related-tutorials-section">
-                    <h3>${icons.book} 事前に読むべきチュートリアル</h3>
-                    <p class="section-hint">このハンズオンを効果的に進めるために、以下のチュートリアルを先に確認することをお勧めします。</p>
+                    <h3>${icons.book} ${t.modalRelatedTutorials}</h3>
+                    <p class="section-hint">${t.prerequisiteTutorialsHint}</p>
                     <div class="related-tutorials-grid">
-                        ${item.relatedTutorials.map(t => `
-                            <div class="related-tutorial-card" onclick="openTutorialById('${t.id}')">
-                                <div class="tutorial-id">${t.id}</div>
+                        ${item.relatedTutorials.map(rt => `
+                            <div class="related-tutorial-card" onclick="openTutorialById('${rt.id}')">
+                                <div class="tutorial-id">${rt.id}</div>
                                 <div class="tutorial-info">
-                                    <div class="tutorial-title">${t.title}</div>
-                                    <div class="tutorial-reason">${t.reason}</div>
+                                    <div class="tutorial-title">${getLocalizedText(rt, 'title')}</div>
+                                    <div class="tutorial-reason">${getLocalizedText(rt, 'reason')}</div>
                                 </div>
                                 <span class="tutorial-arrow">${icons.chevronRight}</span>
                             </div>
@@ -1015,23 +1054,23 @@
                 </div>
             ` : ''}
 
-            <!-- 目標 -->
+            <!-- Goal -->
             <div class="modal-section goal-section">
-                <h3>${icons.target} 目標</h3>
-                <p class="goal-text">${details.goal}</p>
+                <h3>${icons.target} ${t.modalGoal}</h3>
+                <p class="goal-text">${getLocalizedText(details, 'goal')}</p>
             </div>
 
-            <!-- 準備セクション -->
+            <!-- Preparation Section -->
             ${prep ? `
                 <div class="modal-section preparation-section">
-                    <h3>${icons.folder} 準備（重要）</h3>
-                    <p class="section-hint">${prep.description}</p>
+                    <h3>${icons.folder} ${t.modalPreparation}</h3>
+                    <p class="section-hint">${getLocalizedText(prep, 'description')}</p>
 
-                    <!-- フォルダ構造 -->
+                    <!-- Folder Structure -->
                     ${prep.folderStructure ? `
                         <div class="folder-structure">
                             <div class="folder-structure-header">
-                                <span class="label">フォルダ構造</span>
+                                <span class="label">${t.folderStructure}</span>
                                 <button class="copy-btn-small" onclick="copyText(\`${escapeHtml(prep.folderStructure).replace(/`/g, '\\`')}\`)">
                                     ${icons.copy}
                                 </button>
@@ -1040,15 +1079,15 @@
                         </div>
                     ` : ''}
 
-                    <!-- 準備ファイル -->
+                    <!-- Preparation Files -->
                     ${prep.files && prep.files.length > 0 ? `
                         <div class="prep-files">
-                            <h4>作成するファイル</h4>
+                            <h4>${t.filesToCreate}</h4>
                             ${prep.files.map((file, idx) => `
                                 <div class="prep-file-item">
                                     <div class="prep-file-header" onclick="togglePrepFile(${idx})">
                                         <span class="file-path">${icons.file} ${file.path}</span>
-                                        <span class="file-desc">${file.description}</span>
+                                        <span class="file-desc">${getLocalizedText(file, 'description')}</span>
                                         <span class="toggle-icon">${icons.chevronRight}</span>
                                     </div>
                                     <div class="prep-file-content" id="prep-file-${idx}">
@@ -1064,30 +1103,30 @@
                         </div>
                     ` : ''}
 
-                    <!-- セットアップ手順 -->
+                    <!-- Setup Steps -->
                     ${prep.setupSteps && prep.setupSteps.length > 0 ? `
                         <div class="setup-steps">
-                            <h4>セットアップ手順</h4>
+                            <h4>${t.setupSteps}</h4>
                             <ol class="setup-steps-list">
-                                ${prep.setupSteps.map(step => `<li>${step}</li>`).join('')}
+                                ${getLocalizedArray(prep, 'setupSteps').map(step => `<li>${step}</li>`).join('')}
                             </ol>
                         </div>
                     ` : ''}
                 </div>
             ` : ''}
 
-            <!-- 実行ステップ -->
+            <!-- Execution Steps -->
             <div class="modal-section execution-section">
-                <h3>${icons.terminal} 実行手順</h3>
+                <h3>${icons.terminal} ${t.modalExecution}</h3>
                 <div class="handson-steps">
-                    ${details.steps.map(step => `
+                    ${getLocalizedArray(details, 'steps').map(step => `
                         <div class="step-item">
                             <div class="step-number">${step.step}</div>
                             <div class="step-content">
-                                <div class="step-title">${step.title}</div>
-                                ${step.description ? `<p class="step-description">${step.description}</p>` : ''}
+                                <div class="step-title">${getLocalizedText(step, 'title')}</div>
+                                ${step.description ? `<p class="step-description">${getLocalizedText(step, 'description')}</p>` : ''}
                                 <div class="step-prompt">
-                                    <div class="prompt-label">Claude Codeに入力:</div>
+                                    <div class="prompt-label">${t.inputToClaudeCode}</div>
                                     <div class="prompt-box">
                                         <code>${escapeHtml(step.prompt)}</code>
                                         <button class="copy-btn-small" onclick="copyText(\`${escapeHtml(step.prompt).replace(/`/g, '\\`').replace(/\\/g, '\\\\')}\`)">
@@ -1096,11 +1135,11 @@
                                     </div>
                                 </div>
                                 <div class="step-expected">
-                                    <span class="expected-label">期待結果:</span> ${step.expected}
+                                    <span class="expected-label">${t.expectedResult}</span> ${getLocalizedText(step, 'expected')}
                                 </div>
                                 ${step.tips ? `
                                     <div class="step-tips">
-                                        <span class="tips-label">${icons.info} ヒント:</span> ${step.tips}
+                                        <span class="tips-label">${icons.info} ${t.hint}:</span> ${getLocalizedText(step, 'tips')}
                                     </div>
                                 ` : ''}
                             </div>
@@ -1109,47 +1148,47 @@
                 </div>
             </div>
 
-            <!-- 成果物 -->
+            <!-- Outputs -->
             <div class="modal-section outputs-section">
-                <h3>${icons['check-circle']} 成果物</h3>
+                <h3>${icons['check-circle']} ${t.modalOutputs}</h3>
                 <div class="outputs-grid">
-                    ${details.outputs.map(o => {
+                    ${getLocalizedArray(details, 'outputs').map(o => {
                         const output = typeof o === 'string' ? { file: o, description: '' } : o;
                         return `
                             <div class="output-item">
                                 <span class="file-tag created">${output.file}</span>
-                                ${output.description ? `<span class="output-desc">${output.description}</span>` : ''}
+                                ${output.description ? `<span class="output-desc">${getLocalizedText(output, 'description')}</span>` : ''}
                             </div>
                         `;
                     }).join('')}
                 </div>
             </div>
 
-            <!-- 完了チェックリスト -->
+            <!-- Completion Checklist -->
             <div class="modal-section checklist-section">
-                <h3>${icons['check-circle']} 完了チェックリスト</h3>
+                <h3>${icons['check-circle']} ${t.modalChecklist}</h3>
                 <ul class="checklist">
-                    ${details.checkpoints.map(cp => `
+                    ${getLocalizedArray(details, 'checkpoints').map(cp => `
                         <li><label><input type="checkbox"> ${cp}</label></li>
                     `).join('')}
                 </ul>
             </div>
 
-            <!-- 学びのポイント -->
+            <!-- Learning Points -->
             ${details.learningPoints && details.learningPoints.length > 0 ? `
                 <div class="modal-section learning-section">
-                    <h3>${icons.lightbulb} 学びのポイント</h3>
+                    <h3>${icons.lightbulb} ${t.modalLearning}</h3>
                     <ul class="learning-points">
-                        ${details.learningPoints.map(lp => `<li>${lp}</li>`).join('')}
+                        ${getLocalizedArray(details, 'learningPoints').map(lp => `<li>${lp}</li>`).join('')}
                     </ul>
                 </div>
             ` : ''}
 
-            <!-- 関連スキル -->
+            <!-- Related Skills -->
             <div class="modal-section skills-section">
-                <h3>関連スキル</h3>
+                <h3>${t.modalRelatedSkills}</h3>
                 <div class="skills-list">
-                    ${item.skills.map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
+                    ${getLocalizedArray(item, 'skills').map(skill => `<span class="skill-tag">${skill}</span>`).join('')}
                 </div>
             </div>
         `;
@@ -1216,20 +1255,22 @@
     // ===================================
     window.copyCode = function(btn) {
         const code = btn.nextElementSibling.textContent;
+        const t = i18n[state.lang];
         navigator.clipboard.writeText(code).then(() => {
-            btn.innerHTML = `${icons.check} コピー完了`;
+            btn.innerHTML = `${icons.check} ${t.copyComplete}`;
             setTimeout(() => {
-                btn.innerHTML = `${icons.copy} コピー`;
+                btn.innerHTML = `${icons.copy} ${t.copy}`;
             }, 2000);
         });
     };
 
     window.copyText = function(text) {
+        const t = i18n[state.lang];
         navigator.clipboard.writeText(text).then(() => {
             // Show brief feedback
             const notification = document.createElement('div');
             notification.className = 'copy-notification';
-            notification.textContent = 'コピーしました';
+            notification.textContent = t.copied;
             document.body.appendChild(notification);
             setTimeout(() => notification.remove(), 1500);
         });
@@ -1261,9 +1302,11 @@
                 <div class="troubleshooting-solutions">
                     <h4>${icons['check-circle']} ${solutionsLabel}</h4>
                     <ul class="solution-list">
-                        ${getLocalizedArray(item, 'solutions').map(sol => {
+                        ${item.solutions.map(sol => {
                             const action = typeof sol === 'string' ? sol : getLocalizedText(sol, 'action');
-                            const priority = typeof sol === 'object' && sol.priority ? `<span class="priority-${sol.priority.toLowerCase()}">[${sol.priority}]</span> ` : '';
+                            const priorityText = typeof sol === 'object' && sol.priority ? getLocalizedText(sol, 'priority') : '';
+                            const priorityClass = typeof sol === 'object' && sol.priority ? (sol.priority === '高' ? 'high' : sol.priority === '中' ? 'med' : 'low') : '';
+                            const priority = priorityText ? `<span class="priority-${priorityClass}">[${priorityText}]</span> ` : '';
                             return `<li>${priority}${action}</li>`;
                         }).join('')}
                     </ul>
@@ -1414,8 +1457,9 @@
         // Update progress bar
         const fill = document.getElementById('checklistProgressFill');
         const text = document.getElementById('checklistProgressText');
+        const t = i18n[state.lang];
         if (fill) fill.style.width = percentage + '%';
-        if (text) text.textContent = `${completed} / ${total} 完了`;
+        if (text) text.textContent = `${completed} / ${total} ${t.checklistComplete}`;
 
         // Update item styling
         checkboxes.forEach(cb => {
