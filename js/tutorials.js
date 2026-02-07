@@ -6620,6 +6620,197 @@ const FAQ = [
         answer: ".claude/フォルダをGitリポジトリにコミットして共有します。skills/、commands/、agents/をバージョン管理することで、チーム全体で同じワークフローを使えます。",
         answer_en: "Commit the .claude/ folder to Git repository to share. Version control skills/, commands/, agents/ so the entire team uses the same workflows.",
         relatedTutorial: "02_01"
+    },
+    // === 第2回研修 Q&A（2026-02-06追加） ===
+    {
+        id: 21,
+        category: "料金・制限",
+        category_en: "Pricing & Limits",
+        question: "無償版でも研修は受講できますか？",
+        question_en: "Can I take the training with the free version?",
+        answer: "はい、無償版でも研修は受講可能です。ただし、メッセージ送信回数の制限、レスポンス速度の低下、一部最新機能が利用できない可能性があります。実務で継続的に使用する場合はPro版の利用を推奨します。",
+        answer_en: "Yes, you can take the training with the free version. However, there are message limits, potentially slower response times, and some latest features may be unavailable. Pro version is recommended for continuous business use.",
+        relatedTutorial: "00_01"
+    },
+    {
+        id: 22,
+        category: "操作",
+        category_en: "Operations",
+        question: "CLIで直接入力する場合とVSCodeタブから入力する場合の違いは？",
+        question_en: "What's the difference between CLI input and VSCode tab input?",
+        answer: "VSCodeタブ（拡張機能）からの入力には複数のメリットがあります。コード差分や編集内容がGUI上で確認しやすい、複数ファイルの編集を一括で確認・適用できる、コード補完やシンタックスハイライトと連携、変更前後の比較が視覚的に可能、チャット履歴がGUI上で管理しやすいなど。CLI版は軽量で高速ですが、複雑な編集やレビューにはVSCode版が便利です。",
+        answer_en: "VSCode tab (extension) input has multiple benefits: easier to see code diffs and edits in GUI, batch review/apply multi-file edits, integration with code completion and syntax highlighting, visual before/after comparison, easier chat history management. CLI is lightweight and fast, but VSCode is better for complex edits and reviews.",
+        relatedTutorial: "00_01"
+    },
+    {
+        id: 23,
+        category: "操作",
+        category_en: "Operations",
+        question: "2回実行してブラッシュアップしても問題ないですか？",
+        question_en: "Is it okay to run twice and refine the result?",
+        answer: "まったく問題ありません。むしろ推奨される使い方です。Claude Codeは対話を重ねることで、より正確な要件理解、より品質の高い成果物、より適切な実装が得られます。初回の結果に満足できなければ、何度でも改善を依頼してください。",
+        answer_en: "No problem at all. This is actually the recommended approach. Through continued dialogue, Claude Code achieves better requirement understanding, higher quality deliverables, and more appropriate implementation. Request improvements as many times as needed.",
+        relatedTutorial: "01_02"
+    },
+    {
+        id: 24,
+        category: "設定",
+        category_en: "Configuration",
+        question: "生成されるCLAUDE.mdは全員同じ内容になりますか？",
+        question_en: "Will the generated CLAUDE.md be the same for everyone?",
+        answer: "いいえ、全員が異なる内容になる可能性が高いです。CLAUDE.mdはClaudeとの対話内容（プロンプトの違い）、プロジェクトの状態やファイル構成、生成時のモデルの確率的な振る舞いによって変化します。同じプロンプトでも、細かい表現やセクションの順序が異なることがあります。これは正常な動作です。",
+        answer_en: "No, content will likely differ for everyone. CLAUDE.md varies based on dialogue content (prompt differences), project state and file structure, and model's probabilistic behavior. Even with the same prompt, expressions and section order may differ. This is normal behavior.",
+        relatedTutorial: "01_01"
+    },
+    {
+        id: 25,
+        category: "操作",
+        category_en: "Operations",
+        question: "コンテキスト使用率はどうやって確認しますか？",
+        question_en: "How do I check context usage?",
+        answer: "コンテキスト使用率は /context コマンドで確認できます。実行すると、現在のコンテキスト使用量がパーセンテージで表示されます（例：22.6%）。一部のバージョンでエラーが発生する場合は、Claude Codeを最新バージョンにアップデートしてください（npm install -g @anthropic-ai/claude-code@latest）。",
+        answer_en: "Check context usage with the /context command. It displays current context usage as a percentage (e.g., 22.6%). If you get errors on some versions, update Claude Code to the latest version (npm install -g @anthropic-ai/claude-code@latest).",
+        relatedTutorial: "00_03"
+    },
+    {
+        id: 26,
+        category: "操作",
+        category_en: "Operations",
+        question: "ターミナルのClaude Codeで過去のやり取りを表示する方法は？",
+        question_en: "How to view past conversations in terminal Claude Code?",
+        answer: "3つの方法があります。1) claude history で履歴を表示 2) claude --session <session-id> でセッションIDを指定して再開 3) cat ~/.claude/sessions/<session-id>/transcript.json でログファイルを確認。セッションは自動的に保存されるため、次回起動時に前回の続きから再開することも可能です。",
+        answer_en: "Three methods: 1) claude history to show history 2) claude --session <session-id> to resume specific session 3) cat ~/.claude/sessions/<session-id>/transcript.json to check log files. Sessions are saved automatically, so you can resume from where you left off.",
+        relatedTutorial: "01_03"
+    },
+    {
+        id: 27,
+        category: "操作",
+        category_en: "Operations",
+        question: "Claudeが作業中に会話を入れても大丈夫ですか？複数起動は可能ですか？",
+        question_en: "Can I chat while Claude is working? Can I run multiple instances?",
+        answer: "はい、どちらも可能です。作業中でも会話を入れることができ、Claudeは割り込みを検知して適切に対応します。複数のClaudeセッションを並行で立ち上げることも可能で、各セッションは独立したコンテキストを持ちます。ただし、同一ファイルを複数セッションで編集する場合は競合に注意してください。",
+        answer_en: "Yes to both. You can chat during work - Claude detects interruptions and responds appropriately. You can also run multiple Claude sessions in parallel, each with independent context. Be careful of conflicts when editing the same file from multiple sessions.",
+        relatedTutorial: "03_05"
+    },
+    {
+        id: 28,
+        category: "設定",
+        category_en: "Configuration",
+        question: "別のフォルダでCLAUDE.mdを作成した場合、情報は自動共有されますか？",
+        question_en: "If I create CLAUDE.md in another folder, is information automatically shared?",
+        answer: "いいえ、自動的には共有されません。各CLAUDE.mdはそのファイルが置かれたディレクトリ配下にのみ適用され、異なるフォルダのCLAUDE.mdは互いに独立しています。ただし、グローバルCLAUDE.md（~/.claude/CLAUDE.md）は全プロジェクトで共有されます。プロジェクト固有の設定はプロジェクト内のCLAUDE.mdに記述してください。",
+        answer_en: "No, they are not automatically shared. Each CLAUDE.md applies only to its directory and subdirectories - different folder CLAUDE.mds are independent. However, global CLAUDE.md (~/.claude/CLAUDE.md) is shared across all projects. Write project-specific settings in the project's CLAUDE.md.",
+        relatedTutorial: "01_01"
+    },
+    {
+        id: 29,
+        category: "設定",
+        category_en: "Configuration",
+        question: "対話次第でグローバルルールが予期せず追記されることはありますか？",
+        question_en: "Can global rules be unexpectedly added through dialogue?",
+        answer: "いいえ、Claude Codeが自動的にCLAUDE.mdを編集することは基本的にありません。編集が発生するのは、ユーザーが明示的に「CLAUDE.mdに追記して」「このルールを記憶して」と指示した場合のみです。重要な変更の前にはClaudeが確認を求め、ファイル編集の際は差分が表示されます。予期せぬ追記を防ぐため、重要なCLAUDE.mdはバージョン管理（Git）で管理することを推奨します。",
+        answer_en: "No, Claude Code basically doesn't automatically edit CLAUDE.md. Edits only occur when users explicitly instruct 'add to CLAUDE.md' or 'remember this rule'. Claude asks for confirmation before important changes and shows diffs for file edits. Version control (Git) is recommended to prevent unexpected additions.",
+        relatedTutorial: "01_01"
+    },
+    {
+        id: 30,
+        category: "チーム",
+        category_en: "Team",
+        question: "チーム配布時、CLAUDE.mdに書くべきかカスタムコマンドに書くべきか？",
+        question_en: "For team distribution, should I write in CLAUDE.md or custom commands?",
+        answer: "用途に応じて使い分けます。CLAUDE.mdには、プロジェクト全体に適用されるコーディング規約、アーキテクチャの原則、禁止事項やセキュリティルールなど、チーム全員が常に守るべきルールを記載。カスタムコマンド（Skill）には、特定のタスク専用の詳細手順、繰り返し実行する定型作業、テンプレートを使った生成処理などを記載します。CLAUDE.mdは簡潔に保ち（200-300行程度）、詳細な手順はSkillに分離すると保守性と再利用性が向上します。",
+        answer_en: "Use based on purpose. CLAUDE.md: project-wide coding conventions, architecture principles, security rules - rules everyone must follow. Custom commands (Skills): task-specific detailed procedures, repetitive workflows, template-based generation. Keep CLAUDE.md concise (200-300 lines) and separate detailed procedures into Skills for better maintainability and reusability.",
+        relatedTutorial: "02_01"
+    },
+    {
+        id: 31,
+        category: "操作",
+        category_en: "Operations",
+        question: "前回のセッションの続きから始めることは可能ですか？",
+        question_en: "Can I continue from the previous session?",
+        answer: "はい、可能です。CLI版ではセッションは自動的に保存され、次回起動時に前回の続きから再開できます。明示的にセッションを指定する場合は claude --session <session-id> を使用します。VSCode拡張機能の場合はチャット履歴が自動保存されます。注意点として、コンテキストウィンドウには上限があるため長時間のセッションは自動的に圧縮されます。重要な情報はCLAUDE.mdやドキュメントに記録することを推奨します。",
+        answer_en: "Yes. In CLI, sessions are automatically saved and you can resume from where you left off. Use claude --session <session-id> to specify a session explicitly. VSCode extension auto-saves chat history. Note: context window has limits, so long sessions are automatically compressed. Record important information in CLAUDE.md or documents.",
+        relatedTutorial: "01_03"
+    },
+    {
+        id: 32,
+        category: "設定",
+        category_en: "Configuration",
+        question: "グローバルCLAUDE.mdとプロジェクトCLAUDE.mdで相反する指示がある場合、どちらが優先されますか？",
+        question_en: "Which takes priority when global and project CLAUDE.md have conflicting instructions?",
+        answer: "プロジェクトのCLAUDE.mdが優先されます。優先順位は、1) プロジェクト内のCLAUDE.md（最優先）、2) グローバルCLAUDE.md（~/.claude/CLAUDE.md）、3) デフォルトのシステムルール、の順です。プロジェクトのCLAUDE.mdで例外を定義することも可能です。相反する指示は混乱を招くため、明示的に「例外」として記述し、グローバルには汎用的なルール、プロジェクトには固有のルールを記述することを推奨します。",
+        answer_en: "Project CLAUDE.md takes priority. Order: 1) Project CLAUDE.md (highest), 2) Global CLAUDE.md (~/.claude/CLAUDE.md), 3) Default system rules. You can define exceptions in project CLAUDE.md. Conflicting instructions cause confusion, so explicitly write as 'exceptions'. Recommended: generic rules in global, specific rules in project.",
+        relatedTutorial: "01_01"
+    },
+    {
+        id: 33,
+        category: "設定",
+        category_en: "Configuration",
+        question: "CLAUDE.mdの行数制限がある中、ファイル参照で分割すると精度は維持されますか？",
+        question_en: "With CLAUDE.md line limits, does splitting with file references maintain accuracy?",
+        answer: "はい、ファイル参照による分割は精度維持に効果があります。CLAUDE.mdは常にコンテキストに読み込まれますが、参照ファイルは必要に応じて読み込まれるため、コンテキストの節約になります。保守性向上（専門分野ごとにファイルを分けて更新・管理が容易に）、再利用性（共通ルールを複数プロジェクトで参照可能）のメリットもあります。CLAUDE.md自体は200-300行に収め、参照ファイルも1ファイル500行以内を推奨します。つまり、ファイル参照は人間の見通しだけでなく、Claudeのコンテキスト効率化にも貢献します。",
+        answer_en: "Yes, splitting with file references effectively maintains accuracy. CLAUDE.md is always loaded into context, but referenced files are loaded as needed, saving context. Benefits: maintainability (easier to update/manage separate files by domain), reusability (share common rules across projects). Keep CLAUDE.md at 200-300 lines, referenced files under 500 lines each. File references benefit both human readability and Claude's context efficiency.",
+        relatedTutorial: "01_01"
+    },
+    {
+        id: 34,
+        category: "高度な機能",
+        category_en: "Advanced Features",
+        question: "Everything Claude Codeとは何ですか？",
+        question_en: "What is Everything Claude Code?",
+        answer: "Everything Claude Code（github.com/affaan-m/everything-claude-code）はAnthropicハッカソン優勝者が作成したClaude Code用の設定テンプレートです。10ヶ月以上の実践から生まれた、Agents、Skills、Commands、Hooksなどを含む包括的な設定テンプレート集です。導入は /plugin marketplace add affaan-m/everything-claude-code で可能（要：Claude Code CLI v2.1.0以上）。一部のSkillsから試して、チームに合うものを選定し、既存のCLAUDE.mdと競合しないか確認しながら段階的に導入することを推奨します。",
+        answer_en: "Everything Claude Code (github.com/affaan-m/everything-claude-code) is a configuration template for Claude Code created by Anthropic hackathon winners. A comprehensive template collection including Agents, Skills, Commands, Hooks, born from 10+ months of practice. Install with /plugin marketplace add affaan-m/everything-claude-code (requires Claude Code CLI v2.1.0+). Recommend gradually adopting: try some Skills first, check for conflicts with existing CLAUDE.md.",
+        relatedTutorial: "02_01"
+    },
+    {
+        id: 35,
+        category: "チーム",
+        category_en: "Team",
+        question: "複数のプロジェクトを同時進行する場合のベストプラクティスは？",
+        question_en: "Best practices for working on multiple projects simultaneously?",
+        answer: "複数のVSCodeウィンドウで作業しましょう。code /path/to/project-a と code -n /path/to/project-b で別ウィンドウを開けます。各ウィンドウでClaude Codeセッションが独立して動作し、CLAUDE.mdも個別に読み込まれます。共通ルールは参照形式で管理すると効率的です。グローバル（~/.claude/CLAUDE.md）と共有ルール（~/shared-claude-config/rules/）を作成し、各プロジェクトのCLAUDE.mdから参照+固有ルールを追加する構成が推奨です。",
+        answer_en: "Work with multiple VSCode windows. Use code /path/to/project-a and code -n /path/to/project-b to open separate windows. Each window runs independent Claude Code sessions with separately loaded CLAUDE.md. Manage common rules with references efficiently. Recommended: create global (~/.claude/CLAUDE.md) and shared rules (~/shared-claude-config/rules/), then reference from each project's CLAUDE.md + add project-specific rules.",
+        relatedTutorial: "03_05"
+    },
+    {
+        id: 36,
+        category: "操作",
+        category_en: "Operations",
+        question: "Claudeのバージョンアップは追従すべきですか？",
+        question_en: "Should I follow Claude version updates?",
+        answer: "まずはバックアップを取ってから更新しましょう（cp -r ~/.claude ~/.claude.backup && npm update -g @anthropic-ai/claude-code）。重要度の低いプロジェクトで先に動作確認し、問題なければ本番プロジェクトに適用します。安心してよい理由：Claude APIは後方互換性を重視、CLAUDE.mdで明示的にルールを記述していれば影響は最小限、Gitで管理していれば問題があっても戻せる、バグ修正やセキュリティパッチの恩恵を受けられる。更新頻度の目安：パッチ（0.0.x）は気にせず更新、マイナー（0.x.0）はリリースノート確認後、メジャー（x.0.0）はテスト後に慎重に。",
+        answer_en: "First backup then update (cp -r ~/.claude ~/.claude.backup && npm update -g @anthropic-ai/claude-code). Test on less important projects first, then apply to production if no issues. Reasons to feel safe: Claude API prioritizes backward compatibility, explicit rules in CLAUDE.md minimize impact, Git lets you rollback, you get bug fixes and security patches. Update frequency: patch (0.0.x) freely, minor (0.x.0) after checking release notes, major (x.0.0) carefully after testing.",
+        relatedTutorial: "00_01"
+    },
+    {
+        id: 37,
+        category: "ベストプラクティス",
+        category_en: "Best Practices",
+        question: "生成物が多すぎてチェックに時間がかかる場合はどうすべき？",
+        question_en: "What to do when generated output is too much to check?",
+        answer: "これは「人間ボトルネック問題」とも言うべき課題です。まず指示を具体的に絞りましょう（×「ユーザー管理機能を作って」→ ◯「src/api/user.ts のみ、ユーザー登録機能を作成。既存のauth.tsは変更しない」）。CLAUDE.mdで生成量を制限（一度に変更するファイルは最大3つまで、変更が複数ファイルにまたがる場合は事前に計画を提示、テストコードは明示的に指示された場合のみ生成）。さらにPlan Modeで事前に計画を確認し、大きすぎる場合は分割を指示。diff表示を活用して変更箇所だけを集中的にレビュー。生成量のコントロールがAIツール活用の鍵です。",
+        answer_en: "This is the 'human bottleneck problem'. First, narrow instructions (Bad: 'Create user management feature' → Good: 'Create user registration in src/api/user.ts only. Don't modify existing auth.ts'). Limit generation in CLAUDE.md (max 3 files per change, present plan for multi-file changes, generate test code only when explicitly requested). Use Plan Mode to review plans first, request splits if too large. Use diff display to focus review on changes. Controlling generation amount is key to AI tool utilization.",
+        relatedTutorial: "01_05"
+    },
+    {
+        id: 38,
+        category: "設定",
+        category_en: "Configuration",
+        question: "CLAUDE.mdの継承ルールを教えてください（サブディレクトリの場合）",
+        question_en: "Explain CLAUDE.md inheritance rules (for subdirectories)",
+        answer: "Claude Codeは実行ディレクトリから親に向かってCLAUDE.mdを探し、見つかったすべてを適用します。例：~/.claude/CLAUDE.md → /main_pj/CLAUDE.md → /main_pj/suba_pj/CLAUDE.md。suba_pj配下では、main_pj/CLAUDE.mdとsuba_pj/CLAUDE.mdの両方が適用されます。並列ディレクトリ（subb_pj）のCLAUDE.mdは適用されません。優先順位はサブプロジェクト > プロジェクトルート > グローバル。確認方法：cd /main_pj/suba_pj && claude で「現在読み込まれているCLAUDE.mdファイルを教えてください」と質問。",
+        answer_en: "Claude Code searches for CLAUDE.md from execution directory upward to parent, applying all found. Example: ~/.claude/CLAUDE.md → /main_pj/CLAUDE.md → /main_pj/suba_pj/CLAUDE.md. In suba_pj, both main_pj/CLAUDE.md and suba_pj/CLAUDE.md apply. Parallel directory (subb_pj) CLAUDE.md doesn't apply. Priority: subproject > project root > global. To verify: cd /main_pj/suba_pj && claude then ask 'What CLAUDE.md files are currently loaded?'",
+        relatedTutorial: "01_01"
+    },
+    {
+        id: 39,
+        category: "ベストプラクティス",
+        category_en: "Best Practices",
+        question: "ルールを徹底させる方法と考慮漏れを減らす方法は？",
+        question_en: "How to enforce rules strictly and reduce oversight?",
+        answer: "【ルールの徹底】ルールを具体的かつ強制的に書きます。[CRITICAL]違反厳禁として禁止事項を明示、コード生成前のチェックリスト（変更対象ファイルは3つ以内か？など）を記載。優先度を[CRITICAL]、[IMPORTANT]、[RECOMMENDED]で明示し、ルール違反が起きたら失敗例をCLAUDE.mdに追記してフィードバックループを回します。【考慮漏れの削減】質問テンプレートをCLAUDE.mdに記載（エッジケース、影響範囲、セキュリティ、テスト）。バグ修正時のチェックリスト（根本原因を特定したか？同じパターンが他にもないか？）。Plan Modeで段階的に深堀り、実装後に別セッションでAIにレビューさせる手法も有効です。",
+        answer_en: "【Enforcing rules】Write rules specifically and mandatorily. Mark prohibitions as [CRITICAL] violations forbidden, include pre-code generation checklist (max 3 files to change? etc.). Mark priorities as [CRITICAL], [IMPORTANT], [RECOMMENDED]. Add failure examples to CLAUDE.md when violations occur for feedback loop. 【Reducing oversight】Add question templates to CLAUDE.md (edge cases, impact scope, security, tests). Bug fix checklist (identified root cause? same pattern elsewhere?). Dig deeper in stages with Plan Mode, have AI review in separate session after implementation.",
+        relatedTutorial: "01_02"
     }
 ];
 
