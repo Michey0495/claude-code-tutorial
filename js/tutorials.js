@@ -190,16 +190,16 @@ const TUTORIALS = {
             tags: ["コンテキスト", "トークン", "最適化"],
             tags_en: ["Context", "Token", "Optimization"],
             content: {
-                summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。Claude 3.5 Sonnetは約200Kトークン（日本語で約15万字）ですが、効率的に使わなければ性能が劣化します。",
-                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. Claude 3.5 Sonnet has about 200K tokens (~150K Japanese characters), but performance degrades without efficient use.",
+                summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。2026年3月現在、Opus 4.6 / Sonnet 4.6 / Haiku 4.5はいずれも最大1Mトークン（日本語で約75万字）に対応していますが、効率的に使わなければ性能が劣化します。",
+                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. As of March 2026, Opus 4.6 / Sonnet 4.6 / Haiku 4.5 all support up to 1M tokens, but performance degrades without efficient use.",
                 keyPoints: [
-                    "Claude 3.5 Sonnetは約200Kトークン（日本語で約15万字）",
+                    "Opus 4.6 / Sonnet 4.6 / Haiku 4.5 は最大1Mトークン対応（日本語で約75万字）",
                     "コンテキストが埋まるとAIの性能が劣化（Context Rot）",
                     "不要な情報を送らない、必要な情報を効率的に渡すことが重要",
-                    "/context コマンドで使用量を確認できる"
+                    "/cost コマンドで使用量と費用を確認できる"
                 ],
                 keyPoints_en: [
-                    "Claude 3.5 Sonnet has ~200K tokens (~150K Japanese characters)",
+                    "Opus 4.6 / Sonnet 4.6 / Haiku 4.5 support up to 1M tokens",
                     "AI performance degrades when context fills up (Context Rot)",
                     "Important to not send unnecessary info, pass needed info efficiently",
                     "Check usage with /context command"
@@ -473,6 +473,148 @@ const TUTORIALS = {
                     checkpoints_en: [
                         "Operations work without using programming terminology",
                         "Natural language requests are understood"
+                    ]
+                }
+            }
+        },
+        {
+            id: "00_07",
+            number: "00_07",
+            title: "2026年のClaude Code - 最新モデルと新機能",
+            title_en: "Claude Code in 2026 - Latest Models & Features",
+            description: "Opus 4.6 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1の新機能群を把握する。",
+            description_en: "Understand Opus 4.6 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and v2.1 new features.",
+            icon: "zap",
+            tags: ["2026年最新", "モデル", "v2.1"],
+            tags_en: ["2026 Latest", "Models", "v2.1"],
+            content: {
+                summary: "2026年3月時点でClaude Codeはv2.1に到達。Opus 4.6（最高性能）、Sonnet 4.6（日常推奨）、Haiku 4.5（軽量高速）の3モデル体制で、全モデルが1Mトークンのコンテキストウィンドウに対応。opusplanエイリアスで計画時はOpus、実行時はSonnetに自動切替するハイブリッド運用も可能。",
+                summary_en: "As of March 2026, Claude Code has reached v2.1. Three model tiers: Opus 4.6 (highest performance), Sonnet 4.6 (daily recommended), Haiku 4.5 (lightweight fast). All models support 1M token context. The opusplan alias auto-switches between Opus for planning and Sonnet for execution.",
+                keyPoints: [
+                    "Opus 4.6: $5/$25 per 1Mトークン。複雑なアーキテクチャ判断・微妙なバグに最適",
+                    "Sonnet 4.6: $3/$15 per 1Mトークン。日常的なコード生成に最適（推奨）",
+                    "Haiku 4.5: $1/$5 per 1Mトークン。軽量タスク・トリアージ向け",
+                    "opusplan: 計画フェーズ=Opus、実行フェーズ=Sonnetの自動切替",
+                    "プロンプトキャッシュで90%、Batch APIで50%のコスト削減が可能",
+                    "v2.1の主要新機能: Voice Mode, /loop, /teleport, Shift+Enter改行, Skills拡張"
+                ],
+                keyPoints_en: [
+                    "Opus 4.6: $5/$25 per 1M tokens. Best for complex architecture decisions",
+                    "Sonnet 4.6: $3/$15 per 1M tokens. Best for daily coding (recommended)",
+                    "Haiku 4.5: $1/$5 per 1M tokens. For lightweight tasks & triage",
+                    "opusplan: Auto-switch Opus for planning, Sonnet for execution",
+                    "90% cost reduction with prompt caching, 50% with Batch API",
+                    "v2.1 key features: Voice Mode, /loop, /teleport, Shift+Enter newline, Skills expansion"
+                ],
+                newFeatures: [
+                    { name: "/voice", desc: "スペースバーでpush-to-talk音声入力（段階的ロールアウト中）" },
+                    { name: "/loop", desc: "指定間隔でプロンプトを繰り返し実行。セッション内の軽量cron" },
+                    { name: "/teleport", desc: "ローカルとclaude.ai Web間でセッションを転送・復帰" },
+                    { name: "Shift+Enter", desc: "プロンプト入力内で改行が可能に" },
+                    { name: "Agent Teams", desc: "複数Claudeセッションがチームとして協働（実験的）" },
+                    { name: "MCP Elicitation", desc: "MCPサーバーが対話的に構造化入力を要求できる仕組み" }
+                ],
+                handson: {
+                    title: "モデルとバージョンを確認する",
+                    title_en: "Check Models and Version",
+                    goal: "使用中のモデル・バージョン・コストを確認し、モデル切替を体験する",
+                    goal_en: "Check current model, version, cost, and experience model switching",
+                    prerequisites: ["Claude Codeがインストール済み"],
+                    prerequisites_en: ["Claude Code is installed"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "バージョンとコストを確認",
+                            action_en: "Check version and cost",
+                            prompt: "/cost",
+                            prompt_en: "/cost",
+                            expected: "現在のモデル、トークン使用量、概算費用が表示される",
+                            expected_en: "Current model, token usage, and estimated cost are displayed"
+                        },
+                        {
+                            step: 2,
+                            action: "Shift+Tabでモード切替を体験",
+                            action_en: "Experience mode switching with Shift+Tab",
+                            prompt: "Shift+Tabを押す → Normal → Auto-accept → Plan の切替を確認",
+                            prompt_en: "Press Shift+Tab → Confirm Normal → Auto-accept → Plan switching",
+                            expected: "ステータスバーにモードが表示される",
+                            expected_en: "Mode is shown in status bar"
+                        }
+                    ],
+                    checkpoints: [
+                        "使用中のモデルとバージョンが確認できた",
+                        "Shift+Tabでのモード切替を理解した"
+                    ],
+                    checkpoints_en: [
+                        "Confirmed current model and version",
+                        "Understood mode switching with Shift+Tab"
+                    ]
+                }
+            }
+        },
+        {
+            id: "00_08",
+            number: "00_08",
+            title: "IDE統合 - VS Code / JetBrains",
+            title_en: "IDE Integration - VS Code / JetBrains",
+            description: "VS Code拡張とJetBrainsプラグインの導入方法、ネイティブパネル、インラインdiffレビュー。",
+            description_en: "VS Code extension and JetBrains plugin setup, native panel, inline diff review.",
+            icon: "layout",
+            tags: ["VS Code", "JetBrains", "IDE"],
+            tags_en: ["VS Code", "JetBrains", "IDE"],
+            content: {
+                summary: "Claude Codeはターミナル単体でも動作するが、VS Code拡張やJetBrainsプラグインと組み合わせると生産性が跳ね上がる。VS Code版ではネイティブパネル、インラインdiff、Plan Modeの計画UI表示、@メンションによるファイル指定、複数同時会話に対応。JetBrains版はBeta提供中で、IDE内ターミナルとdiffビューアが連動する。",
+                summary_en: "Claude Code works standalone in terminal, but combining with VS Code extension or JetBrains plugin dramatically boosts productivity. VS Code provides native panel, inline diff, Plan Mode UI, @mentions for files, and multiple simultaneous conversations. JetBrains plugin is in Beta with terminal and diff viewer integration.",
+                keyPoints: [
+                    "VS Code: 公式拡張機能 'Claude Code' をMarketplaceからインストール",
+                    "ネイティブパネルでチャット、インライン編集、IDE形式のdiffレビュー",
+                    "Plan Modeの計画をUIで確認・編集してから承認できる",
+                    "@メンションでファイル名や行範囲を直接指定可能",
+                    "複数会話を別タブ・ウィンドウで同時に開ける",
+                    "JetBrains: 'Claude Code [Beta]' プラグインで IntelliJ / PyCharm / WebStorm 等に対応"
+                ],
+                keyPoints_en: [
+                    "VS Code: Install official 'Claude Code' extension from Marketplace",
+                    "Native panel for chat, inline editing, IDE-style diff review",
+                    "Review and edit Plan Mode plans in UI before approving",
+                    "@mentions to directly specify file names and line ranges",
+                    "Open multiple conversations in separate tabs/windows",
+                    "JetBrains: 'Claude Code [Beta]' plugin supports IntelliJ/PyCharm/WebStorm etc."
+                ],
+                handson: {
+                    title: "VS Code拡張を試す",
+                    title_en: "Try VS Code Extension",
+                    goal: "VS Code拡張をインストールし、ネイティブパネルからClaude Codeを使う",
+                    goal_en: "Install VS Code extension and use Claude Code from the native panel",
+                    prerequisites: ["VS Codeがインストール済み"],
+                    prerequisites_en: ["VS Code is installed"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "VS Code Marketplaceで 'Claude Code' を検索してインストール",
+                            action_en: "Search 'Claude Code' in VS Code Marketplace and install",
+                            prompt: "拡張機能パネル → 'Claude Code' で検索 → インストール",
+                            prompt_en: "Extensions panel → Search 'Claude Code' → Install",
+                            expected: "サイドバーにClaude Codeパネルが表示される",
+                            expected_en: "Claude Code panel appears in sidebar"
+                        },
+                        {
+                            step: 2,
+                            action: "パネルからファイルを@指定して質問",
+                            action_en: "Ask a question by @mentioning a file from the panel",
+                            prompt: "@package.json の依存関係を要約して",
+                            prompt_en: "@package.json summarize the dependencies",
+                            expected: "パネル内で回答が表示され、ファイル内容を参照した応答が得られる",
+                            expected_en: "Response appears in panel, referencing file contents"
+                        }
+                    ],
+                    checkpoints: [
+                        "VS Code拡張が正常にインストールできた",
+                        "@メンションでファイルを指定できた"
+                    ],
+                    checkpoints_en: [
+                        "VS Code extension installed successfully",
+                        "Successfully used @mention to specify files"
                     ]
                 }
             }
@@ -957,6 +1099,213 @@ const TUTORIALS = {
                     checkpoints_en: [
                         "Habit of using /clear at task boundaries",
                         "Consider /clear after 2 failures"
+                    ]
+                }
+            }
+        },
+        {
+            id: "01_07",
+            number: "01_07",
+            title: "Plan Mode 完全ガイド",
+            title_en: "Plan Mode Complete Guide",
+            description: "Shift+Tab×2 または /plan で起動する読み取り専用モード。コードを変更せず、計画だけを練る。",
+            description_en: "Read-only mode activated with Shift+Tab×2 or /plan. Plans without modifying code.",
+            icon: "map",
+            tags: ["Plan Mode", "計画", "Shift+Tab"],
+            tags_en: ["Plan Mode", "Planning", "Shift+Tab"],
+            content: {
+                summary: "Plan Modeは「まず考え、次に動く」を強制する仕組み。Shift+Tabを2回押すか /plan コマンドで起動する。Claudeはコードベースを探索し、質問し、詳細な計画を立てるが、ファイル変更は一切行わない。計画をレビュー・承認した後にNormal Modeに戻して実行する流れが正攻法。",
+                summary_en: "Plan Mode enforces 'think first, act second.' Activate with Shift+Tab×2 or /plan. Claude explores the codebase, asks questions, and creates detailed plans without modifying files. Review and approve the plan, then switch to Normal Mode for execution.",
+                keyPoints: [
+                    "Shift+Tab×2 または /plan で起動（/plan 認証機能の設計 のように引数付きも可）",
+                    "利用可能なツール: Read, Glob, Grep, Task, WebFetch, WebSearch（書き込み系は全て無効）",
+                    "不要なケース: タイポ修正、1行変更など明白な小修正",
+                    "有効なケース: アプローチが不確実、複数ファイルにまたがる変更、不慣れなコードベース",
+                    "VS Code拡張ではPlan Modeの計画をUI上で確認・編集してから承認できる",
+                    "承認後はShift+TabでNormal Modeに戻し、計画に沿って実行させる"
+                ],
+                keyPoints_en: [
+                    "Activate with Shift+Tab×2 or /plan (can pass arguments like /plan auth design)",
+                    "Available tools: Read, Glob, Grep, Task, WebFetch, WebSearch (all write tools disabled)",
+                    "Not needed: typo fixes, single-line changes, obvious small fixes",
+                    "Effective for: uncertain approach, multi-file changes, unfamiliar codebase",
+                    "VS Code extension allows reviewing and editing plans in UI before approval",
+                    "After approval, switch to Normal Mode with Shift+Tab to execute the plan"
+                ],
+                handson: {
+                    title: "Plan Modeで機能設計を体験する",
+                    title_en: "Experience Feature Design in Plan Mode",
+                    goal: "Plan Modeで計画を立て、承認後に実行する一連の流れを体験",
+                    goal_en: "Experience the full flow of planning in Plan Mode, approving, then executing",
+                    prerequisites: ["何かしらのプロジェクトフォルダを開いている"],
+                    prerequisites_en: ["Any project folder is open"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "Plan Modeに切り替える",
+                            action_en: "Switch to Plan Mode",
+                            prompt: "/plan このプロジェクトにダークモード切替機能を追加したい。どのファイルを変更すべきか計画を立てて。",
+                            prompt_en: "/plan I want to add a dark mode toggle to this project. Plan which files to modify.",
+                            expected: "Claudeがファイルを探索し、変更計画を提示する（コードは変更しない）",
+                            expected_en: "Claude explores files and presents a modification plan (no code changes)"
+                        },
+                        {
+                            step: 2,
+                            action: "計画を承認してNormal Modeで実行",
+                            action_en: "Approve plan and execute in Normal Mode",
+                            prompt: "Shift+TabでNormal Modeに戻り、「この計画で実行して」と指示",
+                            prompt_en: "Switch to Normal Mode with Shift+Tab and say 'Execute this plan'",
+                            expected: "計画に沿ってファイルの変更が行われる",
+                            expected_en: "Files are modified according to the plan"
+                        }
+                    ],
+                    checkpoints: [
+                        "Plan Modeではファイル変更が発生しなかった",
+                        "計画の内容を確認してから実行に移れた"
+                    ],
+                    checkpoints_en: [
+                        "No file changes occurred in Plan Mode",
+                        "Could review the plan before moving to execution"
+                    ]
+                }
+            }
+        },
+        {
+            id: "01_08",
+            number: "01_08",
+            title: "CLAUDE.mdの4階層メモリシステム",
+            title_en: "CLAUDE.md 4-Layer Memory System",
+            description: "ユーザー・プロジェクト共有・ローカル・自動メモリの4層で、Claudeの記憶を管理する。",
+            description_en: "Manage Claude's memory across 4 layers: user, project-shared, local, and auto-memory.",
+            icon: "layers",
+            tags: ["CLAUDE.md", "メモリ", "設定階層"],
+            tags_en: ["CLAUDE.md", "Memory", "Settings Hierarchy"],
+            content: {
+                summary: "CLAUDE.mdは単なる設定ファイルではなく、4階層で構成されるメモリシステムとして機能する。ユーザーレベル（~/.claude/CLAUDE.md）、プロジェクト共有（./CLAUDE.md、Git管理）、プロジェクトローカル（.claude/settings.local.json）、自動メモリ（~/.claude/projects/配下）の4層。2026年1月のv2.0からは .claude/rules/ フォルダによるモジュラールール読み込みにも対応。最適なファイルサイズは200行以下で、命令形で書くとルール適用率が高い。",
+                summary_en: "CLAUDE.md functions as a 4-layer memory system. User level (~/.claude/CLAUDE.md), project-shared (./CLAUDE.md, Git-managed), project-local (.claude/settings.local.json), and auto-memory (~/.claude/projects/). Since v2.0 in January 2026, modular rule loading via .claude/rules/ folder is supported. Optimal file size is under 200 lines, and imperative form has higher rule application rate.",
+                keyPoints: [
+                    "~/.claude/CLAUDE.md: 全プロジェクト共通の個人ルール",
+                    "./CLAUDE.md: Git管理でチーム共有するプロジェクトルール",
+                    ".claude/settings.local.json: Gitに含めない個人設定",
+                    "~/.claude/projects/: 「これを覚えて」で自動保存される記憶",
+                    ".claude/rules/: モジュラールール読み込み（v2.0以降）",
+                    "200行以下でルール適用率92%超。400行超で71%に低下",
+                    "命令形（『TypeScript strictを使え』）のほうが説明形より規則として認識されやすい"
+                ],
+                keyPoints_en: [
+                    "~/.claude/CLAUDE.md: Personal rules for all projects",
+                    "./CLAUDE.md: Project rules shared via Git",
+                    ".claude/settings.local.json: Personal settings not in Git",
+                    "~/.claude/projects/: Auto-saved memories via 'remember this'",
+                    ".claude/rules/: Modular rule loading (v2.0+)",
+                    "Rule application rate >92% under 200 lines, drops to 71% over 400 lines",
+                    "Imperative form ('Use TypeScript strict') recognized as rules more than descriptive form"
+                ],
+                handson: {
+                    title: "4階層のCLAUDE.mdを体験する",
+                    title_en: "Experience the 4-Layer CLAUDE.md",
+                    goal: "ユーザーレベルとプロジェクトレベルのCLAUDE.mdの違いを体験",
+                    goal_en: "Experience the difference between user-level and project-level CLAUDE.md",
+                    prerequisites: ["Claude Codeが利用可能"],
+                    prerequisites_en: ["Claude Code is available"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "プロジェクトのCLAUDE.mdを自動生成",
+                            action_en: "Auto-generate project CLAUDE.md",
+                            prompt: "/init",
+                            prompt_en: "/init",
+                            expected: "プロジェクトを分析してCLAUDE.mdが生成される",
+                            expected_en: "CLAUDE.md is generated after analyzing the project"
+                        },
+                        {
+                            step: 2,
+                            action: "自動メモリに記憶させる",
+                            action_en: "Save to auto-memory",
+                            prompt: "今後このプロジェクトではTypeScriptのstrictモードを使うこと。これを覚えて。",
+                            prompt_en: "From now on, use TypeScript strict mode in this project. Remember this.",
+                            expected: "~/.claude/projects/ 配下に自動保存される",
+                            expected_en: "Auto-saved under ~/.claude/projects/"
+                        }
+                    ],
+                    checkpoints: [
+                        "/initでプロジェクトCLAUDE.mdが生成された",
+                        "「覚えて」の指示で自動メモリに保存された"
+                    ],
+                    checkpoints_en: [
+                        "Project CLAUDE.md generated with /init",
+                        "Auto-memory saved with 'remember' instruction"
+                    ]
+                }
+            }
+        },
+        {
+            id: "01_09",
+            number: "01_09",
+            title: "キーボードショートカットとカスタマイズ",
+            title_en: "Keyboard Shortcuts and Customization",
+            description: "Shift+Enter改行、Shift+Tabモード切替、/vimモード、keybindings.jsonによるカスタマイズ。",
+            description_en: "Shift+Enter for newline, Shift+Tab mode switch, /vim mode, customization via keybindings.json.",
+            icon: "terminal",
+            tags: ["キーボード", "ショートカット", "カスタマイズ"],
+            tags_en: ["Keyboard", "Shortcuts", "Customization"],
+            content: {
+                summary: "Claude Code v2.1ではキーボード操作が大幅に改善された。Shift+Enterでプロンプト内改行、Shift+Tabでモード切替（Normal → Auto-accept → Plan）、Ctrl+F 2回で全バックグラウンドエージェント停止。/vim でvimキーバインドを適用でき、/keybindings で ~/.claude/keybindings.json を編集してカスタマイズも可能。",
+                summary_en: "Claude Code v2.1 significantly improved keyboard operations. Shift+Enter for in-prompt newline, Shift+Tab for mode switching (Normal → Auto-accept → Plan), Ctrl+F twice to stop all background agents. /vim applies vim keybindings, /keybindings opens ~/.claude/keybindings.json for customization.",
+                keyPoints: [
+                    "Enter: メッセージ送信",
+                    "Shift+Enter: プロンプト内で改行（v2.1.0で追加）",
+                    "Esc: 操作中断（コンテキストは保持）",
+                    "Esc Esc: コード復元（直前の変更を巻き戻し）",
+                    "Shift+Tab: Normal → Auto-accept → Plan のサイクル",
+                    "Ctrl+F (2回): 全バックグラウンドエージェントを停止",
+                    "/vim: プロンプト入力にvimキーバインド（h/j/k/l、d/c/y/p対応）",
+                    "/keybindings: ~/.claude/keybindings.json を開いてカスタマイズ"
+                ],
+                keyPoints_en: [
+                    "Enter: Send message",
+                    "Shift+Enter: Newline within prompt (added in v2.1.0)",
+                    "Esc: Interrupt (context preserved)",
+                    "Esc Esc: Undo code changes (revert last changes)",
+                    "Shift+Tab: Cycle Normal → Auto-accept → Plan",
+                    "Ctrl+F (twice): Stop all background agents",
+                    "/vim: Apply vim keybindings (h/j/k/l, d/c/y/p supported)",
+                    "/keybindings: Open ~/.claude/keybindings.json for customization"
+                ],
+                handson: {
+                    title: "ショートカットを体験する",
+                    title_en: "Experience Shortcuts",
+                    goal: "主要なキーボードショートカットを実際に試す",
+                    goal_en: "Try major keyboard shortcuts hands-on",
+                    prerequisites: ["Claude Codeが起動済み"],
+                    prerequisites_en: ["Claude Code is running"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "Shift+Enterで複数行プロンプトを入力",
+                            action_en: "Enter multi-line prompt with Shift+Enter",
+                            prompt: "以下の条件でコードを書いて（Shift+Enterで改行）\n- TypeScript\n- 関数型スタイル\n- エラーハンドリング付き",
+                            prompt_en: "Write code with these conditions (Shift+Enter for newline)\n- TypeScript\n- Functional style\n- With error handling",
+                            expected: "複数行のプロンプトが1回で送信される",
+                            expected_en: "Multi-line prompt is sent at once"
+                        },
+                        {
+                            step: 2,
+                            action: "Shift+Tabでモードを切り替えて確認",
+                            action_en: "Switch modes with Shift+Tab and verify",
+                            prompt: "Shift+Tabを3回押して、Normal → Auto-accept → Plan → Normal の切替を確認",
+                            prompt_en: "Press Shift+Tab 3 times to confirm Normal → Auto-accept → Plan → Normal cycle",
+                            expected: "ステータスバーのモード表示が変わる",
+                            expected_en: "Mode display in status bar changes"
+                        }
+                    ],
+                    checkpoints: [
+                        "Shift+Enterで改行入力ができた",
+                        "Shift+Tabの3モード切替を理解した"
+                    ],
+                    checkpoints_en: [
+                        "Successfully entered newlines with Shift+Enter",
+                        "Understood 3-mode switching with Shift+Tab"
                     ]
                 }
             }
@@ -2067,7 +2416,7 @@ Claude: ".claude/skills/sales-report.md を
                             step: 1,
                             action: "使用量を確認",
                             prompt: "/context",
-                            expected: "使用量が表示される（例: 45% used, 90K/200K tokens）"
+                            expected: "使用量が表示される（例: 15% used, 150K/1M tokens）"
                         },
                         {
                             step: 2,
@@ -2231,6 +2580,207 @@ wait`
                     }
                 }
             }
+        },
+        {
+            id: "02_09",
+            number: "02_09",
+            title: "Worktree - 並列開発の隔離環境",
+            title_en: "Worktree - Isolated Parallel Development",
+            description: "git worktreeでセッションごとに隔離された作業環境を作り、複数タスクを同時並行で進める。",
+            description_en: "Create isolated working environments per session with git worktree for parallel task execution.",
+            icon: "git-branch",
+            tags: ["Worktree", "並列開発", "git"],
+            tags_en: ["Worktree", "Parallel Dev", "git"],
+            content: {
+                summary: "claude -w（--worktree）フラグで起動すると、.claude/worktrees/<name> に隔離されたgit worktreeが作成され、worktree-<name>ブランチで作業が始まる。複数エージェントが互いに干渉せず並列作業でき、変更がなければセッション終了時に自動削除される。大規模モノレポではworktree.sparsePathsで特定ディレクトリだけをチェックアウトするsparse checkout対応もある。",
+                summary_en: "Start with claude -w (--worktree) to create an isolated git worktree at .claude/worktrees/<name> on branch worktree-<name>. Multiple agents can work in parallel without interference. Auto-cleaned on session exit if no changes. Supports sparse checkout via worktree.sparsePaths for large monorepos.",
+                keyPoints: [
+                    "claude -w または --worktree フラグで起動",
+                    ".claude/worktrees/<name> にworktreeが作成される",
+                    "変更がなければセッション終了時に自動削除、変更があれば確認プロンプト",
+                    "サブエージェントでも isolation: worktree で worktree 分離が使える",
+                    "worktree.sparsePaths 設定で大規模モノレポの特定ディレクトリだけチェックアウト",
+                    "複数ブランチで同時に作業する場合の衝突防止に最適"
+                ],
+                keyPoints_en: [
+                    "Start with claude -w or --worktree flag",
+                    "Worktree created at .claude/worktrees/<name>",
+                    "Auto-deleted on exit if no changes, confirmation prompt if changes exist",
+                    "Subagents also support worktree isolation via isolation: worktree",
+                    "worktree.sparsePaths for sparse checkout in large monorepos",
+                    "Ideal for preventing conflicts when working on multiple branches simultaneously"
+                ],
+                handson: {
+                    title: "Worktreeで隔離された環境を体験する",
+                    title_en: "Experience Isolated Environment with Worktree",
+                    goal: "Worktreeモードで起動し、メインブランチと独立した環境で作業する",
+                    goal_en: "Start in Worktree mode and work in an environment independent of main branch",
+                    prerequisites: ["gitリポジトリ内であること"],
+                    prerequisites_en: ["Must be inside a git repository"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "Worktreeモードで新しいセッションを起動",
+                            action_en: "Start a new session in Worktree mode",
+                            prompt: "claude -w",
+                            prompt_en: "claude -w",
+                            expected: "worktree-<random-name>ブランチが作成され、隔離された環境で起動する",
+                            expected_en: "worktree-<random-name> branch created, starts in isolated environment"
+                        },
+                        {
+                            step: 2,
+                            action: "隔離環境で変更を行う",
+                            action_en: "Make changes in isolated environment",
+                            prompt: "READMEに「Worktreeテスト」セクションを追加して",
+                            prompt_en: "Add a 'Worktree Test' section to README",
+                            expected: "変更がworktreeブランチだけに適用される（mainは影響なし）",
+                            expected_en: "Changes apply only to worktree branch (main is unaffected)"
+                        }
+                    ],
+                    checkpoints: [
+                        "Worktreeが.claude/worktrees/に作成された",
+                        "mainブランチに影響を与えずに変更できた"
+                    ],
+                    checkpoints_en: [
+                        "Worktree created in .claude/worktrees/",
+                        "Made changes without affecting main branch"
+                    ]
+                }
+            }
+        },
+        {
+            id: "02_10",
+            number: "02_10",
+            title: "Settings & Permissions - 権限管理の完全ガイド",
+            title_en: "Settings & Permissions - Complete Permission Guide",
+            description: "5階層の設定ファイル優先順位、allow/deny配列、ワイルドカード権限、$schemaサポート。",
+            description_en: "5-layer settings file priority, allow/deny arrays, wildcard permissions, $schema support.",
+            icon: "shield",
+            tags: ["Settings", "Permissions", "セキュリティ"],
+            tags_en: ["Settings", "Permissions", "Security"],
+            content: {
+                summary: "Claude Codeの設定は5階層で管理される。Enterprise managed-settings.json が最優先、次にセッション設定（--settingsフラグ）、プロジェクト共有 .claude/settings.json、プロジェクトローカル .claude/settings.local.json、最後にユーザーグローバル ~/.claude/settings.json。権限はpermissionsオブジェクト内のallow/deny配列で制御し、denyが最優先でチェックされる。Bash(*-h*)のようなワイルドカード指定も可能。",
+                summary_en: "Claude Code settings are managed in 5 layers. Enterprise managed-settings.json has highest priority, then session settings (--settings flag), project-shared .claude/settings.json, project-local .claude/settings.local.json, finally user-global ~/.claude/settings.json. Permissions controlled via allow/deny arrays, with deny checked first. Wildcard patterns like Bash(*-h*) are supported.",
+                keyPoints: [
+                    "優先順位: Enterprise > セッション > プロジェクト共有 > ローカル > グローバル",
+                    "permissions.allow: 自動承認するツールやコマンド",
+                    "permissions.deny: 常に拒否するツールやコマンド（最優先）",
+                    "ワイルドカード対応: Bash(*test*), Bash(*build:*) のような指定が可能",
+                    "$schemaを追加するとVS CodeやCursorでオートコンプリート有効",
+                    "設定ファイルは自動バックアップ（直近5件保持）"
+                ],
+                keyPoints_en: [
+                    "Priority: Enterprise > Session > Project-shared > Local > Global",
+                    "permissions.allow: Auto-approve tools and commands",
+                    "permissions.deny: Always deny tools and commands (highest priority)",
+                    "Wildcard support: Bash(*test*), Bash(*build:*) patterns",
+                    "Add $schema for VS Code/Cursor autocomplete support",
+                    "Settings files auto-backed up (last 5 kept)"
+                ],
+                handson: {
+                    title: "権限設定をカスタマイズする",
+                    title_en: "Customize Permission Settings",
+                    goal: "プロジェクトのsettings.jsonで安全なコマンドを事前許可する",
+                    goal_en: "Pre-approve safe commands in project settings.json",
+                    prerequisites: ["プロジェクトフォルダがある"],
+                    prerequisites_en: ["Have a project folder"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "プロジェクトのsettings.jsonを作成",
+                            action_en: "Create project settings.json",
+                            prompt: ".claude/settings.json に以下を設定して: テスト実行(npm test)とビルド(npm run build)を自動承認、rm -rf は常に拒否",
+                            prompt_en: "Set up .claude/settings.json: auto-approve test (npm test) and build (npm run build), always deny rm -rf",
+                            expected: "settings.jsonが作成され、allow/deny配列が設定される",
+                            expected_en: "settings.json created with allow/deny arrays configured"
+                        },
+                        {
+                            step: 2,
+                            action: "/permissionsで現在の権限設定を確認",
+                            action_en: "Check current permissions with /permissions",
+                            prompt: "/permissions",
+                            prompt_en: "/permissions",
+                            expected: "許可済み・拒否済みのコマンド一覧が表示される",
+                            expected_en: "List of allowed and denied commands is displayed"
+                        }
+                    ],
+                    checkpoints: [
+                        "settings.jsonの階層構造を理解した",
+                        "allow/denyで権限を制御できた"
+                    ],
+                    checkpoints_en: [
+                        "Understood settings.json hierarchy",
+                        "Controlled permissions with allow/deny"
+                    ]
+                }
+            }
+        },
+        {
+            id: "02_11",
+            number: "02_11",
+            title: "新コマンド群 - /voice, /loop, /teleport, /effort",
+            title_en: "New Commands - /voice, /loop, /teleport, /effort",
+            description: "v2.1で追加された新コマンド群。音声入力、定期実行、セッション転送、思考深度制御。",
+            description_en: "New commands added in v2.1: voice input, periodic execution, session transfer, thinking depth control.",
+            icon: "radio",
+            tags: ["v2.1新機能", "Voice", "Loop"],
+            tags_en: ["v2.1 New", "Voice", "Loop"],
+            content: {
+                summary: "Claude Code v2.1では4つの強力なコマンドが追加された。/voice はスペースバーのpush-to-talk方式で音声入力ができる（段階的ロールアウト中）。/loop は指定間隔でプロンプトを繰り返す軽量cron。/teleport はローカルセッションをclaude.ai Webに転送し、逆にWebからローカルに引き戻すこともできる。/effort はモデルの思考深度をlow/medium/highで調整する。",
+                summary_en: "Claude Code v2.1 added 4 powerful commands. /voice enables push-to-talk voice input via spacebar (gradual rollout). /loop repeats prompts at intervals as a lightweight cron. /teleport transfers local sessions to claude.ai web and back. /effort adjusts model thinking depth to low/medium/high.",
+                keyPoints: [
+                    "/voice: スペースバーでpush-to-talk音声入力。keybindings.jsonでキーカスタマイズ可能",
+                    "/loop 5m check deploy: 5分ごとにデプロイ状況を確認するような定期実行",
+                    "/teleport: ローカル→Web（&コマンド）、Web→ローカル（--teleport）のセッション転送",
+                    "/effort high: 複雑な問題で深い思考を要求。low で軽量応答",
+                    "/fast: 同じモデルのまま高速出力モードに切替（品質は維持）",
+                    "/btw: 処理中にサイド質問（会話履歴を汚さない）"
+                ],
+                keyPoints_en: [
+                    "/voice: Push-to-talk via spacebar. Key customizable in keybindings.json",
+                    "/loop 5m check deploy: Periodic execution like checking deploy every 5 minutes",
+                    "/teleport: Local→Web (& command), Web→Local (--teleport) session transfer",
+                    "/effort high: Request deep thinking for complex problems. low for lightweight",
+                    "/fast: Switch to fast output mode with same model (quality maintained)",
+                    "/btw: Side question during processing (doesn't pollute conversation history)"
+                ],
+                handson: {
+                    title: "新コマンドを試す",
+                    title_en: "Try New Commands",
+                    goal: "/effort と /fast を実際に試して挙動の違いを体感する",
+                    goal_en: "Try /effort and /fast to experience behavioral differences",
+                    prerequisites: ["Claude Codeが起動済み"],
+                    prerequisites_en: ["Claude Code is running"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "/effort で思考深度を変えて同じ質問をする",
+                            action_en: "Change thinking depth with /effort and ask the same question",
+                            prompt: "/effort low\nFizzBuzzを書いて\n\n（応答後）\n/effort high\nFizzBuzzを書いて",
+                            prompt_en: "/effort low\nWrite FizzBuzz\n\n(After response)\n/effort high\nWrite FizzBuzz",
+                            expected: "lowでは簡潔な回答、highではより詳細で考慮された回答になる",
+                            expected_en: "low gives concise answer, high gives more detailed and considered answer"
+                        },
+                        {
+                            step: 2,
+                            action: "/fast で高速モードを切替",
+                            action_en: "Toggle fast mode with /fast",
+                            prompt: "/fast\nこのプロジェクトの構造を説明して",
+                            prompt_en: "/fast\nExplain the structure of this project",
+                            expected: "同じモデルで出力速度が速くなる",
+                            expected_en: "Output speed increases with the same model"
+                        }
+                    ],
+                    checkpoints: [
+                        "/effortの低/高で応答の詳細さが変わることを確認した",
+                        "/fastモードの速度差を体感した"
+                    ],
+                    checkpoints_en: [
+                        "Confirmed response detail changes with /effort low/high",
+                        "Experienced speed difference in /fast mode"
+                    ]
+                }
+            }
         }
     ],
     advanced: [
@@ -2252,14 +2802,14 @@ wait`
                     "不要なファイル読み込みを避ける（@指定で必要部分のみ）",
                     "結果はファイルに書き出してコンテキストから解放",
                     "Grepで必要な部分だけ抽出してから渡す",
-                    "モデル選択: 簡単なタスクはHaiku、複雑なタスクはSonnet/Opus"
+                    "モデル選択: 簡単なタスクはHaiku 4.5、日常的なコード生成はSonnet 4.6、複雑な判断はOpus 4.6"
                 ],
                 keyPoints_en: [
                     "WSCE Framework: Write → Summarize → Compress → Extract",
                     "Avoid unnecessary file reads (@ specify only needed parts)",
                     "Write results to files to release from context",
                     "Extract only needed parts with Grep before passing",
-                    "Model selection: Haiku for simple tasks, Sonnet/Opus for complex"
+                    "Model selection: Haiku 4.5 for simple tasks, Sonnet 4.6 for daily coding, Opus 4.6 for complex decisions"
                 ],
                 wsceFramework: {
                     title: "WSCEフレームワーク",
@@ -2292,25 +2842,31 @@ wait`
                     ]
                 },
                 modelSelection: {
-                    title: "タスク別モデル選択ガイド",
+                    title: "タスク別モデル選択ガイド（2026年3月）",
                     models: [
                         {
-                            model: "Claude 3.5 Haiku",
-                            cost: "低",
-                            useCase: "単純な変換、フォーマット、簡単なリファクタリング",
-                            examples: ["JSONの整形", "変数名の一括置換", "簡単なコメント追加"]
+                            model: "Haiku 4.5",
+                            cost: "$1/$5 per 1M tokens",
+                            useCase: "単純な変換、フォーマット、トリアージ",
+                            examples: ["JSONの整形", "変数名の一括置換", "簡単な質問応答"]
                         },
                         {
-                            model: "Claude 3.5 Sonnet",
-                            cost: "中",
-                            useCase: "一般的なコーディング、分析、レビュー",
+                            model: "Sonnet 4.6（推奨）",
+                            cost: "$3/$15 per 1M tokens",
+                            useCase: "日常的なコード生成、分析、レビュー",
                             examples: ["新機能の実装", "コードレビュー", "バグ修正"]
                         },
                         {
-                            model: "Claude 3 Opus",
-                            cost: "高",
-                            useCase: "複雑な設計、アーキテクチャ、難解な問題",
+                            model: "Opus 4.6",
+                            cost: "$5/$25 per 1M tokens",
+                            useCase: "複雑なアーキテクチャ判断、微妙なバグ、難解な問題",
                             examples: ["システム設計", "複雑なアルゴリズム", "セキュリティ分析"]
+                        },
+                        {
+                            model: "opusplan（ハイブリッド）",
+                            cost: "Plan=Opus / 実行=Sonnet",
+                            useCase: "コスト効率と品質のバランス",
+                            examples: ["計画フェーズは深い思考、実装は高速実行"]
                         }
                     ]
                 },
@@ -3385,6 +3941,267 @@ jobs:
                     optional: ["02_02"],
                     reason: "自動化をさらに発展させるために",
                     reason_en: "To further advance automation"
+                }
+            }
+        },
+        {
+            id: "03_09",
+            number: "03_09",
+            title: "Agent Teams - 複数エージェントの協働",
+            title_en: "Agent Teams - Multi-Agent Collaboration",
+            description: "複数のClaude Codeセッションがチームとして協働し、1セッションがリーダーとしてタスクを統合する。",
+            description_en: "Multiple Claude Code sessions collaborate as a team, with one session leading and integrating tasks.",
+            icon: "users",
+            tags: ["Agent Teams", "並列", "実験的"],
+            tags_en: ["Agent Teams", "Parallel", "Experimental"],
+            content: {
+                summary: "Agent TeamsはOpus 4.6と同時に導入された実験的機能。複数のClaude Codeセッションがチームとして協働し、1セッションがチームリーダーとしてタスクの割り振り・結果の統合を行い、他のメンバーは独立したコンテキストウィンドウで専門作業を行う。リードエージェントがスタイル・セキュリティ・パフォーマンスのレビュー用サブエージェントをオーケストレーションするパターンが典型的。トークン消費は3倍になるが、専門家による特化レビューの品質はジェネラリスト単体を上回る。",
+                summary_en: "Agent Teams is an experimental feature introduced alongside Opus 4.6. Multiple Claude Code sessions collaborate as a team, with one leader orchestrating task delegation and result integration while members work independently with their own context windows. Token consumption triples but specialized review quality exceeds single generalist.",
+                keyPoints: [
+                    "1セッションがリーダー、他がメンバーとして協働",
+                    "各メンバーは独立したコンテキストウィンドウで作業",
+                    "典型パターン: リーダーがスタイル/セキュリティ/パフォーマンスの各専門エージェントに委譲",
+                    "トークン消費は約3倍だが、品質は単体を上回る",
+                    "Opus 4.6で最も効果的（思考の深さが活きる）",
+                    "実験的機能のため、安定性は今後改善予定"
+                ],
+                keyPoints_en: [
+                    "One session leads, others collaborate as members",
+                    "Each member works with independent context window",
+                    "Typical: Leader delegates to style/security/performance specialist agents",
+                    "~3x token consumption but quality exceeds single agent",
+                    "Most effective with Opus 4.6 (deep thinking shines)",
+                    "Experimental feature, stability improvements planned"
+                ],
+                handson: {
+                    title: "マルチエージェント構成を試す",
+                    title_en: "Try Multi-Agent Configuration",
+                    goal: "サブエージェントを活用して並列レビューを実行する",
+                    goal_en: "Use subagents to execute parallel reviews",
+                    prerequisites: ["プロジェクトにレビュー対象のコードがある"],
+                    prerequisites_en: ["Project has code to review"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "並列レビューを依頼",
+                            action_en: "Request parallel review",
+                            prompt: "src/ のコードを3つの観点で並列レビューして: (1)コードスタイル (2)セキュリティ (3)パフォーマンス。それぞれサブエージェントに委譲して、結果を統合して。",
+                            prompt_en: "Review src/ code from 3 perspectives in parallel: (1)Code style (2)Security (3)Performance. Delegate each to a subagent and consolidate results.",
+                            expected: "3つのサブエージェントが並列で起動し、それぞれの観点でレビューを行う",
+                            expected_en: "3 subagents launch in parallel, each reviewing from their perspective"
+                        }
+                    ],
+                    checkpoints: [
+                        "並列サブエージェントが起動した",
+                        "各専門観点からのレビューが統合された"
+                    ],
+                    checkpoints_en: [
+                        "Parallel subagents were launched",
+                        "Reviews from each specialist perspective were consolidated"
+                    ]
+                }
+            }
+        },
+        {
+            id: "03_10",
+            number: "03_10",
+            title: "Agent SDK - 独自エージェント構築",
+            title_en: "Agent SDK - Build Custom Agents",
+            description: "Claude Agent SDK（Python/TypeScript）でClaude Codeの基盤を活用した独自エージェントを構築する。",
+            description_en: "Build custom agents leveraging Claude Code's foundation with Claude Agent SDK (Python/TypeScript).",
+            icon: "package",
+            tags: ["Agent SDK", "Python", "TypeScript"],
+            tags_en: ["Agent SDK", "Python", "TypeScript"],
+            content: {
+                summary: "Claude Agent SDKは、Claude Codeを動かしている基盤をライブラリとして外部公開したもの。2026年3月時点でPythonはv0.1.48（PyPI）、TypeScriptはv0.2.71（npm）。サブエージェントは独自のコンテキストウィンドウ、カスタムシステムプロンプト、ツールアクセス権、独立した権限を持つ。.claude/agents/ にカスタムエージェント定義を配置できる。",
+                summary_en: "Claude Agent SDK publicly exposes the foundation powering Claude Code as a library. As of March 2026, Python is v0.1.48 (PyPI), TypeScript is v0.2.71 (npm). Subagents have their own context window, custom system prompt, tool access, and independent permissions. Custom agent definitions can be placed in .claude/agents/.",
+                keyPoints: [
+                    "Python SDK: pip install claude-agent-sdk (v0.1.48)",
+                    "TypeScript SDK: npm install @anthropic-ai/claude-agent-sdk (v0.2.71)",
+                    "サブエージェント: 独自のコンテキストウィンドウとシステムプロンプト",
+                    ".claude/agents/ にカスタムエージェント定義を配置可能",
+                    "context: fork でSkill内タスクをサブエージェントに委譲",
+                    "並列実行とコンテキスト分離が主な利点"
+                ],
+                keyPoints_en: [
+                    "Python SDK: pip install claude-agent-sdk (v0.1.48)",
+                    "TypeScript SDK: npm install @anthropic-ai/claude-agent-sdk (v0.2.71)",
+                    "Subagents: Own context window and system prompt",
+                    "Custom agent definitions in .claude/agents/",
+                    "context: fork to delegate skill tasks to subagents",
+                    "Parallel execution and context isolation are main benefits"
+                ],
+                handson: {
+                    title: "カスタムサブエージェントを作成する",
+                    title_en: "Create a Custom Subagent",
+                    goal: ".claude/agents/ にカスタムエージェント定義を作成して使う",
+                    goal_en: "Create and use a custom agent definition in .claude/agents/",
+                    prerequisites: ["プロジェクトフォルダがある"],
+                    prerequisites_en: ["Have a project folder"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "カスタムエージェント定義を作成",
+                            action_en: "Create custom agent definition",
+                            prompt: ".claude/agents/code-reviewer.md を作成して。内容は「このエージェントはTypeScriptコードのレビューに特化し、型安全性・エラーハンドリング・パフォーマンスの3点を必ずチェックする」というシステムプロンプト。",
+                            prompt_en: "Create .claude/agents/code-reviewer.md with system prompt: 'This agent specializes in TypeScript code review, always checking type safety, error handling, and performance.'",
+                            expected: ".claude/agents/code-reviewer.md が作成される",
+                            expected_en: ".claude/agents/code-reviewer.md is created"
+                        },
+                        {
+                            step: 2,
+                            action: "作成したエージェントをサブエージェントとして呼び出す",
+                            action_en: "Call the created agent as a subagent",
+                            prompt: "code-reviewerエージェントを使って src/index.ts をレビューして",
+                            prompt_en: "Use the code-reviewer agent to review src/index.ts",
+                            expected: "カスタムエージェントの指示に基づいた3観点レビューが行われる",
+                            expected_en: "3-perspective review based on custom agent instructions is performed"
+                        }
+                    ],
+                    checkpoints: [
+                        ".claude/agents/にエージェント定義を作成できた",
+                        "カスタムエージェントが意図した観点でレビューを行った"
+                    ],
+                    checkpoints_en: [
+                        "Agent definition created in .claude/agents/",
+                        "Custom agent reviewed from intended perspectives"
+                    ]
+                }
+            }
+        },
+        {
+            id: "03_11",
+            number: "03_11",
+            title: "コミュニティスキルとエコシステム",
+            title_en: "Community Skills and Ecosystem",
+            description: "anthropics/skillsリポジトリと外部スキルマーケットプレイスから、実用スキルを探して導入する。",
+            description_en: "Find and install practical skills from anthropics/skills repository and external skill marketplaces.",
+            icon: "globe",
+            tags: ["コミュニティ", "スキル", "エコシステム"],
+            tags_en: ["Community", "Skills", "Ecosystem"],
+            content: {
+                summary: "Claude Code Skills エコシステムは2026年に急成長し、公式のanthropics/skillsリポジトリには1,200以上のスキルが公開されている。Claude Code Templates（aitmpl.com）、SkillsMP（skillsmp.com）、Awesome Claude Agents（GitHub）など外部マーケットプレイスも充実。ただし非公式スキルは必ずSKILL.mdの中身を確認し、権限と環境を分離したうえで導入すること。",
+                summary_en: "The Claude Code Skills ecosystem grew rapidly in 2026, with 1,200+ skills in the official anthropics/skills repository. External marketplaces like Claude Code Templates (aitmpl.com), SkillsMP (skillsmp.com), and Awesome Claude Agents (GitHub) are also available. Always verify SKILL.md contents and isolate permissions before installing unofficial skills.",
+                keyPoints: [
+                    "公式: github.com/anthropics/skills に1,200以上のスキル",
+                    "Claude Code Templates: npx claude-code-templates@latest で導入",
+                    "SkillsMP: skillsmp.com でカテゴリ別にスキル検索",
+                    "Awesome Claude Agents: サブエージェント群の厳選リスト",
+                    "導入前に必ずSKILL.md・付随スクリプトを目視確認",
+                    "本番環境ではなく検証環境で先にテストする",
+                    "ホットリロード対応: スキル変更が即座に反映"
+                ],
+                keyPoints_en: [
+                    "Official: 1,200+ skills at github.com/anthropics/skills",
+                    "Claude Code Templates: Install via npx claude-code-templates@latest",
+                    "SkillsMP: Search skills by category at skillsmp.com",
+                    "Awesome Claude Agents: Curated list of subagent collections",
+                    "Always visually verify SKILL.md and scripts before installing",
+                    "Test in validation environment, not production",
+                    "Hot reload: Skill changes take effect immediately"
+                ],
+                handson: {
+                    title: "外部スキルを探して導入する",
+                    title_en: "Find and Install External Skills",
+                    goal: "コミュニティのスキルを検証環境に導入して試す",
+                    goal_en: "Install community skills in a validation environment and test them",
+                    prerequisites: ["Claude Codeが利用可能", "検証用プロジェクトフォルダがある"],
+                    prerequisites_en: ["Claude Code is available", "Have a validation project folder"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "公式スキルリポジトリを確認",
+                            action_en: "Check official skills repository",
+                            prompt: "github.com/anthropics/skills のREADMEを読んで、利用可能なスキルのカテゴリを教えて",
+                            prompt_en: "Read the README at github.com/anthropics/skills and tell me available skill categories",
+                            expected: "スキルカテゴリの一覧が表示される",
+                            expected_en: "List of skill categories is displayed"
+                        },
+                        {
+                            step: 2,
+                            action: "スキルを.claude/skills/に配置",
+                            action_en: "Place skill in .claude/skills/",
+                            prompt: "選んだスキルのSKILL.mdを .claude/skills/test-skill/ にコピーして配置して。中身を確認してから有効化して。",
+                            prompt_en: "Copy the chosen skill's SKILL.md to .claude/skills/test-skill/. Verify contents before activating.",
+                            expected: "スキルが配置され、次のプロンプトから利用可能になる",
+                            expected_en: "Skill is placed and available from next prompt"
+                        }
+                    ],
+                    checkpoints: [
+                        "スキルの中身を確認してから導入した",
+                        "スキルが正常に動作することを検証環境で確認した"
+                    ],
+                    checkpoints_en: [
+                        "Verified skill contents before installation",
+                        "Confirmed skill works correctly in validation environment"
+                    ]
+                }
+            }
+        },
+        {
+            id: "03_12",
+            number: "03_12",
+            title: "CI/CD高度活用 - Docker隔離とバッチ処理",
+            title_en: "Advanced CI/CD - Docker Isolation and Batch Processing",
+            description: "Dockerコンテナ内でのheadless実行、--dangerously-skip-permissionsの安全な運用、バッチAPI活用。",
+            description_en: "Headless execution in Docker containers, safe --dangerously-skip-permissions usage, Batch API utilization.",
+            icon: "box",
+            tags: ["CI/CD", "Docker", "ヘッドレス"],
+            tags_en: ["CI/CD", "Docker", "Headless"],
+            content: {
+                summary: "claude -p（非インタラクティブモード）に --dangerously-skip-permissions を組み合わせると完全自動実行が可能になる。ただしDockerコンテナ内での実行が強く推奨され、コンテナによる二重隔離で攻撃面を99%削減できる。--output-format stream-json と併用すればCI/CDパイプラインへの統合も容易。Anthropic自身が2026年2月のブログで、並列Claudeによるコンパイラ構築にこのモードを使った事例を公開している。",
+                summary_en: "Combining claude -p (non-interactive mode) with --dangerously-skip-permissions enables fully automated execution. Docker container execution is strongly recommended, reducing attack surface by 99%. Combined with --output-format stream-json for easy CI/CD pipeline integration. Anthropic published a case study of using this mode for parallel compiler building in February 2026.",
+                keyPoints: [
+                    "claude -p 'prompt' で非インタラクティブ実行",
+                    "--dangerously-skip-permissions はDockerコンテナ内でのみ推奨",
+                    "--output-format stream-json でCI/CDパイプラインに統合",
+                    "Batch APIで50%のコスト削減（非リアルタイム処理向け）",
+                    "GitHub Actionsとの連携: PRコメントに結果を自動投稿",
+                    "並列実行: 複数のclaude -pを同時に走らせてスループット向上"
+                ],
+                keyPoints_en: [
+                    "claude -p 'prompt' for non-interactive execution",
+                    "--dangerously-skip-permissions only recommended inside Docker",
+                    "--output-format stream-json for CI/CD pipeline integration",
+                    "Batch API for 50% cost reduction (non-realtime processing)",
+                    "GitHub Actions integration: Auto-post results as PR comments",
+                    "Parallel execution: Run multiple claude -p simultaneously for throughput"
+                ],
+                handson: {
+                    title: "ヘッドレスモードでバッチ処理",
+                    title_en: "Batch Processing in Headless Mode",
+                    goal: "claude -p を使った非インタラクティブ実行を体験する",
+                    goal_en: "Experience non-interactive execution with claude -p",
+                    prerequisites: ["Claude Codeがインストール済み", "テスト用プロジェクトがある"],
+                    prerequisites_en: ["Claude Code is installed", "Have a test project"],
+                    steps: [
+                        {
+                            step: 1,
+                            action: "ヘッドレスモードでプロジェクト分析を実行",
+                            action_en: "Run project analysis in headless mode",
+                            prompt: "claude -p 'このプロジェクトのpackage.jsonを読んで、依存関係の概要を3行で要約して' --output-format text",
+                            prompt_en: "claude -p 'Read package.json and summarize dependencies in 3 lines' --output-format text",
+                            expected: "対話なしで結果がターミナルに出力される",
+                            expected_en: "Results output to terminal without interaction"
+                        },
+                        {
+                            step: 2,
+                            action: "JSON出力でパイプラインに統合",
+                            action_en: "Integrate with pipeline via JSON output",
+                            prompt: "claude -p 'src/のファイル数とコード行数を集計して' --output-format stream-json | tail -1",
+                            prompt_en: "claude -p 'Count files and lines of code in src/' --output-format stream-json | tail -1",
+                            expected: "JSON形式で結果が出力され、jq等で加工可能",
+                            expected_en: "Results in JSON format, processable with jq etc."
+                        }
+                    ],
+                    checkpoints: [
+                        "claude -pで対話なし実行ができた",
+                        "JSON出力がパイプライン連携に使えることを確認した"
+                    ],
+                    checkpoints_en: [
+                        "Successfully ran non-interactive execution with claude -p",
+                        "Confirmed JSON output is usable for pipeline integration"
+                    ]
                 }
             }
         }
@@ -5985,7 +6802,7 @@ const BORIS_TIPS = [
     { number: 2, category: "セッション運用", category_en: "Session Management", title: "Web/モバイルでさらに5〜10セッション追加", title_en: "Add 5-10 more sessions on Web/mobile", description: "claude.ai/code 上でもセッションを並列で走らせている。朝はスマホからセッションを数個立ち上げることも。ただし10〜20%は想定外で放棄される。", description_en: "Run parallel sessions on claude.ai/code too. Sometimes start a few sessions from phone in the morning. However, 10-20% are abandoned unexpectedly." },
     { number: 3, category: "セッション運用", category_en: "Session Management", title: "セッションごとに独立したgit checkoutを使う", title_en: "Use independent git checkout per session", description: "ブランチやworktreeではなく、セッションごとに独自のcheckoutを用意する。これで複数セッションが同時に同じファイルを触っても衝突しない。", description_en: "Instead of branches or worktrees, prepare a unique checkout per session. This prevents conflicts when multiple sessions touch the same file simultaneously." },
     { number: 4, category: "セッション運用", category_en: "Session Management", title: "&コマンドでローカル→Webへセッション引き継ぎ", title_en: "Transfer local→Web sessions with & command", description: "ローカルのセッションを&でWeb版に引き渡し、--teleportで戻すことも可能。デスクとモバイルの行き来に便利。", description_en: "Hand off local session to web version with &, return with --teleport. Convenient for switching between desk and mobile." },
-    { number: 5, category: "モデル・設定", category_en: "Model & Settings", title: "Opus 4.5 + thinkingを全てのコーディングに使う", title_en: "Use Opus 4.5 + thinking for all coding", description: "Sonnetより大きくて遅いが、ステアリングが少なく済みツール使用も上手い。結果的にSonnetより速く終わることが多い。「スマートなモデルへの先行投資が後の修正コストを削減する」。", description_en: "Bigger and slower than Sonnet, but needs less steering and better at tool use. Often finishes faster than Sonnet. 'Investing in smarter models upfront reduces correction costs later.'" },
+    { number: 5, category: "モデル・設定", category_en: "Model & Settings", title: "Opus 4.6を全てのコーディングに使う", title_en: "Use Opus 4.6 for all coding", description: "Sonnetより大きくて遅いが、ステアリングが少なく済みツール使用も上手い。結果的にSonnetより速く終わることが多い。「スマートなモデルへの先行投資が後の修正コストを削減する」。", description_en: "Bigger and slower than Sonnet, but needs less steering and better at tool use. Often finishes faster than Sonnet. 'Investing in smarter models upfront reduces correction costs later.'" },
     { number: 6, category: "モデル・設定", category_en: "Model & Settings", title: "CLAUDE.mdをチームでgit管理する", title_en: "Git-manage CLAUDE.md as a team", description: "各チームがリポジトリにCLAUDE.mdをチェックイン。Claudeがやらかしたミスをその都度追記して改善サイクルを回す。現在のサイズは約2.5kトークン。", description_en: "Each team checks in CLAUDE.md to repo. Add Claude's mistakes each time to run improvement cycles. Current size is about 2.5K tokens." },
     { number: 7, category: "モデル・設定", category_en: "Model & Settings", title: "PRレビュー時に@.claudeでCLAUDE.mdを更新", title_en: "Update CLAUDE.md with @.claude during PR review", description: "コードレビュー中に同僚のPRに@.claudeタグを付けて、学びをCLAUDE.mdに反映させる。GitHub Actionと連携。", description_en: "Tag colleague's PRs with @.claude during code review to reflect learnings in CLAUDE.md. Integrates with GitHub Actions." },
     { number: 8, category: "ワークフロー", category_en: "Workflow", title: "Plan Modeを最初に使う（Shift+Tab 2回）", title_en: "Use Plan Mode first (Shift+Tab twice)", description: "いきなりコードを書かせない。まずPlan Modeで計画を反復し、納得したらauto-accept editsモードに切り替えて一発実装。良い計画が一番大事。", description_en: "Don't have it write code immediately. Iterate on plan in Plan Mode first, then switch to auto-accept edits mode for one-shot implementation. A good plan is most important." },

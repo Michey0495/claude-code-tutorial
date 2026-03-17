@@ -2,63 +2,35 @@
 
 ## プロジェクト概要
 Claude Codeの実践的チュートリアルサイト（EZOAI制作）
+2026年3月最新版 / Opus 4.6 / Sonnet 4.6 / Haiku 4.5 / v2.1対応
+全40章 + 13種類のハンズオン
 
-## ソース素材との同期
-
-### 素材フォルダ
-```
-/Users/coelaqanth_006/Desktop/01ezoai/Givery/2026/xGN/有用記事/claude-code-tutorial/
-├── turtorial/
-│   ├── 00_01_Claude_Codeとは何か.md
-│   ├── 00_02_エージェントという概念.md
-│   ├── ...
-│   └── 参考リソース.md
-└── ハンズオン/
-    ├── 1_sales_data_analytics/
-    ├── 2_document_organization/
-    └── ...
-```
-
-### Webアプリ（本リポジトリ）
+## Webアプリ（本リポジトリ）
 ```
 /Users/coelaqanth_006/Desktop/02forAI/06Demo/claude-code-tutorial/
-├── index.html
-├── css/style.css
+├── index.html           メインHTML
+├── css/style.css        Anthropic風デザインシステム
 ├── js/
-│   ├── app.js
-│   └── tutorials.js  ← チュートリアルデータ
-└── assets/
+│   ├── app.js           アプリケーションロジック、i18n
+│   └── tutorials.js     チュートリアル・ハンズオンデータ（全コンテンツ）
+├── assets/
+│   └── favicon.svg
+└── docs/
+    ├── Boris_Cherny_Claude_Code_TIPS.md
+    └── External_Skills_Hands-on.md
 ```
 
-## 同期ルール
-
-### 素材が更新されたとき
-1. 素材フォルダの変更内容を確認
-2. `js/tutorials.js` の該当セクションを更新
-3. 変更をコミット＆プッシュ
-
-### 対応マッピング
-
-| 素材ファイル | tutorials.js の場所 |
-|-------------|-------------------|
-| 00_xx_*.md | TUTORIALS.intro |
-| 01_xx_*.md | TUTORIALS.basic |
-| 02_xx_*.md | TUTORIALS.intermediate |
-| 03_xx_*.md | TUTORIALS.advanced |
-| ハンズオン/N_*/ | HANDSON.nonDev または HANDSON.dev |
-| 参考リソース.md | BEST_PRACTICES, OFFICIAL_RESOURCES |
-
-### 整合性チェック項目
-- [ ] チュートリアル数が一致
-- [ ] タイトルが一致
-- [ ] ハンズオンの準備ファイル内容が最新
-- [ ] 関連チュートリアルIDが有効
-- [ ] 公式リソースリンクが有効
+## チュートリアル構成
+| レベル | 章数 | ID範囲 | 内容 |
+|--------|------|---------|------|
+| 入門 | 8章 | 00_01〜00_08 | Claude Code概要、モデル、IDE統合 |
+| 基礎 | 9章 | 01_01〜01_09 | CLAUDE.md、Plan Mode、ショートカット |
+| 中級 | 11章 | 02_01〜02_11 | Skills、Hooks、MCP、Worktree、新コマンド |
+| 上級 | 12章 | 03_01〜03_12 | Agent Teams、Agent SDK、CI/CD、コミュニティ |
 
 ## コマンド
 
-### ビルド・実行
-静的サイトのためビルド不要。`index.html` をブラウザで開く。
+ビルド不要の静的サイト。`index.html` をブラウザで開く。
 
 ### デプロイ
 ```bash
