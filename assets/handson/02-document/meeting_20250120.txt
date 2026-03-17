@@ -1,0 +1,10 @@
+Weekly Team Meeting
+Date: 2025-01-20
+Attendees: Team A
+
+Topics discussed:
+- Sprint planning
+- Bug fixes
+
+Action items:
+- Fix critical bug by Friday

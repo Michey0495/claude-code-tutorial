@@ -114,7 +114,11 @@
             filesToCreate: '作成するファイル',
             setupSteps: 'セットアップ手順',
             cause: '原因',
-            hint: 'ヒント'
+            hint: 'ヒント',
+            // ダウンロード
+            downloadFiles: 'ファイルをダウンロード',
+            downloadAll: '一括ダウンロード',
+            downloadSingle: 'ダウンロード'
         },
         en: {
             // Navigation
@@ -205,7 +209,11 @@
             filesToCreate: 'Files to Create',
             setupSteps: 'Setup Steps',
             cause: 'Cause',
-            hint: 'Hint'
+            hint: 'Hint',
+            // Downloads
+            downloadFiles: 'Download Files',
+            downloadAll: 'Download All',
+            downloadSingle: 'Download'
         }
     };
 
@@ -1079,6 +1087,26 @@
                         </div>
                     ` : ''}
 
+                    <!-- Download Section -->
+                    ${window.HANDSON_DOWNLOADS && window.HANDSON_DOWNLOADS[item.id] ? `
+                        <div class="prep-download-section">
+                            <h4>${icons.download} ${t.downloadFiles}</h4>
+                            <div class="download-file-list">
+                                ${window.HANDSON_DOWNLOADS[item.id].files.map(df => `
+                                    <a class="download-file-link" href="${df.path}" download="${df.name}">
+                                        ${icons.file} <span>${df.name}</span>
+                                        <span class="download-icon-small">${icons.download}</span>
+                                    </a>
+                                `).join('')}
+                            </div>
+                            ${window.HANDSON_DOWNLOADS[item.id].files.length > 1 ? `
+                                <button class="download-all-btn" onclick="downloadAllHandsonFiles(${item.id})">
+                                    ${icons.download} ${t.downloadAll}（${state.lang === 'ja' ? window.HANDSON_DOWNLOADS[item.id].label : window.HANDSON_DOWNLOADS[item.id].label_en}）
+                                </button>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+
                     <!-- Preparation Files -->
                     ${prep.files && prep.files.length > 0 ? `
                         <div class="prep-files">
@@ -1227,6 +1255,22 @@
     window.closeModal = function() {
         elements.tutorialModal.classList.remove('active');
         document.body.style.overflow = '';
+    };
+
+    // 複数ファイルの一括ダウンロード
+    window.downloadAllHandsonFiles = function(handsonId) {
+        const dl = window.HANDSON_DOWNLOADS && window.HANDSON_DOWNLOADS[handsonId];
+        if (!dl) return;
+        dl.files.forEach(function(file, i) {
+            setTimeout(function() {
+                const a = document.createElement('a');
+                a.href = file.path;
+                a.download = file.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }, i * 300);
+        });
     };
 
     // ===================================

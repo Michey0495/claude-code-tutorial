@@ -7689,8 +7689,111 @@ const CHECKLIST = {
 };
 
 // Export for use in app.js
+// ハンズオン用ダミーデータのダウンロードパスマッピング
+const HANDSON_DOWNLOADS = {
+    1: {
+        label: "売上データCSV",
+        label_en: "Sales Data CSV",
+        files: [
+            { name: "sales_2025.csv", path: "assets/handson/01-sales/sales_2025.csv" }
+        ]
+    },
+    2: {
+        label: "整理対象ドキュメント4件",
+        label_en: "4 Documents to Organize",
+        files: [
+            { name: "議事録0115.txt", path: "assets/handson/02-document/議事録0115.txt" },
+            { name: "meeting_20250120.txt", path: "assets/handson/02-document/meeting_20250120.txt" },
+            { name: "report_q1.txt", path: "assets/handson/02-document/report_q1.txt" },
+            { name: "企画書（修正版）.txt", path: "assets/handson/02-document/企画書（修正版）.txt" }
+        ]
+    },
+    3: {
+        label: "API仕様書 + 設定サンプル",
+        label_en: "API Spec + Config Sample",
+        files: [
+            { name: "api_spec.yaml", path: "assets/handson/03-spec/api_spec.yaml" },
+            { name: "config_sample.json", path: "assets/handson/03-spec/config_sample.json" }
+        ]
+    },
+    4: {
+        label: "議事録テキスト",
+        label_en: "Meeting Notes",
+        files: [
+            { name: "meeting_notes.txt", path: "assets/handson/04-meeting/meeting_notes.txt" }
+        ]
+    },
+    5: {
+        label: "API仕様 + requirements.txt",
+        label_en: "API Spec + requirements.txt",
+        files: [
+            { name: "api_spec.yaml", path: "assets/handson/05-api/api_spec.yaml" },
+            { name: "requirements.txt", path: "assets/handson/05-api/requirements.txt" }
+        ]
+    },
+    6: {
+        label: "機能仕様書",
+        label_en: "Feature Spec",
+        files: [
+            { name: "FEATURE_SPEC.md", path: "assets/handson/06-feature/FEATURE_SPEC.md" }
+        ]
+    },
+    7: {
+        label: "CLI仕様書",
+        label_en: "CLI Spec",
+        files: [
+            { name: "CLI_SPEC.md", path: "assets/handson/07-cli/CLI_SPEC.md" }
+        ]
+    },
+    8: {
+        label: "バグ入りコード + エラーログ",
+        label_en: "Buggy Code + Error Log",
+        files: [
+            { name: "calculator.py", path: "assets/handson/08-debug/calculator.py" },
+            { name: "error.log", path: "assets/handson/08-debug/error.log" }
+        ]
+    },
+    9: {
+        label: "リファクタリング対象コード",
+        label_en: "Code to Refactor",
+        files: [
+            { name: "order_processor.py", path: "assets/handson/09-refactor/order_processor.py" }
+        ]
+    },
+    10: {
+        label: "テスト仕様書",
+        label_en: "Test Spec",
+        files: [
+            { name: "SPEC.md", path: "assets/handson/10-tdd/SPEC.md" }
+        ]
+    },
+    11: {
+        label: "レビュー対象コード",
+        label_en: "Code to Review",
+        files: [
+            { name: "user_api.py", path: "assets/handson/11-review/user_api.py" }
+        ]
+    },
+    12: {
+        label: "脆弱性のあるコード2件",
+        label_en: "Vulnerable Code (2 files)",
+        files: [
+            { name: "auth.py", path: "assets/handson/12-security/auth.py" },
+            { name: "config.py", path: "assets/handson/12-security/config.py" }
+        ]
+    },
+    13: {
+        label: "requirements.txt",
+        label_en: "requirements.txt",
+        files: [
+            { name: "requirements.txt", path: "assets/handson/13-fullstack/requirements.txt" }
+        ]
+    }
+};
+
 window.TUTORIALS = TUTORIALS;
 window.HANDSON = HANDSON;
+window.HANDSON_DOWNLOADS = HANDSON_DOWNLOADS;
 window.BEST_PRACTICES = BEST_PRACTICES;
 window.BORIS_TIPS = BORIS_TIPS;
 window.PROMPT_TIPS = PROMPT_TIPS;

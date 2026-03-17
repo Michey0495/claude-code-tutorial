@@ -1,0 +1,3 @@
+[2025-01-15 10:23:45] ERROR: ZeroDivisionError in divide()
+[2025-01-15 10:24:12] ERROR: ZeroDivisionError in calculate_average() - empty list
+[2025-01-15 10:25:33] ERROR: ValueError in parse_number() - invalid literal

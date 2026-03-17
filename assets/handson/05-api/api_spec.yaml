@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: タスク管理API
+  version: 1.0.0
+
+paths:
+  /tasks:
+    get:
+      summary: タスク一覧取得
+      responses:
+        '200':
+          description: タスク一覧
+    post:
+      summary: タスク作成
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+      responses:
+        '201':
+          description: 作成成功
+
+  /tasks/{id}:
+    get:
+      summary: タスク詳細取得
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: タスク詳細
+        '404':
+          description: 見つからない
+    delete:
+      summary: タスク削除
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 削除成功

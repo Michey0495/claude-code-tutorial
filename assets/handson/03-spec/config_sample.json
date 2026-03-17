@@ -1,0 +1,23 @@
+{
+  "app": {
+    "name": "TaskManager",
+    "version": "1.0.0",
+    "debug": false
+  },
+  "database": {
+    "host": "localhost",
+    "port": 5432,
+    "name": "taskdb",
+    "pool_size": 10
+  },
+  "api": {
+    "rate_limit": 100,
+    "timeout_seconds": 30,
+    "cors_origins": ["http://localhost:3000"]
+  },
+  "logging": {
+    "level": "INFO",
+    "format": "json",
+    "output": "stdout"
+  }
+}

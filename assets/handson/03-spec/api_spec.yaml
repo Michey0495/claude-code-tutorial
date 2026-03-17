@@ -1,0 +1,91 @@
+openapi: 3.0.0
+info:
+  title: タスク管理API
+  version: 1.0.0
+  description: シンプルなタスク管理システムのREST API
+
+paths:
+  /tasks:
+    get:
+      summary: タスク一覧取得
+      description: 登録されているすべてのタスクを取得します
+      parameters:
+        - name: status
+          in: query
+          description: フィルタするステータス
+          schema:
+            type: string
+            enum: [pending, done]
+      responses:
+        '200':
+          description: タスク一覧
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Task'
+    post:
+      summary: タスク作成
+      description: 新しいタスクを作成します
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  description: タスクのタイトル
+                description:
+                  type: string
+                  description: タスクの詳細説明
+      responses:
+        '201':
+          description: 作成されたタスク
+
+  /tasks/{id}:
+    get:
+      summary: タスク詳細取得
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: タスク詳細
+    delete:
+      summary: タスク削除
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: 削除成功
+
+components:
+  schemas:
+    Task:
+      type: object
+      properties:
+        id:
+          type: integer
+          description: タスクID
+        title:
+          type: string
+          description: タイトル
+        status:
+          type: string
+          enum: [pending, done]
+          description: ステータス
+        created_at:
+          type: string
+          format: date-time
+          description: 作成日時
