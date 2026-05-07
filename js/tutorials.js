@@ -190,16 +190,16 @@ const TUTORIALS = {
             tags: ["コンテキスト", "トークン", "最適化"],
             tags_en: ["Context", "Token", "Optimization"],
             content: {
-                summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。2026年3月現在、Opus 4.6 / Sonnet 4.6 / Haiku 4.5はいずれも最大1Mトークン（日本語で約75万字）に対応していますが、効率的に使わなければ性能が劣化します。",
-                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. As of March 2026, Opus 4.6 / Sonnet 4.6 / Haiku 4.5 all support up to 1M tokens, but performance degrades without efficient use.",
+                summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。2026年5月現在、Opus 4.7 / Sonnet 4.6が最大1Mトークン（日本語で約75万字）、Haiku 4.5は200kトークンに対応しています。容量があっても効率的に使わなければ性能が劣化します。",
+                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. As of May 2026, Opus 4.7 / Sonnet 4.6 support up to 1M tokens, while Haiku 4.5 supports 200k. Even with this capacity, performance degrades without efficient use.",
                 keyPoints: [
-                    "Opus 4.6 / Sonnet 4.6 / Haiku 4.5 は最大1Mトークン対応（日本語で約75万字）",
+                    "Opus 4.7 / Sonnet 4.6 は最大1Mトークン対応（日本語で約75万字）、Haiku 4.5は200kトークン",
                     "コンテキストが埋まるとAIの性能が劣化（Context Rot）",
                     "不要な情報を送らない、必要な情報を効率的に渡すことが重要",
                     "/cost コマンドで使用量と費用を確認できる"
                 ],
                 keyPoints_en: [
-                    "Opus 4.6 / Sonnet 4.6 / Haiku 4.5 support up to 1M tokens",
+                    "Opus 4.7 / Sonnet 4.6 support up to 1M tokens, Haiku 4.5 up to 200k",
                     "AI performance degrades when context fills up (Context Rot)",
                     "Important to not send unnecessary info, pass needed info efficiently",
                     "Check usage with /context command"
@@ -482,37 +482,45 @@ const TUTORIALS = {
             number: "00_07",
             title: "2026年のClaude Code - 最新モデルと新機能",
             title_en: "Claude Code in 2026 - Latest Models & Features",
-            description: "Opus 4.6 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1の新機能群を把握する。",
-            description_en: "Understand Opus 4.6 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and v2.1 new features.",
+            description: "Opus 4.7 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.132までの新機能群を把握する。",
+            description_en: "Understand Opus 4.7 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.132.",
             icon: "zap",
-            tags: ["2026年最新", "モデル", "v2.1"],
-            tags_en: ["2026 Latest", "Models", "v2.1"],
+            tags: ["2026年5月最新", "モデル", "v2.1.132"],
+            tags_en: ["May 2026 Latest", "Models", "v2.1.132"],
             content: {
-                summary: "2026年3月時点でClaude Codeはv2.1に到達。Opus 4.6（最高性能）、Sonnet 4.6（日常推奨）、Haiku 4.5（軽量高速）の3モデル体制で、全モデルが1Mトークンのコンテキストウィンドウに対応。opusplanエイリアスで計画時はOpus、実行時はSonnetに自動切替するハイブリッド運用も可能。",
-                summary_en: "As of March 2026, Claude Code has reached v2.1. Three model tiers: Opus 4.6 (highest performance), Sonnet 4.6 (daily recommended), Haiku 4.5 (lightweight fast). All models support 1M token context. The opusplan alias auto-switches between Opus for planning and Sonnet for execution.",
+                summary: "2026年5月時点でClaude Codeはv2.1.132、3〜5月で40近いマイナーリリースが出ている。モデル構成はOpus 4.7（2026/4/16リリース、SWE-bench 70%でOpus 4.6比+12pt）、Sonnet 4.6（日常推奨、初めてSonnetが前世代Opusを上回ったモデル）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.7はAdaptive Thinkingのみ対応で、思考量は/effortのxhigh（思考10kトークン、highの2倍）まで指定可能。",
+                summary_en: "As of May 2026, Claude Code is at v2.1.132 with ~40 minor releases between March and May. Model lineup: Opus 4.7 (released 2026/4/16, 70% on SWE-bench, +12pt over Opus 4.6), Sonnet 4.6 (daily-use recommended, the first Sonnet to surpass the prior generation Opus), Haiku 4.5 (200k context, lightweight). Opus 4.7 supports Adaptive Thinking only and can be set to xhigh effort (10k thinking tokens, 2x of high).",
                 keyPoints: [
-                    "Opus 4.6: $5/$25 per 1Mトークン。複雑なアーキテクチャ判断・微妙なバグに最適",
-                    "Sonnet 4.6: $3/$15 per 1Mトークン。日常的なコード生成に最適（推奨）",
-                    "Haiku 4.5: $1/$5 per 1Mトークン。軽量タスク・トリアージ向け",
+                    "Opus 4.7: 1Mコンテキスト、コーディングSWE-bench 70%、最高難度の設計・デバッグ向け",
+                    "Sonnet 4.6: 1Mコンテキスト、日常的なコード生成に最適（推奨）",
+                    "Haiku 4.5: 200kコンテキスト、軽量タスク・トリアージ向け",
                     "opusplan: 計画フェーズ=Opus、実行フェーズ=Sonnetの自動切替",
                     "プロンプトキャッシュで90%、Batch APIで50%のコスト削減が可能",
-                    "v2.1の主要新機能: Voice Mode, /loop, /teleport, Shift+Enter改行, Skills拡張"
+                    "/effortが矢印キーのスライダーUIに刷新、Opus 4.7はxhighレベルが追加",
+                    "Pro/MaxプランのデフォルトEffortがmedium → highに引き上げ（2026/4）",
+                    "v2.1.132までの主要新機能: /ultrareview, /ultraplan, /team-onboarding, auto permission mode"
                 ],
                 keyPoints_en: [
-                    "Opus 4.6: $5/$25 per 1M tokens. Best for complex architecture decisions",
-                    "Sonnet 4.6: $3/$15 per 1M tokens. Best for daily coding (recommended)",
-                    "Haiku 4.5: $1/$5 per 1M tokens. For lightweight tasks & triage",
+                    "Opus 4.7: 1M context, 70% on SWE-bench, best for complex design & debugging",
+                    "Sonnet 4.6: 1M context, best for daily coding (recommended)",
+                    "Haiku 4.5: 200k context, for lightweight tasks & triage",
                     "opusplan: Auto-switch Opus for planning, Sonnet for execution",
                     "90% cost reduction with prompt caching, 50% with Batch API",
-                    "v2.1 key features: Voice Mode, /loop, /teleport, Shift+Enter newline, Skills expansion"
+                    "/effort got a slider UI; Opus 4.7 supports new xhigh level",
+                    "Default Effort raised from medium to high on Pro/Max plans (2026/4)",
+                    "Recent v2.1.132 highlights: /ultrareview, /ultraplan, /team-onboarding, auto permission mode"
                 ],
                 newFeatures: [
-                    { name: "/voice", desc: "スペースバーでpush-to-talk音声入力（段階的ロールアウト中）" },
-                    { name: "/loop", desc: "指定間隔でプロンプトを繰り返し実行。セッション内の軽量cron" },
-                    { name: "/teleport", desc: "ローカルとclaude.ai Web間でセッションを転送・復帰" },
-                    { name: "Shift+Enter", desc: "プロンプト入力内で改行が可能に" },
-                    { name: "Agent Teams", desc: "複数Claudeセッションがチームとして協働（実験的）" },
-                    { name: "MCP Elicitation", desc: "MCPサーバーが対話的に構造化入力を要求できる仕組み" }
+                    { name: "Opus 4.7", desc: "2026/4/16リリース。Adaptive Thinking + xhigh effort、SWE-bench 70%" },
+                    { name: "/ultrareview", desc: "マルチエージェント並列コードレビュー（クラウド実行、2026/4）" },
+                    { name: "/ultraplan", desc: "クラウドで計画ドラフト → Web編集 → ローカル実行（早期プレビュー）" },
+                    { name: "/team-onboarding", desc: "過去30日のUsageから同僚向けオンボーディング資料を自動生成" },
+                    { name: "auto permission mode", desc: "安全操作は自動許可・高リスクは自動ブロック（リサーチプレビュー）" },
+                    { name: "/voice", desc: "スペースバーでpush-to-talk音声入力" },
+                    { name: "/loop", desc: "指定間隔でプロンプトを繰り返し実行。動的モードはモデルが自己ペース" },
+                    { name: "/teleport", desc: "ローカルとclaude.ai Web間でセッションを転送・復帰（高速化済み）" },
+                    { name: "Agent Teams", desc: "複数Claudeセッションがチームとして協働" },
+                    { name: "PowerShell tool", desc: "Windowsネイティブ実行（CLAUDE_CODE_USE_POWERSHELL_TOOL=1）" }
                 ],
                 handson: {
                     title: "モデルとバージョンを確認する",
@@ -2718,31 +2726,41 @@ wait`
         {
             id: "02_11",
             number: "02_11",
-            title: "新コマンド群 - /voice, /loop, /teleport, /effort",
-            title_en: "New Commands - /voice, /loop, /teleport, /effort",
-            description: "v2.1で追加された新コマンド群。音声入力、定期実行、セッション転送、思考深度制御。",
-            description_en: "New commands added in v2.1: voice input, periodic execution, session transfer, thinking depth control.",
+            title: "新コマンド群 - /voice, /loop, /teleport, /effort, /ultrareview, /ultraplan",
+            title_en: "New Commands - /voice, /loop, /teleport, /effort, /ultrareview, /ultraplan",
+            description: "v2.1〜v2.1.132で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携レビュー/計画。",
+            description_en: "New commands added between v2.1 and v2.1.132: voice, periodic execution, session transfer, thinking depth, cloud-backed review and planning.",
             icon: "radio",
-            tags: ["v2.1新機能", "Voice", "Loop"],
-            tags_en: ["v2.1 New", "Voice", "Loop"],
+            tags: ["v2.1.132新機能", "Voice", "Loop", "UltraReview", "UltraPlan"],
+            tags_en: ["v2.1.132 New", "Voice", "Loop", "UltraReview", "UltraPlan"],
             content: {
-                summary: "Claude Code v2.1では4つの強力なコマンドが追加された。/voice はスペースバーのpush-to-talk方式で音声入力ができる（段階的ロールアウト中）。/loop は指定間隔でプロンプトを繰り返す軽量cron。/teleport はローカルセッションをclaude.ai Webに転送し、逆にWebからローカルに引き戻すこともできる。/effort はモデルの思考深度をlow/medium/highで調整する。",
-                summary_en: "Claude Code v2.1 added 4 powerful commands. /voice enables push-to-talk voice input via spacebar (gradual rollout). /loop repeats prompts at intervals as a lightweight cron. /teleport transfers local sessions to claude.ai web and back. /effort adjusts model thinking depth to low/medium/high.",
+                summary: "Claude Code v2.1〜v2.1.132で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する（高速化済み）。/effort は矢印キーのスライダーUIで思考深度を調整し、Opus 4.7 では xhigh が追加された。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding（過去30日のUsageから同僚向け資料を自動生成）、/powerup（インタラクティブ学習レッスン）が登場。permission モードには auto が追加され、安全な操作は自動許可・高リスク操作は自動ブロックされる（リサーチプレビュー）。",
+                summary_en: "Many commands were added between v2.1 and v2.1.132. /voice enables push-to-talk voice input via spacebar. /loop repeats prompts at intervals as a lightweight cron; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web (now significantly faster). /effort got a slider UI; Opus 4.7 adds xhigh. April 2026 introduced cloud-backed /ultrareview (parallel multi-agent code review), /ultraplan (cloud planning draft → web edit → local execution), /team-onboarding (auto-generates onboarding materials from the last 30 days of usage), and /powerup (interactive learning lessons). A new auto permission mode auto-approves safe ops and auto-blocks risky ones (research preview).",
                 keyPoints: [
                     "/voice: スペースバーでpush-to-talk音声入力。keybindings.jsonでキーカスタマイズ可能",
-                    "/loop 5m check deploy: 5分ごとにデプロイ状況を確認するような定期実行",
+                    "/loop 5m check deploy: 5分ごとに定期実行。間隔省略でモデル自己ペースの動的モード",
                     "/teleport: ローカル→Web（&コマンド）、Web→ローカル（--teleport）のセッション転送",
-                    "/effort high: 複雑な問題で深い思考を要求。low で軽量応答",
+                    "/effort: 矢印キースライダーで low/medium/high/xhigh（Opus 4.7のみ）を指定",
+                    "/ultrareview: マルチエージェント並列コードレビューをクラウドで実行（2026/4）",
+                    "/ultraplan: クラウドで計画ドラフト → Webで編集・コメント → ローカル実行（早期プレビュー）",
+                    "/team-onboarding: 過去30日のUsageから同僚向けオンボーディング資料を自動生成",
+                    "/powerup: CLI内でインタラクティブな学習レッスンを実行",
                     "/fast: 同じモデルのまま高速出力モードに切替（品質は維持）",
-                    "/btw: 処理中にサイド質問（会話履歴を汚さない）"
+                    "/btw: 処理中にサイド質問（会話履歴を汚さない）",
+                    "auto permission mode: 安全操作は自動許可、高リスクは自動ブロック（リサーチプレビュー）"
                 ],
                 keyPoints_en: [
                     "/voice: Push-to-talk via spacebar. Key customizable in keybindings.json",
-                    "/loop 5m check deploy: Periodic execution like checking deploy every 5 minutes",
+                    "/loop 5m check deploy: Periodic execution; omit interval for dynamic self-paced mode",
                     "/teleport: Local→Web (& command), Web→Local (--teleport) session transfer",
-                    "/effort high: Request deep thinking for complex problems. low for lightweight",
+                    "/effort: Slider UI to set low/medium/high/xhigh (xhigh is Opus 4.7 only)",
+                    "/ultrareview: Cloud-backed parallel multi-agent code review (2026/4)",
+                    "/ultraplan: Cloud planning draft → web edit → local execution (early preview)",
+                    "/team-onboarding: Auto-generates onboarding docs from last 30 days of usage",
+                    "/powerup: Interactive learning lessons inside the CLI",
                     "/fast: Switch to fast output mode with same model (quality maintained)",
-                    "/btw: Side question during processing (doesn't pollute conversation history)"
+                    "/btw: Side question during processing (doesn't pollute conversation history)",
+                    "auto permission mode: Auto-approves safe ops, auto-blocks risky ops (research preview)"
                 ],
                 handson: {
                     title: "新コマンドを試す",
@@ -2802,14 +2820,14 @@ wait`
                     "不要なファイル読み込みを避ける（@指定で必要部分のみ）",
                     "結果はファイルに書き出してコンテキストから解放",
                     "Grepで必要な部分だけ抽出してから渡す",
-                    "モデル選択: 簡単なタスクはHaiku 4.5、日常的なコード生成はSonnet 4.6、複雑な判断はOpus 4.6"
+                    "モデル選択: 簡単なタスクはHaiku 4.5、日常的なコード生成はSonnet 4.6、複雑な判断はOpus 4.7"
                 ],
                 keyPoints_en: [
                     "WSCE Framework: Write → Summarize → Compress → Extract",
                     "Avoid unnecessary file reads (@ specify only needed parts)",
                     "Write results to files to release from context",
                     "Extract only needed parts with Grep before passing",
-                    "Model selection: Haiku 4.5 for simple tasks, Sonnet 4.6 for daily coding, Opus 4.6 for complex decisions"
+                    "Model selection: Haiku 4.5 for simple tasks, Sonnet 4.6 for daily coding, Opus 4.7 for complex decisions"
                 ],
                 wsceFramework: {
                     title: "WSCEフレームワーク",
@@ -2842,25 +2860,25 @@ wait`
                     ]
                 },
                 modelSelection: {
-                    title: "タスク別モデル選択ガイド（2026年3月）",
+                    title: "タスク別モデル選択ガイド（2026年5月）",
                     models: [
                         {
                             model: "Haiku 4.5",
-                            cost: "$1/$5 per 1M tokens",
+                            cost: "200kコンテキスト・低コスト",
                             useCase: "単純な変換、フォーマット、トリアージ",
                             examples: ["JSONの整形", "変数名の一括置換", "簡単な質問応答"]
                         },
                         {
                             model: "Sonnet 4.6（推奨）",
-                            cost: "$3/$15 per 1M tokens",
+                            cost: "1Mコンテキスト・標準",
                             useCase: "日常的なコード生成、分析、レビュー",
                             examples: ["新機能の実装", "コードレビュー", "バグ修正"]
                         },
                         {
-                            model: "Opus 4.6",
-                            cost: "$5/$25 per 1M tokens",
-                            useCase: "複雑なアーキテクチャ判断、微妙なバグ、難解な問題",
-                            examples: ["システム設計", "複雑なアルゴリズム", "セキュリティ分析"]
+                            model: "Opus 4.7",
+                            cost: "1Mコンテキスト・最上位",
+                            useCase: "複雑なアーキテクチャ判断、微妙なバグ、難解な問題（xhigh effort 推奨）",
+                            examples: ["システム設計", "複雑なアルゴリズム", "セキュリティ分析", "Adaptive Thinking で xhigh"]
                         },
                         {
                             model: "opusplan（ハイブリッド）",
@@ -3955,23 +3973,23 @@ jobs:
             tags: ["Agent Teams", "並列", "実験的"],
             tags_en: ["Agent Teams", "Parallel", "Experimental"],
             content: {
-                summary: "Agent TeamsはOpus 4.6と同時に導入された実験的機能。複数のClaude Codeセッションがチームとして協働し、1セッションがチームリーダーとしてタスクの割り振り・結果の統合を行い、他のメンバーは独立したコンテキストウィンドウで専門作業を行う。リードエージェントがスタイル・セキュリティ・パフォーマンスのレビュー用サブエージェントをオーケストレーションするパターンが典型的。トークン消費は3倍になるが、専門家による特化レビューの品質はジェネラリスト単体を上回る。",
-                summary_en: "Agent Teams is an experimental feature introduced alongside Opus 4.6. Multiple Claude Code sessions collaborate as a team, with one leader orchestrating task delegation and result integration while members work independently with their own context windows. Token consumption triples but specialized review quality exceeds single generalist.",
+                summary: "Agent TeamsはOpus 4.6と同時期に導入され、Opus 4.7（2026/4）の登場以降は本機能の主戦力モデルとなった。複数のClaude Codeセッションがチームとして協働し、1セッションがチームリーダーとしてタスクの割り振り・結果の統合を行い、他のメンバーは独立したコンテキストウィンドウで専門作業を行う。リードエージェントがスタイル・セキュリティ・パフォーマンスのレビュー用サブエージェントをオーケストレーションするパターンが典型的で、2026年4月にはこのオーケストレーションをクラウドで自動化する /ultrareview コマンドも追加された。トークン消費は3倍になるが、専門家による特化レビューの品質はジェネラリスト単体を上回る。",
+                summary_en: "Agent Teams was introduced alongside Opus 4.6, and Opus 4.7 (2026/4) became the main driver afterward. Multiple Claude Code sessions collaborate as a team, with one leader orchestrating task delegation and result integration while members work independently with their own context windows. April 2026 also added /ultrareview, which automates this orchestration in the cloud. Token consumption triples but specialized review quality exceeds a single generalist.",
                 keyPoints: [
                     "1セッションがリーダー、他がメンバーとして協働",
                     "各メンバーは独立したコンテキストウィンドウで作業",
                     "典型パターン: リーダーがスタイル/セキュリティ/パフォーマンスの各専門エージェントに委譲",
                     "トークン消費は約3倍だが、品質は単体を上回る",
-                    "Opus 4.6で最も効果的（思考の深さが活きる）",
-                    "実験的機能のため、安定性は今後改善予定"
+                    "Opus 4.7で最も効果的（xhigh effort + 1Mコンテキストが活きる）",
+                    "/ultrareviewでクラウドベースの並列レビューを最小コストで自動化"
                 ],
                 keyPoints_en: [
                     "One session leads, others collaborate as members",
                     "Each member works with independent context window",
                     "Typical: Leader delegates to style/security/performance specialist agents",
                     "~3x token consumption but quality exceeds single agent",
-                    "Most effective with Opus 4.6 (deep thinking shines)",
-                    "Experimental feature, stability improvements planned"
+                    "Most effective with Opus 4.7 (xhigh effort + 1M context shines)",
+                    "/ultrareview automates cloud-based parallel reviews at minimal cost"
                 ],
                 handson: {
                     title: "マルチエージェント構成を試す",
@@ -4013,23 +4031,25 @@ jobs:
             tags: ["Agent SDK", "Python", "TypeScript"],
             tags_en: ["Agent SDK", "Python", "TypeScript"],
             content: {
-                summary: "Claude Agent SDKは、Claude Codeを動かしている基盤をライブラリとして外部公開したもの。2026年3月時点でPythonはv0.1.48（PyPI）、TypeScriptはv0.2.71（npm）。サブエージェントは独自のコンテキストウィンドウ、カスタムシステムプロンプト、ツールアクセス権、独立した権限を持つ。.claude/agents/ にカスタムエージェント定義を配置できる。",
-                summary_en: "Claude Agent SDK publicly exposes the foundation powering Claude Code as a library. As of March 2026, Python is v0.1.48 (PyPI), TypeScript is v0.2.71 (npm). Subagents have their own context window, custom system prompt, tool access, and independent permissions. Custom agent definitions can be placed in .claude/agents/.",
+                summary: "Claude Agent SDKは、Claude Codeを動かしている基盤をライブラリとして外部公開したもの。2026年5月時点で月次マイナーリリースが続いており、Adaptive Thinking・1h prompt caching・Batch API 300k出力など、最新APIフィーチャーへSDK経由で先行アクセスできる。サブエージェントは独自のコンテキストウィンドウ、カスタムシステムプロンプト、ツールアクセス権、独立した権限を持つ。.claude/agents/ にカスタムエージェント定義を配置できる。",
+                summary_en: "Claude Agent SDK publicly exposes the foundation powering Claude Code as a library. As of May 2026, monthly minor releases continue, exposing the latest API features (Adaptive Thinking, 1h prompt caching, Batch API 300k output) ahead of other clients. Subagents have their own context window, custom system prompt, tool access, and independent permissions. Custom agent definitions can be placed in .claude/agents/.",
                 keyPoints: [
-                    "Python SDK: pip install claude-agent-sdk (v0.1.48)",
-                    "TypeScript SDK: npm install @anthropic-ai/claude-agent-sdk (v0.2.71)",
+                    "Python SDK: pip install claude-agent-sdk（最新版を pip install -U で取得）",
+                    "TypeScript SDK: npm install @anthropic-ai/claude-agent-sdk（最新版を npm install --save@latest で取得）",
                     "サブエージェント: 独自のコンテキストウィンドウとシステムプロンプト",
                     ".claude/agents/ にカスタムエージェント定義を配置可能",
                     "context: fork でSkill内タスクをサブエージェントに委譲",
-                    "並列実行とコンテキスト分離が主な利点"
+                    "並列実行とコンテキスト分離が主な利点",
+                    "Adaptive Thinking と 1h prompt caching は SDK の最新ヘッダで有効化"
                 ],
                 keyPoints_en: [
-                    "Python SDK: pip install claude-agent-sdk (v0.1.48)",
-                    "TypeScript SDK: npm install @anthropic-ai/claude-agent-sdk (v0.2.71)",
+                    "Python SDK: pip install claude-agent-sdk (use -U for latest)",
+                    "TypeScript SDK: npm install @anthropic-ai/claude-agent-sdk (latest)",
                     "Subagents: Own context window and system prompt",
                     "Custom agent definitions in .claude/agents/",
                     "context: fork to delegate skill tasks to subagents",
-                    "Parallel execution and context isolation are main benefits"
+                    "Parallel execution and context isolation are main benefits",
+                    "Adaptive Thinking and 1h prompt caching enabled via latest SDK headers"
                 ],
                 handson: {
                     title: "カスタムサブエージェントを作成する",

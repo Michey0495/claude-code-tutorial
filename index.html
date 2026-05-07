@@ -4,22 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Tutorial by EZOAI</title>
-    <meta name="description" content="2026年3月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全40章 + 13種類のハンズオン。Opus 4.6 / Sonnet 4.6 / Haiku 4.5対応。">
+    <meta name="description" content="2026年5月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全40章 + 13種類のハンズオン。Opus 4.7 / Sonnet 4.6 / Haiku 4.5 / v2.1.132対応。">
     <meta name="author" content="EZOAI">
 
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Claude Code Tutorial by EZOAI - 2026年3月最新版">
-    <meta property="og:description" content="エージェント型AIコーディングの真髄を学ぶ。全40章 + 13種類のハンズオン。Opus 4.6対応。">
+    <meta property="og:title" content="Claude Code Tutorial by EZOAI - 2026年5月最新版">
+    <meta property="og:description" content="エージェント型AIコーディングの真髄を学ぶ。全40章 + 13種類のハンズオン。Opus 4.7 / Sonnet 4.6 / Haiku 4.5対応。">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ja_JP">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Claude Code Tutorial by EZOAI">
-    <meta name="twitter:description" content="2026年3月最新版。Opus 4.6対応。全40章 + 13ハンズオン。">
+    <meta name="twitter:description" content="2026年5月最新版。Opus 4.7 / Sonnet 4.6 / Haiku 4.5対応。全40章 + 13ハンズオン。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -95,7 +95,7 @@
         <div class="hero-content">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                2026.03 Updated - Opus 4.6 / Sonnet 4.6 / Haiku 4.5
+                2026.05 Updated - Opus 4.7 / Sonnet 4.6 / Haiku 4.5
             </div>
             <h1 class="hero-title">
                 <span class="title-line">Claude Code</span>
@@ -104,7 +104,7 @@
             <p class="hero-description">
                 エージェント型AIコーディングの真髄を学ぶ。<br>
                 公式ベストプラクティスに基づいた全40章 + 13種類のハンズオン。<br>
-                <span style="font-size: 0.85em; opacity: 0.8;">v2.1対応 / Skills / Hooks / MCP / Agent Teams / Voice Mode</span>
+                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.132対応 / Skills / Hooks / MCP / Agent Teams / Voice Mode / Auto Permission / xhigh Effort</span>
             </p>
             <div class="hero-stats">
                 <div class="stat">
@@ -492,6 +492,7 @@
                         <tbody>
                             <tr><td>Enter</td><td>メッセージ送信</td></tr>
                             <tr><td>Shift+Enter</td><td>プロンプト内で改行（v2.1.0追加）</td></tr>
+                            <tr><td>Ctrl+U</td><td>行を全削除（v2.1.118で挙動変更、行頭まで削除は Ctrl+Y）</td></tr>
                             <tr><td>Esc</td><td>操作中断（コンテキストは保持）</td></tr>
                             <tr><td>Esc Esc</td><td>コード復元（巻き戻し）</td></tr>
                             <tr><td>Shift+Tab</td><td>モード切替（Normal → Auto-accept → Plan）</td></tr>
@@ -512,19 +513,36 @@
                             <tr><td>--output-format stream-json</td><td>JSON形式でストリーム出力（パイプ連携用）</td></tr>
                         </tbody>
                     </table>
-                    <h3>対応モデル（2026年3月）</h3>
+                    <h3>対応モデル（2026年5月）</h3>
                     <table class="cheat-table">
                         <thead>
-                            <tr><th>モデル</th><th>コンテキスト</th><th>入力/出力（1Mトークン）</th><th>用途</th></tr>
+                            <tr><th>モデル</th><th>コンテキスト</th><th>主な用途</th><th>備考</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Opus 4.6</td><td>1Mトークン</td><td>$5 / $25</td><td>複雑なアーキテクチャ判断・デバッグ</td></tr>
-                            <tr><td>Sonnet 4.6</td><td>1Mトークン</td><td>$3 / $15</td><td>日常的なコード生成（推奨）</td></tr>
-                            <tr><td>Haiku 4.5</td><td>1Mトークン</td><td>$1 / $5</td><td>軽量タスク・トリアージ</td></tr>
-                            <tr><td>opusplan</td><td>-</td><td>-</td><td>Plan=Opus / 実行=Sonnet のハイブリッド</td></tr>
+                            <tr><td>Opus 4.7</td><td>1Mトークン</td><td>最高難度の設計・デバッグ</td><td>2026/4/16リリース、コーディングSWE-bench 70%、Adaptive Thinkingのみ対応</td></tr>
+                            <tr><td>Sonnet 4.6</td><td>1Mトークン</td><td>日常的なコード生成（推奨）</td><td>初めてSonnetが前世代Opusを上回ったモデル</td></tr>
+                            <tr><td>Haiku 4.5</td><td>200kトークン</td><td>軽量タスク・トリアージ</td><td>2025/10リリース、低コスト高速</td></tr>
+                            <tr><td>opusplan</td><td>-</td><td>Plan=Opus / 実行=Sonnet のハイブリッド</td><td>長時間タスクの省コスト運用</td></tr>
                         </tbody>
                     </table>
-                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/ja/overview" target="_blank" rel="noopener">Claude Code 公式ドキュメント</a>で全機能を確認できます。最終更新: 2026年3月</p>
+                    <h3>2026年4〜5月の主要新機能</h3>
+                    <table class="cheat-table">
+                        <thead>
+                            <tr><th>機能</th><th>概要</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>/ultrareview</td><td>マルチエージェント並列コードレビュー（クラウド実行）</td></tr>
+                            <tr><td>/ultraplan</td><td>クラウド計画ドラフト → Web編集 → ローカル実行（早期プレビュー）</td></tr>
+                            <tr><td>/team-onboarding</td><td>過去30日のUsageから同僚向けオンボーディング資料を自動生成</td></tr>
+                            <tr><td>/effort（刷新）</td><td>矢印キーのスライダーで思考量を調整。Opus 4.7で<code>xhigh</code>追加</td></tr>
+                            <tr><td>/powerup</td><td>インタラクティブ学習レッスン（CLI内）</td></tr>
+                            <tr><td>auto permission mode</td><td>安全操作は自動許可・高リスクは自動ブロック（リサーチプレビュー）</td></tr>
+                            <tr><td>PowerShell tool</td><td>Windowsネイティブ実行（<code>CLAUDE_CODE_USE_POWERSHELL_TOOL</code>）</td></tr>
+                            <tr><td>Batch API 300k出力</td><td><code>output-300k-2026-03-24</code>ベータヘッダで超長文バッチ可能</td></tr>
+                            <tr><td>1h prompt caching</td><td><code>ENABLE_PROMPT_CACHING_1H</code>で長時間タスクのキャッシュ延長</td></tr>
+                        </tbody>
+                    </table>
+                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年5月（月2回自動アップデート）</p>
                 </div>
             </div>
         </div>
@@ -539,7 +557,7 @@
                     <span class="footer-badge">by EZOAI</span>
                 </div>
                 <p class="footer-description">
-                    2026年3月最新版 / Opus 4.6対応 / Anthropic公式ベストプラクティス準拠
+                    2026年5月最新版 / Opus 4.7・Sonnet 4.6・Haiku 4.5 対応 / Claude Code v2.1.132 / Anthropic公式ベストプラクティス準拠
                 </p>
             </div>
             <div class="footer-links">

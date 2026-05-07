@@ -2,8 +2,15 @@
 
 ## プロジェクト概要
 Claude Codeの実践的チュートリアルサイト（EZOAI制作）
-2026年3月最新版 / Opus 4.6 / Sonnet 4.6 / Haiku 4.5 / v2.1対応
+2026年5月最新版 / Opus 4.7 / Sonnet 4.6 / Haiku 4.5 / v2.1.132対応
 全40章 + 13種類のハンズオン
+
+## 自動アップデート
+schedule（cron）で月2回（毎月1日・15日 09:00 JST）に最新化。
+- 調査: claude-code-guide で公式 changelog / モデル一覧を取得
+- 反映: index.html / js/tutorials.js / js/app.js のバージョン表記とモデル一覧を Edit
+- デプロイ: git push で Vercel 自動デプロイ
+- スクリプト: `scripts/auto-update.md`（プロンプト本体）
 
 ## Webアプリ（本リポジトリ）
 ```
