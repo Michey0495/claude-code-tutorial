@@ -1,7 +1,7 @@
 # Claude Code Tutorial Website
 
 ## プロジェクト概要
-Claude Codeの実践的チュートリアルサイト（EZOAI制作）
+Claude Codeの実践的チュートリアルサイト
 2026年5月最新版 / Opus 4.7 / Sonnet 4.6 / Haiku 4.5 / v2.1.132対応
 全40章 + 13種類のハンズオン
 

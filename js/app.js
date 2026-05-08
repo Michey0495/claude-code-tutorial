@@ -1,6 +1,5 @@
 /**
  * Claude Code Tutorial - Main Application (Enhanced)
- * by EZOAI
  *
  * Anthropic-inspired interactive tutorial website
  * with detailed hands-on modals and official resource links
@@ -74,7 +73,7 @@
             // Footer
             footerResources: '公式リソース',
             footerLearn: '学習コンテンツ',
-            footerCopyright: '© 2026 EZOAI. Built with Claude Code.',
+            footerCopyright: '© 2026 Claude Code Tutorial. Built with Claude Code.',
             // Boris Tips
             borisTipsTitle: 'Boris Cherny氏のTIPS 22選',
             borisTipsDesc: 'Claude Code開発者本人が実践する運用テクニック',
@@ -169,7 +168,7 @@
             // Footer
             footerResources: 'Official Resources',
             footerLearn: 'Learning Content',
-            footerCopyright: '© 2026 EZOAI. Built with Claude Code.',
+            footerCopyright: '© 2026 Claude Code Tutorial. Built with Claude Code.',
             // Boris Tips
             borisTipsTitle: "Boris Cherny's 22 TIPS",
             borisTipsDesc: 'Operational techniques practiced by the Claude Code developer himself',

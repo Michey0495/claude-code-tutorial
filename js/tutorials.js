@@ -1,6 +1,5 @@
 /**
  * Claude Code Tutorial - Tutorial Data (Enhanced)
- * by EZOAI
  *
  * 詳細なハンズオン手順と公式ベストプラクティスリンク付き
  */
