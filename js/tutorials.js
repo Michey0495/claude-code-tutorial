@@ -481,14 +481,14 @@ const TUTORIALS = {
             number: "00_07",
             title: "2026年のClaude Code - 最新モデルと新機能",
             title_en: "Claude Code in 2026 - Latest Models & Features",
-            description: "Opus 4.7 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.132までの新機能群を把握する。",
-            description_en: "Understand Opus 4.7 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.132.",
+            description: "Opus 4.7 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.142までの新機能群を把握する。",
+            description_en: "Understand Opus 4.7 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.142.",
             icon: "zap",
-            tags: ["2026年5月最新", "モデル", "v2.1.132"],
-            tags_en: ["May 2026 Latest", "Models", "v2.1.132"],
+            tags: ["2026年5月最新", "モデル", "v2.1.142"],
+            tags_en: ["May 2026 Latest", "Models", "v2.1.142"],
             content: {
-                summary: "2026年5月時点でClaude Codeはv2.1.132、3〜5月で40近いマイナーリリースが出ている。モデル構成はOpus 4.7（2026/4/16リリース、SWE-bench 70%でOpus 4.6比+12pt）、Sonnet 4.6（日常推奨、初めてSonnetが前世代Opusを上回ったモデル）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.7はAdaptive Thinkingのみ対応で、思考量は/effortのxhigh（思考10kトークン、highの2倍）まで指定可能。",
-                summary_en: "As of May 2026, Claude Code is at v2.1.132 with ~40 minor releases between March and May. Model lineup: Opus 4.7 (released 2026/4/16, 70% on SWE-bench, +12pt over Opus 4.6), Sonnet 4.6 (daily-use recommended, the first Sonnet to surpass the prior generation Opus), Haiku 4.5 (200k context, lightweight). Opus 4.7 supports Adaptive Thinking only and can be set to xhigh effort (10k thinking tokens, 2x of high).",
+                summary: "2026年5月時点でClaude Codeはv2.1.142（2026/5/14リリース）、3〜5月で50近いマイナーリリースが出ている。モデル構成はOpus 4.7（2026/4/16リリース、SWE-bench 70%でOpus 4.6比+12pt）、Sonnet 4.6（日常推奨、初めてSonnetが前世代Opusを上回ったモデル）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.7はAdaptive Thinkingのみ対応で、思考量は/effortのxhigh（思考10kトークン、highの2倍）まで指定可能。v2.1.139では`claude agents`（エージェントビュー）、`/goal`（完了条件設定）、`/scroll-speed`が追加。v2.1.142ではFast modeのデフォルトがOpus 4.7に変更。",
+                summary_en: "As of May 2026, Claude Code is at v2.1.142 (released 2026/5/14) with ~50 minor releases between March and May. Model lineup: Opus 4.7 (released 2026/4/16, 70% on SWE-bench, +12pt over Opus 4.6), Sonnet 4.6 (daily-use recommended, the first Sonnet to surpass the prior generation Opus), Haiku 4.5 (200k context, lightweight). Opus 4.7 supports Adaptive Thinking only, settable up to xhigh effort (10k thinking tokens, 2x of high). v2.1.139 adds `claude agents` (agent view), `/goal` (set completion conditions), and `/scroll-speed`. v2.1.142 changes Fast mode default to Opus 4.7.",
                 keyPoints: [
                     "Opus 4.7: 1Mコンテキスト、コーディングSWE-bench 70%、最高難度の設計・デバッグ向け",
                     "Sonnet 4.6: 1Mコンテキスト、日常的なコード生成に最適（推奨）",
@@ -497,7 +497,7 @@ const TUTORIALS = {
                     "プロンプトキャッシュで90%、Batch APIで50%のコスト削減が可能",
                     "/effortが矢印キーのスライダーUIに刷新、Opus 4.7はxhighレベルが追加",
                     "Pro/MaxプランのデフォルトEffortがmedium → highに引き上げ（2026/4）",
-                    "v2.1.132までの主要新機能: /ultrareview, /ultraplan, /team-onboarding, auto permission mode"
+                    "v2.1.142までの主要新機能: claude agents, /goal, /scroll-speed, /usage, worktree.baseRef, ANTHROPIC_WORKSPACE_ID"
                 ],
                 keyPoints_en: [
                     "Opus 4.7: 1M context, 70% on SWE-bench, best for complex design & debugging",
@@ -507,19 +507,20 @@ const TUTORIALS = {
                     "90% cost reduction with prompt caching, 50% with Batch API",
                     "/effort got a slider UI; Opus 4.7 supports new xhigh level",
                     "Default Effort raised from medium to high on Pro/Max plans (2026/4)",
-                    "Recent v2.1.132 highlights: /ultrareview, /ultraplan, /team-onboarding, auto permission mode"
+                    "Recent v2.1.142 highlights: claude agents, /goal, /scroll-speed, /usage, worktree.baseRef"
                 ],
                 newFeatures: [
-                    { name: "Opus 4.7", desc: "2026/4/16リリース。Adaptive Thinking + xhigh effort、SWE-bench 70%" },
+                    { name: "claude agents", desc: "エージェントビュー（Research Preview）。--add-dir, --model, --effort等のフラグで起動（v2.1.139/142）" },
+                    { name: "/goal", desc: "完了条件を設定し、条件を満たすまで継続実行（v2.1.139）" },
+                    { name: "/scroll-speed", desc: "マウスホイールのスクロール速度を調整（v2.1.139）" },
+                    { name: "/usage", desc: "/cost と /stats を統合したコスト・使用量確認コマンド（v2.1.118）" },
+                    { name: "worktree.baseRef", desc: "fresh|head でworktreeのベースブランチを指定（v2.1.133）" },
+                    { name: "ANTHROPIC_WORKSPACE_ID", desc: "ワークロードアイデンティティフェデレーション用の新環境変数（v2.1.141）" },
+                    { name: "Opus 4.7", desc: "2026/4/16リリース。Adaptive Thinking + xhigh effort、SWE-bench 70%。v2.1.142でFast modeのデフォルトに" },
                     { name: "/ultrareview", desc: "マルチエージェント並列コードレビュー（クラウド実行、2026/4）" },
                     { name: "/ultraplan", desc: "クラウドで計画ドラフト → Web編集 → ローカル実行（早期プレビュー）" },
                     { name: "/team-onboarding", desc: "過去30日のUsageから同僚向けオンボーディング資料を自動生成" },
-                    { name: "auto permission mode", desc: "安全操作は自動許可・高リスクは自動ブロック（リサーチプレビュー）" },
-                    { name: "/voice", desc: "スペースバーでpush-to-talk音声入力" },
-                    { name: "/loop", desc: "指定間隔でプロンプトを繰り返し実行。動的モードはモデルが自己ペース" },
-                    { name: "/teleport", desc: "ローカルとclaude.ai Web間でセッションを転送・復帰（高速化済み）" },
-                    { name: "Agent Teams", desc: "複数Claudeセッションがチームとして協働" },
-                    { name: "PowerShell tool", desc: "Windowsネイティブ実行（CLAUDE_CODE_USE_POWERSHELL_TOOL=1）" }
+                    { name: "auto permission mode", desc: "安全操作は自動許可・高リスクは自動ブロック（リサーチプレビュー）" }
                 ],
                 handson: {
                     title: "モデルとバージョンを確認する",
@@ -2725,17 +2726,21 @@ wait`
         {
             id: "02_11",
             number: "02_11",
-            title: "新コマンド群 - /voice, /loop, /teleport, /effort, /ultrareview, /ultraplan",
-            title_en: "New Commands - /voice, /loop, /teleport, /effort, /ultrareview, /ultraplan",
-            description: "v2.1〜v2.1.132で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携レビュー/計画。",
-            description_en: "New commands added between v2.1 and v2.1.132: voice, periodic execution, session transfer, thinking depth, cloud-backed review and planning.",
+            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, claude agents（v2.1.142）",
+            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, claude agents (v2.1.142)",
+            description: "v2.1〜v2.1.142で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定。",
+            description_en: "New commands added between v2.1 and v2.1.142: voice, periodic execution, session transfer, thinking depth, cloud-backed review/planning, agent view, goal setting.",
             icon: "radio",
-            tags: ["v2.1.132新機能", "Voice", "Loop", "UltraReview", "UltraPlan"],
-            tags_en: ["v2.1.132 New", "Voice", "Loop", "UltraReview", "UltraPlan"],
+            tags: ["v2.1.142新機能", "Voice", "Loop", "UltraReview", "claude agents", "/goal"],
+            tags_en: ["v2.1.142 New", "Voice", "Loop", "UltraReview", "claude agents", "/goal"],
             content: {
-                summary: "Claude Code v2.1〜v2.1.132で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する（高速化済み）。/effort は矢印キーのスライダーUIで思考深度を調整し、Opus 4.7 では xhigh が追加された。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding（過去30日のUsageから同僚向け資料を自動生成）、/powerup（インタラクティブ学習レッスン）が登場。permission モードには auto が追加され、安全な操作は自動許可・高リスク操作は自動ブロックされる（リサーチプレビュー）。",
-                summary_en: "Many commands were added between v2.1 and v2.1.132. /voice enables push-to-talk voice input via spacebar. /loop repeats prompts at intervals as a lightweight cron; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web (now significantly faster). /effort got a slider UI; Opus 4.7 adds xhigh. April 2026 introduced cloud-backed /ultrareview (parallel multi-agent code review), /ultraplan (cloud planning draft → web edit → local execution), /team-onboarding (auto-generates onboarding materials from the last 30 days of usage), and /powerup (interactive learning lessons). A new auto permission mode auto-approves safe ops and auto-blocks risky ones (research preview).",
+                summary: "Claude Code v2.1〜v2.1.142で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する（高速化済み）。/effort は矢印キーのスライダーUIで思考深度を調整し、Opus 4.7 では xhigh が追加された。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding（過去30日のUsageから同僚向け資料を自動生成）、/powerup（インタラクティブ学習レッスン）が登場。permission モードには auto が追加された（リサーチプレビュー）。v2.1.139ではさらに `claude agents`（エージェントビューの起動）、`/goal`（完了条件を設定し条件達成まで継続）、`/scroll-speed`（スクロール速度調整）が追加。/usage は /cost と /stats を統合した新コマンド。",
+                summary_en: "Many commands were added between v2.1 and v2.1.142. /voice enables push-to-talk voice input via spacebar. /loop repeats prompts at intervals as a lightweight cron; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web (now significantly faster). /effort got a slider UI; Opus 4.7 adds xhigh. April 2026 introduced cloud-backed /ultrareview (parallel multi-agent code review), /ultraplan (cloud planning draft → web edit → local execution), /team-onboarding (auto-generates onboarding materials from the last 30 days of usage), and /powerup (interactive learning lessons). A new auto permission mode was added (research preview). v2.1.139 added `claude agents` (agent view launcher), `/goal` (set completion conditions and run until met), and `/scroll-speed` (scroll speed adjustment). /usage consolidates /cost and /stats.",
                 keyPoints: [
+                    "claude agents: エージェントビューを起動（Research Preview）。--model, --effort, --add-dir等のフラグ対応（v2.1.139/142）",
+                    "/goal: 完了条件を設定し、条件を満たすまでClaudeが継続実行（v2.1.139）",
+                    "/usage: /cost と /stats を統合。コスト・使用量・セッション統計を一括表示（v2.1.118）",
+                    "/scroll-speed: マウスホイールのスクロール速度を調整（v2.1.139）",
                     "/voice: スペースバーでpush-to-talk音声入力。keybindings.jsonでキーカスタマイズ可能",
                     "/loop 5m check deploy: 5分ごとに定期実行。間隔省略でモデル自己ペースの動的モード",
                     "/teleport: ローカル→Web（&コマンド）、Web→ローカル（--teleport）のセッション転送",
@@ -2744,11 +2749,15 @@ wait`
                     "/ultraplan: クラウドで計画ドラフト → Webで編集・コメント → ローカル実行（早期プレビュー）",
                     "/team-onboarding: 過去30日のUsageから同僚向けオンボーディング資料を自動生成",
                     "/powerup: CLI内でインタラクティブな学習レッスンを実行",
-                    "/fast: 同じモデルのまま高速出力モードに切替（品質は維持）",
+                    "/fast: 同じモデルのまま高速出力モードに切替（v2.1.142でFast modeのデフォルトがOpus 4.7に）",
                     "/btw: 処理中にサイド質問（会話履歴を汚さない）",
                     "auto permission mode: 安全操作は自動許可、高リスクは自動ブロック（リサーチプレビュー）"
                 ],
                 keyPoints_en: [
+                    "claude agents: Launch agent view (Research Preview). Supports --model, --effort, --add-dir flags (v2.1.139/142)",
+                    "/goal: Set completion conditions; Claude runs continuously until conditions are met (v2.1.139)",
+                    "/usage: Consolidates /cost and /stats. Shows cost, usage, and session stats (v2.1.118)",
+                    "/scroll-speed: Adjust mouse wheel scroll speed (v2.1.139)",
                     "/voice: Push-to-talk via spacebar. Key customizable in keybindings.json",
                     "/loop 5m check deploy: Periodic execution; omit interval for dynamic self-paced mode",
                     "/teleport: Local→Web (& command), Web→Local (--teleport) session transfer",
@@ -2757,7 +2766,7 @@ wait`
                     "/ultraplan: Cloud planning draft → web edit → local execution (early preview)",
                     "/team-onboarding: Auto-generates onboarding docs from last 30 days of usage",
                     "/powerup: Interactive learning lessons inside the CLI",
-                    "/fast: Switch to fast output mode with same model (quality maintained)",
+                    "/fast: Fast output mode with same model (v2.1.142: Opus 4.7 is now Fast mode default)",
                     "/btw: Side question during processing (doesn't pollute conversation history)",
                     "auto permission mode: Auto-approves safe ops, auto-blocks risky ops (research preview)"
                 ],
