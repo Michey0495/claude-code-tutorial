@@ -3655,3 +3655,21 @@ body:hover .cursor-glow {
     border-radius: var(--radius-sm);
 }
 .bundle-file-chip svg { width: 0.85em; height: 0.85em; }
+
+/* 受入基準など checklist 直下のインラインSVGをテキストサイズに収める
+   （未指定だとSVG既定サイズで巨大化する。handsonのlabel入りliには影響しない） */
+.checklist li > svg {
+    width: 1.05em;
+    height: 1.05em;
+    flex-shrink: 0;
+    vertical-align: -0.15em;
+    color: var(--color-accent-primary);
+}
+.checklist li:not(:has(label)) {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
