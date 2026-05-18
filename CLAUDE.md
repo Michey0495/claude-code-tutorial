@@ -21,11 +21,25 @@ schedule（cron）で月2回（毎月1日・15日 09:00 JST）に最新化。
 │   ├── app.js           アプリケーションロジック、i18n
 │   └── tutorials.js     チュートリアル・ハンズオンデータ（全コンテンツ）
 ├── assets/
-│   └── favicon.svg
+│   ├── favicon.svg
+│   ├── handson/            ハンズオン配布データ
+│   ├── projects/           開発トラック準備物（alpha/beta/gamma/delta/orchestra）
+│   └── legal/              プライバシーポリシー雛形
 └── docs/
     ├── Boris_Cherny_Claude_Code_TIPS.md
     └── External_Skills_Hands-on.md
 ```
+
+## 開発トラック（テーマ別パイプライン）
+`#projects` セクション。PROJECT_TRACKS / PROJECT_DOWNLOADS（tutorials.js）でデータ定義。
+複数テーマ選択 → 準備物一括DL → 学ぶ章へ誘導 → 受入基準と比較ビュー。
+T1案件健全性ダッシュボード / T2議事録ToDo / T3提案QA / T4監査自動化 / T5上級オーケストレーション。
+企業名はすべて架空。各トラックの作業ファイルは assets/projects/<id>/ に実体配置。
+
+## プライバシー・セキュリティ
+`#privacy` セクション。CSPメタで connect-src 'none'（フォント以外の外部接続を遮断）。
+解析・Cookie・トラッキングなし。localStorage はテーマ/言語のみ。
+社内配布用ポリシー雛形: assets/legal/privacy-policy-template.md
 
 ## チュートリアル構成
 | レベル | 章数 | ID範囲 | 内容 |

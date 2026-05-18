@@ -7819,9 +7819,343 @@ const HANDSON_DOWNLOADS = {
     }
 };
 
+// ===================================
+// 開発一貫トラック（テーマ別パイプライン）
+// 並列＋逐次、コンテキスト分離を1テーマで通す。
+// 企業名はすべて架空（実在組織と無関係）。
+// ===================================
+const PROJECT_TRACKS = [
+    {
+        id: "alpha",
+        number: "T1",
+        title: "案件健全性ダッシュボード",
+        title_en: "Project Health Dashboard",
+        tagline: "ヒアリング議事録から埋もれたリスクを構造化し、一覧化する",
+        tagline_en: "Surface buried project risks from interview transcripts",
+        domain: "PMO / プロジェクト管理",
+        domain_en: "PMO / Project Management",
+        deliverable: "リスク可視化Webアプリ（API + ダッシュボード + SQLite）",
+        deliverable_en: "Risk dashboard web app (API + UI + SQLite)",
+        difficulty: "中級",
+        difficulty_en: "Intermediate",
+        estimatedTime: "180-240分",
+        estimatedTime_en: "180-240 min",
+        scenario: "松風製薬（架空）の基幹システム刷新。複数の関係者ヒアリングを重ねたが、議事録が個人のメモに散らばりリスクが埋もれている。3本の議事録を読み込み、深刻度と分類でリスクを構造化してダッシュボードに並べる。",
+        scenario_en: "Matsukaze Pharma (fictional) core-system renewal. Interview notes are scattered and risks are buried. Read 3 transcripts, structure risks by severity and category, and lay them out on a dashboard.",
+        pipeline: [
+            { phase: "議事録の並列抽出", phase_en: "Parallel transcript extraction", mode: "parallel", detail: "議事録3本をサブエージェント3つで同時に読み、課題・決定・宿題を抜き出す", detail_en: "Read 3 transcripts with 3 subagents in parallel, pulling out issues, decisions, action items", context: "各エージェントは担当の1議事録だけを文脈に持つ", context_en: "Each agent holds only its one transcript in context" },
+            { phase: "リスク分類", phase_en: "Risk classification", mode: "sequential", detail: "抽出結果を深刻度（重大/中/軽）×分類（スケジュール/スコープ/品質/コスト/体制）に判定", detail_en: "Classify extracted items by severity (high/mid/low) and category", context: "分類スキルのみを読み込み、抽出時の長い文脈は持ち込まない", context_en: "Load only the classifier skill; drop the long extraction context" },
+            { phase: "DB正規化とシード", phase_en: "DB normalization & seed", mode: "sequential", detail: "判定済みリスクをスキーマへ正規化しSQLiteへ投入", detail_en: "Normalize classified risks into a schema and seed SQLite", context: "スキーマ定義とシード処理だけを対象にする", context_en: "Scope to schema and seeding only" },
+            { phase: "ダッシュボード実装", phase_en: "Dashboard implementation", mode: "sequential", detail: "一覧とドリルダウンを実装し、Writer/Reviewerで品質を確認", detail_en: "Build list + drill-down, verify with Writer/Reviewer", context: "実装役とレビュー役を別セッションに分ける", context_en: "Split implementer and reviewer into separate sessions" }
+        ],
+        tutorials: [
+            { id: "01_01", title: "CLAUDE.md", title_en: "CLAUDE.md", why: "リスクの語彙と分類基準をプロジェクト規約として固定する", why_en: "Fix risk vocabulary and criteria as project rules" },
+            { id: "02_01", title: "Skills", title_en: "Skills", why: "分類ロジックを再利用可能なスキルにする", why_en: "Make classification a reusable skill" },
+            { id: "02_03", title: "Subagents", title_en: "Subagents", why: "議事録ごとに抽出を委譲する", why_en: "Delegate extraction per transcript" },
+            { id: "02_08", title: "並列化戦略", title_en: "Parallelization", why: "3本を同時に処理する", why_en: "Process 3 transcripts at once" },
+            { id: "03_05", title: "Writer/Reviewerパターン", title_en: "Writer/Reviewer Pattern", why: "実装とレビューを分けて品質を上げる", why_en: "Separate build and review for quality" }
+        ],
+        acceptance: [
+            "議事録3本から12件以上のリスクを抽出できている",
+            "各リスクに深刻度と分類が付いている",
+            "一覧を深刻度でソートできる",
+            "詳細で根拠の議事録箇所をたどれる",
+            "READMEだけで起動・投入を再現できる"
+        ],
+        acceptance_en: [
+            "12+ risks extracted from 3 transcripts",
+            "Every risk has severity and category",
+            "List can be sorted by severity",
+            "Detail traces back to the source transcript",
+            "README alone reproduces setup and seeding"
+        ],
+        compare: [
+            { axis: "抽出網羅性", axis_en: "Extraction coverage", hint: "見落としたリスクの数で比べる", hint_en: "Compare by number of missed risks" },
+            { axis: "分類の妥当性", axis_en: "Classification validity", hint: "深刻度のブレを確認する", hint_en: "Check severity consistency" },
+            { axis: "UIの可読性", axis_en: "UI readability", hint: "初見で件数と深刻度が掴めるか", hint_en: "Grasp count and severity at a glance" },
+            { axis: "根拠の追跡性", axis_en: "Traceability", hint: "結論から議事録に戻れるか", hint_en: "Can you trace back to the source" }
+        ]
+    },
+    {
+        id: "beta",
+        number: "T2",
+        title: "議事録ToDo自動抽出",
+        title_en: "Meeting ToDo Extractor",
+        tagline: "散らばる会議メモから担当・期限つきタスク台帳を生成する",
+        tagline_en: "Turn scattered meeting notes into an owned, dated task ledger",
+        domain: "コンサル / 会議運営",
+        domain_en: "Consulting / Meeting Ops",
+        deliverable: "タスク台帳生成CLI + 担当者別Markdownビュー",
+        deliverable_en: "Task-ledger CLI + per-owner Markdown view",
+        difficulty: "中級",
+        difficulty_en: "Intermediate",
+        estimatedTime: "150-200分",
+        estimatedTime_en: "150-200 min",
+        scenario: "青葉コンサルティング（架空）では会議メモが個人ノートに散り、ToDoが消える。3本の会議メモを入力に、担当者・期限・優先度つきの台帳を自動生成し、再実行しても結果がぶれないようにする。",
+        scenario_en: "Aoba Consulting (fictional): meeting notes scatter and todos vanish. From 3 notes, auto-generate a ledger with owner, due date, priority, idempotent on rerun.",
+        pipeline: [
+            { phase: "メモの並列抽出", phase_en: "Parallel note extraction", mode: "parallel", detail: "会議メモ3本からToDo候補をサブエージェント3つで同時抽出", detail_en: "Extract todo candidates from 3 notes with 3 subagents at once", context: "メモ単位でコンテキストを分ける", context_en: "Isolate context per note" },
+            { phase: "名寄せと重複排除", phase_en: "Dedup & merge", mode: "sequential", detail: "同一タスクを統合し表記ゆれを揃える", detail_en: "Merge duplicate tasks and normalize wording", context: "抽出済みリストだけを対象にする", context_en: "Scope to the extracted list only" },
+            { phase: "担当・期限・優先度の付与", phase_en: "Assign owner/due/priority", mode: "sequential", detail: "文脈から担当者と期限、優先度を推定し台帳スキーマへ", detail_en: "Infer owner, due, priority and map to the ledger schema", context: "推定ルールと台帳定義のみ", context_en: "Only inference rules and ledger schema" },
+            { phase: "台帳とビュー生成", phase_en: "Ledger & view output", mode: "sequential", detail: "Markdown台帳と担当者別ビューを生成、Stopフックで件数を要約", detail_en: "Emit Markdown ledger + per-owner view; Stop hook summarizes counts", context: "出力整形に限定する", context_en: "Limit to output formatting" }
+        ],
+        tutorials: [
+            { id: "01_01", title: "CLAUDE.md", title_en: "CLAUDE.md", why: "台帳のスキーマと優先度基準を固定する", why_en: "Fix ledger schema and priority rules" },
+            { id: "02_01", title: "Skills", title_en: "Skills", why: "ToDo抽出のルールをスキル化する", why_en: "Make extraction rules a skill" },
+            { id: "02_03", title: "Subagents", title_en: "Subagents", why: "メモごとに抽出を委譲する", why_en: "Delegate extraction per note" },
+            { id: "02_02", title: "Hooks", title_en: "Hooks", why: "実行後に件数サマリを自動出力する", why_en: "Auto-summarize counts after run" },
+            { id: "02_08", title: "並列化戦略", title_en: "Parallelization", why: "3本を同時に処理する", why_en: "Process 3 notes at once" }
+        ],
+        acceptance: [
+            "メモ3本からToDoを抽出できている",
+            "重複タスクが統合されている",
+            "担当・期限・優先度が付いている",
+            "担当者別ビューが出力される",
+            "同じ入力で再実行しても結果が変わらない"
+        ],
+        acceptance_en: [
+            "Todos extracted from 3 notes",
+            "Duplicate tasks merged",
+            "Owner, due, priority assigned",
+            "Per-owner view is produced",
+            "Rerun on same input is idempotent"
+        ],
+        compare: [
+            { axis: "抽出漏れ", axis_en: "Missed items", hint: "拾えなかったToDoの数", hint_en: "Number of missed todos" },
+            { axis: "重複統合精度", axis_en: "Merge accuracy", hint: "別タスクを誤統合していないか", hint_en: "No wrong merges" },
+            { axis: "期限推定", axis_en: "Due inference", hint: "明示なしの期限の妥当性", hint_en: "Reasonable when not stated" },
+            { axis: "冪等性", axis_en: "Idempotency", hint: "再実行で差分が出ないか", hint_en: "No diff on rerun" }
+        ]
+    },
+    {
+        id: "gamma",
+        number: "T3",
+        title: "提案QAビルダー",
+        title_en: "Proposal Q&A Builder",
+        tagline: "RFPとヒアリングから根拠つき想定問答集を組み立てる",
+        tagline_en: "Build a sourced Q&A set from an RFP and hearing notes",
+        domain: "営業 / 提案",
+        domain_en: "Sales / Proposals",
+        deliverable: "想定問答集（カテゴリ別の静的ページまたはMarkdown）",
+        deliverable_en: "Q&A set (categorized static page or Markdown)",
+        difficulty: "中級",
+        difficulty_en: "Intermediate",
+        estimatedTime: "150-200分",
+        estimatedTime_en: "150-200 min",
+        scenario: "霞ヶ関ソリューションズ（架空）の提案で、審査委員からの想定質問に根拠つきで答えたい。RFP抜粋と顧客ヒアリングメモから、出典つきのQA集をカテゴリ別に生成する。",
+        scenario_en: "Kasumigaseki Solutions (fictional): prepare sourced answers to likely review-panel questions. From an RFP excerpt and hearing notes, generate a categorized Q&A set with citations.",
+        pipeline: [
+            { phase: "資料の並列要約", phase_en: "Parallel summarization", mode: "parallel", detail: "RFP抜粋とヒアリングメモを別エージェントで同時に要約", detail_en: "Summarize RFP excerpt and hearing notes with separate agents in parallel", context: "資料種別ごとにコンテキストを分ける", context_en: "Isolate context per document type" },
+            { phase: "論点と想定質問の生成", phase_en: "Issues & questions", mode: "sequential", detail: "論点を抽出し、審査側の想定質問を起こす", detail_en: "Extract issues and draft likely panel questions", context: "要約結果だけを対象にする", context_en: "Scope to the summaries only" },
+            { phase: "回答と根拠の付与", phase_en: "Answers & citations", mode: "sequential", detail: "各質問に回答案と出典（RFP/ヒアリングの該当箇所）を付ける", detail_en: "Attach answer drafts and citations for each question", context: "質問リストと原資料のみ", context_en: "Only the question list and source docs" },
+            { phase: "整形と一貫性チェック", phase_en: "Format & consistency", mode: "sequential", detail: "カテゴリ別に整形し、Reviewerで回答の矛盾を洗う", detail_en: "Categorize and review for contradictions", context: "整形とレビューを別役に分ける", context_en: "Split format and review roles" }
+        ],
+        tutorials: [
+            { id: "01_01", title: "CLAUDE.md", title_en: "CLAUDE.md", why: "回答トーンと出典の付け方を規約化する", why_en: "Standardize tone and citation style" },
+            { id: "02_01", title: "Skills", title_en: "Skills", why: "QA生成の型をスキルにする", why_en: "Make Q&A generation a skill" },
+            { id: "02_03", title: "Subagents", title_en: "Subagents", why: "資料種別ごとに要約を委譲する", why_en: "Delegate summarization per doc type" },
+            { id: "03_05", title: "Writer/Reviewerパターン", title_en: "Writer/Reviewer Pattern", why: "回答の一貫性を別役で確認する", why_en: "Check answer consistency separately" },
+            { id: "02_08", title: "並列化戦略", title_en: "Parallelization", why: "資料を同時に処理する", why_en: "Process documents at once" }
+        ],
+        acceptance: [
+            "想定QAが20問以上ある",
+            "各回答に出典が付いている",
+            "カテゴリで分類されている",
+            "回答どうしに矛盾がない",
+            "目的の質問を探しやすい体裁になっている"
+        ],
+        acceptance_en: [
+            "20+ Q&A entries",
+            "Every answer has a citation",
+            "Entries are categorized",
+            "Answers are mutually consistent",
+            "Layout makes target questions easy to find"
+        ],
+        compare: [
+            { axis: "質問の網羅性", axis_en: "Question coverage", hint: "想定漏れの観点数", hint_en: "Number of missed angles" },
+            { axis: "回答の具体性", axis_en: "Answer specificity", hint: "一般論で逃げていないか", hint_en: "No vague generalities" },
+            { axis: "出典の妥当性", axis_en: "Citation validity", hint: "根拠が実際の記述に対応するか", hint_en: "Citations match the text" },
+            { axis: "一貫性", axis_en: "Consistency", hint: "数値や前提の食い違い", hint_en: "No conflicting figures or premises" }
+        ]
+    },
+    {
+        id: "delta",
+        number: "T4",
+        title: "コンプライアンス監査自動化",
+        title_en: "Compliance Audit Automation",
+        tagline: "規程と判例に照らして成果物の違反を検出し、監査レポートにする",
+        tagline_en: "Check deliverables against rules and precedents, output an audit report",
+        domain: "監査 / 内部統制",
+        domain_en: "Audit / Internal Control",
+        deliverable: "監査レポート生成システム（指摘・根拠条文・是正案）",
+        deliverable_en: "Audit-report generator (findings, cited rules, remediation)",
+        difficulty: "上級",
+        difficulty_en: "Advanced",
+        estimatedTime: "200-260分",
+        estimatedTime_en: "200-260 min",
+        scenario: "白河信用組合（架空）の内部監査で、社内規程と提出成果物の突き合わせが属人化している。規程と過去判例を読み込み、成果物の違反箇所を根拠つきで検出して監査レポートを生成する。",
+        scenario_en: "Shirakawa Credit Union (fictional): rule-vs-deliverable checking is person-dependent. Ingest rules and precedents, detect violations with evidence, generate an audit report.",
+        pipeline: [
+            { phase: "規程と判例の取り込み", phase_en: "Ingest rules & precedents", mode: "sequential", detail: "規程と判例をMCP(filesystem)で読み込みインデックス化する", detail_en: "Load rules and precedents via filesystem MCP and index them", context: "参照データの取り込みに限定する", context_en: "Scope to reference ingestion" },
+            { phase: "章ごとの並列監査", phase_en: "Per-section parallel audit", mode: "parallel", detail: "成果物を章単位で分け、監査サブエージェントを並列起動する", detail_en: "Split the deliverable by section, run audit subagents in parallel", context: "1エージェントは担当章＋規程インデックスだけ", context_en: "Each agent holds only its section + rule index" },
+            { phase: "違反候補の集約と判例突合", phase_en: "Aggregate & match precedents", mode: "sequential", detail: "重大度で集約し、過去判例と突き合わせる", detail_en: "Aggregate by severity and match against precedents", context: "違反候補と判例集のみ", context_en: "Only candidate findings and precedents" },
+            { phase: "監査レポート生成", phase_en: "Audit report generation", mode: "sequential", detail: "指摘・根拠条文・是正案を整形、PostToolUseフックで体裁を検証", detail_en: "Format findings/cited-rules/remediation; PostToolUse hook validates layout", context: "レポート整形に限定する", context_en: "Limit to report formatting" }
+        ],
+        tutorials: [
+            { id: "01_01", title: "CLAUDE.md", title_en: "CLAUDE.md", why: "重大度の定義とレポート様式を固定する", why_en: "Fix severity definitions and report format" },
+            { id: "02_01", title: "Skills", title_en: "Skills", why: "規程照合の判定をスキル化する", why_en: "Make rule-matching a skill" },
+            { id: "02_03", title: "Subagents", title_en: "Subagents", why: "章ごとに監査を委譲する", why_en: "Delegate audit per section" },
+            { id: "02_05", title: "MCP", title_en: "MCP", why: "規程・判例をローカルから読み込む", why_en: "Read rules and precedents locally" },
+            { id: "02_02", title: "Hooks", title_en: "Hooks", why: "レポートの体裁を自動検証する", why_en: "Auto-validate report layout" }
+        ],
+        acceptance: [
+            "規程の全項目を成果物と照合できている",
+            "違反に根拠条文が紐づいている",
+            "重大度が判定されている",
+            "是正案が具体的に示されている",
+            "同じ入力で再現できる"
+        ],
+        acceptance_en: [
+            "All rule items checked against the deliverable",
+            "Each finding links to a cited rule",
+            "Severity is judged",
+            "Concrete remediation is shown",
+            "Reproducible on the same input"
+        ],
+        compare: [
+            { axis: "検出網羅性", axis_en: "Detection coverage", hint: "見逃した違反の数", hint_en: "Number of missed violations" },
+            { axis: "誤検知率", axis_en: "False positives", hint: "問題ない箇所を挙げていないか", hint_en: "No flagging of clean parts" },
+            { axis: "根拠の正確性", axis_en: "Evidence accuracy", hint: "引いた条文が指摘に対応するか", hint_en: "Cited rule matches the finding" },
+            { axis: "是正案の実用性", axis_en: "Remediation usefulness", hint: "そのまま着手できるか", hint_en: "Actionable as written" }
+        ]
+    },
+    {
+        id: "orchestra",
+        number: "T5",
+        title: "上級オーケストレーション統合",
+        title_en: "Advanced Orchestration",
+        tagline: "4テーマを並列・逐次・コンテキスト分離・自動化で一本のパイプラインに束ねる",
+        tagline_en: "Bind 4 themes into one pipeline: parallel, sequential, isolated, automated",
+        domain: "横断 / 並列パイプライン",
+        domain_en: "Cross-cutting / Parallel Pipeline",
+        deliverable: "複数テーマを束ねた自動処理パイプライン（cron運用込み）",
+        deliverable_en: "Multi-theme automated pipeline (with cron operation)",
+        difficulty: "上級",
+        difficulty_en: "Advanced",
+        estimatedTime: "240-300分",
+        estimatedTime_en: "240-300 min",
+        scenario: "T1〜T4の処理を1プロジェクトに統合する。入力投入から成果物まで、並列フェーズと逐次フェーズを混在させ、テーマごとにコンテキストを切り、フックとcronで自動で回す。1テーマが失敗しても他に波及しないことを確かめる。",
+        scenario_en: "Integrate T1-T4 into one project. Mix parallel and sequential phases, isolate context per theme, automate with hooks and cron, and verify one failing theme does not cascade.",
+        pipeline: [
+            { phase: "4テーマの並列抽出", phase_en: "4-theme parallel extraction", mode: "parallel", detail: "T1〜T4の抽出フェーズをTaskツールで4エージェント同時起動", detail_en: "Launch T1-T4 extraction phases as 4 agents via the Task tool", context: "テーマごとに独立したコンテキスト。互いの中間結果を見せない", context_en: "Independent context per theme; no shared intermediates" },
+            { phase: "中間成果の集約", phase_en: "Aggregate intermediates", mode: "sequential", detail: "オーケストレータが各テーマの中間成果を回収し正規化する", detail_en: "Orchestrator collects and normalizes per-theme intermediates", context: "集約ロジックのみ。抽出時の長文脈は捨てる", context_en: "Only aggregation logic; drop long extraction context" },
+            { phase: "分類・突合の並列処理", phase_en: "Parallel classify/match", mode: "parallel", detail: "集約結果を分類フェーズと突合フェーズで再度並列処理", detail_en: "Re-parallelize the aggregate across classify and match phases", context: "フェーズ間で結果を共有しない", context_en: "No cross-phase result sharing" },
+            { phase: "永続化と自動運用", phase_en: "Persist & automate", mode: "sequential", detail: "MCP(sqlite)へ保存、Stop+PostToolUseフックで検証、cron雛形で定期実行", detail_en: "Persist via sqlite MCP, verify with Stop+PostToolUse hooks, schedule via cron template", context: "永続化と運用設定に限定する", context_en: "Scope to persistence and ops config" }
+        ],
+        tutorials: [
+            { id: "02_03", title: "Subagents", title_en: "Subagents", why: "テーマごとに処理を委譲する", why_en: "Delegate per theme" },
+            { id: "02_08", title: "並列化戦略", title_en: "Parallelization", why: "4テーマを同時に走らせる", why_en: "Run 4 themes at once" },
+            { id: "03_06", title: "Fan-outパターン", title_en: "Fan-out Pattern", why: "入力を分散して並列処理する", why_en: "Fan out inputs for parallel work" },
+            { id: "02_02", title: "Hooks", title_en: "Hooks", why: "完了時に自動検証する", why_en: "Auto-verify on completion" },
+            { id: "02_05", title: "MCP", title_en: "MCP", why: "成果をローカルDBへ永続化する", why_en: "Persist outputs to a local DB" },
+            { id: "03_09", title: "Agent Teams", title_en: "Agent Teams", why: "複数エージェントの協働を設計する", why_en: "Design multi-agent collaboration" }
+        ],
+        acceptance: [
+            "4テーマを1つのコマンド系列で実行できる",
+            "並列フェーズが互いに独立したコンテキストで動く",
+            "フックで成果物が自動検証される",
+            "cron雛形で定期実行に載せられる",
+            "1テーマの失敗が他テーマに波及しない"
+        ],
+        acceptance_en: [
+            "All 4 themes run from one command sequence",
+            "Parallel phases run in independent contexts",
+            "Hooks auto-verify outputs",
+            "A cron template enables scheduled runs",
+            "One theme's failure does not cascade"
+        ],
+        compare: [
+            { axis: "並列化の効き", axis_en: "Parallel speedup", hint: "逐次実行との時間差", hint_en: "Time delta vs sequential" },
+            { axis: "コンテキスト分離", axis_en: "Context isolation", hint: "他テーマの文脈が混入していないか", hint_en: "No cross-theme context bleed" },
+            { axis: "自動検証の堅牢性", axis_en: "Verification robustness", hint: "壊れた成果物を止められるか", hint_en: "Does it stop on broken output" },
+            { axis: "障害分離", axis_en: "Fault isolation", hint: "1失敗で全体が落ちないか", hint_en: "One failure does not kill the run" }
+        ]
+    }
+];
+
+// トラック準備物（その場でダウンロード）
+const PROJECT_DOWNLOADS = {
+    alpha: {
+        label: "案件健全性ダッシュボード 一式",
+        label_en: "Project Health Dashboard bundle",
+        files: [
+            { name: "README.md", path: "assets/projects/alpha/README.md" },
+            { name: "CLAUDE.md", path: "assets/projects/alpha/CLAUDE.md" },
+            { name: "client-brief.md", path: "assets/projects/alpha/client-brief.md" },
+            { name: "transcript-01.md", path: "assets/projects/alpha/transcripts/transcript-01.md" },
+            { name: "transcript-02.md", path: "assets/projects/alpha/transcripts/transcript-02.md" },
+            { name: "transcript-03.md", path: "assets/projects/alpha/transcripts/transcript-03.md" },
+            { name: "risk-extractor.md", path: "assets/projects/alpha/.claude/agents/risk-extractor.md" },
+            { name: "SKILL.md", path: "assets/projects/alpha/.claude/skills/risk-classifier/SKILL.md" }
+        ]
+    },
+    beta: {
+        label: "議事録ToDo自動抽出 一式",
+        label_en: "Meeting ToDo Extractor bundle",
+        files: [
+            { name: "README.md", path: "assets/projects/beta/README.md" },
+            { name: "CLAUDE.md", path: "assets/projects/beta/CLAUDE.md" },
+            { name: "client-brief.md", path: "assets/projects/beta/client-brief.md" },
+            { name: "meeting-01.md", path: "assets/projects/beta/notes/meeting-01.md" },
+            { name: "meeting-02.md", path: "assets/projects/beta/notes/meeting-02.md" },
+            { name: "meeting-03.md", path: "assets/projects/beta/notes/meeting-03.md" },
+            { name: "todo-extractor.md", path: "assets/projects/beta/.claude/agents/todo-extractor.md" }
+        ]
+    },
+    gamma: {
+        label: "提案QAビルダー 一式",
+        label_en: "Proposal Q&A Builder bundle",
+        files: [
+            { name: "README.md", path: "assets/projects/gamma/README.md" },
+            { name: "CLAUDE.md", path: "assets/projects/gamma/CLAUDE.md" },
+            { name: "client-brief.md", path: "assets/projects/gamma/client-brief.md" },
+            { name: "rfp-excerpt.md", path: "assets/projects/gamma/rfp-excerpt.md" },
+            { name: "hearing.md", path: "assets/projects/gamma/hearing.md" },
+            { name: "SKILL.md", path: "assets/projects/gamma/.claude/skills/qa-builder/SKILL.md" }
+        ]
+    },
+    delta: {
+        label: "コンプライアンス監査自動化 一式",
+        label_en: "Compliance Audit Automation bundle",
+        files: [
+            { name: "README.md", path: "assets/projects/delta/README.md" },
+            { name: "CLAUDE.md", path: "assets/projects/delta/CLAUDE.md" },
+            { name: "client-brief.md", path: "assets/projects/delta/client-brief.md" },
+            { name: "rules.md", path: "assets/projects/delta/rules.md" },
+            { name: "deliverable-sample.md", path: "assets/projects/delta/deliverable-sample.md" },
+            { name: "precedents.md", path: "assets/projects/delta/precedents.md" },
+            { name: "audit-checker.md", path: "assets/projects/delta/.claude/agents/audit-checker.md" }
+        ]
+    },
+    orchestra: {
+        label: "上級オーケストレーション統合 一式",
+        label_en: "Advanced Orchestration bundle",
+        files: [
+            { name: "README.md", path: "assets/projects/orchestra/README.md" },
+            { name: "CLAUDE.md", path: "assets/projects/orchestra/CLAUDE.md" },
+            { name: "ORCHESTRATION.md", path: "assets/projects/orchestra/ORCHESTRATION.md" },
+            { name: "mcp.json", path: "assets/projects/orchestra/.mcp.json" },
+            { name: "run-all.md", path: "assets/projects/orchestra/.claude/commands/run-all.md" },
+            { name: "stop-summary.sh", path: "assets/projects/orchestra/.claude/hooks/stop-summary.sh" }
+        ]
+    }
+};
+
 window.TUTORIALS = TUTORIALS;
 window.HANDSON = HANDSON;
 window.HANDSON_DOWNLOADS = HANDSON_DOWNLOADS;
+window.PROJECT_TRACKS = PROJECT_TRACKS;
+window.PROJECT_DOWNLOADS = PROJECT_DOWNLOADS;
 window.BEST_PRACTICES = BEST_PRACTICES;
 window.BORIS_TIPS = BORIS_TIPS;
 window.PROMPT_TIPS = PROMPT_TIPS;

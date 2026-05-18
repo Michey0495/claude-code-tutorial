@@ -17,7 +17,8 @@
         currentHandsonType: 'non-dev',
         theme: localStorage.getItem('theme') || 'light',
         lang: localStorage.getItem('lang') || 'ja',
-        mobileMenuOpen: false
+        mobileMenuOpen: false,
+        selectedProjectTracks: []
     };
 
     // ===================================
@@ -117,7 +118,31 @@
             // ダウンロード
             downloadFiles: 'ファイルをダウンロード',
             downloadAll: '一括ダウンロード',
-            downloadSingle: 'ダウンロード'
+            downloadSingle: 'ダウンロード',
+            // Navigation 追加
+            navProjects: '開発トラック',
+            navPrivacy: 'プライバシー',
+            footerAbout: 'サイトについて',
+            // 開発トラック
+            sectionTagProjects: '開発一貫ハンズオン',
+            sectionTitleProjects: 'テーマ別 開発トラック',
+            sectionDescProjects: 'テーマを選び、準備物をその場でダウンロード。学ぶ章を順にこなし、最終成果物を受入基準で確かめて見比べる。',
+            projTrackSelected: '選択中',
+            projSelectTrack: 'このテーマを選ぶ',
+            projSelectedSuffix: '件選択中',
+            projDownloadBundle: '準備物をダウンロード',
+            projOpenDetail: '詳細とパイプライン',
+            projScenario: 'シナリオ',
+            projPipeline: 'パイプライン',
+            projParallel: '並列',
+            projSequential: '逐次',
+            projContext: 'コンテキスト分離',
+            projLearnTutorials: '学ぶ章',
+            projDeliverable: '最終成果物',
+            projAcceptance: '受入基準',
+            projCompareAxis: '比較の観点',
+            projCompareTitle: '選択トラックの比較',
+            projCompareEmpty: 'テーマを2つ以上選ぶと比較できます。'
         },
         en: {
             // Navigation
@@ -212,7 +237,31 @@
             // Downloads
             downloadFiles: 'Download Files',
             downloadAll: 'Download All',
-            downloadSingle: 'Download'
+            downloadSingle: 'Download',
+            // Navigation added
+            navProjects: 'Tracks',
+            navPrivacy: 'Privacy',
+            footerAbout: 'About',
+            // Project tracks
+            sectionTagProjects: 'End-to-end Hands-on',
+            sectionTitleProjects: 'Themed Dev Tracks',
+            sectionDescProjects: 'Pick a theme, download the materials, work through the listed chapters, then verify and compare the final deliverable.',
+            projTrackSelected: 'Selected',
+            projSelectTrack: 'Select this theme',
+            projSelectedSuffix: ' selected',
+            projDownloadBundle: 'Download materials',
+            projOpenDetail: 'Detail & pipeline',
+            projScenario: 'Scenario',
+            projPipeline: 'Pipeline',
+            projParallel: 'Parallel',
+            projSequential: 'Sequential',
+            projContext: 'Context isolation',
+            projLearnTutorials: 'Chapters to learn',
+            projDeliverable: 'Final deliverable',
+            projAcceptance: 'Acceptance criteria',
+            projCompareAxis: 'Comparison axes',
+            projCompareTitle: 'Compare selected tracks',
+            projCompareEmpty: 'Select 2+ themes to compare.'
         }
     };
 
@@ -317,6 +366,7 @@
         animateStats();
         renderTutorials(state.currentLevel);
         renderHandson(state.currentHandsonType);
+        renderProjects();
         renderBestPractices();
         renderBorisTips();
         renderPromptTips();
@@ -341,24 +391,28 @@
         }
 
         // Update navigation
-        const navLinks = document.querySelectorAll('.nav-link');
-        if (navLinks.length >= 4) {
+        const navLinks = document.querySelectorAll('.nav-link:not(.nav-link-btn)');
+        if (navLinks.length >= 6) {
             navLinks[0].textContent = t.navTutorials;
             navLinks[1].textContent = t.navHandson;
-            navLinks[2].textContent = t.navBestPractices;
-            navLinks[3].textContent = t.navHelp;
+            navLinks[2].textContent = t.navProjects;
+            navLinks[3].textContent = t.navBestPractices;
+            navLinks[4].textContent = t.navHelp;
+            navLinks[5].textContent = t.navPrivacy;
         }
         const cheatsheetBtn = document.querySelector('.nav-link-btn');
         if (cheatsheetBtn) cheatsheetBtn.textContent = t.navCheatsheet;
 
         // Update mobile menu
         const mobileLinks = document.querySelectorAll('.mobile-link');
-        if (mobileLinks.length >= 5) {
+        if (mobileLinks.length >= 7) {
             mobileLinks[0].textContent = t.navTutorials;
             mobileLinks[1].textContent = t.navHandson;
-            mobileLinks[2].textContent = t.navBestPractices;
-            mobileLinks[3].textContent = t.navHelp;
-            mobileLinks[4].textContent = t.navCheatsheet;
+            mobileLinks[2].textContent = t.navProjects;
+            mobileLinks[3].textContent = t.navBestPractices;
+            mobileLinks[4].textContent = t.navHelp;
+            mobileLinks[5].textContent = t.navPrivacy;
+            mobileLinks[6].textContent = t.navCheatsheet;
         }
 
         // Update hero section
@@ -440,6 +494,7 @@
         if (footerColumns.length >= 2) {
             footerColumns[0].textContent = t.footerResources;
             footerColumns[1].textContent = t.footerLearn;
+            if (footerColumns[2]) footerColumns[2].textContent = t.footerAbout;
         }
 
         const footerCopyright = document.querySelector('.footer-bottom p');
@@ -462,6 +517,7 @@
         // Re-render all content sections with localized data
         renderTutorials(state.currentLevel);
         renderHandson(state.currentHandsonType);
+        renderProjects();
         renderBestPractices();
         renderBorisTips();
         renderPromptTips();
@@ -491,6 +547,17 @@
             if (tag) tag.textContent = t.sectionTagPractice;
             if (title) title.textContent = t.sectionTitleHandson;
             if (desc) desc.textContent = t.sectionDescHandson;
+        }
+
+        // Projects section
+        const projectsSection = document.getElementById('projects');
+        if (projectsSection) {
+            const tag = projectsSection.querySelector('.section-tag');
+            const title = projectsSection.querySelector('.section-title');
+            const desc = projectsSection.querySelector('.section-description');
+            if (tag) tag.textContent = t.sectionTagProjects;
+            if (title) title.textContent = t.sectionTitleProjects;
+            if (desc) desc.textContent = t.sectionDescProjects;
         }
 
         // Best Practices section
@@ -792,6 +859,246 @@
             });
         });
     }
+
+    // ===================================
+    // 開発トラック（テーマ別パイプライン）
+    // ===================================
+    function difficultyClass(track) {
+        return (track.difficulty_en === 'Advanced') ? 'advanced' : 'intermediate';
+    }
+
+    function renderProjects() {
+        const grid = document.getElementById('projectsGrid');
+        if (!grid || !window.PROJECT_TRACKS) return;
+        const t = i18n[state.lang];
+
+        grid.innerHTML = window.PROJECT_TRACKS.map(track => {
+            const selected = state.selectedProjectTracks.indexOf(track.id) !== -1;
+            const pipeline = track.pipeline.map(p => `
+                <span class="pl-chip ${p.mode}">${p.mode === 'parallel' ? t.projParallel : t.projSequential}</span>
+            `).join('<span class="pl-arrow">›</span>');
+            return `
+            <div class="project-card${selected ? ' selected' : ''}" data-track="${track.id}">
+                <div class="project-card-top">
+                    <span class="project-number">${track.number}</span>
+                    <span class="difficulty-badge ${difficultyClass(track)}">${getLocalizedText(track, 'difficulty')}</span>
+                    <span class="time-badge">${icons.clock} ${getLocalizedText(track, 'estimatedTime')}</span>
+                </div>
+                <h3 class="project-title">${escapeHtml(getLocalizedText(track, 'title'))}</h3>
+                <p class="project-tagline">${escapeHtml(getLocalizedText(track, 'tagline'))}</p>
+                <div class="project-meta">
+                    <span class="project-domain">${escapeHtml(getLocalizedText(track, 'domain'))}</span>
+                    <span class="project-deliverable">${icons['check-circle']} ${escapeHtml(getLocalizedText(track, 'deliverable'))}</span>
+                </div>
+                <div class="project-pipeline-mini">${pipeline}</div>
+                <div class="project-card-actions">
+                    <button type="button" class="btn-track-select${selected ? ' on' : ''}" onclick="toggleTrackSelect('${track.id}')">
+                        ${selected ? '✓ ' + t.projTrackSelected : t.projSelectTrack}
+                    </button>
+                    <button type="button" class="btn-track-detail" onclick="openProjectTrack('${track.id}')">${t.projOpenDetail}</button>
+                </div>
+                <button type="button" class="btn-track-download" onclick="downloadProjectBundle('${track.id}')">
+                    ${icons.download} ${t.projDownloadBundle}
+                </button>
+            </div>`;
+        }).join('');
+
+        updateProjectsToolbar();
+    }
+
+    function updateProjectsToolbar() {
+        const t = i18n[state.lang];
+        const n = state.selectedProjectTracks.length;
+        const countEl = document.getElementById('projectsSelectedCount');
+        if (countEl) {
+            countEl.textContent = state.lang === 'en'
+                ? n + t.projSelectedSuffix
+                : n + ' ' + t.projSelectedSuffix;
+        }
+        const dlBtn = document.getElementById('downloadSelectedBtn');
+        const cmpBtn = document.getElementById('openCompareBtn');
+        if (dlBtn) dlBtn.disabled = (n === 0);
+        if (cmpBtn) cmpBtn.disabled = (n < 2);
+    }
+
+    function getTrack(id) {
+        return (window.PROJECT_TRACKS || []).find(tr => tr.id === id);
+    }
+
+    // 連続ダウンロード（外部送信なし。ローカルassetを順にaタグで取得）
+    function triggerSequentialDownloads(files) {
+        files.forEach(function(f, i) {
+            setTimeout(function() {
+                const a = document.createElement('a');
+                a.href = f.path;
+                a.download = f.name;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+            }, i * 250);
+        });
+    }
+
+    window.toggleTrackSelect = function(id) {
+        const idx = state.selectedProjectTracks.indexOf(id);
+        if (idx === -1) {
+            state.selectedProjectTracks = [...state.selectedProjectTracks, id];
+        } else {
+            state.selectedProjectTracks = state.selectedProjectTracks.filter(x => x !== id);
+        }
+        renderProjects();
+    };
+
+    window.downloadProjectBundle = function(id) {
+        const dl = window.PROJECT_DOWNLOADS && window.PROJECT_DOWNLOADS[id];
+        if (dl) triggerSequentialDownloads(dl.files);
+    };
+
+    window.downloadSelectedBundles = function() {
+        const all = [];
+        state.selectedProjectTracks.forEach(id => {
+            const dl = window.PROJECT_DOWNLOADS && window.PROJECT_DOWNLOADS[id];
+            if (dl) dl.files.forEach(f => all.push(f));
+        });
+        if (all.length) triggerSequentialDownloads(all);
+    };
+
+    window.openProjectTrack = function(id) {
+        const track = getTrack(id);
+        if (!track) return;
+        const t = i18n[state.lang];
+
+        const pipeline = track.pipeline.map((p, i) => `
+            <div class="pl-step">
+                <div class="pl-step-head">
+                    <span class="pl-step-no">${i + 1}</span>
+                    <span class="pl-chip ${p.mode}">${p.mode === 'parallel' ? t.projParallel : t.projSequential}</span>
+                    <span class="pl-step-phase">${escapeHtml(getLocalizedText(p, 'phase'))}</span>
+                </div>
+                <p class="pl-step-detail">${escapeHtml(getLocalizedText(p, 'detail'))}</p>
+                <p class="pl-step-context">${t.projContext}: ${escapeHtml(getLocalizedText(p, 'context'))}</p>
+            </div>
+        `).join('');
+
+        const tutorials = track.tutorials.map(tut => `
+            <div class="related-tutorial-card" onclick="openTutorialById('${tut.id}')">
+                <div class="tutorial-id">${tut.id}</div>
+                <div class="tutorial-info">
+                    <div class="tutorial-title">${escapeHtml(getLocalizedText(tut, 'title'))}</div>
+                    <div class="tutorial-reason">${escapeHtml(getLocalizedText(tut, 'why'))}</div>
+                </div>
+                <span class="tutorial-arrow">${icons.chevronRight}</span>
+            </div>
+        `).join('');
+
+        const acceptance = getLocalizedArray(track, 'acceptance')
+            .map(a => `<li>${icons['check-circle']} ${escapeHtml(a)}</li>`).join('');
+
+        const compare = track.compare.map(c => `
+            <li><strong>${escapeHtml(getLocalizedText(c, 'axis'))}</strong> — ${escapeHtml(getLocalizedText(c, 'hint'))}</li>
+        `).join('');
+
+        const dl = window.PROJECT_DOWNLOADS && window.PROJECT_DOWNLOADS[track.id];
+        const dlList = dl ? dl.files.map(f => `
+            <a class="download-file-link" href="${f.path}" download="${f.name}">
+                ${icons.file} <span>${f.name}</span>
+                <span class="download-icon-small">${icons.download}</span>
+            </a>
+        `).join('') : '';
+
+        elements.modalBody.innerHTML = `
+            <div class="modal-header">
+                <div class="modal-badges">
+                    <span class="modal-level ${difficultyClass(track)}">${track.number}</span>
+                    <span class="difficulty-badge ${difficultyClass(track)}">${getLocalizedText(track, 'difficulty')}</span>
+                    <span class="time-badge">${icons.clock} ${getLocalizedText(track, 'estimatedTime')}</span>
+                </div>
+                <h2 class="modal-title">${escapeHtml(getLocalizedText(track, 'title'))}</h2>
+                <p class="modal-description">${escapeHtml(getLocalizedText(track, 'tagline'))}</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>${icons.folder} ${t.projScenario}</h3>
+                <p class="goal-text">${escapeHtml(getLocalizedText(track, 'scenario'))}</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>${icons.layers} ${t.projPipeline}</h3>
+                <div class="pl-steps">${pipeline}</div>
+            </div>
+
+            <div class="modal-section related-tutorials-section">
+                <h3>${icons.book} ${t.projLearnTutorials}</h3>
+                <div class="related-tutorials-grid">${tutorials}</div>
+            </div>
+
+            <div class="modal-section">
+                <h3>${icons['check-circle']} ${t.projDeliverable}</h3>
+                <p class="goal-text">${escapeHtml(getLocalizedText(track, 'deliverable'))}</p>
+            </div>
+
+            <div class="modal-section">
+                <h3>${icons['check-circle']} ${t.projAcceptance}</h3>
+                <ul class="checklist">${acceptance}</ul>
+            </div>
+
+            <div class="modal-section">
+                <h3>${icons.lightbulb} ${t.projCompareAxis}</h3>
+                <ul class="learning-points">${compare}</ul>
+            </div>
+
+            ${dl ? `
+                <div class="modal-section prep-download-section">
+                    <h4>${icons.download} ${t.projDownloadBundle}</h4>
+                    <div class="download-file-list">${dlList}</div>
+                    <button class="download-all-btn" onclick="downloadProjectBundle('${track.id}')">
+                        ${icons.download} ${state.lang === 'ja' ? dl.label : dl.label_en}
+                    </button>
+                </div>
+            ` : ''}
+        `;
+        elements.tutorialModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
+
+    window.openCompareView = function() {
+        const t = i18n[state.lang];
+        const ids = state.selectedProjectTracks;
+        if (ids.length < 2) return;
+        const tracks = ids.map(getTrack).filter(Boolean);
+
+        const cards = tracks.map(track => `
+            <div class="compare-col">
+                <div class="compare-col-head">
+                    <span class="project-number">${track.number}</span>
+                    <h3>${escapeHtml(getLocalizedText(track, 'title'))}</h3>
+                    <span class="difficulty-badge ${difficultyClass(track)}">${getLocalizedText(track, 'difficulty')}</span>
+                </div>
+                <div class="compare-block">
+                    <span class="compare-label">${t.projDeliverable}</span>
+                    <p>${escapeHtml(getLocalizedText(track, 'deliverable'))}</p>
+                </div>
+                <div class="compare-block">
+                    <span class="compare-label">${t.projAcceptance}</span>
+                    <ul>${getLocalizedArray(track, 'acceptance').map(a => `<li>${escapeHtml(a)}</li>`).join('')}</ul>
+                </div>
+                <div class="compare-block">
+                    <span class="compare-label">${t.projCompareAxis}</span>
+                    <ul>${track.compare.map(c => `<li><strong>${escapeHtml(getLocalizedText(c, 'axis'))}</strong> — ${escapeHtml(getLocalizedText(c, 'hint'))}</li>`).join('')}</ul>
+                </div>
+            </div>
+        `).join('');
+
+        elements.modalBody.innerHTML = `
+            <div class="modal-header">
+                <h2 class="modal-title">${t.projCompareTitle}</h2>
+                <p class="modal-description">${tracks.map(tr => escapeHtml(getLocalizedText(tr, 'title'))).join(' / ')}</p>
+            </div>
+            <div class="compare-grid">${cards}</div>
+        `;
+        elements.tutorialModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    };
 
     // ===================================
     // Best Practices

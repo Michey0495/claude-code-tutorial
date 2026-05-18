@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "./themes"],
+      "description": "テーマ一式と中間成果を読み書きする。ローカルのみ。"
+    },
+    "sqlite": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sqlite", "./orchestra.db"],
+      "description": "runs / theme_results / items を永続化する。ローカルのみ。"
+    }
+  }
+}
