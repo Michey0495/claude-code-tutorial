@@ -130,7 +130,9 @@
             projTrackSelected: '選択中',
             projSelectTrack: 'このテーマを選ぶ',
             projSelectedSuffix: '件選択中',
-            projDownloadBundle: '準備物をダウンロード',
+            projDownloadBundle: '準備物をZIPでダウンロード',
+            projDownloadZip: '準備物（ZIP・Mac/Win対応）',
+            projBundleContents: '同梱ファイル',
             projOpenDetail: '詳細とパイプライン',
             projScenario: 'シナリオ',
             projPipeline: 'パイプライン',
@@ -249,7 +251,9 @@
             projTrackSelected: 'Selected',
             projSelectTrack: 'Select this theme',
             projSelectedSuffix: ' selected',
-            projDownloadBundle: 'Download materials',
+            projDownloadBundle: 'Download bundle (ZIP)',
+            projDownloadZip: 'Bundle (ZIP, Mac/Win)',
+            projBundleContents: 'Included files',
             projOpenDetail: 'Detail & pipeline',
             projScenario: 'Scenario',
             projPipeline: 'Pipeline',
@@ -949,18 +953,19 @@
         renderProjects();
     };
 
+    // トラックは事前生成済みのZIP（Mac/Win対応・同一オリジン）を配布する
     window.downloadProjectBundle = function(id) {
         const dl = window.PROJECT_DOWNLOADS && window.PROJECT_DOWNLOADS[id];
-        if (dl) triggerSequentialDownloads(dl.files);
+        if (dl && dl.zip) triggerSequentialDownloads([{ path: dl.zip, name: dl.zipName }]);
     };
 
     window.downloadSelectedBundles = function() {
-        const all = [];
+        const zips = [];
         state.selectedProjectTracks.forEach(id => {
             const dl = window.PROJECT_DOWNLOADS && window.PROJECT_DOWNLOADS[id];
-            if (dl) dl.files.forEach(f => all.push(f));
+            if (dl && dl.zip) zips.push({ path: dl.zip, name: dl.zipName });
         });
-        if (all.length) triggerSequentialDownloads(all);
+        if (zips.length) triggerSequentialDownloads(zips);
     };
 
     window.openProjectTrack = function(id) {
@@ -1000,10 +1005,7 @@
 
         const dl = window.PROJECT_DOWNLOADS && window.PROJECT_DOWNLOADS[track.id];
         const dlList = dl ? dl.files.map(f => `
-            <a class="download-file-link" href="${f.path}" download="${f.name}">
-                ${icons.file} <span>${f.name}</span>
-                <span class="download-icon-small">${icons.download}</span>
-            </a>
+            <span class="bundle-file-chip">${icons.file} ${f.name}</span>
         `).join('') : '';
 
         elements.modalBody.innerHTML = `
@@ -1049,11 +1051,12 @@
 
             ${dl ? `
                 <div class="modal-section prep-download-section">
-                    <h4>${icons.download} ${t.projDownloadBundle}</h4>
-                    <div class="download-file-list">${dlList}</div>
+                    <h4>${icons.download} ${t.projDownloadZip}</h4>
                     <button class="download-all-btn" onclick="downloadProjectBundle('${track.id}')">
-                        ${icons.download} ${state.lang === 'ja' ? dl.label : dl.label_en}
+                        ${icons.download} ${state.lang === 'ja' ? dl.label : dl.label_en}（ZIP）
                     </button>
+                    <p class="bundle-contents-label">${t.projBundleContents}</p>
+                    <div class="bundle-file-list">${dlList}</div>
                 </div>
             ` : ''}
         `;

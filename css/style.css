@@ -3627,3 +3627,31 @@ body:hover .cursor-glow {
     .projects-toolbar-actions { flex-direction: column; }
     .project-card-actions { flex-direction: column; }
 }
+
+/* ZIP同梱ファイルのプレビュー */
+.bundle-contents-label {
+    margin: var(--space-md) 0 var(--space-sm);
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--color-text-tertiary);
+}
+.bundle-file-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-sm);
+}
+.bundle-file-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    padding: 0.25rem 0.6rem;
+    font-size: var(--text-xs);
+    font-family: var(--font-mono);
+    color: var(--color-text-secondary);
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+.bundle-file-chip svg { width: 0.85em; height: 0.85em; }

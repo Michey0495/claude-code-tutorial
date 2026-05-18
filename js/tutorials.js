@@ -8088,6 +8088,8 @@ const PROJECT_DOWNLOADS = {
     alpha: {
         label: "案件健全性ダッシュボード 一式",
         label_en: "Project Health Dashboard bundle",
+        zip: "assets/projects/alpha.zip",
+        zipName: "track-alpha.zip",
         files: [
             { name: "README.md", path: "assets/projects/alpha/README.md" },
             { name: "CLAUDE.md", path: "assets/projects/alpha/CLAUDE.md" },
@@ -8102,6 +8104,8 @@ const PROJECT_DOWNLOADS = {
     beta: {
         label: "議事録ToDo自動抽出 一式",
         label_en: "Meeting ToDo Extractor bundle",
+        zip: "assets/projects/beta.zip",
+        zipName: "track-beta.zip",
         files: [
             { name: "README.md", path: "assets/projects/beta/README.md" },
             { name: "CLAUDE.md", path: "assets/projects/beta/CLAUDE.md" },
@@ -8115,6 +8119,8 @@ const PROJECT_DOWNLOADS = {
     gamma: {
         label: "提案QAビルダー 一式",
         label_en: "Proposal Q&A Builder bundle",
+        zip: "assets/projects/gamma.zip",
+        zipName: "track-gamma.zip",
         files: [
             { name: "README.md", path: "assets/projects/gamma/README.md" },
             { name: "CLAUDE.md", path: "assets/projects/gamma/CLAUDE.md" },
@@ -8127,6 +8133,8 @@ const PROJECT_DOWNLOADS = {
     delta: {
         label: "コンプライアンス監査自動化 一式",
         label_en: "Compliance Audit Automation bundle",
+        zip: "assets/projects/delta.zip",
+        zipName: "track-delta.zip",
         files: [
             { name: "README.md", path: "assets/projects/delta/README.md" },
             { name: "CLAUDE.md", path: "assets/projects/delta/CLAUDE.md" },
@@ -8140,6 +8148,8 @@ const PROJECT_DOWNLOADS = {
     orchestra: {
         label: "上級オーケストレーション統合 一式",
         label_en: "Advanced Orchestration bundle",
+        zip: "assets/projects/orchestra.zip",
+        zipName: "track-orchestra.zip",
         files: [
             { name: "README.md", path: "assets/projects/orchestra/README.md" },
             { name: "CLAUDE.md", path: "assets/projects/orchestra/CLAUDE.md" },
