@@ -53,6 +53,13 @@ function dayEndSec(d) { return Math.floor(Date.parse(d + 'T23:59:59Z') / 1000); 
 
 module.exports = async (req, res) => {
   res.setHeader('Cache-Control', 'no-store');
+
+  // ログイン機能オフ（既定）。誰でも閲覧可。フロントは認証UIを出さない。
+  if (process.env.AUTH_ENABLED !== '1') {
+    res.status(200).json({ authenticated: true, disabled: true });
+    return;
+  }
+
   const secret = process.env.SESSION_SECRET;
   const fail = (extra) => res.status(200).json(Object.assign({ authenticated: false }, extra || {}));
 

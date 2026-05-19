@@ -426,6 +426,15 @@
         if (logoutBtn) logoutBtn.hidden = true;
     }
 
+    // ログイン機能オフ（公開モード）。認証UIは一切出さず全コンテンツ閲覧可。
+    function applyDisabledUI() {
+        state.auth = { authenticated: true, org: null, start: null, end: null };
+        ['authStatus', 'authLoginBtn', 'authLogoutBtn'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.hidden = true;
+        });
+    }
+
     function loadContentThenRender() {
         if (window.TUTORIALS) {
             renderProtectedContent();
@@ -456,7 +465,10 @@
         try {
             const res = await fetch('/api/session', { credentials: 'same-origin' });
             const data = await res.json();
-            if (data && data.authenticated) {
+            if (data && data.disabled) {
+                applyDisabledUI();
+                loadContentThenRender();
+            } else if (data && data.authenticated) {
                 applyAuthedUI(data);
                 loadContentThenRender();
             } else {

@@ -68,13 +68,17 @@ export default async function middleware(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
 
-  // 組織テーブルは絶対に配信しない
+  // 組織テーブルは（認証の有効/無効に関わらず）絶対に配信しない
   if (pathname.includes('/_data/') || pathname.endsWith('orgs.json')) {
     return new Response('Not found', { status: 404 });
   }
 
+  // ログイン機能のスイッチ。AUTH_ENABLED=1 のときだけ保護する。
+  // 未設定（既定）は無効＝全コンテンツ公開（再有効化は環境変数1つ）。
+  if (process.env.AUTH_ENABLED !== '1') return; // そのまま配信
+
   const secret = process.env.SESSION_SECRET;
-  // シークレット未設定はフェイルクローズ（保護対象を出さない）
+  // 有効時にシークレット未設定ならフェイルクローズ（保護対象を出さない）
   if (!secret) return unauthorized(pathname);
 
   const cookie = request.cookies.get(COOKIE_NAME);

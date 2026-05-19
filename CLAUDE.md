@@ -41,7 +41,9 @@ T1案件健全性ダッシュボード / T2議事録ToDo / T3提案QA / T4監査
 解析・追跡なし。localStorage はテーマ/言語のみ。社内配布用ポリシー雛形: assets/legal/privacy-policy-template.md
 
 ## アクセス制御（組織別・期間制限）
-学習部分（tutorials/handson/projects）と準備物をサーバー側で保護。トップ/プライバシーは公開。
+スイッチ式。環境変数 `AUTH_ENABLED=1` のときのみ有効。**未設定（既定）は無効＝全公開**。
+有効時は学習部分（tutorials/handson/projects）と準備物をサーバー側で保護、トップ/プライバシーは公開。
+無効時も `api/_data/` と `orgs.json` は常に404（組織表は出さない）。
 
 - `middleware.js`（Vercel Edge）: 保護パスを署名cookie検証で遮断。`js/tutorials.js`・`assets/projects/**`・`assets/handson/**` を matcher 指定
 - `api/login.js` `api/logout.js` `api/session.js`（Node Function）: scryptでPW照合、HMAC署名HTTP-onlyセッションcookie、閲覧期間をサーバー判定。`api/session` は orgs.json を都度再確認し取消/期限を即時反映
@@ -49,7 +51,8 @@ T1案件健全性ダッシュボード / T2議事録ToDo / T3提案QA / T4監査
 - フロント: `index.html` の `#authModal`、`js/app.js` の認証フロー。`js/tutorials.js` は認証成功後に動的ロード
 
 ### 運用
-- 必須環境変数: Vercel の `SESSION_SECRET`（未設定だと全保護がフェイルクローズ）。値の生成: `node scripts/gen-orgs.mjs secret`
+- ログイン無効化（既定/現状）: Vercel に `AUTH_ENABLED` を設定しない、または `1` 以外。全公開
+- ログイン有効化: Vercel で `AUTH_ENABLED=1` と `SESSION_SECRET`（`node scripts/gen-orgs.mjs secret` で生成）を設定し再デプロイ。`SESSION_SECRET` 未設定のまま有効化すると全保護フェイルクローズ
 - 組織追加: `node scripts/gen-orgs.mjs add "<会社名>" <略号2-3字> <開始YYYY-MM-DD> [終了]`
   - 組織ID=略号+開始MMDD、PW=ランダム8桁、期間既定=開始+1ヶ月
   - `api/_data/orgs.json` 更新（commit）＋ `scripts/credentials.{csv,md}`（平文PW・gitignore・配布用）
