@@ -6,8 +6,9 @@
     <title>Claude Code Tutorial</title>
     <meta name="description" content="2026年5月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全40章 + 13種類のハンズオン。Opus 4.7 / Sonnet 4.6 / Haiku 4.5 / v2.1.142対応。">
 
-    <!-- Security: 外部送信ゼロ。フォント以外の外部接続を遮断（connect-src 'none'） -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'none'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'none'">
+    <!-- Security: 解析/トラッキングなし。外部接続はフォントのみ。
+         認証のため同一オリジンの /api と最小限のセッションcookieを使用（connect-src 'self'）。 -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'">
     <meta name="referrer" content="no-referrer">
 
     <!-- Favicon -->
@@ -53,6 +54,9 @@
                 <a href="#" onclick="showSection('troubleshooting')" class="nav-link">ヘルプ</a>
                 <a href="#" onclick="showSection('privacy')" class="nav-link">プライバシー</a>
                 <button type="button" onclick="openCheatSheetModal()" class="nav-link nav-link-btn">機能一覧</button>
+                <span class="auth-status" id="authStatus" hidden></span>
+                <button type="button" class="nav-link nav-link-btn auth-action" id="authLoginBtn" onclick="openAuthModal()">ログイン</button>
+                <button type="button" class="nav-link nav-link-btn auth-action" id="authLogoutBtn" onclick="doLogout()" hidden>ログアウト</button>
                 <button class="lang-toggle" id="langToggle" aria-label="Switch language">
                     <span class="lang-label">EN</span>
                 </button>
@@ -473,18 +477,22 @@
                     <h3>収集しないもの</h3>
                     <ul>
                         <li>アクセス解析・行動トラッキング</li>
-                        <li>Cookie による識別</li>
+                        <li>広告・追跡目的の Cookie</li>
                         <li>入力内容・操作ログの外部送信</li>
                         <li>氏名・メール等の個人情報</li>
                     </ul>
+                </div>
+                <div class="privacy-card">
+                    <h3>アクセス制御</h3>
+                    <p>学習コンテンツと準備物は、企業ごとの組織ID・パスワード・閲覧期間でサーバー側（Vercel）が保護します。判定用に必要最小限の HTTP-only セッション cookie を1つだけ使用します。追跡には使いません。</p>
                 </div>
                 <div class="privacy-card">
                     <h3>端末内だけに保存</h3>
                     <p>表示テーマと表示言語のみブラウザの localStorage に保存します。外部には出ません。ブラウザのデータ削除で消去できます。</p>
                 </div>
                 <div class="privacy-card">
-                    <h3>技術的な遮断</h3>
-                    <p>Content-Security-Policy で <code>connect-src 'none'</code> を指定し、フォント以外の外部接続をブラウザ側で遮断しています。スクリプトは同一オリジンのみ読み込みます。</p>
+                    <h3>通信の範囲</h3>
+                    <p>Content-Security-Policy で <code>connect-src 'self'</code> を指定。通信はログイン・セッション確認のための同一オリジン API に限られ、第三者への送信先はありません。スクリプトも同一オリジンのみです。</p>
                 </div>
                 <div class="privacy-card">
                     <h3>唯一の外部取得</h3>
@@ -501,7 +509,7 @@
                 </div>
             </div>
 
-            <p class="privacy-note">配信サーバー側で HTTP セキュリティヘッダ（CSP / X-Content-Type-Options / X-Frame-Options 等）を併せて付与すると、さらに強固になります。</p>
+            <p class="privacy-note">配信サーバー側でも HTTP セキュリティヘッダ（CSP / X-Content-Type-Options / X-Frame-Options / Referrer-Policy / HSTS）を付与しています。セッション cookie は HttpOnly・Secure・SameSite=Lax で、閲覧期間を超えて有効になることはありません。</p>
         </div>
     </section>
 
@@ -679,7 +687,28 @@
         </div>
     </footer>
 
-    <script src="js/tutorials.js"></script>
+    <!-- 受講者ログイン（学習部分＋準備物の保護ゲート） -->
+    <div class="auth-modal" id="authModal" role="dialog" aria-modal="true" aria-labelledby="authTitle" aria-hidden="true">
+        <div class="auth-backdrop" onclick="closeAuthModal()"></div>
+        <div class="auth-card">
+            <h2 id="authTitle" class="auth-title">受講者ログイン</h2>
+            <p class="auth-desc">企業ごとに発行された組織IDとパスワードを入力してください。閲覧期間内のみ学習コンテンツに入れます。</p>
+            <form id="authForm" class="auth-form" autocomplete="off" novalidate>
+                <label class="auth-field">
+                    <span>組織ID</span>
+                    <input type="text" id="authOrgId" name="orgId" inputmode="latin" autocapitalize="none" spellcheck="false" autocomplete="username" required placeholder="例: abc0519">
+                </label>
+                <label class="auth-field">
+                    <span>パスワード</span>
+                    <input type="password" id="authPassword" name="password" autocomplete="current-password" required placeholder="発行された8桁">
+                </label>
+                <p class="auth-error" id="authError" role="alert" hidden></p>
+                <button type="submit" class="btn btn-primary auth-submit" id="authSubmit">ログイン</button>
+            </form>
+            <p class="auth-note">トップとプライバシーはログイン不要で閲覧できます。</p>
+        </div>
+    </div>
+
     <script src="js/app.js"></script>
 </body>
 </html>

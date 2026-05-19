@@ -1,3 +1,13 @@
 .DS_Store
 node_modules/
 assets/mj-preview/
+
+# 配布用の平文資格情報（絶対にコミットしない）
+scripts/credentials.csv
+scripts/credentials.md
+
+# ローカルの環境変数
+.env
+.env.local
+.env*.local
+.vercel

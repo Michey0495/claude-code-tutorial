@@ -1,0 +1,8 @@
+{
+  "private": true,
+  "name": "claude-code-tutorial",
+  "description": "Claude Code Tutorial（組織別アクセス制御つき静的サイト）",
+  "engines": {
+    "node": "20.x"
+  }
+}

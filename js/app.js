@@ -18,7 +18,9 @@
         theme: localStorage.getItem('theme') || 'light',
         lang: localStorage.getItem('lang') || 'ja',
         mobileMenuOpen: false,
-        selectedProjectTracks: []
+        selectedProjectTracks: [],
+        auth: { authenticated: false, org: null, start: null, end: null },
+        pendingSection: null
     };
 
     // ===================================
@@ -368,6 +370,16 @@
         setupEventListeners();
         setupCursorGlow();
         animateStats();
+        renderProtectedContent();
+        setupHelpTabs();
+        setupAuth();
+        bootstrapAuth();
+    }
+
+    // tutorials.js（学習コンテンツ本体）は認証後に動的ロードされる。
+    // 未ロード時はここで何もしない（hero/privacy のみ公開）。
+    function renderProtectedContent() {
+        if (!window.TUTORIALS) return;
         renderTutorials(state.currentLevel);
         renderHandson(state.currentHandsonType);
         renderProjects();
@@ -377,7 +389,160 @@
         renderTroubleshooting();
         renderFAQ();
         renderChecklist();
-        setupHelpTabs();
+    }
+
+    // ===================================
+    // 受講者認証（組織ID＋パスワード＋閲覧期間）
+    // 実体の保護は Vercel Middleware（サーバー側）。ここはUI制御。
+    // ===================================
+    const PROTECTED_SECTIONS = new Set(['tutorials', 'handson', 'projects']);
+
+    function daysLeft(endDate) {
+        const end = Date.parse(endDate + 'T23:59:59Z');
+        return Math.max(0, Math.ceil((end - Date.now()) / 86400000));
+    }
+
+    function applyAuthedUI(data) {
+        state.auth = { authenticated: true, org: data.org, start: data.start, end: data.end };
+        const statusEl = document.getElementById('authStatus');
+        const loginBtn = document.getElementById('authLoginBtn');
+        const logoutBtn = document.getElementById('authLogoutBtn');
+        if (statusEl) {
+            const left = daysLeft(data.end);
+            statusEl.textContent = `${data.org.name}（残り${left}日）`;
+            statusEl.hidden = false;
+        }
+        if (loginBtn) loginBtn.hidden = true;
+        if (logoutBtn) logoutBtn.hidden = false;
+    }
+
+    function applyPublicUI() {
+        state.auth = { authenticated: false, org: null, start: null, end: null };
+        const statusEl = document.getElementById('authStatus');
+        const loginBtn = document.getElementById('authLoginBtn');
+        const logoutBtn = document.getElementById('authLogoutBtn');
+        if (statusEl) statusEl.hidden = true;
+        if (loginBtn) loginBtn.hidden = false;
+        if (logoutBtn) logoutBtn.hidden = true;
+    }
+
+    function loadContentThenRender() {
+        if (window.TUTORIALS) {
+            renderProtectedContent();
+            if (state.pendingSection) {
+                const s = state.pendingSection;
+                state.pendingSection = null;
+                window.showSection(s);
+            }
+            return;
+        }
+        const s = document.createElement('script');
+        s.src = 'js/tutorials.js';
+        s.onload = function() {
+            renderProtectedContent();
+            const target = state.pendingSection || (PROTECTED_SECTIONS.has(state.currentSection) ? state.currentSection : null);
+            state.pendingSection = null;
+            if (target) window.showSection(target);
+        };
+        s.onerror = function() {
+            // middleware が遮断＝未認証/期限切れ
+            applyPublicUI();
+            openAuthModal();
+        };
+        document.body.appendChild(s);
+    }
+
+    async function bootstrapAuth() {
+        try {
+            const res = await fetch('/api/session', { credentials: 'same-origin' });
+            const data = await res.json();
+            if (data && data.authenticated) {
+                applyAuthedUI(data);
+                loadContentThenRender();
+            } else {
+                applyPublicUI();
+            }
+        } catch (e) {
+            applyPublicUI();
+        }
+    }
+
+    window.openAuthModal = function() {
+        const m = document.getElementById('authModal');
+        if (!m) return;
+        m.classList.add('active');
+        m.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        const f = document.getElementById('authOrgId');
+        if (f) setTimeout(() => f.focus(), 50);
+    };
+
+    window.closeAuthModal = function() {
+        const m = document.getElementById('authModal');
+        if (!m) return;
+        m.classList.remove('active');
+        m.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    window.doLogout = async function() {
+        try { await fetch('/api/logout', { method: 'POST', credentials: 'same-origin' }); }
+        catch (e) { /* 失敗してもcookieは期限で失効 */ }
+        location.reload();
+    };
+
+    function authErrorMessage(code) {
+        const ja = {
+            invalid_credentials: '組織IDまたはパスワードが違います。',
+            not_started: '閲覧開始日より前です。',
+            expired: '閲覧期間が終了しています。',
+            missing_credentials: '組織IDとパスワードを入力してください。',
+            server_not_configured: 'サーバー設定が未完了です（管理者に連絡してください）。',
+            org_table_unavailable: '組織情報を読み込めませんでした。',
+            bad_request: '入力内容を確認してください。',
+            network: '通信に失敗しました。時間をおいて再度お試しください。'
+        };
+        return ja[code] || 'ログインできませんでした。';
+    }
+
+    function setupAuth() {
+        const form = document.getElementById('authForm');
+        if (!form) return;
+        form.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const errEl = document.getElementById('authError');
+            const submitBtn = document.getElementById('authSubmit');
+            const orgId = (document.getElementById('authOrgId').value || '').trim();
+            const password = document.getElementById('authPassword').value || '';
+            if (errEl) { errEl.hidden = true; errEl.textContent = ''; }
+            if (!orgId || !password) {
+                if (errEl) { errEl.textContent = authErrorMessage('missing_credentials'); errEl.hidden = false; }
+                return;
+            }
+            if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = '確認中…'; }
+            let data = null;
+            try {
+                const res = await fetch('/api/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    credentials: 'same-origin',
+                    body: JSON.stringify({ orgId, password })
+                });
+                data = await res.json();
+            } catch (e) {
+                data = { ok: false, error: 'network' };
+            }
+            if (submitBtn) { submitBtn.disabled = false; submitBtn.textContent = 'ログイン'; }
+            if (data && data.ok) {
+                document.getElementById('authPassword').value = '';
+                closeAuthModal();
+                applyAuthedUI(data);
+                loadContentThenRender();
+            } else if (errEl) {
+                errEl.textContent = authErrorMessage(data && data.error);
+                errEl.hidden = false;
+            }
+        });
     }
 
     // ===================================
@@ -518,16 +683,8 @@
         if (promptTipsTitle) promptTipsTitle.textContent = t.promptTipsTitle;
         if (promptTipsDesc) promptTipsDesc.textContent = t.promptTipsDesc;
 
-        // Re-render all content sections with localized data
-        renderTutorials(state.currentLevel);
-        renderHandson(state.currentHandsonType);
-        renderProjects();
-        renderBestPractices();
-        renderBorisTips();
-        renderPromptTips();
-        renderTroubleshooting();
-        renderFAQ();
-        renderChecklist();
+        // Re-render localized content（未認証時は内部でスキップ）
+        renderProtectedContent();
     }
 
     function updateSectionTexts(t) {
@@ -653,7 +810,10 @@
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 const cheatSheetModal = document.getElementById('cheatSheetModal');
-                if (cheatSheetModal && cheatSheetModal.classList.contains('active')) {
+                const authModal = document.getElementById('authModal');
+                if (authModal && authModal.classList.contains('active')) {
+                    closeAuthModal();
+                } else if (cheatSheetModal && cheatSheetModal.classList.contains('active')) {
                     closeCheatSheetModal();
                 } else {
                     closeModal();
@@ -747,6 +907,13 @@
     // Section Navigation
     // ===================================
     window.showSection = function(sectionId) {
+        // 保護セクションは未認証だとログインへ誘導（実体はサーバー側で遮断済み）
+        if (PROTECTED_SECTIONS.has(sectionId) && !state.auth.authenticated) {
+            state.pendingSection = sectionId;
+            openAuthModal();
+            return;
+        }
+
         // Hide all sections
         document.querySelectorAll('.hero, .section').forEach(section => {
             section.style.display = 'none';

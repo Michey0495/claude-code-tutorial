@@ -3673,3 +3673,102 @@ body:hover .cursor-glow {
     color: var(--color-text-secondary);
     line-height: 1.6;
 }
+
+/* ===================================
+   受講者ログイン
+   =================================== */
+.auth-status {
+    display: inline-flex;
+    align-items: center;
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    padding: 0.25rem 0.6rem;
+    background: var(--color-bg-tertiary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-full);
+    white-space: nowrap;
+}
+.auth-action { cursor: pointer; }
+
+.auth-modal {
+    position: fixed;
+    inset: 0;
+    z-index: var(--z-modal);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-lg);
+}
+.auth-modal.active { display: flex; }
+.auth-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+.auth-card {
+    position: relative;
+    width: 100%;
+    max-width: 420px;
+    background: var(--color-bg-elevated);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-xl);
+    box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
+    padding: var(--space-2xl);
+}
+.auth-title {
+    margin: 0 0 var(--space-sm);
+    font-size: var(--text-2xl);
+    color: var(--color-text-primary);
+}
+.auth-desc {
+    margin: 0 0 var(--space-lg);
+    font-size: var(--text-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.7;
+}
+.auth-form { display: flex; flex-direction: column; gap: var(--space-md); }
+.auth-field { display: flex; flex-direction: column; gap: 0.35rem; }
+.auth-field span {
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.auth-field input {
+    width: 100%;
+    padding: 0.65rem 0.8rem;
+    font-size: var(--text-base);
+    font-family: var(--font-sans);
+    color: var(--color-text-primary);
+    background: var(--color-bg-secondary);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-sizing: border-box;
+}
+.auth-field input:focus {
+    outline: none;
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px var(--color-accent-subtle);
+}
+.auth-submit { width: 100%; justify-content: center; margin-top: var(--space-xs); }
+.auth-submit:disabled { opacity: 0.6; cursor: progress; }
+.auth-error {
+    margin: 0;
+    font-size: var(--text-sm);
+    color: var(--color-advanced);
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    border-radius: var(--radius-md);
+    padding: var(--space-sm) var(--space-md);
+}
+.auth-note {
+    margin: var(--space-lg) 0 0;
+    font-size: var(--text-xs);
+    color: var(--color-text-tertiary);
+    text-align: center;
+}
+@media (max-width: 768px) {
+    .auth-card { padding: var(--space-xl); }
+    .auth-status { display: none; }
+}
