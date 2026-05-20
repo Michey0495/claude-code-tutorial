@@ -1,26 +1,506 @@
 [
   {
-    "id": "dmo0519",
-    "name": "デモ製作所（架空）",
+    "id": "apa0430",
+    "name": "4月末-A",
+    "start": "2026-05-19",
+    "end": "2027-04-30",
+    "salt": "837c5d8b7b0cad65eb578fb0d952d52b",
+    "passHash": "527b405004f58f3dcde4dce0ec37f97512dc6a4805ec861f7fcc061fea29d8c7"
+  },
+  {
+    "id": "apb0430",
+    "name": "4月末-B",
+    "start": "2026-05-19",
+    "end": "2027-04-30",
+    "salt": "ba9022f4c1f7781d1fabef11d6762c9c",
+    "passHash": "4ba53f93a3c403f9c5e77cc2588a36cb955caba838e28c545943264999a55bc6"
+  },
+  {
+    "id": "apc0430",
+    "name": "4月末-C",
+    "start": "2026-05-19",
+    "end": "2027-04-30",
+    "salt": "567a804e1beb8b7b3a7a4da8f2d561a8",
+    "passHash": "621a492a315f097372708ad01921f2875d1fd6181418fbebdda53d5d3b00276d"
+  },
+  {
+    "id": "apd0430",
+    "name": "4月末-D",
+    "start": "2026-05-19",
+    "end": "2027-04-30",
+    "salt": "ce4e41e90b20b64feab691c0819735ad",
+    "passHash": "fa429c07e15b27ba03803910a50efa1572247f80943b5145ec3638ed00d52be2"
+  },
+  {
+    "id": "ape0430",
+    "name": "4月末-E",
+    "start": "2026-05-19",
+    "end": "2027-04-30",
+    "salt": "a942eacdc193399925efa81beb78b75d",
+    "passHash": "27b48d122406feea0f7957c72009775eec87954e585bc965fae8ef18bd176632"
+  },
+  {
+    "id": "aua0831",
+    "name": "8月末-A",
+    "start": "2026-05-19",
+    "end": "2026-08-31",
+    "salt": "d1d8b2de6a46a4a38f0cf8b3f8a1d1cd",
+    "passHash": "9d0deadcc6be6811f2ff89edc3467cb6e9588d56902e4f1aca61df29627798e3"
+  },
+  {
+    "id": "aub0831",
+    "name": "8月末-B",
+    "start": "2026-05-19",
+    "end": "2026-08-31",
+    "salt": "7bb007289ffbf6a2a8b0ddae7034fec0",
+    "passHash": "c05964d68f140e784b658ddc84189ea3e309429dbf0c51b49a4132fa19a1f23c"
+  },
+  {
+    "id": "auc0831",
+    "name": "8月末-C",
+    "start": "2026-05-19",
+    "end": "2026-08-31",
+    "salt": "6528a71ef1fe9be53a7b64616badf17b",
+    "passHash": "5cd947a164e0a83fd1899d49c672ced2b9552f3098c3dd35d87a912d585d382b"
+  },
+  {
+    "id": "aud0831",
+    "name": "8月末-D",
+    "start": "2026-05-19",
+    "end": "2026-08-31",
+    "salt": "f6657f397e51589b1bbee1186b73607c",
+    "passHash": "5beb25c745d4c85d844ad044961e1c807bb9f079dd972bae25f092560336d123"
+  },
+  {
+    "id": "aue0831",
+    "name": "8月末-E",
+    "start": "2026-05-19",
+    "end": "2026-08-31",
+    "salt": "66622a880653c15126905fdd6029fdae",
+    "passHash": "61661e717f9099a3ed18f308fe70008de1f3a27d7325b5ff832381afd12b53fc"
+  },
+  {
+    "id": "dca1231",
+    "name": "12月末-A",
+    "start": "2026-05-19",
+    "end": "2026-12-31",
+    "salt": "580542094fd3993c52a864fa2cefb448",
+    "passHash": "de4c965b2104750389367ee7d7377d4c9107e7bfdd6f267b7bc4328538560435"
+  },
+  {
+    "id": "dcb1231",
+    "name": "12月末-B",
+    "start": "2026-05-19",
+    "end": "2026-12-31",
+    "salt": "addda9dc40cf4cf99c374e4e509459f5",
+    "passHash": "7ad5d3e681c9fe5fdb613f474bd539c580583a219a394bd19a07d36eeedce8e4"
+  },
+  {
+    "id": "dcc1231",
+    "name": "12月末-C",
+    "start": "2026-05-19",
+    "end": "2026-12-31",
+    "salt": "a7d5834bd814d2c859b8bc4366308e0c",
+    "passHash": "2ac698a2831199e6188da540e2bbc87cff850eb30addb91e796f68c171346197"
+  },
+  {
+    "id": "dcd1231",
+    "name": "12月末-D",
+    "start": "2026-05-19",
+    "end": "2026-12-31",
+    "salt": "f5e9c2c35156cef7cae0a7eaa7f139cd",
+    "passHash": "5055140db35a1fc8aa697e1275bc507ec7cd4a8702ae7f0c824ad790daae8aa5"
+  },
+  {
+    "id": "dce1231",
+    "name": "12月末-E",
+    "start": "2026-05-19",
+    "end": "2026-12-31",
+    "salt": "3d80d6856cb0435eb793f5a891742a30",
+    "passHash": "5cc1e8efefa7b487ddcefe6a068149a45c5f40d72e0ef6efdf9d86a165d9cea4"
+  },
+  {
+    "id": "fba0228",
+    "name": "2月末-A",
+    "start": "2026-05-19",
+    "end": "2027-02-28",
+    "salt": "00006084050188bde0da727054507225",
+    "passHash": "b6035f667a9dc02b0c237cc54d04b72713998b1deaa78dea457e16fda201b4ab"
+  },
+  {
+    "id": "fbb0228",
+    "name": "2月末-B",
+    "start": "2026-05-19",
+    "end": "2027-02-28",
+    "salt": "642f8139538af484ea7695133d379014",
+    "passHash": "4f1722d701d11f2580833b9798d6571dc93c73ba81a425b404e1355435c15bc7"
+  },
+  {
+    "id": "fbc0228",
+    "name": "2月末-C",
+    "start": "2026-05-19",
+    "end": "2027-02-28",
+    "salt": "b59f9202540cbfcbba0f335e3e5a20aa",
+    "passHash": "d7c16a0621fcd6d9291e214ac701b12168836041e5d89e7b106d3cb90d4f028d"
+  },
+  {
+    "id": "fbd0228",
+    "name": "2月末-D",
+    "start": "2026-05-19",
+    "end": "2027-02-28",
+    "salt": "572ed45ea43ad1d6a3a2605b6bdc4b1c",
+    "passHash": "23ffb841c279af70ee4dc3875f74072fa3cc8c55727c567c52412194e4a1b3ba"
+  },
+  {
+    "id": "fbe0228",
+    "name": "2月末-E",
+    "start": "2026-05-19",
+    "end": "2027-02-28",
+    "salt": "e8a3ce997a84ec16d985128786527955",
+    "passHash": "f7631bae5ddc0760719329fff7b1beec6f5f3282ca2e6240a798cc17aa3181f8"
+  },
+  {
+    "id": "jaa0131",
+    "name": "1月末-A",
+    "start": "2026-05-19",
+    "end": "2027-01-31",
+    "salt": "6d517c6dfbacccc712cb8abef5a7b913",
+    "passHash": "05f6258fbbbb60dff9039d6a9b71dc75127da4ef5e0fa048c97d2c6847cb8cc3"
+  },
+  {
+    "id": "jab0131",
+    "name": "1月末-B",
+    "start": "2026-05-19",
+    "end": "2027-01-31",
+    "salt": "6562ece5d869aa18c3e89be8a3e62381",
+    "passHash": "4091b1979845c8722029690febf1aa25506e7c0da738c19f1cd33214809c1d6d"
+  },
+  {
+    "id": "jac0131",
+    "name": "1月末-C",
+    "start": "2026-05-19",
+    "end": "2027-01-31",
+    "salt": "6177054aa54e94ecffd49d7df0563807",
+    "passHash": "3c9714a0cd71f2fb2a32677487a9925c194c4d84c1081ddec2c5c1e5883673b1"
+  },
+  {
+    "id": "jad0131",
+    "name": "1月末-D",
+    "start": "2026-05-19",
+    "end": "2027-01-31",
+    "salt": "f6b0086c40904e27bc16039c92b3ad1d",
+    "passHash": "f7274cbbb64376f75f8f274ac7097a0b750b5624fe8a99c90b31163c0558b676"
+  },
+  {
+    "id": "jae0131",
+    "name": "1月末-E",
+    "start": "2026-05-19",
+    "end": "2027-01-31",
+    "salt": "76c4d23d89218ea1038696de77cc3e04",
+    "passHash": "daaa7a164fefa287364f7ba64fa7e901622bd54c269f27d5b44b93a25d67aa96"
+  },
+  {
+    "id": "jla0731",
+    "name": "7月末-A",
+    "start": "2026-05-19",
+    "end": "2026-07-31",
+    "salt": "8d3ec7d75499ae27ecfc215fa6ba9c92",
+    "passHash": "19009531ac99c804f441c90c01ec3a1ea4c7d05a7843daf21a59658b5741c1ca"
+  },
+  {
+    "id": "jlb0731",
+    "name": "7月末-B",
+    "start": "2026-05-19",
+    "end": "2026-07-31",
+    "salt": "761cff8413e176284d84dc3e1e474bdf",
+    "passHash": "c93de6555861fdef28839df7165e01caefd14d3e29c7c0d48da6904f29e0f573"
+  },
+  {
+    "id": "jlc0731",
+    "name": "7月末-C",
+    "start": "2026-05-19",
+    "end": "2026-07-31",
+    "salt": "42d57098feff8b729109eb8b0f0d7cde",
+    "passHash": "db05655f2d3d8a3fb3cd223e9a505af93d3d7fa2f00a3904eee7c903af2c1641"
+  },
+  {
+    "id": "jld0731",
+    "name": "7月末-D",
+    "start": "2026-05-19",
+    "end": "2026-07-31",
+    "salt": "f4e2834a3de6ecfc291fd733b7829dc6",
+    "passHash": "9f39abd7acbffe24b7856afa0a3fbc123d726096a24427da9d85eba89d6106ed"
+  },
+  {
+    "id": "jle0731",
+    "name": "7月末-E",
+    "start": "2026-05-19",
+    "end": "2026-07-31",
+    "salt": "57307fa6a1755238d8f6a676fd84b4e5",
+    "passHash": "2795e3391057bcfd949ae035747ecfd25d4e59a46f7bc0b1be53c602aba767e9"
+  },
+  {
+    "id": "jna0630",
+    "name": "6月末-A",
     "start": "2026-05-19",
     "end": "2026-06-30",
-    "salt": "a2f6477d364f72ffdb9c2fd4baf85095",
-    "passHash": "d4ebacdfaf3695e788ac8098bf30798a83763113992e79b2ec11129145ea48e5"
+    "salt": "42e7da72427eed07813a42f3d1ca7614",
+    "passHash": "d19cad3a44676e503f7a583afdacc91725056c8214dec42f386fbe4846d579c3"
   },
   {
-    "id": "smp0519",
-    "name": "サンプル商事（架空）",
+    "id": "jnb0630",
+    "name": "6月末-B",
     "start": "2026-05-19",
-    "end": "2026-06-19",
-    "salt": "3a30d18c71687c03608192557a9b6517",
-    "passHash": "864416c54544418368e1892dc62a049e49f60184ef5d85b2ae1d5b1ac3128880"
+    "end": "2026-06-30",
+    "salt": "b5b79af7169d7a02cd8221ec1c3eb945",
+    "passHash": "f6739c5013f24aeb7f453b5855a300576b89f23232c56d04a297d4be9c843e14"
   },
   {
-    "id": "tst0519",
-    "name": "テスト工業（架空）",
+    "id": "jnc0630",
+    "name": "6月末-C",
     "start": "2026-05-19",
-    "end": "2026-06-19",
-    "salt": "544eb10ad9c1a527a039ca426fc95010",
-    "passHash": "f789510885f3998cee215ae6e17974792a2cbf369df1995073529877d7f89b33"
+    "end": "2026-06-30",
+    "salt": "272c796f3a1f2069a35afb811fb710a3",
+    "passHash": "a2528c0b1835028dc382936449dcb9863d9fdbbdfd846468d9e623d9108c88ea"
+  },
+  {
+    "id": "jnd0630",
+    "name": "6月末-D",
+    "start": "2026-05-19",
+    "end": "2026-06-30",
+    "salt": "3929f05a1ac9c82f4bbe3a09571631e8",
+    "passHash": "c2eb25bb3a7d2d1e70b2c7e6845010eb3ed0731b865f3e7baa1f02f39d797606"
+  },
+  {
+    "id": "jne0630",
+    "name": "6月末-E",
+    "start": "2026-05-19",
+    "end": "2026-06-30",
+    "salt": "bc2474d20b8c38572aefcaf0370373f5",
+    "passHash": "3864d19232bfb427411916d4df544050e0a7b11ed4114b68e697537973818ace"
+  },
+  {
+    "id": "mra0331",
+    "name": "3月末-A",
+    "start": "2026-05-19",
+    "end": "2027-03-31",
+    "salt": "a60343075710afe509e52c40edbd120a",
+    "passHash": "f73ab182120ebd59915ee5191cc87defdfc024bf9fea773832128d393ee8fb13"
+  },
+  {
+    "id": "mrb0331",
+    "name": "3月末-B",
+    "start": "2026-05-19",
+    "end": "2027-03-31",
+    "salt": "b999748fab5b1ca652ba93ca3a049b69",
+    "passHash": "cd31724afb25ef79fefb0916312713a73e6a4631e0a07e42485657cff919df76"
+  },
+  {
+    "id": "mrc0331",
+    "name": "3月末-C",
+    "start": "2026-05-19",
+    "end": "2027-03-31",
+    "salt": "a431d1991531b9e9d0c7e5608b76ef5c",
+    "passHash": "fc46f8e0ed7078a6002da3aca2656c32cb123e5c4b5faa4ec65700ae53b224bc"
+  },
+  {
+    "id": "mrd0331",
+    "name": "3月末-D",
+    "start": "2026-05-19",
+    "end": "2027-03-31",
+    "salt": "d72b5bc019ad305c9f89fef1c07263f2",
+    "passHash": "ac638f9c76992298e8b4306015b5150297a830d5d5a3d188001d8bbacca62644"
+  },
+  {
+    "id": "mre0331",
+    "name": "3月末-E",
+    "start": "2026-05-19",
+    "end": "2027-03-31",
+    "salt": "defc4d4aeb2f2007e054c979d646b501",
+    "passHash": "6ce6d75bc198648561e8a6eb09a0ad4ac1610baf7014db068a8a7373863460dd"
+  },
+  {
+    "id": "mya0531",
+    "name": "5月末-A",
+    "start": "2026-05-19",
+    "end": "2027-05-31",
+    "salt": "4ea32bc3670fbfda0977594df967b1f5",
+    "passHash": "b758cc2eedbbee58d1d63709de2411aa9db079d60725a18560e9b353aa0f09f9"
+  },
+  {
+    "id": "myb0531",
+    "name": "5月末-B",
+    "start": "2026-05-19",
+    "end": "2027-05-31",
+    "salt": "90ffd92a4ccb4c2af00ba2f62d50b938",
+    "passHash": "24f304c93782cde6548ae5801aa82e68708935609dcba7eb267547c9844614fb"
+  },
+  {
+    "id": "myc0531",
+    "name": "5月末-C",
+    "start": "2026-05-19",
+    "end": "2027-05-31",
+    "salt": "1a4258628ebc998af4369d08aebe8740",
+    "passHash": "6df8e0d1af277a673a0def18655eaa56981326e4130dc4d3ad1239099aa6d093"
+  },
+  {
+    "id": "myd0531",
+    "name": "5月末-D",
+    "start": "2026-05-19",
+    "end": "2027-05-31",
+    "salt": "d20c61e21eddc1089b8a787b2ee73963",
+    "passHash": "7a78ecfc6e04f87ab69ee6c6d8acc4da4892ff7502d96ac8d249318003392610"
+  },
+  {
+    "id": "mye0531",
+    "name": "5月末-E",
+    "start": "2026-05-19",
+    "end": "2027-05-31",
+    "salt": "e588714840e2b4d3f241e41fbe9714a4",
+    "passHash": "f9e59b827a5d5ed875cd486d24612837a6300442498b4fec5c669dd70635a518"
+  },
+  {
+    "id": "nva1130",
+    "name": "11月末-A",
+    "start": "2026-05-19",
+    "end": "2026-11-30",
+    "salt": "b1b6de5b2c7fc7128a2c5d1817b466ef",
+    "passHash": "c7f9bdcb949b308fba10fd36c34e6d77160666fae118efc160ab7017693ddb87"
+  },
+  {
+    "id": "nvb1130",
+    "name": "11月末-B",
+    "start": "2026-05-19",
+    "end": "2026-11-30",
+    "salt": "caa501d5d1bef885af8108cbc0f0d528",
+    "passHash": "af051feb65c8c3141507c512b94e596f6fe06d64712cccc2fc150319de147b26"
+  },
+  {
+    "id": "nvc1130",
+    "name": "11月末-C",
+    "start": "2026-05-19",
+    "end": "2026-11-30",
+    "salt": "2c613dd6a1908f9dbdba7617b8099872",
+    "passHash": "859e5c96fd4969ba4f0a5a9baeb4945dbf415a9e3167a7c69883d698403cdbca"
+  },
+  {
+    "id": "nvd1130",
+    "name": "11月末-D",
+    "start": "2026-05-19",
+    "end": "2026-11-30",
+    "salt": "d915884dcf29526c20c55d86093400b3",
+    "passHash": "6e99c0eb370111e4d7c40ba4e126a0777c8872cc08552bb2925c7b3723320c5c"
+  },
+  {
+    "id": "nve1130",
+    "name": "11月末-E",
+    "start": "2026-05-19",
+    "end": "2026-11-30",
+    "salt": "52e92f8645390da1da165e957f8871e6",
+    "passHash": "3de229a648a37d0768460bcc24174d74fd3c4b8e865412650e7f418eb76d8bec"
+  },
+  {
+    "id": "oca1031",
+    "name": "10月末-A",
+    "start": "2026-05-19",
+    "end": "2026-10-31",
+    "salt": "8f0eea08406b0052d13db00b50487e65",
+    "passHash": "a398c74939abefcccd4e92f857b28e156a14a4f1bdb018b43b3d901b404e9bad"
+  },
+  {
+    "id": "ocb1031",
+    "name": "10月末-B",
+    "start": "2026-05-19",
+    "end": "2026-10-31",
+    "salt": "16d4fd2546c1253cdedb93810749c42b",
+    "passHash": "c52be6f21bbca7111c2a8480aef7592a24bda455cf1b2a45f2f20920e3fdf174"
+  },
+  {
+    "id": "occ1031",
+    "name": "10月末-C",
+    "start": "2026-05-19",
+    "end": "2026-10-31",
+    "salt": "1c64c185a141940162569daa7171d23f",
+    "passHash": "9ecd2f7852f637b82bccaf21390d75d5d45b74ce5c114f2704a172e90233b6f7"
+  },
+  {
+    "id": "ocd1031",
+    "name": "10月末-D",
+    "start": "2026-05-19",
+    "end": "2026-10-31",
+    "salt": "2b9709eb315a25f1703a08015c9eb43f",
+    "passHash": "eb91c3274815e3bf855cb1dfe75c2d22877c5a713a0c1e824d65401484471d66"
+  },
+  {
+    "id": "oce1031",
+    "name": "10月末-E",
+    "start": "2026-05-19",
+    "end": "2026-10-31",
+    "salt": "24ecdbd5303c8de12cde9fd73617ac26",
+    "passHash": "b9e8f537077ddab58a51c8184053ade353974d42155840d40db6d4117f03f49e"
+  },
+  {
+    "id": "pma9999",
+    "name": "無期限-A",
+    "start": "2026-05-19",
+    "end": "9999-12-31",
+    "salt": "d74fcb76e9d859d815604932f4d3bccc",
+    "passHash": "4d4d99922699911e517c98fbceee0fbd549502b88d02f094de14ee94d3960788"
+  },
+  {
+    "id": "pmb9999",
+    "name": "無期限-B",
+    "start": "2026-05-19",
+    "end": "9999-12-31",
+    "salt": "b1d725d70fe5bddda0bf4d4703a1d69a",
+    "passHash": "ceea60fdd4fee7a16f0a717f16ed461cfde7fa783dd5031cc10889b932a07fcd"
+  },
+  {
+    "id": "pmc9999",
+    "name": "無期限-C",
+    "start": "2026-05-19",
+    "end": "9999-12-31",
+    "salt": "c8b2ec41410d9bbcbfb92c84d5550b2f",
+    "passHash": "2dee1e2630cc508c8e8daae3459780f248f1d07c6a91c6544830ec0087f18b46"
+  },
+  {
+    "id": "spa0930",
+    "name": "9月末-A",
+    "start": "2026-05-19",
+    "end": "2026-09-30",
+    "salt": "0e08e9646bc30937c1e660a864447972",
+    "passHash": "c4d072d0cddce20e2bb3a9964cac8e8dfedd4e0be318e1ad9d6aa1e881f01ab2"
+  },
+  {
+    "id": "spb0930",
+    "name": "9月末-B",
+    "start": "2026-05-19",
+    "end": "2026-09-30",
+    "salt": "ae45d4a11e9789ef61cf6f72faf32b99",
+    "passHash": "25494bd0de29d8d53b898e6d610464ca9654df035cea065608ed2767b59c12ae"
+  },
+  {
+    "id": "spc0930",
+    "name": "9月末-C",
+    "start": "2026-05-19",
+    "end": "2026-09-30",
+    "salt": "140a94398cafb3221b92d886d80d4c3d",
+    "passHash": "db3c528eb5ccc6c16594c0990b8f5313d43e159f7bb8151ca63454d440295260"
+  },
+  {
+    "id": "spd0930",
+    "name": "9月末-D",
+    "start": "2026-05-19",
+    "end": "2026-09-30",
+    "salt": "ce041a38657e7feba4c56f2346e20f4e",
+    "passHash": "48b21be7110a947acf183e083ebb8b8524b619efb78dcb6e9838ed335bff726f"
+  },
+  {
+    "id": "spe0930",
+    "name": "9月末-E",
+    "start": "2026-05-19",
+    "end": "2026-09-30",
+    "salt": "f413ae24ca06b65665f347c5fccbe11d",
+    "passHash": "066a93ded3733576e3ffbd55c359a413ee7fac9a01c5df02d1f35e37037785e2"
   }
 ]
