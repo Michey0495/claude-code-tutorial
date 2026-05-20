@@ -3772,3 +3772,98 @@ body:hover .cursor-glow {
     .auth-card { padding: var(--space-xl); }
     .auth-status { display: none; }
 }
+
+/* ===================================
+   サイドバー（デスクトップ用セクションナビ）
+   モバイル（<1024px）では非表示にし、既存の mobile-menu を使用。
+   =================================== */
+:root { --sidebar-width: 240px; --nav-height: 64px; }
+
+.sidebar {
+    position: fixed;
+    top: var(--nav-height);
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100vh - var(--nav-height));
+    background: var(--color-bg-secondary);
+    border-right: 1px solid var(--color-border);
+    overflow-y: auto;
+    z-index: var(--z-sticky);
+    padding: var(--space-md) 0;
+    display: none; /* デフォルト非表示。デスクトップ幅で表示 */
+}
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 0 var(--space-sm);
+}
+.sidebar-link {
+    display: block;
+    padding: 0.6rem var(--space-md);
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    background: transparent;
+    border: none;
+    border-radius: var(--radius-md);
+    text-align: left;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background var(--transition-fast), color var(--transition-fast);
+    width: 100%;
+}
+.sidebar-link:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+}
+.sidebar-link.active {
+    background: var(--color-accent-subtle);
+    color: var(--color-accent-primary);
+    font-weight: 600;
+}
+.sidebar-link--button {
+    margin-top: var(--space-sm);
+    border-top: 1px solid var(--color-border);
+    padding-top: calc(var(--space-md) + 0.2rem);
+    border-radius: 0;
+}
+
+/* 認証ボタン（ヘッダー右側） */
+.auth-action-btn {
+    padding: 0.4rem 0.9rem;
+    font-size: var(--text-sm);
+    font-weight: 500;
+    color: var(--color-accent-primary);
+    background: transparent;
+    border: 1px solid var(--color-accent-primary);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+    transition: background var(--transition-fast), color var(--transition-fast);
+}
+.auth-action-btn:hover {
+    background: var(--color-accent-primary);
+    color: var(--color-text-inverse);
+}
+#authLogoutBtn {
+    color: var(--color-text-secondary);
+    border-color: var(--color-border-hover);
+}
+#authLogoutBtn:hover {
+    background: var(--color-bg-tertiary);
+    color: var(--color-text-primary);
+}
+
+/* デスクトップ（>=1024px）でサイドバー表示＋コンテンツ右シフト */
+@media (min-width: 1024px) {
+    .sidebar { display: block; }
+    .hero,
+    .section,
+    .footer {
+        margin-left: var(--sidebar-width);
+    }
+    .nav-menu-btn { display: none; }
+}

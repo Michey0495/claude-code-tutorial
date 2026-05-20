@@ -568,18 +568,11 @@
             langToggle.querySelector('.lang-label').textContent = lang === 'ja' ? 'EN' : 'JA';
         }
 
-        // Update navigation
-        const navLinks = document.querySelectorAll('.nav-link:not(.nav-link-btn)');
-        if (navLinks.length >= 6) {
-            navLinks[0].textContent = t.navTutorials;
-            navLinks[1].textContent = t.navHandson;
-            navLinks[2].textContent = t.navProjects;
-            navLinks[3].textContent = t.navBestPractices;
-            navLinks[4].textContent = t.navHelp;
-            navLinks[5].textContent = t.navPrivacy;
-        }
-        const cheatsheetBtn = document.querySelector('.nav-link-btn');
-        if (cheatsheetBtn) cheatsheetBtn.textContent = t.navCheatsheet;
+        // サイドバーのセクションリンク（data-i18n属性で個別にローカライズ）
+        document.querySelectorAll('.sidebar-link[data-i18n]').forEach(el => {
+            const key = el.dataset.i18n;
+            if (key && t[key]) el.textContent = t[key];
+        });
 
         // Update mobile menu
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -938,9 +931,9 @@
             // Smooth scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
-            // Update nav active state
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
+            // サイドバーのアクティブ表示を切り替え
+            document.querySelectorAll('.sidebar-link').forEach(link => {
+                link.classList.toggle('active', link.dataset.section === sectionId);
             });
         }
     };

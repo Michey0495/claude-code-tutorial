@@ -47,16 +47,9 @@
                 <span class="logo-text">Claude Code Tutorial</span>
             </a>
             <div class="nav-links">
-                <a href="#" onclick="showSection('tutorials')" class="nav-link">チュートリアル</a>
-                <a href="#" onclick="showSection('handson')" class="nav-link">ハンズオン</a>
-                <a href="#" onclick="showSection('projects')" class="nav-link">開発トラック</a>
-                <a href="#" onclick="showSection('bestpractices')" class="nav-link">ベストプラクティス</a>
-                <a href="#" onclick="showSection('troubleshooting')" class="nav-link">ヘルプ</a>
-                <a href="#" onclick="showSection('privacy')" class="nav-link">プライバシー</a>
-                <button type="button" onclick="openCheatSheetModal()" class="nav-link nav-link-btn">機能一覧</button>
                 <span class="auth-status" id="authStatus" hidden></span>
-                <button type="button" class="nav-link nav-link-btn auth-action" id="authLoginBtn" onclick="openAuthModal()">ログイン</button>
-                <button type="button" class="nav-link nav-link-btn auth-action" id="authLogoutBtn" onclick="doLogout()" hidden>ログアウト</button>
+                <button type="button" class="auth-action-btn" id="authLoginBtn" onclick="openAuthModal()">ログイン</button>
+                <button type="button" class="auth-action-btn" id="authLogoutBtn" onclick="doLogout()" hidden>ログアウト</button>
                 <button class="lang-toggle" id="langToggle" aria-label="Switch language">
                     <span class="lang-label">EN</span>
                 </button>
@@ -90,6 +83,19 @@
             <a href="#" onclick="openCheatSheetModal(); closeMobileMenu()" class="mobile-link">機能一覧</a>
         </div>
     </div>
+
+    <!-- Sidebar (デスクトップ用セクションナビ。モバイルは mobile-menu を使用) -->
+    <aside class="sidebar" id="sidebar" aria-label="セクションナビゲーション">
+        <nav class="sidebar-nav">
+            <a href="#" class="sidebar-link" data-i18n="navTutorials" data-section="tutorials" onclick="showSection('tutorials')">チュートリアル</a>
+            <a href="#" class="sidebar-link" data-i18n="navHandson" data-section="handson" onclick="showSection('handson')">ハンズオン</a>
+            <a href="#" class="sidebar-link" data-i18n="navProjects" data-section="projects" onclick="showSection('projects')">開発トラック</a>
+            <a href="#" class="sidebar-link" data-i18n="navBestPractices" data-section="bestpractices" onclick="showSection('bestpractices')">ベストプラクティス</a>
+            <a href="#" class="sidebar-link" data-i18n="navHelp" data-section="troubleshooting" onclick="showSection('troubleshooting')">ヘルプ</a>
+            <a href="#" class="sidebar-link" data-i18n="navPrivacy" data-section="privacy" onclick="showSection('privacy')">プライバシー</a>
+            <button type="button" class="sidebar-link sidebar-link--button" id="sidebarCheatsheet" data-i18n="navCheatsheet" onclick="openCheatSheetModal()">機能一覧</button>
+        </nav>
+    </aside>
 
     <!-- Hero Section -->
     <section class="hero" id="hero">
