@@ -6,6 +6,9 @@ assets/mj-preview/
 scripts/credentials.csv
 scripts/credentials.md
 
+# 受講者アカウント割当台帳（平文PW・社内管理用、GitHubには上げない）
+private/
+
 # ローカルの環境変数
 .env
 .env.local
