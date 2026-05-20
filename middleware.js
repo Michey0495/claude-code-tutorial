@@ -64,6 +64,27 @@ function unauthorized(pathname) {
   });
 }
 
+// Vercel Edge ランタイムの request.cookies は版によって戻り値が
+// 文字列だったりオブジェクトだったりするため、Cookie ヘッダを直接
+// パースする方が堅牢。失敗したら request.cookies API へフォールバック。
+function readCookie(request, name) {
+  const header = request.headers && request.headers.get && request.headers.get('cookie');
+  if (header) {
+    const parts = header.split(';');
+    for (const part of parts) {
+      const i = part.indexOf('=');
+      if (i === -1) continue;
+      const k = part.slice(0, i).trim();
+      if (k === name) return part.slice(i + 1).trim();
+    }
+  }
+  try {
+    const c = request.cookies && request.cookies.get && request.cookies.get(name);
+    if (c) return typeof c === 'string' ? c : c.value || null;
+  } catch (_) {}
+  return null;
+}
+
 export default async function middleware(request) {
   const url = new URL(request.url);
   const pathname = url.pathname;
@@ -81,8 +102,7 @@ export default async function middleware(request) {
   // 有効時にシークレット未設定ならフェイルクローズ（保護対象を出さない）
   if (!secret) return unauthorized(pathname);
 
-  const cookie = request.cookies.get(COOKIE_NAME);
-  const token = cookie && cookie.value;
+  const token = readCookie(request, COOKIE_NAME);
   const payload = await verifyToken(token, secret);
   if (!payload) return unauthorized(pathname);
 
