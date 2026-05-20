@@ -435,24 +435,21 @@
         });
     }
 
-    function loadContentThenRender() {
-        if (window.TUTORIALS) {
+    // afterLogin=true なら直前にログインしたケース。pendingSection か、
+    // 現在が保護外（hero など）なら tutorials に自動遷移して中身を見せる。
+    function loadContentThenRender(afterLogin) {
+        const finalize = () => {
             renderProtectedContent();
-            if (state.pendingSection) {
-                const s = state.pendingSection;
-                state.pendingSection = null;
-                window.showSection(s);
-            }
-            return;
-        }
-        const s = document.createElement('script');
-        s.src = 'js/tutorials.js';
-        s.onload = function() {
-            renderProtectedContent();
-            const target = state.pendingSection || (PROTECTED_SECTIONS.has(state.currentSection) ? state.currentSection : null);
+            let target = state.pendingSection;
+            if (!target && PROTECTED_SECTIONS.has(state.currentSection)) target = state.currentSection;
+            if (!target && afterLogin) target = 'tutorials';
             state.pendingSection = null;
             if (target) window.showSection(target);
         };
+        if (window.TUTORIALS) { finalize(); return; }
+        const s = document.createElement('script');
+        s.src = 'js/tutorials.js';
+        s.onload = finalize;
         s.onerror = function() {
             // middleware が遮断＝未認証/期限切れ
             applyPublicUI();
@@ -549,7 +546,7 @@
                 document.getElementById('authPassword').value = '';
                 closeAuthModal();
                 applyAuthedUI(data);
-                loadContentThenRender();
+                loadContentThenRender(true);
             } else if (errEl) {
                 errEl.textContent = authErrorMessage(data && data.error);
                 errEl.hidden = false;
