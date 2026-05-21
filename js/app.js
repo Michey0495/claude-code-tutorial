@@ -123,7 +123,14 @@
             downloadSingle: 'ダウンロード',
             // Navigation 追加
             navProjects: '開発トラック',
+            navSettings: '設定テンプレート',
             navPrivacy: 'プライバシー',
+            sectionTagSettings: '配布物',
+            sectionTitleSettings: 'Claude 設定テンプレート',
+            sectionDescSettings: 'Mac / Windows 共通の ZIP で配布。展開して所定の場所に置くだけで使えます。',
+            settingsDownloadLabel: 'ZIPでダウンロード',
+            settingsPlacementLabel: '配置',
+            settingsSizeLabel: 'サイズ',
             footerAbout: 'サイトについて',
             // 開発トラック
             sectionTagProjects: '開発一貫ハンズオン',
@@ -244,7 +251,14 @@
             downloadSingle: 'Download',
             // Navigation added
             navProjects: 'Tracks',
+            navSettings: 'Settings',
             navPrivacy: 'Privacy',
+            sectionTagSettings: 'Distribution',
+            sectionTitleSettings: 'Claude Settings Templates',
+            sectionDescSettings: 'Cross-platform ZIPs (Mac/Windows). Extract and drop them into the right place.',
+            settingsDownloadLabel: 'Download (ZIP)',
+            settingsPlacementLabel: 'Placement',
+            settingsSizeLabel: 'Size',
             footerAbout: 'About',
             // Project tracks
             sectionTagProjects: 'End-to-end Hands-on',
@@ -383,6 +397,7 @@
         renderTutorials(state.currentLevel);
         renderHandson(state.currentHandsonType);
         renderProjects();
+        renderSettings();
         renderBestPractices();
         renderBorisTips();
         renderPromptTips();
@@ -395,7 +410,7 @@
     // 受講者認証（組織ID＋パスワード＋閲覧期間）
     // 実体の保護は Vercel Middleware（サーバー側）。ここはUI制御。
     // ===================================
-    const PROTECTED_SECTIONS = new Set(['tutorials', 'handson', 'projects']);
+    const PROTECTED_SECTIONS = new Set(['tutorials', 'handson', 'projects', 'settings']);
 
     function daysLeft(endDate) {
         const end = Date.parse(endDate + 'T23:59:59Z');
@@ -721,6 +736,17 @@
             if (tag) tag.textContent = t.sectionTagProjects;
             if (title) title.textContent = t.sectionTitleProjects;
             if (desc) desc.textContent = t.sectionDescProjects;
+        }
+
+        // Settings section
+        const settingsSection = document.getElementById('settings');
+        if (settingsSection) {
+            const tag = settingsSection.querySelector('.section-tag');
+            const title = settingsSection.querySelector('.section-title');
+            const desc = settingsSection.querySelector('.section-description');
+            if (tag) tag.textContent = t.sectionTagSettings;
+            if (title) title.textContent = t.sectionTitleSettings;
+            if (desc) desc.textContent = t.sectionDescSettings;
         }
 
         // Best Practices section
@@ -1271,6 +1297,48 @@
         elements.tutorialModal.classList.add('active');
         document.body.style.overflow = 'hidden';
     };
+
+    // ===================================
+    // Claude 設定テンプレート
+    // ===================================
+    function renderSettings() {
+        const list = document.getElementById('settingsList');
+        if (!list || !window.SETTINGS_TEMPLATES) return;
+        const t = i18n[state.lang];
+        const cats = window.SETTINGS_CATEGORIES || [];
+
+        list.innerHTML = cats.map(cat => {
+            const items = window.SETTINGS_TEMPLATES.filter(s => s.cat === cat.id);
+            if (!items.length) return '';
+            const cards = items.map(s => `
+                <div class="settings-card">
+                    <div class="settings-card-head">
+                        <h4 class="settings-card-title">${escapeHtml(s.title)}</h4>
+                        <span class="settings-card-size">${t.settingsSizeLabel}: ${escapeHtml(s.size)}</span>
+                    </div>
+                    <p class="settings-card-desc">${escapeHtml(s.desc)}</p>
+                    <p class="settings-card-placement"><strong>${t.settingsPlacementLabel}:</strong> ${parseInlineCode(s.placement)}</p>
+                    <a class="settings-card-download" href="assets/settings/${encodeURIComponent(s.zip)}" download="${escapeHtml(s.zip)}">
+                        ${icons.download} <span>${t.settingsDownloadLabel}</span>
+                        <span class="settings-card-filename">${escapeHtml(s.zip)}</span>
+                    </a>
+                </div>
+            `).join('');
+            return `
+                <div class="settings-category">
+                    <h3 class="settings-category-title">${escapeHtml(cat.label)}</h3>
+                    <div class="settings-grid">${cards}</div>
+                </div>
+            `;
+        }).join('');
+    }
+
+    // インラインの `code` 部分だけタグに置換（XSS安全のため他はエスケープ）
+    function parseInlineCode(text) {
+        if (!text) return '';
+        const escaped = escapeHtml(text);
+        return escaped.replace(/`([^`]+)`/g, '<code>$1</code>');
+    }
 
     // ===================================
     // Best Practices

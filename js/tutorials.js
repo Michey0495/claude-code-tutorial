@@ -8161,11 +8161,161 @@ const PROJECT_DOWNLOADS = {
     }
 };
 
+// ===================================
+// Claude 設定テンプレート（Mac/Win対応ZIP配布）
+// 配置の基本: 各テンプレートに展開先の指示を記載。
+// すべて assets/settings/<file>.zip。venv/node_modules 等は除外済み。
+// ===================================
+const SETTINGS_CATEGORIES = [
+    { id: 'official',  label: '公式パック' },
+    { id: 'workflow',  label: 'ワークフロー・スターター' },
+    { id: 'reference', label: 'ガイド・リファレンス' },
+    { id: 'skills',    label: 'Skills 集' },
+    { id: 'agents',    label: 'Agents 集' },
+    { id: 'design',    label: 'UI / UX デザイン' }
+];
+
+const SETTINGS_TEMPLATES = [
+    // 公式パック
+    { id: 'claude-config-bundle', cat: 'official', title: '推奨 .claude/ 設定一式',
+      desc: '研修の前提とする .claude/ の最小構成。settings.json と代表的な agents / hooks / commands / skills のサンプルを含む。',
+      placement: '展開してできる `.claude/` を プロジェクトルートに置くとそのプロジェクトのみの設定、`~/` 直下に置くと全プロジェクト共通の設定になります。',
+      zip: 'claude-config-bundle.zip', size: '21 KB' },
+    { id: 'claude-code-official-plugins', cat: 'official', title: 'Claude Code 公式プラグイン パック',
+      desc: '`claude-code-setup` プラグイン本体。`.claude-plugin/plugin.json` と `claude-automation-recommender` 等のスキル群。',
+      placement: '展開した `claude-code-setup/` フォルダを任意の場所に置き、Claude Code で `/plugins install ./claude-code-setup` のように読み込みます。',
+      zip: 'claude-code-official-plugins.zip', size: '531 KB' },
+    { id: 'aidriven-docs-commands', cat: 'official', title: 'AI 駆動 ドキュメント＆コマンド',
+      desc: 'AI 駆動開発（要件整理〜設計〜実装〜ハッカソン）の各フェーズ別コマンドとドキュメントのテンプレート集。',
+      placement: '展開後、各フェーズフォルダの `.md` を `~/.claude/commands/` または プロジェクトの `.claude/commands/` にコピーして使います。',
+      zip: 'aidriven-docs-commands.zip', size: '285 KB' },
+    { id: 'demo-mtg', cat: 'official', title: 'デモミーティング素材',
+      desc: '商談議事録デモ用の最小素材セット。研修中の体験デモで利用。',
+      placement: '任意の作業フォルダに展開して、Claude Code でデモを進めます。',
+      zip: 'demo-mtg.zip', size: '8.9 KB' },
+    { id: 'hallmark-ja', cat: 'official', title: 'Hallmark-JA プラグイン',
+      desc: '日本語向け Hallmark プラグイン（2026-05-21 版）。',
+      placement: '展開した本体を Claude Code でプラグインとして読み込み（`/plugins install <path>`）。',
+      zip: 'hallmark-ja.zip', size: '1.4 MB' },
+
+    // ワークフロー・スターター
+    { id: 'cc-sdd', cat: 'workflow', title: 'cc-sdd（Spec Driven Development）',
+      desc: '要件→設計→タスク→実装 のサイクルを Claude Code / Cursor / Gemini で回すための SDD ワークフロー一式。',
+      placement: '展開して README に従いインストール。多くは `.claude/` 配下にコマンドとスキルを追加する形になります。',
+      zip: 'cc-sdd.zip', size: '705 KB' },
+    { id: 'claude-code-spec-workflow', cat: 'workflow', title: 'claude-code-spec-workflow（Pimzino）',
+      desc: 'Pimzino 系の Spec Workflow（Claude Code 版）。仕様駆動でタスクを刻む。',
+      placement: '展開後、README の指示に従い `.claude/commands/` に該当コマンドを配置。',
+      zip: 'claude-code-spec-workflow.zip', size: '1.0 MB' },
+    { id: 'claude-code-starter-kit', cat: 'workflow', title: 'Claude Code Starter Kit',
+      desc: 'Cloud Native Inc. Shinji Saito 氏の Claude Code 環境ワンコマンド構築キット。',
+      placement: 'README の `curl ... | bash` 手順を **内容を確認してから** 実行してください（信頼できない場合は手動配置を推奨）。',
+      zip: 'claude-code-starter-kit.zip', size: '361 KB' },
+    { id: 'aidlc-workflows', cat: 'workflow', title: 'AWS AI-DLC ワークフロー',
+      desc: 'AWS AI-Driven Development Life Cycle の三段階適応ワークフロー。',
+      placement: '展開して README の手順に従って導入。多くは `.claude/commands/` と `.claude/skills/` に追加されます。',
+      zip: 'aidlc-workflows.zip', size: '6.7 MB' },
+    { id: 'spec-kit', cat: 'workflow', title: 'GitHub Spec Kit',
+      desc: 'GitHub 公式の仕様駆動 OSS ツールキット。',
+      placement: 'リポジトリ単位で導入。README の指示に従ってインストール。',
+      zip: 'spec-kit.zip', size: '2.2 MB' },
+
+    // ガイド・リファレンス
+    { id: 'claude-code-best-practice', cat: 'reference', title: 'Claude Code Best Practice（Anthropic）',
+      desc: 'Anthropic 公式 Boris Cherny 氏の発言まとめと実装サンプル一式。',
+      placement: '参照用。`.claude/` のサンプルがあるので必要部分だけ自分の設定にコピー。',
+      zip: 'claude-code-best-practice.zip', size: '22 MB' },
+    { id: 'claude-code-tips', cat: 'reference', title: 'Claude Code Tips 40+',
+      desc: 'status line / voice / Gemini minion など 40 以上の Tips。',
+      placement: '参照用。気に入った Tips の設定だけを自分の `~/.claude/` にコピー。',
+      zip: 'claude-code-tips.zip', size: '9.3 MB' },
+    { id: 'everything-claude-code', cat: 'reference', title: 'Everything Claude Code（総合カタログ）',
+      desc: 'Claude Code 総合カタログ（多言語）。`ecc-universal` / `ecc-agentshield` などを含む。',
+      placement: '参照用。`skills/` や `agents/` などのサブディレクトリから必要なものだけを `~/.claude/` 配下にコピー。',
+      zip: 'everything-claude-code.zip', size: '25 MB' },
+
+    // Skills 集
+    { id: 'awesome-claude-skills', cat: 'skills', title: 'Awesome Claude Skills（Composio）',
+      desc: 'Composio 製の Claude Skills awesome リスト＋サンプル集。',
+      placement: '気に入った Skill フォルダを `~/.claude/skills/<skill-name>/` にコピー。',
+      zip: 'awesome-claude-skills.zip', size: '4.7 MB' },
+    { id: 'claude-skills', cat: 'skills', title: 'claude-skills（trkbt10 / Office系）',
+      desc: 'trkbt10 製。slide-studio / oxen-office など Office 系プラグインの skills。',
+      placement: '各 skill フォルダを `~/.claude/skills/` にコピー。',
+      zip: 'claude-skills.zip', size: '387 KB' },
+    { id: 'agent-skills', cat: 'skills', title: 'agent-skills（React/Next.js）',
+      desc: 'React / Next.js のベストプラクティス Skills 集。',
+      placement: 'プロジェクトの `.claude/skills/` か `~/.claude/skills/` にコピー。',
+      zip: 'agent-skills.zip', size: '350 KB' },
+    { id: 'claude-code-skill-example', cat: 'skills', title: 'Skill 最小例（plan→worktree→PR）',
+      desc: 'plan → worktree → PR → cleanup の最小サンプル Skill。',
+      placement: '参照用。中身を読んで自前 Skill のひな型にする。',
+      zip: 'claude-code-skill-example.zip', size: '16 KB' },
+    { id: 'site2skill', cat: 'skills', title: 'site2skill（ドキュサイト→Skill変換）',
+      desc: '任意のドキュメントサイトを Claude Skill の ZIP に変換するツール。',
+      placement: '展開して README の手順で実行。生成された Skill ZIP は `~/.claude/skills/` に展開して利用。',
+      zip: 'site2skill.zip', size: '66 KB' },
+    { id: 'opc-skills', cat: 'skills', title: 'opc-skills（ReScienceLab）',
+      desc: 'ReScienceLab 製、ソロプレナー向けの Skills 集。',
+      placement: '各 skill フォルダを `~/.claude/skills/` にコピー。',
+      zip: 'opc-skills.zip', size: '14 MB' },
+    { id: 'obsidian-dev-skills', cat: 'skills', title: 'Obsidian Dev Skills',
+      desc: 'Obsidian プラグイン／テーマ開発のための Skills 集。',
+      placement: 'Obsidian 関連の開発プロジェクトの `.claude/skills/` にコピー。',
+      zip: 'obsidian-dev-skills.zip', size: '76 KB' },
+    { id: 'skills', cat: 'skills', title: '逆瀬川氏（@gyakuse）個人スキル保管庫',
+      desc: '個人スキル保管庫＋参考リソース。',
+      placement: '気に入った Skill を `~/.claude/skills/` にコピー。',
+      zip: 'skills.zip', size: '2.8 MB' },
+    { id: 'pm-skills', cat: 'skills', title: 'pm-skills（PM 用 65 + 36）',
+      desc: 'プロダクト・マネージャー用 65 skills と 36 ワークフロー。',
+      placement: '使いたい Skill / ワークフローを `~/.claude/skills/` `~/.claude/commands/` にコピー。',
+      zip: 'pm-skills.zip', size: '12 MB' },
+    { id: 'miyabi-claude-plugins', cat: 'skills', title: 'miyabi-claude-plugins',
+      desc: '合同会社みやびのオールインワン。25+ Agent と 22 Skill。',
+      placement: 'README に従い `~/.claude/` 配下に Agent と Skill を展開。',
+      zip: 'miyabi-claude-plugins.zip', size: '791 KB' },
+    { id: 'notebooklm-skill', cat: 'skills', title: 'NotebookLM 連携 Skill',
+      desc: 'Claude Code から Google NotebookLM に問い合わせるための Skill。',
+      placement: '展開して `~/.claude/skills/notebooklm-skill/` に配置。Google 認証は README の手順に従う。',
+      zip: 'notebooklm-skill.zip', size: '179 KB' },
+
+    // Agents
+    { id: 'claude-agents', cat: 'agents', title: 'Claude Agents（arian88・専門領域別）',
+      desc: '専門領域別のエージェント集。code-reviewer / security-auditor 等のリッチ版。',
+      placement: '各 agent の `.md` を `~/.claude/agents/` または プロジェクトの `.claude/agents/` に配置。',
+      zip: 'claude-agents.zip', size: '167 KB' },
+    { id: 'claude-agents-main', cat: 'agents', title: 'Claude Agents（main.zip / リリース版）',
+      desc: '上記 claude-agents のリリース ZIP 版（軽量）。',
+      placement: '同上。READMEを参照。',
+      zip: 'claude-agents-main.zip', size: '19 KB' },
+
+    // UI / UX デザイン
+    { id: 'ui-ux-pro-max-skill', cat: 'design', title: 'UI/UX Pro Max Skill',
+      desc: '57 UI Styles / 95 Palettes / 56 Font Pairings / 98 UX Guidelines のデザイン知識DB。',
+      placement: '`~/.claude/skills/ui-ux-pro-max-skill/` に配置。`/skill ui-ux-pro-max` で呼び出し。',
+      zip: 'ui-ux-pro-max-skill.zip', size: '1.8 MB' },
+    { id: 'claude-design-skill', cat: 'design', title: 'claude-design-skill（Interface Design）',
+      desc: 'dashboard / app / tool 向け Interface Design Skill（Craft / Memory / Consistency）。',
+      placement: '`~/.claude/skills/` に配置。',
+      zip: 'claude-design-skill.zip', size: '36 KB' },
+    { id: 'claude-design-engineer', cat: 'design', title: 'claude-design-engineer',
+      desc: 'Interface Design の別名／フォーク版。中身は claude-design-skill とほぼ同一。',
+      placement: '`~/.claude/skills/` に配置（claude-design-skill とは重複扱い）。',
+      zip: 'claude-design-engineer.zip', size: '35 KB' },
+    { id: 'interface-design', cat: 'design', title: 'interface-design（オリジナル）',
+      desc: 'Interface Design のオリジナル版。',
+      placement: '`~/.claude/skills/` に配置。',
+      zip: 'interface-design.zip', size: '35 KB' }
+];
+
 window.TUTORIALS = TUTORIALS;
 window.HANDSON = HANDSON;
 window.HANDSON_DOWNLOADS = HANDSON_DOWNLOADS;
 window.PROJECT_TRACKS = PROJECT_TRACKS;
 window.PROJECT_DOWNLOADS = PROJECT_DOWNLOADS;
+window.SETTINGS_CATEGORIES = SETTINGS_CATEGORIES;
+window.SETTINGS_TEMPLATES = SETTINGS_TEMPLATES;
 window.BEST_PRACTICES = BEST_PRACTICES;
 window.BORIS_TIPS = BORIS_TIPS;
 window.PROMPT_TIPS = PROMPT_TIPS;

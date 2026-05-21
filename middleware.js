@@ -8,6 +8,7 @@ export const config = {
     '/js/tutorials.js',
     '/assets/projects/:path*',
     '/assets/handson/:path*',
+    '/assets/settings/:path*',
     '/api/_data/:path*',
   ],
 };

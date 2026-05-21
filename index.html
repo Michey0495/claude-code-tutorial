@@ -77,6 +77,7 @@
             <a href="#" onclick="showSection('tutorials'); closeMobileMenu()" class="mobile-link">チュートリアル</a>
             <a href="#" onclick="showSection('handson'); closeMobileMenu()" class="mobile-link">ハンズオン</a>
             <a href="#" onclick="showSection('projects'); closeMobileMenu()" class="mobile-link">開発トラック</a>
+            <a href="#" onclick="showSection('settings'); closeMobileMenu()" class="mobile-link">設定テンプレート</a>
             <a href="#" onclick="showSection('bestpractices'); closeMobileMenu()" class="mobile-link">ベストプラクティス</a>
             <a href="#" onclick="showSection('troubleshooting'); closeMobileMenu()" class="mobile-link">ヘルプ</a>
             <a href="#" onclick="showSection('privacy'); closeMobileMenu()" class="mobile-link">プライバシー</a>
@@ -90,6 +91,7 @@
             <a href="#" class="sidebar-link" data-i18n="navTutorials" data-section="tutorials" onclick="showSection('tutorials')">チュートリアル</a>
             <a href="#" class="sidebar-link" data-i18n="navHandson" data-section="handson" onclick="showSection('handson')">ハンズオン</a>
             <a href="#" class="sidebar-link" data-i18n="navProjects" data-section="projects" onclick="showSection('projects')">開発トラック</a>
+            <a href="#" class="sidebar-link" data-i18n="navSettings" data-section="settings" onclick="showSection('settings')">設定テンプレート</a>
             <a href="#" class="sidebar-link" data-i18n="navBestPractices" data-section="bestpractices" onclick="showSection('bestpractices')">ベストプラクティス</a>
             <a href="#" class="sidebar-link" data-i18n="navHelp" data-section="troubleshooting" onclick="showSection('troubleshooting')">ヘルプ</a>
             <a href="#" class="sidebar-link" data-i18n="navPrivacy" data-section="privacy" onclick="showSection('privacy')">プライバシー</a>
@@ -264,6 +266,33 @@
             </div>
 
             <div class="projects-grid" id="projectsGrid">
+                <!-- Dynamic content loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Claude 設定テンプレート -->
+    <section class="section settings-section" id="settings" style="display: none;">
+        <div class="section-container">
+            <div class="section-header">
+                <span class="section-tag">配布物</span>
+                <h2 class="section-title">Claude 設定テンプレート</h2>
+                <p class="section-description">
+                    Mac / Windows 共通の ZIP で配布。展開して所定の場所に置くだけで使えます。
+                </p>
+            </div>
+
+            <div class="settings-guide">
+                <h3>配置の基本ルール</h3>
+                <ol>
+                    <li><code>~/.claude/</code> はホームディレクトリ直下の <strong>全プロジェクト共通の設定</strong>。スキル・コマンド・エージェントなどを置くとどの作業フォルダからでも呼び出せます。</li>
+                    <li>プロジェクトフォルダ内の <code>.claude/</code> は <strong>そのプロジェクト専用の設定</strong>。チームで共有したい設定は git にコミットします。</li>
+                    <li>各サブディレクトリの役割: <code>skills/</code> = Skill、<code>commands/</code> = スラッシュコマンド、<code>agents/</code> = サブエージェント、<code>hooks/</code> = フック、<code>settings.json</code> = 環境設定。</li>
+                    <li>各テンプレートの「配置」欄に展開先と使い方の要点を記載しています。詳細は ZIP 内 README を参照してください。</li>
+                </ol>
+            </div>
+
+            <div class="settings-list" id="settingsList">
                 <!-- Dynamic content loaded here -->
             </div>
         </div>
