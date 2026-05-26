@@ -945,6 +945,21 @@ body:hover .cursor-glow {
     line-height: 1.6;
 }
 
+.card-time {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    margin-top: var(--space-sm);
+    font-size: var(--text-xs);
+    color: var(--color-accent-primary);
+    background: var(--color-accent-subtle);
+    padding: 0.2rem 0.55rem;
+    border-radius: var(--radius-full);
+    align-self: flex-start;
+    width: fit-content;
+}
+.card-time svg { width: 0.95em; height: 0.95em; }
+
 .card-tags {
     display: flex;
     flex-wrap: wrap;

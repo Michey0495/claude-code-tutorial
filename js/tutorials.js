@@ -40,6 +40,8 @@ const TUTORIALS = {
     intro: [
         {
             id: "00_01",
+            time: "10分",
+            time_en: "10 min",
             number: "00_01",
             title: "Claude Codeとは何か",
             title_en: "What is Claude Code",
@@ -111,6 +113,8 @@ const TUTORIALS = {
         },
         {
             id: "00_02",
+            time: "10分",
+            time_en: "10 min",
             number: "00_02",
             title: "エージェントという概念",
             title_en: "The Concept of Agents",
@@ -180,6 +184,8 @@ const TUTORIALS = {
         },
         {
             id: "00_03",
+            time: "15分",
+            time_en: "15 min",
             number: "00_03",
             title: "なぜコンテキストウィンドウが最重要か",
             title_en: "Why Context Window is Critical",
@@ -241,6 +247,8 @@ const TUTORIALS = {
         },
         {
             id: "00_04",
+            time: "20分",
+            time_en: "20 min",
             number: "00_04",
             title: "インストールと初期設定",
             title_en: "Installation and Setup",
@@ -311,6 +319,8 @@ const TUTORIALS = {
         },
         {
             id: "00_05",
+            time: "15分",
+            time_en: "15 min",
             number: "00_05",
             title: "基本操作とショートカット",
             title_en: "Basic Operations and Shortcuts",
@@ -399,6 +409,8 @@ const TUTORIALS = {
         },
         {
             id: "00_06",
+            time: "15分",
+            time_en: "15 min",
             number: "00_06",
             title: "非技術者向けの最初の5つのコマンド",
             title_en: "First 5 Commands for Non-Developers",
@@ -478,6 +490,8 @@ const TUTORIALS = {
         },
         {
             id: "00_07",
+            time: "12分",
+            time_en: "12 min",
             number: "00_07",
             title: "2026年のClaude Code - 最新モデルと新機能",
             title_en: "Claude Code in 2026 - Latest Models & Features",
@@ -562,6 +576,8 @@ const TUTORIALS = {
         },
         {
             id: "00_08",
+            time: "20分",
+            time_en: "20 min",
             number: "00_08",
             title: "IDE統合 - VS Code / JetBrains",
             title_en: "IDE Integration - VS Code / JetBrains",
@@ -631,6 +647,8 @@ const TUTORIALS = {
     basic: [
         {
             id: "01_01",
+            time: "25分",
+            time_en: "25 min",
             number: "01_01",
             title: "CLAUDE.md - プロジェクトの記憶",
             title_en: "CLAUDE.md - Project Memory",
@@ -724,6 +742,8 @@ const TUTORIALS = {
         },
         {
             id: "01_02",
+            time: "20分",
+            time_en: "20 min",
             number: "01_02",
             title: "検証の仕組みを与える",
             title_en: "Provide Verification Methods",
@@ -800,6 +820,8 @@ const TUTORIALS = {
         },
         {
             id: "01_03",
+            time: "15分",
+            time_en: "15 min",
             number: "01_03",
             title: "Context Rotとは何か",
             title_en: "What is Context Rot",
@@ -882,6 +904,8 @@ const TUTORIALS = {
         },
         {
             id: "01_04",
+            time: "20分",
+            time_en: "20 min",
             number: "01_04",
             title: "4つの基本戦略 - WSCEフレームワーク",
             title_en: "4 Core Strategies - WSCE Framework",
@@ -954,6 +978,8 @@ const TUTORIALS = {
         },
         {
             id: "01_05",
+            time: "25分",
+            time_en: "25 min",
             number: "01_05",
             title: "探索→計画→実装→コミット",
             title_en: "Explore → Plan → Implement → Commit",
@@ -1036,6 +1062,8 @@ const TUTORIALS = {
         },
         {
             id: "01_06",
+            time: "20分",
+            time_en: "20 min",
             number: "01_06",
             title: "よくある失敗パターン",
             title_en: "Common Failure Patterns",
@@ -1113,6 +1141,8 @@ const TUTORIALS = {
         },
         {
             id: "01_07",
+            time: "25分",
+            time_en: "25 min",
             number: "01_07",
             title: "Plan Mode 完全ガイド",
             title_en: "Plan Mode Complete Guide",
@@ -1180,6 +1210,8 @@ const TUTORIALS = {
         },
         {
             id: "01_08",
+            time: "20分",
+            time_en: "20 min",
             number: "01_08",
             title: "CLAUDE.mdの4階層メモリシステム",
             title_en: "CLAUDE.md 4-Layer Memory System",
@@ -1249,6 +1281,8 @@ const TUTORIALS = {
         },
         {
             id: "01_09",
+            time: "15分",
+            time_en: "15 min",
             number: "01_09",
             title: "キーボードショートカットとカスタマイズ",
             title_en: "Keyboard Shortcuts and Customization",
@@ -1322,6 +1356,8 @@ const TUTORIALS = {
     intermediate: [
         {
             id: "02_01",
+            time: "35分",
+            time_en: "35 min",
             number: "02_01",
             title: "Skills - ワークフローの定義",
             title_en: "Skills - Workflow Definitions",
@@ -1553,6 +1589,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_02",
+            time: "30分",
+            time_en: "30 min",
             number: "02_02",
             title: "Hooks - 自動化トリガー",
             title_en: "Hooks - Automation Triggers",
@@ -1794,6 +1832,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_03",
+            time: "35分",
+            time_en: "35 min",
             number: "02_03",
             title: "Subagents - タスク委譲の仕組み",
             title_en: "Subagents - Task Delegation",
@@ -1946,6 +1986,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_04",
+            time: "25分",
+            time_en: "25 min",
             number: "02_04",
             title: "Tasks - セッションを超えるタスク管理",
             title_en: "Tasks - Cross-Session Task Management",
@@ -2009,6 +2051,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_05",
+            time: "40分",
+            time_en: "40 min",
             number: "02_05",
             title: "MCP - 外部サービス連携",
             title_en: "MCP - External Service Integration",
@@ -2215,6 +2259,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_06",
+            time: "30分",
+            time_en: "30 min",
             number: "02_06",
             title: "Plugins - 拡張パッケージ",
             title_en: "Plugins - Extension Packages",
@@ -2350,6 +2396,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_07",
+            time: "25分",
+            time_en: "25 min",
             number: "02_07",
             title: "戦略的コンパクト化",
             title_en: "Strategic Compaction",
@@ -2464,6 +2512,8 @@ Claude: ".claude/skills/sales-report.md を
         },
         {
             id: "02_08",
+            time: "30分",
+            time_en: "30 min",
             number: "02_08",
             title: "並列化戦略",
             title_en: "Parallelization Strategies",
@@ -2591,6 +2641,8 @@ wait`
         },
         {
             id: "02_09",
+            time: "30分",
+            time_en: "30 min",
             number: "02_09",
             title: "Worktree - 並列開発の隔離環境",
             title_en: "Worktree - Isolated Parallel Development",
@@ -2658,6 +2710,8 @@ wait`
         },
         {
             id: "02_10",
+            time: "30分",
+            time_en: "30 min",
             number: "02_10",
             title: "Settings & Permissions - 権限管理の完全ガイド",
             title_en: "Settings & Permissions - Complete Permission Guide",
@@ -2725,6 +2779,8 @@ wait`
         },
         {
             id: "02_11",
+            time: "30分",
+            time_en: "30 min",
             number: "02_11",
             title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, claude agents（v2.1.142）",
             title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, claude agents (v2.1.142)",
@@ -2812,6 +2868,8 @@ wait`
     advanced: [
         {
             id: "03_01",
+            time: "35分",
+            time_en: "35 min",
             number: "03_01",
             title: "トークン最適化",
             title_en: "Token Optimization",
@@ -2973,6 +3031,8 @@ wait`
         },
         {
             id: "03_02",
+            time: "30分",
+            time_en: "30 min",
             number: "03_02",
             title: "継続学習パターン",
             title_en: "Continuous Learning Patterns",
@@ -3145,6 +3205,8 @@ user-invocable: true
         },
         {
             id: "03_03",
+            time: "30分",
+            time_en: "30 min",
             number: "03_03",
             title: "非技術者向け - コードを書かない使い方",
             title_en: "For Non-Developers - Using Without Code",
@@ -3288,6 +3350,8 @@ user-invocable: true
         },
         {
             id: "03_04",
+            time: "40分",
+            time_en: "40 min",
             number: "03_04",
             title: "50の非コーディング活用例",
             title_en: "50 Non-Coding Use Cases",
@@ -3449,6 +3513,8 @@ user-invocable: true
         },
         {
             id: "03_05",
+            time: "45分",
+            time_en: "45 min",
             number: "03_05",
             title: "Writer/Reviewerパターン",
             title_en: "Writer/Reviewer Pattern",
@@ -3542,6 +3608,8 @@ user-invocable: true
         },
         {
             id: "03_06",
+            time: "45分",
+            time_en: "45 min",
             number: "03_06",
             title: "Fan-outパターン（バッチ処理）",
             title_en: "Fan-out Pattern (Batch Processing)",
@@ -3647,6 +3715,8 @@ done`,
         },
         {
             id: "03_07",
+            time: "50分",
+            time_en: "50 min",
             number: "03_07",
             title: "Subagents活用パターン",
             title_en: "Advanced Subagent Patterns",
@@ -3835,6 +3905,8 @@ Generate tests for:
         },
         {
             id: "03_08",
+            time: "50分",
+            time_en: "50 min",
             number: "03_08",
             title: "Headless CI/CD統合",
             title_en: "Headless CI/CD Integration",
@@ -3972,6 +4044,8 @@ jobs:
         },
         {
             id: "03_09",
+            time: "55分",
+            time_en: "55 min",
             number: "03_09",
             title: "Agent Teams - 複数エージェントの協働",
             title_en: "Agent Teams - Multi-Agent Collaboration",
@@ -4030,6 +4104,8 @@ jobs:
         },
         {
             id: "03_10",
+            time: "60分",
+            time_en: "60 min",
             number: "03_10",
             title: "Agent SDK - 独自エージェント構築",
             title_en: "Agent SDK - Build Custom Agents",
@@ -4099,6 +4175,8 @@ jobs:
         },
         {
             id: "03_11",
+            time: "30分",
+            time_en: "30 min",
             number: "03_11",
             title: "コミュニティスキルとエコシステム",
             title_en: "Community Skills and Ecosystem",
@@ -4168,6 +4246,8 @@ jobs:
         },
         {
             id: "03_12",
+            time: "60分",
+            time_en: "60 min",
             number: "03_12",
             title: "CI/CD高度活用 - Docker隔離とバッチ処理",
             title_en: "Advanced CI/CD - Docker Isolation and Batch Processing",

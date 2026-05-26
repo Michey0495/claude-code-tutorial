@@ -131,6 +131,7 @@
             settingsDownloadLabel: 'ZIPでダウンロード',
             settingsPlacementLabel: '配置',
             settingsSizeLabel: 'サイズ',
+            learningTimeLabel: '学習目安',
             footerAbout: 'サイトについて',
             // 開発トラック
             sectionTagProjects: '開発一貫ハンズオン',
@@ -259,6 +260,7 @@
             settingsDownloadLabel: 'Download (ZIP)',
             settingsPlacementLabel: 'Placement',
             settingsSizeLabel: 'Size',
+            learningTimeLabel: 'Est. time',
             footerAbout: 'About',
             // Project tracks
             sectionTagProjects: 'End-to-end Hands-on',
@@ -985,7 +987,10 @@
     function renderTutorials(level) {
         const tutorials = window.TUTORIALS[level] || [];
 
-        elements.tutorialsGrid.innerHTML = tutorials.map((tutorial, index) => `
+        const t = i18n[state.lang];
+        elements.tutorialsGrid.innerHTML = tutorials.map((tutorial, index) => {
+            const timeText = getLocalizedText(tutorial, 'time');
+            return `
             <div class="tutorial-card" data-level="${level}" onclick="openTutorial('${level}', ${index})" style="animation-delay: ${index * 0.1}s">
                 <div class="card-header">
                     <span class="card-number">${tutorial.number}</span>
@@ -993,11 +998,12 @@
                 </div>
                 <h3 class="card-title">${getLocalizedText(tutorial, 'title')}</h3>
                 <p class="card-description">${getLocalizedText(tutorial, 'description')}</p>
+                ${timeText ? `<div class="card-time">${icons.clock} <span>${t.learningTimeLabel}: ${escapeHtml(timeText)}</span></div>` : ''}
                 <div class="card-tags">
                     ${getLocalizedArray(tutorial, 'tags').map(tag => `<span class="card-tag">${tag}</span>`).join('')}
                 </div>
-            </div>
-        `).join('');
+            </div>`;
+        }).join('');
 
         // Animate cards
         requestAnimationFrame(() => {
@@ -1438,9 +1444,13 @@
             advanced: t.levelAdvanced
         };
 
+        const timeText = getLocalizedText(tutorial, 'time');
         let modalContent = `
             <div class="modal-header">
-                <span class="modal-level ${level}">${tutorial.number} | ${levelLabels[level]}</span>
+                <div class="modal-badges">
+                    <span class="modal-level ${level}">${tutorial.number} | ${levelLabels[level]}</span>
+                    ${timeText ? `<span class="time-badge">${icons.clock} ${t.learningTimeLabel}: ${escapeHtml(timeText)}</span>` : ''}
+                </div>
                 <h2 class="modal-title">${getLocalizedText(tutorial, 'title')}</h2>
                 <p class="modal-description">${getLocalizedText(tutorial.content, 'summary')}</p>
             </div>
