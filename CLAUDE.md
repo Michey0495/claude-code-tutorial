@@ -3,7 +3,7 @@
 ## プロジェクト概要
 Claude Codeの実践的チュートリアルサイト
 2026年5月最新版 / Opus 4.7 / Sonnet 4.6 / Haiku 4.5 / v2.1.142対応
-全40章 + 13種類のハンズオン
+全42章 + 13種類のハンズオン
 
 ## 自動アップデート
 schedule（cron）で月2回（毎月1日・15日 09:00 JST）に最新化。
@@ -64,7 +64,7 @@ T1案件健全性ダッシュボード / T2議事録ToDo / T3提案QA / T4監査
 | 入門 | 8章 | 00_01〜00_08 | Claude Code概要、モデル、IDE統合 |
 | 基礎 | 9章 | 01_01〜01_09 | CLAUDE.md、Plan Mode、ショートカット |
 | 中級 | 11章 | 02_01〜02_11 | Skills、Hooks、MCP、Worktree、新コマンド |
-| 上級 | 12章 | 03_01〜03_12 | Agent Teams、Agent SDK、CI/CD、コミュニティ |
+| 上級 | 14章 | 03_01〜03_14 | Agent Teams、Agent SDK、CI/CD、コミュニティ |
 
 ## コマンド
 

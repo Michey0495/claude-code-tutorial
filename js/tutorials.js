@@ -4312,6 +4312,177 @@ jobs:
                     ]
                 }
             }
+        },
+        {
+            id: "03_13",
+            time: "40分",
+            time_en: "40 min",
+            number: "03_13",
+            title: "Skill合成 - 別Skill/Subagentを呼ぶ",
+            title_en: "Skill Composition - Calling other Skills / Subagents",
+            description: "1Skillに詰め込むのではなく、責務を分けた小さなSkillを連鎖・Subagent委譲で組み合わせるパターン。",
+            description_en: "Pattern of chaining small focused Skills and delegating to Subagents instead of stuffing one large Skill.",
+            icon: "layers",
+            tags: ["Skills", "Subagents", "合成", "再利用"],
+            tags_en: ["Skills", "Subagents", "Composition", "Reuse"],
+            content: {
+                summary: "巨大な単一Skillはdescription肥大化でロード判定が荒くなり、本文も読み切れず精度が落ちる。責務を1Skill=1動詞で分け、SKILL.mdから別Skillへの参照（@-import）や、TaskツールでのSubagent委譲を組み込む。これで個々のSkillは検証可能なサイズに保ち、合成で複雑なフローを実現できる。",
+                summary_en: "A giant single Skill makes load detection coarse and inflates context. Split responsibilities as one-Skill-one-verb, then chain via @-imports or delegate to Subagents from inside SKILL.md. Each Skill stays verifiable; composition handles the complex flow.",
+                keyPoints: [
+                    "1Skill=1責務を守り、description は短く具体的に書く",
+                    "SKILL.md 本文に @../path/to/other-skill/SKILL.md と書くとClaudeが必要時に補助Skillを読み込む",
+                    "重い解析や別ドメインはTaskツールでSubagent化 → 結果だけ親に戻す（context汚染を防ぐ）",
+                    "戻り値は機械可読な構造（JSON/Markdown表）で返す約束をSkill側に明記",
+                    "命名はプレフィックス化（review-*, refactor-*, audit-*）で関連Skillをグルーピング",
+                    "失敗時のフォールバックをSkillに書き、Claudeに代替手段の判断材料を渡す"
+                ],
+                keyPoints_en: [
+                    "Keep one Skill to one responsibility; make description short and specific",
+                    "Use @../path/to/other-skill/SKILL.md inside the body to chain-load helper Skills",
+                    "Delegate heavy analysis to Subagents via Task; return only the result to keep context clean",
+                    "Specify a machine-readable return format (JSON / Markdown table) in the Skill",
+                    "Use name prefixes (review-*, refactor-*) to group related Skills",
+                    "Document fallback behavior so Claude can decide the next move on failure"
+                ],
+                code: "---\nname: review-pr\ndescription: PRのコードレビュー。診断はサブSkillに委譲し、結果を統合する。\n---\n\n# 役割\n変更diffを受け取り、3観点で監査して総合レポートを出す。\n\n# 手順\n1. セキュリティ観点は @../audit-security/SKILL.md を参照\n2. パフォーマンス観点は @../audit-perf/SKILL.md を参照\n3. スタイル観点は @../audit-style/SKILL.md を参照\n4. 各観点の結果（JSON）を統合し、重大度順に並べてMarkdownで返す\n\n# 重い解析の委譲\n変更ファイルが20本を超えるときは、Taskツールでファイル別にSubagentを並列起動し、それぞれの結果のみを集約する。",
+                commands: [
+                    { cmd: "/skill review-pr", desc: "合成Skillを呼び出し、内部で監査Skillを連鎖", desc_en: "Invoke composite Skill chaining audit sub-skills" }
+                ],
+                handson: {
+                    title: "実践: 監査Skillを3本に分けて統合Skillから呼ぶ",
+                    title_en: "Practice: Split audit into 3 sub-skills and orchestrate from one composite Skill",
+                    goal: "巨大な1Skillではなく、観点別の小Skill群と統合Skillで構成し直す",
+                    goal_en: "Recompose a monolithic Skill into focused sub-skills coordinated by a composite Skill",
+                    prerequisites: ["既存の review 系Skillが1本ある、または新規に作成する"],
+                    prerequisites_en: ["You have an existing review Skill (or create one)"],
+                    steps: [
+                        { step: 1, action: "観点別Skillを3本に分割", action_en: "Split into 3 audit sub-skills",
+                          prompt: "現在の review.md を、audit-security / audit-perf / audit-style の3つのSkillに分割して。各Skillはその観点だけに集中し、共通の出力形式（severity / file:line / finding）に従わせて。",
+                          prompt_en: "Split current review.md into 3 sub-skills (audit-security / audit-perf / audit-style). Each focuses on its angle and follows the same output schema.",
+                          expected: "3つのSKILL.mdが作成され、それぞれ責務が明確",
+                          expected_en: "Three SKILL.md files are created with clear responsibilities" },
+                        { step: 2, action: "統合Skillから @-import で連鎖", action_en: "Compose via @-imports",
+                          prompt: "review-pr.md を新規作成し、本文中に @audit-security/SKILL.md / @audit-perf/SKILL.md / @audit-style/SKILL.md を順に参照する手順を書いて。各観点の結果をJSONで受け取り、統合してMarkdownテーブルで返すように指示する。",
+                          prompt_en: "Create review-pr.md and instruct it to reference the three sub-skills, gather JSON results, and emit a unified Markdown table.",
+                          expected: "review-pr が3 Skillを連鎖呼び出しする構成になる",
+                          expected_en: "review-pr now chains the 3 sub-skills" },
+                        { step: 3, action: "ファイル数が多い場合はSubagentに委譲", action_en: "Delegate to Subagents when files are many",
+                          prompt: "diffに含まれるファイルが20本を超えるときは、Taskツールでファイル別にSubagentを並列起動し、各Subagentの結果のみを統合するロジックを review-pr に追記して。",
+                          prompt_en: "Add logic to spawn Subagents per file via Task when the diff exceeds 20 files, and aggregate only the results.",
+                          expected: "大規模PRでもメインの会話が肥大化しないフローになる",
+                          expected_en: "Main session stays small even for large PRs" },
+                        { step: 4, action: "サンプルPRで動作確認", action_en: "Verify on a sample PR",
+                          prompt: "git diff main..HEAD を入力にして /skill review-pr を実行し、3観点の指摘が統合されたMarkdownが返ってくるか確認して。",
+                          prompt_en: "Run /skill review-pr against git diff main..HEAD and verify the unified Markdown output.",
+                          expected: "severity順のレポートが1枚で得られる",
+                          expected_en: "A single severity-ordered report is produced" }
+                    ],
+                    checkpoints: [
+                        "1Skillあたりの行数が短くなり、description も具体的になった",
+                        "@-import で別Skillを参照する書き方を理解した",
+                        "Taskツールで重い処理をSubagent化する判断ができた",
+                        "出力形式を統一して呼び出し元で結合できる設計にした"
+                    ],
+                    checkpoints_en: [
+                        "Each Skill is now shorter with a specific description",
+                        "Understood how to reference other Skills via @-import",
+                        "Decided when to offload heavy work to a Subagent via Task",
+                        "Designed a unified output schema for clean composition"
+                    ]
+                }
+            }
+        },
+        {
+            id: "03_14",
+            time: "50分",
+            time_en: "50 min",
+            number: "03_14",
+            title: "Hook起点パイプライン - 別コンテキストでAI起動",
+            title_en: "Hook-triggered Pipelines - Spawn AI in a fresh context",
+            description: "PostToolUse / Stop Hook から claude -p を非対話起動し、独立コンテキストで監査・要約・自動修正を段付け実行する。",
+            description_en: "Spawn claude -p from PostToolUse / Stop hooks to run audits, summaries, and auto-fixes in independent contexts.",
+            icon: "git-branch",
+            tags: ["Hooks", "ヘッドレス", "パイプライン", "自動化"],
+            tags_en: ["Hooks", "Headless", "Pipeline", "Automation"],
+            content: {
+                summary: "Hookは単なるshellでも、AIパイプラインの起動点として使うと真価が出る。PostToolUseで claude -p を非対話起動すると、メインの会話を止めずに別コンテキストで監査エージェントや要約エージェントを走らせられる。結果は exit-code とJSONファイルで親に返し、Stop hookでMCP-sqliteなどへ蓄積。段付け実行で軽い検証→詳細レビュー→長文戦略の3段階を組むと、コストも品質も最適化できる。",
+                summary_en: "Hooks become powerful when used as launch points for AI pipelines. Spawning claude -p from PostToolUse runs audit/summary agents in a separate context without bloating the main session. Pass results back via exit-code and a JSON file; Stop hook persists to MCP-sqlite. Tiered execution (haiku then sonnet then opus) optimizes cost and quality.",
+                keyPoints: [
+                    "PostToolUse で claude -p \"...\" --output-format json --output-file <path> を非対話起動",
+                    "別コンテキストなのでメインの会話を肥大化させない（成果物だけが残る）",
+                    "exit-code を hook が拾って、後続ツール呼び出しをブロック/通すか判定",
+                    "段付け: 1段目=軽い検証(haiku) / 2段目=詳細レビュー(sonnet) / 3段目=長文戦略(opus)。失敗で次段停止",
+                    "SessionEnd hookで daily-summary を走らせ MCP-sqlite に蓄積（cron不要の自然なジョブ化）",
+                    "--dangerously-skip-permissions は Docker 内のみ。ホスト直叩きは避ける"
+                ],
+                keyPoints_en: [
+                    "PostToolUse fires claude -p \"...\" --output-format json --output-file <path>",
+                    "Independent context keeps the main session small; only artifacts persist",
+                    "Hook reads exit-code to decide whether to allow or block the next tool call",
+                    "Tiered: stage 1 light check (haiku), stage 2 review (sonnet), stage 3 strategy (opus); stop chain on failure",
+                    "SessionEnd hook runs daily-summary and writes to MCP-sqlite (no cron needed)",
+                    "--dangerously-skip-permissions only inside Docker; never on bare host"
+                ],
+                code: "#!/usr/bin/env bash\n# .claude/hooks/post-edit-audit.sh\n# 編集後に軽量モデルで監査し、重い問題があれば次段へエスカレート\nset -euo pipefail\nDIFF=$(git diff --cached || true)\n[ -z \"$DIFF\" ] && exit 0\n\n# 1段目: Haiku で高速プレチェック\nclaude -p \"次のdiffに明白なバグやsecretの混入があるか判定。JSON {risk:high|low} で返す: $DIFF\" \\\n  --model claude-haiku-4-5 --output-format json --output-file /tmp/pre.json\n\nRISK=$(jq -r .risk /tmp/pre.json)\n[ \"$RISK\" != \"high\" ] && exit 0\n\n# 2段目: Sonnet で詳細レビュー\nclaude -p \"diffを詳細レビューしJSONで指摘リストを返す: $DIFF\" \\\n  --model claude-sonnet-4-6 --output-format json --output-file /tmp/review.json\n\n# 3段目: 修正案を提示して人間レビューへ\njq . /tmp/review.json >&2\nexit 2  # PostToolUse でブロックしてユーザーに確認させる",
+                commands: [
+                    { cmd: "claude -p '...'", desc: "ヘッドレス起動。別コンテキストで一回限りの推論を実行", desc_en: "Headless run; one-shot inference in fresh context" },
+                    { cmd: "claude -p '...' --output-format json", desc: "結果を機械可読JSONで受ける", desc_en: "Receive output as machine-readable JSON" },
+                    { cmd: "claude -p '...' --model claude-haiku-4-5", desc: "段付けの1段目に軽量モデルを指定", desc_en: "Use a lightweight model for the first stage" }
+                ],
+                handson: {
+                    title: "実践: PostToolUse から3段ヘッドレス監査を組む",
+                    title_en: "Practice: Build a 3-stage headless audit from PostToolUse",
+                    goal: "Hookから claude -p を起動して、メインの会話を肥大化させずに段付け監査を回す",
+                    goal_en: "Run a tiered audit pipeline launched from a Hook, keeping the main session lean",
+                    prerequisites: [
+                        ".claude/hooks/ にスクリプトを書ける環境",
+                        "jq がインストールされている"
+                    ],
+                    prerequisites_en: [
+                        "Ability to add scripts under .claude/hooks/",
+                        "jq installed"
+                    ],
+                    steps: [
+                        { step: 1, action: "PostToolUse hookを登録", action_en: "Register a PostToolUse hook",
+                          prompt: ".claude/settings.json に PostToolUse: \".claude/hooks/post-edit-audit.sh\" を追加し、Edit/Write後に発火するように設定して。",
+                          prompt_en: "Add PostToolUse: \".claude/hooks/post-edit-audit.sh\" to .claude/settings.json so it fires after Edit/Write.",
+                          expected: "編集ごとにスクリプトが呼ばれる状態",
+                          expected_en: "Script runs after every edit" },
+                        { step: 2, action: "1段目: haiku で高速プレチェック", action_en: "Stage 1: fast precheck with haiku",
+                          prompt: "post-edit-audit.sh に、git diff を入力として claude -p --model claude-haiku-4-5 を呼び、risk:high/low を JSON で返させる処理を書いて。低リスクなら exit 0 で終了。",
+                          prompt_en: "In post-edit-audit.sh, call claude -p with haiku on git diff and return risk:high/low. Exit 0 on low risk.",
+                          expected: "low判定の編集はメインを止めずに通過",
+                          expected_en: "Low-risk edits pass through without blocking" },
+                        { step: 3, action: "2段目: sonnet で詳細レビュー", action_en: "Stage 2: detailed review with sonnet",
+                          prompt: "high判定だった場合のみ、claude -p --model claude-sonnet-4-6 で詳細レビューを行い、JSON配列で指摘を出力させて。",
+                          prompt_en: "Only on high risk, run claude -p with sonnet for a detailed review returning a JSON findings array.",
+                          expected: "重要な編集だけが詳細レビューに進む",
+                          expected_en: "Only impactful edits trigger detailed review" },
+                        { step: 4, action: "exit 2 でブロックし確認を促す", action_en: "Block with exit 2 for human confirmation",
+                          prompt: "重大指摘が1件以上あれば exit 2 を返し、ユーザーに対応を促す挙動にして。それ以外は exit 0 で通過。",
+                          prompt_en: "Return exit 2 if any high-severity findings; otherwise exit 0.",
+                          expected: "重大時のみメインで対話が割り込み、軽微なら自動で通る",
+                          expected_en: "Only severe cases interrupt the main conversation" },
+                        { step: 5, action: "SessionEnd hookで日次サマリ", action_en: "Daily summary via SessionEnd hook",
+                          prompt: "SessionEnd hookを追加し、その日のレビュー結果（/tmp/review.json）を MCP-sqlite に insert する処理を書いて。",
+                          prompt_en: "Add a SessionEnd hook that inserts the day's review.json into MCP-sqlite.",
+                          expected: "毎セッションの結果が蓄積され、daily-summaryを後で参照できる",
+                          expected_en: "Each session's results accumulate and can be reviewed later" }
+                    ],
+                    checkpoints: [
+                        "Hookから claude -p を起動し、結果が exit-code と JSON で親に返る",
+                        "メインの会話に監査ログが混ざらず、肥大化しない",
+                        "段付けで軽い→重いモデルへエスカレートする実装ができた",
+                        "Stop/SessionEnd hook で成果物がDBに蓄積される運用にできた"
+                    ],
+                    checkpoints_en: [
+                        "Hook launches claude -p and receives result via exit-code and JSON",
+                        "Audit logs no longer pollute the main conversation",
+                        "Tiered escalation from light to heavy models is implemented",
+                        "Stop/SessionEnd hook persists artifacts to a DB"
+                    ]
+                }
+            }
         }
     ]
 };
