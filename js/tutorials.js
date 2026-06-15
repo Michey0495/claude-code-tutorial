@@ -495,35 +495,42 @@ const TUTORIALS = {
             number: "00_07",
             title: "2026年のClaude Code - 最新モデルと新機能",
             title_en: "Claude Code in 2026 - Latest Models & Features",
-            description: "Opus 4.8 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.159までの新機能群を把握する。",
-            description_en: "Understand Opus 4.8 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.159.",
+            description: "Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.176までの新機能群を把握する。",
+            description_en: "Understand Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.176.",
             icon: "zap",
-            tags: ["2026年6月最新", "モデル", "v2.1.159"],
-            tags_en: ["June 2026 Latest", "Models", "v2.1.159"],
+            tags: ["2026年6月最新", "モデル", "v2.1.176"],
+            tags_en: ["June 2026 Latest", "Models", "v2.1.176"],
             content: {
-                summary: "2026年6月時点でClaude Codeはv2.1.159（2026/5/31リリース）。モデル構成はOpus 4.8（2026/5/28リリース・v2.1.154でデフォルトに、最高難度の推論・エージェントコーディング向け）、Sonnet 4.6（日常推奨）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.8はAdaptive Thinking対応、effortはデフォルトhigh（/effort xhighでさらに強化）。Fast modeはOpus 4.8で2倍レート・2.5倍速度。v2.1.154ではdynamic workflows（/workflowsで数十〜数百のサブエージェントをオーケストレーション）、/code-review（/simplifyを改名）が追加。v2.1.157ではプラグインが.claude/skillsから自動ロード、/reload-skillsコマンドが追加。",
-                summary_en: "As of June 2026, Claude Code is at v2.1.159 (released 2026/5/31). Model lineup: Opus 4.8 (released 2026/5/28, default as of v2.1.154, best for complex reasoning and agentic coding), Sonnet 4.6 (daily-use recommended), Haiku 4.5 (200k context, lightweight). Opus 4.8 supports Adaptive Thinking; effort defaults to high (/effort xhigh for harder tasks). Fast mode runs on Opus 4.8 at 2x rate for 2.5x speed. v2.1.154 adds dynamic workflows (/workflows orchestrates dozens-hundreds of subagents) and /code-review (renamed from /simplify). v2.1.157 adds plugin auto-loading from .claude/skills and the /reload-skills command.",
+                summary: "2026年6月時点でClaude Codeはv2.1.176（2026/6/12リリース）。モデル構成はFable 5（2026/6/9リリース、最も高性能な一般公開モデル、Adaptive Thinking常時有効、1Mコンテキスト）、Opus 4.8（2026/5/28リリース・v2.1.154でデフォルトに、最高難度の推論・エージェントコーディング向け）、Sonnet 4.6（日常推奨、1Mコンテキスト）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.8はAdaptive Thinking対応、effortはデフォルトhigh（/effort xhighでさらに強化）。v2.1.176では/cdコマンド（ワーキングディレクトリ変更）、/usage-credits（/extra-usageを改名）、--fallback-modelフラグ、--safe-modeフラグが追加。v2.1.154ではdynamic workflows（/workflowsで数十〜数百のサブエージェントをオーケストレーション）、/code-review（/simplifyを改名）が追加。v2.1.157ではプラグインが.claude/skillsから自動ロード、/reload-skillsコマンドが追加。",
+                summary_en: "As of June 2026, Claude Code is at v2.1.176 (released 2026/6/12). Model lineup: Fable 5 (released 2026/6/9, most capable widely released model, Adaptive Thinking always on, 1M context), Opus 4.8 (released 2026/5/28, default as of v2.1.154, best for complex reasoning and agentic coding), Sonnet 4.6 (daily-use recommended, 1M context), Haiku 4.5 (200k context, lightweight). Opus 4.8 supports Adaptive Thinking; effort defaults to high (/effort xhigh for harder tasks). v2.1.176 adds /cd (change working directory), /usage-credits (renamed from /extra-usage), --fallback-model flag, and --safe-mode flag. v2.1.154 adds dynamic workflows (/workflows orchestrates dozens-hundreds of subagents) and /code-review (renamed from /simplify). v2.1.157 adds plugin auto-loading from .claude/skills and the /reload-skills command.",
                 keyPoints: [
-                    "Opus 4.8: 1Mコンテキスト、最高難度の推論・エージェントコーディング向け、effortデフォルトhigh",
-                    "Sonnet 4.6: 1Mコンテキスト、日常的なコード生成に最適（推奨）",
-                    "Haiku 4.5: 200kコンテキスト、軽量タスク・トリアージ向け",
+                    "Fable 5: 1Mコンテキスト、最も高性能な一般公開モデル、Adaptive Thinking常時有効、$10/$50 per MTok",
+                    "Opus 4.8: 1Mコンテキスト、最高難度の推論・エージェントコーディング向け、effortデフォルトhigh、$5/$25 per MTok",
+                    "Sonnet 4.6: 1Mコンテキスト、日常的なコード生成に最適（推奨）、$3/$15 per MTok",
+                    "Haiku 4.5: 200kコンテキスト、軽量タスク・トリアージ向け、$1/$5 per MTok",
                     "opusplan: 計画フェーズ=Opus、実行フェーズ=Sonnetの自動切替",
                     "プロンプトキャッシュで90%、Batch APIで50%のコスト削減が可能",
                     "Opus 4.8 Fast mode: 2倍レートで2.5倍速度、/effort xhighで最大思考",
                     "dynamic workflows: 数十〜数百のサブエージェントをスクリプトでオーケストレーション",
-                    "v2.1.159までの主要新機能: /workflows, /code-review, /reload-skills, Plugin自動ロード, auto mode Pro対応"
+                    "v2.1.176までの主要新機能: /cd, /usage-credits, --fallback-model, --safe-mode, Fable 5, /workflows, /code-review, /reload-skills"
                 ],
                 keyPoints_en: [
-                    "Opus 4.8: 1M context, best for complex reasoning & agentic coding, effort defaults to high",
-                    "Sonnet 4.6: 1M context, best for daily coding (recommended)",
-                    "Haiku 4.5: 200k context, for lightweight tasks & triage",
+                    "Fable 5: 1M context, most capable widely released model, Adaptive Thinking always on, $10/$50 per MTok",
+                    "Opus 4.8: 1M context, best for complex reasoning & agentic coding, effort defaults to high, $5/$25 per MTok",
+                    "Sonnet 4.6: 1M context, best for daily coding (recommended), $3/$15 per MTok",
+                    "Haiku 4.5: 200k context, for lightweight tasks & triage, $1/$5 per MTok",
                     "opusplan: Auto-switch Opus for planning, Sonnet for execution",
                     "90% cost reduction with prompt caching, 50% with Batch API",
                     "Opus 4.8 Fast mode: 2x rate for 2.5x speed; /effort xhigh for max thinking",
                     "dynamic workflows: orchestrate dozens-hundreds of subagents from a script",
-                    "Recent v2.1.159 highlights: /workflows, /code-review, /reload-skills, plugin auto-load, auto mode on Pro"
+                    "v2.1.176 highlights: /cd, /usage-credits, --fallback-model, --safe-mode, Fable 5, /workflows, /code-review, /reload-skills"
                 ],
                 newFeatures: [
+                    { name: "Claude Fable 5", desc: "2026/6/9リリース。最も高性能な一般公開モデル。Adaptive Thinking常時有効、1Mコンテキスト。$10/$50 per MTok" },
+                    { name: "/cd", desc: "セッションを新しいワーキングディレクトリに移動（v2.1.176）" },
+                    { name: "/usage-credits", desc: "使用クレジット表示（/extra-usageを改名）" },
+                    { name: "--fallback-model", desc: "プライマリモデル利用不可時のフォールバックモデルを指定するCLIフラグ" },
+                    { name: "--safe-mode", desc: "全カスタマイズを無効化して起動するフラグ。CLAUDE_CODE_SAFE_MODE環境変数でも指定可" },
                     { name: "Opus 4.8", desc: "2026/5/28リリース。v2.1.154でデフォルトに。Adaptive Thinking対応、effortデフォルトhigh。Fast mode 2倍レート・2.5倍速度" },
                     { name: "dynamic workflows", desc: "数十〜数百のサブエージェントをスクリプトでオーケストレーション（v2.1.154）" },
                     { name: "/workflows", desc: "dynamic workflowの実行状況を表示（v2.1.154）" },
@@ -533,7 +540,6 @@ const TUTORIALS = {
                     { name: "auto mode Pro対応", desc: "ProプランでSonnet 4.6とOpusでauto modeが利用可能に（v2.1.143）" },
                     { name: "claude agents", desc: "エージェントビュー。--add-dir, --model, --effort等のフラグで起動（v2.1.139/142）" },
                     { name: "/goal", desc: "完了条件を設定し、条件を満たすまで継続実行（v2.1.139）" },
-                    { name: "/usage", desc: "/cost と /stats を統合、カテゴリ別内訳表示（v2.1.149）" },
                     { name: "auto permission mode", desc: "安全操作は自動許可・高リスクは自動ブロック。hard_deny/soft_deny対応" }
                 ],
                 handson: {
@@ -2782,17 +2788,21 @@ wait`
             time: "30分",
             time_en: "30 min",
             number: "02_11",
-            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, /workflows（v2.1.159）",
-            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, /workflows (v2.1.159)",
-            description: "v2.1〜v2.1.159で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定・ワークフロー。",
-            description_en: "New commands added between v2.1 and v2.1.159: voice, periodic execution, session transfer, thinking depth, cloud-backed review/planning, agent view, goal setting, workflows.",
+            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /cd（v2.1.176）",
+            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /cd (v2.1.176)",
+            description: "v2.1〜v2.1.176で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定・ワークフロー・ディレクトリ移動。",
+            description_en: "New commands added between v2.1 and v2.1.176: voice, periodic execution, session transfer, thinking depth, cloud-backed review/planning, agent view, goal setting, workflows, cd.",
             icon: "radio",
-            tags: ["v2.1.159新機能", "Voice", "Loop", "UltraReview", "/workflows", "/code-review"],
-            tags_en: ["v2.1.159 New", "Voice", "Loop", "UltraReview", "/workflows", "/code-review"],
+            tags: ["v2.1.176新機能", "Voice", "Loop", "UltraReview", "/workflows", "/code-review", "/cd"],
+            tags_en: ["v2.1.176 New", "Voice", "Loop", "UltraReview", "/workflows", "/code-review", "/cd"],
             content: {
-                summary: "Claude Code v2.1〜v2.1.159で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する。/effort は矢印キーのスライダーUIで思考深度を調整し、xhighで最大思考が可能。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding、/powerupが登場。v2.1.139では`claude agents`、`/goal`、`/scroll-speed`が追加。v2.1.149では/usageにカテゴリ別内訳が追加。v2.1.152では/code-review（/simplifyを改名）が追加。v2.1.154ではOpus 4.8がデフォルトになりdynamic workflows（/workflows）が登場。v2.1.157ではプラグインの.claude/skills自動ロードと/reload-skillsが追加。",
-                summary_en: "Many commands were added between v2.1 and v2.1.159. /voice enables push-to-talk via spacebar. /loop repeats prompts at intervals; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web. /effort got a slider UI with xhigh for max thinking. April 2026 introduced /ultrareview, /ultraplan, /team-onboarding, and /powerup. v2.1.139 added `claude agents`, `/goal`, and `/scroll-speed`. v2.1.149 added category breakdown to /usage. v2.1.152 added /code-review (renamed from /simplify). v2.1.154 made Opus 4.8 the default and introduced dynamic workflows (/workflows). v2.1.157 added plugin auto-loading from .claude/skills and /reload-skills.",
+                summary: "Claude Code v2.1〜v2.1.176で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する。/effort は矢印キーのスライダーUIで思考深度を調整し、xhighで最大思考が可能。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding、/powerupが登場。v2.1.139では`claude agents`、`/goal`、`/scroll-speed`が追加。v2.1.149では/usageにカテゴリ別内訳が追加。v2.1.152では/code-review（/simplifyを改名）が追加。v2.1.154ではOpus 4.8がデフォルトになりdynamic workflows（/workflows）が登場。v2.1.157ではプラグインの.claude/skills自動ロードと/reload-skillsが追加。v2.1.176では/cd（ワーキングディレクトリ変更）、/usage-credits（/extra-usageを改名）、--fallback-modelフラグ、--safe-modeフラグが追加。",
+                summary_en: "Many commands were added between v2.1 and v2.1.176. /voice enables push-to-talk via spacebar. /loop repeats prompts at intervals; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web. /effort got a slider UI with xhigh for max thinking. April 2026 introduced /ultrareview, /ultraplan, /team-onboarding, and /powerup. v2.1.139 added `claude agents`, `/goal`, and `/scroll-speed`. v2.1.149 added category breakdown to /usage. v2.1.152 added /code-review (renamed from /simplify). v2.1.154 made Opus 4.8 the default and introduced dynamic workflows (/workflows). v2.1.157 added plugin auto-loading from .claude/skills and /reload-skills. v2.1.176 added /cd (change working directory), /usage-credits (renamed from /extra-usage), --fallback-model flag, and --safe-mode flag.",
                 keyPoints: [
+                    "/cd: セッションを新しいワーキングディレクトリに移動（v2.1.176）",
+                    "/usage-credits: 使用クレジット表示（/extra-usageを改名）",
+                    "--fallback-model: プライマリモデル利用不可時のフォールバックモデル指定フラグ",
+                    "--safe-mode: 全カスタマイズを無効化して起動（CLAUDE_CODE_SAFE_MODE環境変数でも指定可）",
                     "/workflows: dynamic workflowの実行状況を表示（v2.1.154）",
                     "/code-review: 正確性バグを指定レベルで報告。--commentでGitHub PRにコメント投稿（/simplify改名、v2.1.152）",
                     "/reload-skills: 再起動なしでskillディレクトリを再スキャン（v2.1.157）",
@@ -2806,13 +2816,14 @@ wait`
                     "/effort: 矢印キースライダーで low/medium/high/xhigh を指定",
                     "/ultrareview: マルチエージェント並列コードレビューをクラウドで実行（2026/4）",
                     "/ultraplan: クラウドで計画ドラフト → Webで編集・コメント → ローカル実行（早期プレビュー）",
-                    "/team-onboarding: 過去30日のUsageから同僚向けオンボーディング資料を自動生成",
-                    "/powerup: CLI内でインタラクティブな学習レッスンを実行",
                     "/fast: 同じモデルのまま高速出力モードに切替（Opus 4.8で2倍レート・2.5倍速度）",
-                    "/btw: 処理中にサイド質問（会話履歴を汚さない）",
                     "auto permission mode: 安全操作は自動許可、高リスクは自動ブロック。hard_deny/soft_deny対応"
                 ],
                 keyPoints_en: [
+                    "/cd: Move session to a new working directory (v2.1.176)",
+                    "/usage-credits: Display usage credits (renamed from /extra-usage)",
+                    "--fallback-model: Specify fallback model when primary is unavailable",
+                    "--safe-mode: Start with all customizations disabled (also via CLAUDE_CODE_SAFE_MODE env var)",
                     "/workflows: View dynamic workflow runs (v2.1.154)",
                     "/code-review: Report correctness bugs at chosen effort level. --comment posts to GitHub PR (renamed from /simplify, v2.1.152)",
                     "/reload-skills: Re-scan skill directories without restarting (v2.1.157)",
@@ -2826,10 +2837,7 @@ wait`
                     "/effort: Slider UI to set low/medium/high/xhigh",
                     "/ultrareview: Cloud-backed parallel multi-agent code review (2026/4)",
                     "/ultraplan: Cloud planning draft → web edit → local execution (early preview)",
-                    "/team-onboarding: Auto-generates onboarding docs from last 30 days of usage",
-                    "/powerup: Interactive learning lessons inside the CLI",
                     "/fast: Fast output mode with same model (Opus 4.8: 2x rate for 2.5x speed)",
-                    "/btw: Side question during processing (doesn't pollute conversation history)",
                     "auto permission mode: Auto-approves safe ops, auto-blocks risky ops; hard_deny/soft_deny supported"
                 ],
                 handson: {
@@ -2936,21 +2944,27 @@ wait`
                     models: [
                         {
                             model: "Haiku 4.5",
-                            cost: "200kコンテキスト・低コスト",
+                            cost: "200kコンテキスト・$1/$5 per MTok",
                             useCase: "単純な変換、フォーマット、トリアージ",
                             examples: ["JSONの整形", "変数名の一括置換", "簡単な質問応答"]
                         },
                         {
                             model: "Sonnet 4.6（推奨）",
-                            cost: "1Mコンテキスト・標準",
+                            cost: "1Mコンテキスト・$3/$15 per MTok",
                             useCase: "日常的なコード生成、分析、レビュー",
                             examples: ["新機能の実装", "コードレビュー", "バグ修正"]
                         },
                         {
                             model: "Opus 4.8",
-                            cost: "1Mコンテキスト・最上位",
+                            cost: "1Mコンテキスト・$5/$25 per MTok",
                             useCase: "複雑なアーキテクチャ判断、難解な問題、エージェント長時間タスク（effortデフォルトhigh）",
                             examples: ["システム設計", "複雑なアルゴリズム", "セキュリティ分析", "dynamic workflows"]
+                        },
+                        {
+                            model: "Fable 5",
+                            cost: "1Mコンテキスト・$10/$50 per MTok",
+                            useCase: "最高難度の推論・長期エージェント作業。Adaptive Thinking常時有効",
+                            examples: ["超複雑なシステム設計", "長期自律エージェント", "最高品質が求められる判断"]
                         },
                         {
                             model: "opusplan（ハイブリッド）",
