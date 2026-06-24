@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Tutorial</title>
-    <meta name="description" content="2026年6月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全42章 + 13種類のハンズオン。Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5 / v2.1.176対応。">
+    <meta name="description" content="2026年6月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全50章 + 13種類のハンズオン。Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5 / v2.1.187対応。">
 
     <!-- Security: 解析/トラッキングなし。外部接続はフォントのみ。
          認証のため同一オリジンの /api と最小限のセッションcookieを使用（connect-src 'self'）。 -->
@@ -16,14 +16,14 @@
 
     <!-- Open Graph -->
     <meta property="og:title" content="Claude Code Tutorial - 2026年6月最新版">
-    <meta property="og:description" content="エージェント型AIコーディングの真髄を学ぶ。全42章 + 13種類のハンズオン。Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5対応。">
+    <meta property="og:description" content="エージェント型AIコーディングの真髄を学ぶ。全50章 + 13種類のハンズオン。Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5対応。">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="ja_JP">
 
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Claude Code Tutorial">
-    <meta name="twitter:description" content="2026年6月最新版。Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5対応。全42章 + 13ハンズオン。">
+    <meta name="twitter:description" content="2026年6月最新版。Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5対応。全50章 + 13ハンズオン。">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -124,12 +124,12 @@
             </h1>
             <p class="hero-description">
                 エージェント型AIコーディングの真髄を学ぶ。<br>
-                公式ベストプラクティスに基づいた全42章 + 13種類のハンズオン。<br>
-                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.176対応 / Fable 5 / Skills / Hooks / MCP / Agent Teams / claude agents / /goal / /workflows / /cd</span>
+                公式ベストプラクティスに基づいた全50章 + 13種類のハンズオン。<br>
+                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.187対応 / Fable 5 / Artifacts / .claude/rules / Skills / Hooks / MCP / Agent Teams / /goal / /workflows</span>
             </p>
             <div class="hero-stats">
                 <div class="stat">
-                    <span class="stat-number" data-count="42">0</span>
+                    <span class="stat-number" data-count="50">0</span>
                     <span class="stat-label">チャプター</span>
                 </div>
                 <div class="stat-divider"></div>
@@ -654,21 +654,21 @@
                             <tr><th>モデル</th><th>コンテキスト</th><th>主な用途</th><th>備考</th></tr>
                         </thead>
                         <tbody>
-                            <tr><td>Fable 5</td><td>1Mトークン</td><td>最高難度の推論・長期エージェント作業</td><td>2026/6/9リリース。最も高性能な一般公開モデル。Adaptive Thinking常時有効。$10/$50 per MTok</td></tr>
-                            <tr><td>Opus 4.8</td><td>1Mトークン</td><td>複雑な推論・エージェントコーディング</td><td>2026/5/28リリース・v2.1.154でデフォルトに、Adaptive Thinking対応、effortデフォルトhigh。$5/$25 per MTok</td></tr>
-                            <tr><td>Sonnet 4.6</td><td>1Mトークン</td><td>日常的なコード生成（推奨）</td><td>速度と知性のベストバランス。$3/$15 per MTok</td></tr>
-                            <tr><td>Haiku 4.5</td><td>200kトークン</td><td>軽量タスク・トリアージ</td><td>2025/10リリース、低コスト高速。$1/$5 per MTok</td></tr>
+                            <tr><td>Fable 5</td><td>1Mトークン</td><td>最高難度の推論・長期エージェント作業</td><td>2026/6/9 GA。最も高性能な一般公開モデル。Adaptive Thinking常時有効（無効化不可）、extended thinking非対応。effort=low/medium/high/xhigh/max。最大出力128K（Batch APIは300K）。$10/$50 per MTok。Claude Code v2.1.170以降が必要・/model fableで選択（デフォルトではない）</td></tr>
+                            <tr><td>Opus 4.8</td><td>1Mトークン</td><td>複雑な推論・エージェントコーディング</td><td>2026/5/28リリース・v2.1.154でデフォルトに。Adaptive Thinking対応、extended thinking非対応。effortデフォルトhigh（xhigh/max可）。Fast modeは$10/$50・2倍レートで約2.5倍速。通常$5/$25 per MTok。最大出力128K（Batch API 300K）</td></tr>
+                            <tr><td>Sonnet 4.6</td><td>1Mトークン</td><td>日常的なコード生成（推奨）</td><td>extended thinkingとAdaptive Thinkingの両方に対応。最大出力64K（Batch API 300K）。$3/$15 per MTok</td></tr>
+                            <tr><td>Haiku 4.5</td><td>200kトークン</td><td>軽量タスク・トリアージ</td><td>pinned ID claude-haiku-4-5-20251001。extended thinking対応・Adaptive Thinking非対応。最大出力64K。$1/$5 per MTok。退役予定2026/10/15以降</td></tr>
                             <tr><td>opusplan</td><td>-</td><td>Plan=Opus / 実行=Sonnet のハイブリッド</td><td>長時間タスクの省コスト運用</td></tr>
                         </tbody>
                     </table>
-                    <h3>2026年6月の主要新機能（v2.1.176）</h3>
+                    <h3>2026年6月の主要新機能（v2.1.187）</h3>
                     <table class="cheat-table">
                         <thead>
                             <tr><th>機能</th><th>概要</th></tr>
                         </thead>
                         <tbody>
                             <tr><td>Claude Fable 5</td><td>2026/6/9リリース。最も高性能な一般公開モデル。Adaptive Thinking常時有効、1Mコンテキスト</td></tr>
-                            <tr><td>/cd</td><td>セッションを新しいワーキングディレクトリに移動（v2.1.176）</td></tr>
+                            <tr><td>/cd</td><td>セッションを新しいワーキングディレクトリに移動（v2.1.169）</td></tr>
                             <tr><td>/usage-credits</td><td>使用クレジット表示（/extra-usageを改名）</td></tr>
                             <tr><td>/plugin list</td><td>インストール済みプラグインをリスト表示</td></tr>
                             <tr><td>--fallback-model</td><td>プライマリモデル利用不可時のフォールバックモデル指定フラグ</td></tr>
@@ -682,9 +682,26 @@
                             <tr><td>claude agents</td><td>エージェントビュー — <code>--add-dir</code>, <code>--model</code>, <code>--effort</code>等のフラグ対応（v2.1.139/142）</td></tr>
                             <tr><td>/goal</td><td>完了条件を設定し、条件を満たすまで継続実行（v2.1.139）</td></tr>
                             <tr><td>auto permission mode</td><td>安全操作は自動許可・高リスクは自動ブロック。hard_deny/soft_deny対応</td></tr>
+                            <tr><td>Claude Code Artifacts</td><td>セッション文脈（コードベース/コネクタ/会話）から共有可能なライブWebページを生成。単一HTML（CSS/JSインライン・画像data URI）、ビルド不要。発行ごとに同一リンクで新バージョン化し開いているページが自動更新。組織内認証メンバーに限定共有（公開化不可）。Team/Enterprise向けβ・CLI/デスクトップ対応（2026/6/18）</td></tr>
+                            <tr><td>.claude/rules/（パススコープ指示）</td><td>特定の制約をmarkdownで.claude/rules/に置き、paths:フロントマターで関連ディレクトリ作業時のみコンテキストへロード。無関係な作業中のトークン消費を抑える。CLAUDE.mdは200行以内・事実中心（手順はskillへ）・「never do X」は避けてhookやmanaged settingsで強制、が公式推奨（2026/6/18 steeringガイド）</td></tr>
+                            <tr><td>パラメータ単位の権限ルール Tool(param:value)</td><td>権限ルールをパラメータ値で絞り込める構文。例 Agent(model:opus) でOpusサブエージェントの起動を拒否。*ワイルドカード対応、allowは従来構文を維持（v2.1.178）</td></tr>
+                            <tr><td>sandbox.credentials</td><td>サンドボックス内コマンドからの認証情報ファイル・秘密環境変数の読み取りをブロックする設定キー（v2.1.187）</td></tr>
+                            <tr><td>Auto modeの破壊的gitブロック</td><td>auto modeで git reset --hard / git checkout -- . / git clean -fd / git stash drop をブロック。エージェント以外のコミットへのgit commit --amendを拒否、terraform/pulumi/cdk destroyはスタック名明示を要求、サブエージェント起動前にclassifier評価（v2.1.183）</td></tr>
+                            <tr><td>acceptEditsモードの保護パス</td><td>acceptEditsでも、コード実行につながるファイル（.zshenv等シェル起動ファイル、~/.config/git/配下、.npmrc/.bazelrc/.pre-commit-config.yaml等ビルドツール設定）への書き込み前に確認。bypassPermissions以外では自動承認しない（v2.1.160）</td></tr>
+                            <tr><td>! 付きBashコマンドへの自動応答</td><td>! で実行したbashコマンドの出力にClaudeが自動で応答。respondToBashCommands: false で従来のコンテキスト追加のみの挙動に戻せる（デフォルトtrue、v2.1.186）</td></tr>
+                            <tr><td>claude mcp login / logout</td><td>CLIからMCPサーバーを認証/ログアウト。/mcp対話メニュー不要。--no-browser stdin redirectでSSH越しの認証完了に対応（v2.1.186）</td></tr>
+                            <tr><td>/config key=value</td><td>プロンプトから設定値を変更。例 /config thinking=false。interactive・-p・Remote Controlで動作。/config --help でショートハンドキー一覧（v2.1.181〜v2.1.183）</td></tr>
+                            <tr><td>Subagentの5階層ネスト</td><td>サブエージェントが自身のサブエージェントを起動可能（最大5階層）。パネルに子孫数とmainへの経路を含むツリー表示、/agentsで確認（v2.1.172）</td></tr>
+                            <tr><td>post-session フック</td><td>セッション終了後・ワークスペース削除前に実行されるライフサイクルフック。未コミット作業のスナップショットやログのエクスポート用、self-hostedランナー向け（v2.1.169）</td></tr>
+                            <tr><td>/btw</td><td>主タスクの実行を止めず横から質問。会話履歴を汚さず、ツールアクセスなしで現会話の既存情報から回答（Borisの実践tip）</td></tr>
+                            <tr><td>Hook条件式の改善</td><td>SessionStart（reloadSkills/sessionTitle）、MessageDisplay（メッセージ変換・非表示）など新Hook種別。MessageDisplayはv2.1.152で追加</td></tr>
+                            <tr><td>requiredMinimumVersion / requiredMaximumVersion</td><td>managed設定で許容バージョン範囲を強制。範囲外のクライアントは起動時に終了し更新を促す。claude update/install/doctorは復旧用に動作継続（v2.1.163）</td></tr>
+                            <tr><td>enforceAvailableModels</td><td>availableModelsのallowlistをDefaultモデルにも強制。ユーザー/プロジェクト設定で拡張不可（v2.1.175）</td></tr>
+                            <tr><td>リモートMCPツールのアイドルタイムアウト</td><td>5分ハングしたリモートMCPツール呼び出しをエラーで中断。CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUTで上書き可（v2.1.187）</td></tr>
+                            <tr><td>Stop/SubagentStop additionalContext</td><td>Stop/SubagentStopフックがhookSpecificOutput.additionalContextを返してClaudeにフィードバックし、ターンを継続させられる（v2.1.163）</td></tr>
                         </tbody>
                     </table>
-                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年6月15日（月2回自動アップデート）</p>
+                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年6月24日（月2回自動アップデート）</p>
                 </div>
             </div>
         </div>
@@ -698,7 +715,7 @@
                     <span class="footer-logo">Claude Code Tutorial</span>
                 </div>
                 <p class="footer-description">
-                    2026年6月最新版 / Fable 5・Opus 4.8・Sonnet 4.6・Haiku 4.5 対応 / Claude Code v2.1.176 / Anthropic公式ベストプラクティス準拠
+                    2026年6月最新版 / Fable 5・Opus 4.8・Sonnet 4.6・Haiku 4.5 対応 / Claude Code v2.1.187 / Anthropic公式ベストプラクティス準拠
                 </p>
             </div>
             <div class="footer-links">

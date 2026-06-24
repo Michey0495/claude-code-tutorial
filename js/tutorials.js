@@ -195,16 +195,16 @@ const TUTORIALS = {
             tags: ["コンテキスト", "トークン", "最適化"],
             tags_en: ["Context", "Token", "Optimization"],
             content: {
-                summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。2026年5月現在、Opus 4.7 / Sonnet 4.6が最大1Mトークン（日本語で約75万字）、Haiku 4.5は200kトークンに対応しています。容量があっても効率的に使わなければ性能が劣化します。",
-                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. As of May 2026, Opus 4.7 / Sonnet 4.6 support up to 1M tokens, while Haiku 4.5 supports 200k. Even with this capacity, performance degrades without efficient use.",
+                summary: "コンテキストウィンドウは「AIの短期記憶」です。この有限リソースをどう使うかが成否を分けます。2026年6月現在、Fable 5 / Opus 4.8 / Sonnet 4.6が最大1Mトークン（日本語で約75万字）、Haiku 4.5は200kトークンに対応しています。容量があっても効率的に使わなければ性能が劣化します。",
+                summary_en: "The context window is 'AI's short-term memory.' How you use this finite resource determines success or failure. As of June 2026, Fable 5 / Opus 4.8 / Sonnet 4.6 support up to 1M tokens, while Haiku 4.5 supports 200k. Even with this capacity, performance degrades without efficient use.",
                 keyPoints: [
-                    "Opus 4.7 / Sonnet 4.6 は最大1Mトークン対応（日本語で約75万字）、Haiku 4.5は200kトークン",
+                    "Fable 5 / Opus 4.8 / Sonnet 4.6 は最大1Mトークン対応（日本語で約75万字）、Haiku 4.5は200kトークン",
                     "コンテキストが埋まるとAIの性能が劣化（Context Rot）",
                     "不要な情報を送らない、必要な情報を効率的に渡すことが重要",
                     "/cost コマンドで使用量と費用を確認できる"
                 ],
                 keyPoints_en: [
-                    "Opus 4.7 / Sonnet 4.6 support up to 1M tokens, Haiku 4.5 up to 200k",
+                    "Fable 5 / Opus 4.8 / Sonnet 4.6 support up to 1M tokens, Haiku 4.5 up to 200k",
                     "AI performance degrades when context fills up (Context Rot)",
                     "Important to not send unnecessary info, pass needed info efficiently",
                     "Check usage with /context command"
@@ -495,14 +495,14 @@ const TUTORIALS = {
             number: "00_07",
             title: "2026年のClaude Code - 最新モデルと新機能",
             title_en: "Claude Code in 2026 - Latest Models & Features",
-            description: "Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.176までの新機能群を把握する。",
-            description_en: "Understand Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.176.",
+            description: "Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.187までの新機能群を把握する。",
+            description_en: "Understand Fable 5 / Opus 4.8 / Sonnet 4.6 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.187.",
             icon: "zap",
-            tags: ["2026年6月最新", "モデル", "v2.1.176"],
-            tags_en: ["June 2026 Latest", "Models", "v2.1.176"],
+            tags: ["2026年6月最新", "モデル", "v2.1.187"],
+            tags_en: ["June 2026 Latest", "Models", "v2.1.187"],
             content: {
-                summary: "2026年6月時点でClaude Codeはv2.1.176（2026/6/12リリース）。モデル構成はFable 5（2026/6/9リリース、最も高性能な一般公開モデル、Adaptive Thinking常時有効、1Mコンテキスト）、Opus 4.8（2026/5/28リリース・v2.1.154でデフォルトに、最高難度の推論・エージェントコーディング向け）、Sonnet 4.6（日常推奨、1Mコンテキスト）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.8はAdaptive Thinking対応、effortはデフォルトhigh（/effort xhighでさらに強化）。v2.1.176では/cdコマンド（ワーキングディレクトリ変更）、/usage-credits（/extra-usageを改名）、--fallback-modelフラグ、--safe-modeフラグが追加。v2.1.154ではdynamic workflows（/workflowsで数十〜数百のサブエージェントをオーケストレーション）、/code-review（/simplifyを改名）が追加。v2.1.157ではプラグインが.claude/skillsから自動ロード、/reload-skillsコマンドが追加。",
-                summary_en: "As of June 2026, Claude Code is at v2.1.176 (released 2026/6/12). Model lineup: Fable 5 (released 2026/6/9, most capable widely released model, Adaptive Thinking always on, 1M context), Opus 4.8 (released 2026/5/28, default as of v2.1.154, best for complex reasoning and agentic coding), Sonnet 4.6 (daily-use recommended, 1M context), Haiku 4.5 (200k context, lightweight). Opus 4.8 supports Adaptive Thinking; effort defaults to high (/effort xhigh for harder tasks). v2.1.176 adds /cd (change working directory), /usage-credits (renamed from /extra-usage), --fallback-model flag, and --safe-mode flag. v2.1.154 adds dynamic workflows (/workflows orchestrates dozens-hundreds of subagents) and /code-review (renamed from /simplify). v2.1.157 adds plugin auto-loading from .claude/skills and the /reload-skills command.",
+                summary: "2026年6月時点でClaude Codeはv2.1.187（2026/6/23リリース）。モデル構成はFable 5（2026/6/9リリース、最も高性能な一般公開モデル、Adaptive Thinking常時有効、1Mコンテキスト）、Opus 4.8（2026/5/28リリース・v2.1.154でデフォルトに、最高難度の推論・エージェントコーディング向け）、Sonnet 4.6（日常推奨、1Mコンテキスト）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 4.8はAdaptive Thinking対応、effortはデフォルトhigh（/effort xhighでさらに強化）。コマンド面ではv2.1.169で/cd（ワーキングディレクトリ変更）と--safe-mode、v2.1.166で--fallback-model（最大3モデルの代替指定）が追加。v2.1.154ではdynamic workflows（/workflowsで数十〜数百のサブエージェントをオーケストレーション、トリガーはultracode）と/code-review（/simplifyを改名）が登場。2026年6月後半はClaude Code Artifacts（セッション文脈から共有可能なライブWebページを生成、Team/Enterprise向けβ）、.claude/rules（paths指定で関連ディレクトリ作業時のみロードされる指示）、パラメータ単位の権限ルール Tool(param:value)（v2.1.178）、auto modeの破壊的git操作ブロック（v2.1.183）、sandbox.credentials（認証情報の読取遮断、v2.1.187）が加わった。",
+                summary_en: "As of June 2026, Claude Code is at v2.1.187 (released 2026/6/23). Model lineup: Fable 5 (released 2026/6/9, most capable widely released model, Adaptive Thinking always on, 1M context), Opus 4.8 (released 2026/5/28, default as of v2.1.154, best for complex reasoning and agentic coding), Sonnet 4.6 (daily-use recommended, 1M context), Haiku 4.5 (200k context, lightweight). Opus 4.8 supports Adaptive Thinking; effort defaults to high (/effort xhigh for harder tasks). v2.1.169 adds /cd and --safe-mode; v2.1.166 adds --fallback-model (up to 3). v2.1.154 brought dynamic workflows (/workflows; trigger keyword 'ultracode') and /code-review (renamed from /simplify). Late June 2026 added Claude Code Artifacts (shareable live web pages from session context, Team/Enterprise beta), .claude/rules (path-scoped instructions), parameter-level permission rules Tool(param:value) (v2.1.178), auto-mode destructive-git blocking (v2.1.183), and sandbox.credentials (blocks reading secrets, v2.1.187).",
                 keyPoints: [
                     "Fable 5: 1Mコンテキスト、最も高性能な一般公開モデル、Adaptive Thinking常時有効、$10/$50 per MTok",
                     "Opus 4.8: 1Mコンテキスト、最高難度の推論・エージェントコーディング向け、effortデフォルトhigh、$5/$25 per MTok",
@@ -512,7 +512,7 @@ const TUTORIALS = {
                     "プロンプトキャッシュで90%、Batch APIで50%のコスト削減が可能",
                     "Opus 4.8 Fast mode: 2倍レートで2.5倍速度、/effort xhighで最大思考",
                     "dynamic workflows: 数十〜数百のサブエージェントをスクリプトでオーケストレーション",
-                    "v2.1.176までの主要新機能: /cd, /usage-credits, --fallback-model, --safe-mode, Fable 5, /workflows, /code-review, /reload-skills"
+                    "v2.1.187までの主要新機能: Artifacts, .claude/rules, Tool(param:value)権限, auto modeの破壊的gitブロック, sandbox.credentials, /cd, --safe-mode, Fable 5, /workflows"
                 ],
                 keyPoints_en: [
                     "Fable 5: 1M context, most capable widely released model, Adaptive Thinking always on, $10/$50 per MTok",
@@ -523,11 +523,16 @@ const TUTORIALS = {
                     "90% cost reduction with prompt caching, 50% with Batch API",
                     "Opus 4.8 Fast mode: 2x rate for 2.5x speed; /effort xhigh for max thinking",
                     "dynamic workflows: orchestrate dozens-hundreds of subagents from a script",
-                    "v2.1.176 highlights: /cd, /usage-credits, --fallback-model, --safe-mode, Fable 5, /workflows, /code-review, /reload-skills"
+                    "v2.1.187 highlights: Artifacts, .claude/rules, Tool(param:value) permissions, auto-mode git blocking, sandbox.credentials, /cd, --safe-mode, Fable 5, /workflows"
                 ],
                 newFeatures: [
                     { name: "Claude Fable 5", desc: "2026/6/9リリース。最も高性能な一般公開モデル。Adaptive Thinking常時有効、1Mコンテキスト。$10/$50 per MTok" },
-                    { name: "/cd", desc: "セッションを新しいワーキングディレクトリに移動（v2.1.176）" },
+                    { name: "/cd", desc: "セッションを新しいワーキングディレクトリに移動（v2.1.169）" },
+                    { name: "Claude Code Artifacts", desc: "セッション文脈から共有可能なライブWebページを生成。単一HTML・組織内限定共有、Team/Enterprise向けβ（2026/6/18）" },
+                    { name: ".claude/rules", desc: "paths指定で関連ディレクトリ作業時のみロードされる指示ファイル。CLAUDE.mdより省トークン（2026/6/18 steeringガイド）" },
+                    { name: "Tool(param:value) 権限", desc: "パラメータ値で権限を制御。例 Agent(model:opus) でOpusサブエージェント起動を拒否（v2.1.178）" },
+                    { name: "auto modeの破壊的gitブロック", desc: "auto modeで git reset --hard / clean -fd 等を自動遮断（v2.1.183）" },
+                    { name: "sandbox.credentials", desc: "サンドボックス内コマンドからの認証情報・秘密環境変数の読取をブロック（v2.1.187）" },
                     { name: "/usage-credits", desc: "使用クレジット表示（/extra-usageを改名）" },
                     { name: "--fallback-model", desc: "プライマリモデル利用不可時のフォールバックモデルを指定するCLIフラグ" },
                     { name: "--safe-mode", desc: "全カスタマイズを無効化して起動するフラグ。CLAUDE_CODE_SAFE_MODE環境変数でも指定可" },
@@ -2788,18 +2793,18 @@ wait`
             time: "30分",
             time_en: "30 min",
             number: "02_11",
-            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /cd（v2.1.176）",
-            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /cd (v2.1.176)",
-            description: "v2.1〜v2.1.176で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定・ワークフロー・ディレクトリ移動。",
-            description_en: "New commands added between v2.1 and v2.1.176: voice, periodic execution, session transfer, thinking depth, cloud-backed review/planning, agent view, goal setting, workflows, cd.",
+            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /cd（v2.1.169）",
+            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /cd (v2.1.169)",
+            description: "v2.1〜v2.1.187で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定・ワークフロー・ディレクトリ移動。",
+            description_en: "New commands added between v2.1 and v2.1.187: voice, periodic execution, session transfer, thinking depth, cloud-backed review/planning, agent view, goal setting, workflows, cd.",
             icon: "radio",
-            tags: ["v2.1.176新機能", "Voice", "Loop", "UltraReview", "/workflows", "/code-review", "/cd"],
-            tags_en: ["v2.1.176 New", "Voice", "Loop", "UltraReview", "/workflows", "/code-review", "/cd"],
+            tags: ["v2.1.187新機能", "Voice", "Loop", "UltraReview", "/workflows", "/code-review", "/cd"],
+            tags_en: ["v2.1.187 New", "Voice", "Loop", "UltraReview", "/workflows", "/code-review", "/cd"],
             content: {
-                summary: "Claude Code v2.1〜v2.1.176で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する。/effort は矢印キーのスライダーUIで思考深度を調整し、xhighで最大思考が可能。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding、/powerupが登場。v2.1.139では`claude agents`、`/goal`、`/scroll-speed`が追加。v2.1.149では/usageにカテゴリ別内訳が追加。v2.1.152では/code-review（/simplifyを改名）が追加。v2.1.154ではOpus 4.8がデフォルトになりdynamic workflows（/workflows）が登場。v2.1.157ではプラグインの.claude/skills自動ロードと/reload-skillsが追加。v2.1.176では/cd（ワーキングディレクトリ変更）、/usage-credits（/extra-usageを改名）、--fallback-modelフラグ、--safe-modeフラグが追加。",
-                summary_en: "Many commands were added between v2.1 and v2.1.176. /voice enables push-to-talk via spacebar. /loop repeats prompts at intervals; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web. /effort got a slider UI with xhigh for max thinking. April 2026 introduced /ultrareview, /ultraplan, /team-onboarding, and /powerup. v2.1.139 added `claude agents`, `/goal`, and `/scroll-speed`. v2.1.149 added category breakdown to /usage. v2.1.152 added /code-review (renamed from /simplify). v2.1.154 made Opus 4.8 the default and introduced dynamic workflows (/workflows). v2.1.157 added plugin auto-loading from .claude/skills and /reload-skills. v2.1.176 added /cd (change working directory), /usage-credits (renamed from /extra-usage), --fallback-model flag, and --safe-mode flag.",
+                summary: "Claude Code v2.1〜v2.1.187で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はローカルとclaude.ai Web間でセッションを転送する。/effort は矢印キーのスライダーUIで思考深度を調整し、xhighで最大思考が可能。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /ultraplan（クラウドで計画ドラフト → Web編集 → ローカル実行）、/team-onboarding、/powerupが登場。v2.1.139では`claude agents`、`/goal`、`/scroll-speed`が追加。v2.1.149では/usageにカテゴリ別内訳が追加。v2.1.152では/code-review（/simplifyを改名）が追加。v2.1.154ではOpus 4.8がデフォルトになりdynamic workflows（/workflows）が登場。v2.1.157ではプラグインの.claude/skills自動ロードと/reload-skillsが追加。v2.1.166では--fallback-model（最大3モデルの代替）、v2.1.169では/cd（ワーキングディレクトリ変更）と--safe-modeが追加。v2.1.181〜183では/config key=value（プロンプトから設定変更）、v2.1.186ではclaude mcp login/logoutが加わった。",
+                summary_en: "Many commands were added between v2.1 and v2.1.187. /voice enables push-to-talk via spacebar. /loop repeats prompts at intervals; omitting the interval enters a dynamic self-paced mode. /teleport transfers sessions between local and claude.ai web. /effort got a slider UI with xhigh for max thinking. April 2026 introduced /ultrareview, /ultraplan, /team-onboarding, and /powerup. v2.1.139 added `claude agents`, `/goal`, and `/scroll-speed`. v2.1.149 added category breakdown to /usage. v2.1.152 added /code-review (renamed from /simplify). v2.1.154 made Opus 4.8 the default and introduced dynamic workflows (/workflows). v2.1.157 added plugin auto-loading from .claude/skills and /reload-skills. v2.1.166 added --fallback-model (up to 3); v2.1.169 added /cd and --safe-mode; v2.1.181-183 added /config key=value; v2.1.186 added claude mcp login/logout.",
                 keyPoints: [
-                    "/cd: セッションを新しいワーキングディレクトリに移動（v2.1.176）",
+                    "/cd: セッションを新しいワーキングディレクトリに移動（v2.1.169）",
                     "/usage-credits: 使用クレジット表示（/extra-usageを改名）",
                     "--fallback-model: プライマリモデル利用不可時のフォールバックモデル指定フラグ",
                     "--safe-mode: 全カスタマイズを無効化して起動（CLAUDE_CODE_SAFE_MODE環境変数でも指定可）",
@@ -2820,7 +2825,7 @@ wait`
                     "auto permission mode: 安全操作は自動許可、高リスクは自動ブロック。hard_deny/soft_deny対応"
                 ],
                 keyPoints_en: [
-                    "/cd: Move session to a new working directory (v2.1.176)",
+                    "/cd: Move session to a new working directory (v2.1.169)",
                     "/usage-credits: Display usage credits (renamed from /extra-usage)",
                     "--fallback-model: Specify fallback model when primary is unavailable",
                     "--safe-mode: Start with all customizations disabled (also via CLAUDE_CODE_SAFE_MODE env var)",
@@ -2877,6 +2882,305 @@ wait`
                     ]
                 }
             }
+        },
+                {
+            id: "02_12",
+            time: "30分",
+            time_en: "30 min",
+            number: "02_12",
+            title: "コンテキスト予算管理 - dumb zone回避",
+            title_en: "Context Budget Management - Avoiding the Dumb Zone",
+            description: "1Mコンテキストでも300-400kで劣化が始まる。autocompact閾値調整と手書きブリーフ+/clearで品質を保つ。",
+            description_en: "Even with 1M context, degradation starts around 300-400k. Keep quality with autocompact tuning and handwritten brief + /clear.",
+            icon: "database",
+            tags: ["コンテキスト", "compact", "予算管理"],
+            tags_en: ["Context", "Compact", "Budgeting"],
+            content: {
+                summary: "コンテキストは大きいほど良いわけではない。実測ベースの運用報告では、1Mコンテキストでも300〜400k付近からcontext rotによる劣化（指示の取りこぼし、古い方針への回帰）が始まり、使用率40%を超えたあたりから顕著になる。対策は2系統ある。1つは CLAUDE_AUTOCOMPACT_PCT_OVERRIDE で自動compactの発火を早めに引く、あるいはあえてコンテキスト上限を200kに縮めて常に新鮮な状態で回す逆張り運用。もう1つは /compact の要約に頼らず、自分で次セッションへの引き継ぎブリーフを書いて /clear する方法で、長期タスクではこちらの方が確実性が高い。",
+                summary_en: "Bigger context is not automatically better. Field reports show degradation (dropped instructions, regression to stale plans) starting around 300-400k even on 1M windows, becoming pronounced past 40% utilization. Two countermeasures: tune CLAUDE_AUTOCOMPACT_PCT_OVERRIDE to compact earlier (or contrarian: shrink to 200k and stay fresh), or skip /compact summaries entirely and write your own handoff brief before /clear — more reliable for long-running work.",
+                keyPoints: [
+                    "/context で現在の使用内訳（システム/ツール/メッセージ/MCP）を常時把握する",
+                    "劣化は使用率40%超から体感できる。1Mあっても300-400kが実用上の天井",
+                    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE で自動compactの発火閾値を調整（早め推奨）",
+                    "/compact <指示> で残したい情報を明示。例: /compact 設計判断とTODOだけ残して",
+                    "長期タスクは /compact より「手書きブリーフ → /clear → ブリーフ貼り付け」が確実",
+                    "MCPサーバーの繋ぎすぎはツール定義だけで数万トークンを食う。使わないものは外す"
+                ],
+                keyPoints_en: [
+                    "Watch /context for the live breakdown (system / tools / messages / MCP)",
+                    "Degradation is noticeable past 40% utilization; 300-400k is the practical ceiling even on 1M",
+                    "Tune CLAUDE_AUTOCOMPACT_PCT_OVERRIDE to trigger autocompact earlier",
+                    "Give /compact explicit instructions: /compact keep only design decisions and TODOs",
+                    "For long tasks prefer handwritten brief then /clear over /compact summaries",
+                    "Too many MCP servers burn tens of thousands of tokens on tool definitions alone"
+                ],
+                quote: "コンテキストウィンドウを200kに戻したら、Claude Codeはむしろ賢くなった。大きな窓は、注意を薄く引き伸ばすだけのことがある。",
+                quote_en: "When I shrank the context window back to 200k, Claude Code actually got smarter. A big window can just stretch attention thinner.",
+                commands: [
+                    { cmd: "/context", desc: "コンテキスト使用量の内訳を表示", desc_en: "Show context usage breakdown" },
+                    { cmd: "/compact 設計判断とTODOだけ残して", desc: "残す情報を指定してコンパクト", desc_en: "Compact with explicit keep-list" },
+                    { cmd: "export CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=60", desc: "自動compactを60%で発火させる", desc_en: "Fire autocompact at 60%" }
+                ],
+                handson: {
+                    title: "実践: 劣化を観測してから予算運用に切り替える",
+                    title_en: "Practice: Observe degradation, then switch to budget-driven operation",
+                    goal: "コンテキスト使用率と応答品質の関係を体感し、自分の閾値運用を決める",
+                    goal_en: "Feel the utilization-vs-quality relationship and set your own thresholds",
+                    prerequisites: ["長めの作業履歴があるセッション、または大きめのプロジェクト"],
+                    prerequisites_en: ["A session with long history, or a reasonably large project"],
+                    steps: [
+                        { step: 1, action: "現在の使用内訳を確認", action_en: "Check current usage breakdown",
+                          prompt: "/context",
+                          prompt_en: "/context",
+                          expected: "システムプロンプト・ツール定義・MCP・会話履歴の内訳が表示される",
+                          expected_en: "Breakdown of system prompt, tool definitions, MCP, and history is shown" },
+                        { step: 2, action: "重い作業でコンテキストを消費して再測定", action_en: "Consume context with heavy work and re-measure",
+                          prompt: "プロジェクト全体を読み込んで構造をまとめて。その後 /context で使用率を確認",
+                          prompt_en: "Read the whole project and summarize the structure, then check /context again",
+                          expected: "使用率が大きく上がる。どの操作が何トークン食うかの感覚がつかめる",
+                          expected_en: "Utilization jumps; you get a feel for token cost per operation" },
+                        { step: 3, action: "指示付きcompactを試す", action_en: "Try compact with instructions",
+                          prompt: "/compact ここまでの設計判断・未完了TODO・次にやることだけを残して",
+                          prompt_en: "/compact keep only design decisions, open TODOs, and next steps",
+                          expected: "指定した情報を中心に圧縮され、不要な探索ログが消える",
+                          expected_en: "History is compacted around the keep-list; exploration noise disappears" },
+                        { step: 4, action: "手書きブリーフ + /clear と比較", action_en: "Compare with handwritten brief + /clear",
+                          prompt: "次セッションへの引き継ぎブリーフを書いて（背景・確定事項・残タスク・注意点）。出力をコピーしたら /clear して貼り付け",
+                          prompt_en: "Write a handoff brief (background / decisions / remaining tasks / cautions). Copy it, /clear, and paste",
+                          expected: "compact要約より意図が正確に引き継がれることを確認できる",
+                          expected_en: "Intent carries over more accurately than a compact summary" }
+                    ],
+                    checkpoints: [
+                        "/context で内訳を読めるようになった",
+                        "自分の環境での「劣化が始まる使用率」の目安を持てた",
+                        "/compact に残すものを指示する習慣がついた",
+                        "長期タスクでは手書きブリーフ + /clear を選べるようになった"
+                    ],
+                    checkpoints_en: [
+                        "Can read the /context breakdown",
+                        "Have a personal threshold for when degradation starts",
+                        "Habitually give /compact an explicit keep-list",
+                        "Choose handwritten brief + /clear for long-running tasks"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "02_13",
+            "time": "25分",
+            "time_en": "25 min",
+            "number": "02_13",
+            "title": ".claude/rules - パススコープ指示",
+            "title_en": ".claude/rules - Path-Scoped Instructions",
+            "description": "特定ディレクトリの作業時だけロードされる指示ファイル。常時読み込むCLAUDE.mdよりトークン効率が良い。",
+            "description_en": "Instruction files loaded only when working in matching directories - more token-efficient than always-on CLAUDE.md.",
+            "icon": "file-text",
+            "tags": [
+                ".claude/rules",
+                "steering",
+                "コンテキスト効率"
+            ],
+            "tags_en": [
+                ".claude/rules",
+                "Steering",
+                "Context efficiency"
+            ],
+            "content": {
+                "summary": "2026年6月の公式steeringガイドで、.claude/rules/ に置く指示ファイルが正式化された。各ファイルの先頭に paths: フロントマターを書くと、その対象ディレクトリやファイルを触るときだけ内容がコンテキストに入る。常に読み込まれるCLAUDE.mdと違い、無関係な作業中はロードされないのでトークンを節約できる。公式は CLAUDE.md を200行以内・事実中心に保ち、手順はskillへ、必ず守らせたい禁止はhookやmanaged settingsで強制、パス限定の制約はrulesへ、と役割分担を推奨している。（出典: 公式 steering ガイド 2026/6/18）",
+                "summary_en": "The June 2026 official steering guide formalized instruction files under .claude/rules/. A paths: frontmatter makes a file load into context only when you touch matching directories or files. Unlike always-on CLAUDE.md, unrelated work does not pay the token cost. Anthropic recommends keeping CLAUDE.md under 200 lines and fact-focused, moving procedures to skills, enforcing hard 'never do X' rules via hooks or managed settings, and path-scoped constraints into rules.",
+                "keyPoints": [
+                    "rulesは .claude/rules/ 配下のmarkdown。paths: フロントマターで対象ディレクトリ/ファイルを指定",
+                    "対象を編集するときだけロードされるため、常時読込のCLAUDE.mdよりトークン効率が良い",
+                    "公式推奨: CLAUDE.mdは200行以内、所有者を決めて変更をレビュー、手順でなく事実を書く",
+                    "「never do X」のような禁止は守られにくい。hookやmanaged settingsで決定的に強制する",
+                    "使い分け: 常時の事実=CLAUDE.md / パス限定の制約=rules / 必ず起こす操作=hook / 隔離した副作業=subagent",
+                    "CLAUDE.md・rules・skill・hookは役割が重複しないよう責務を分離する"
+                ],
+                "keyPoints_en": [
+                    "rules are markdown under .claude/rules/; paths: frontmatter targets directories/files",
+                    "Loads only when you edit matching paths, saving tokens vs always-on CLAUDE.md",
+                    "Official guidance: keep CLAUDE.md under 200 lines, assign an owner, write facts not procedures",
+                    "'never do X' rules are unreliable; enforce them with hooks or managed settings",
+                    "Split roles: always-true facts=CLAUDE.md / path-scoped=rules / must-happen=hook / isolated subtask=subagent",
+                    "Keep CLAUDE.md, rules, skills, and hooks non-overlapping in responsibility"
+                ],
+                "code": "---\npaths:\n  - \"frontend/**\"\n  - \"**/*.tsx\"\n---\n\n# フロントエンド規約（frontend/ 作業時のみロード）\n\n- コンポーネントは関数コンポーネント＋hooksで書く\n- 状態は最小限。サーバー状態は react-query を使う\n- スタイルは既存の design tokens を使い、生の色値を書かない",
+                "commands": [
+                    {
+                        "cmd": "/context",
+                        "desc": "どのrulesが今ロードされているか使用内訳で確認",
+                        "desc_en": "Check which rules are loaded via the context breakdown"
+                    }
+                ],
+                "handson": {
+                    "title": "実践: 肥大化したCLAUDE.mdをrulesへ切り出す",
+                    "title_en": "Practice: Split a bloated CLAUDE.md into rules",
+                    "goal": "パス限定の制約をrulesへ移し、CLAUDE.mdを事実中心に絞る",
+                    "goal_en": "Move path-scoped constraints to rules and trim CLAUDE.md to facts",
+                    "prerequisites": [
+                        "ある程度ルールが溜まったCLAUDE.mdを持つプロジェクト"
+                    ],
+                    "prerequisites_en": [
+                        "A project whose CLAUDE.md has accumulated rules"
+                    ],
+                    "steps": [
+                        {
+                            "step": 1,
+                            "action": "CLAUDE.mdを棚卸し",
+                            "action_en": "Inventory CLAUDE.md",
+                            "prompt": "今のCLAUDE.mdを読んで、(1)常に効くべき事実 (2)特定ディレクトリでしか使わない制約 (3)手順 (4)禁止事項 に分類して一覧にして。",
+                            "prompt_en": "Read CLAUDE.md and classify each line into (1) always-true facts (2) path-scoped constraints (3) procedures (4) prohibitions.",
+                            "expected": "4分類のリストが出て、rules/skill/hookへ移すべき候補が見える",
+                            "expected_en": "A 4-way classification shows what to move to rules/skills/hooks"
+                        },
+                        {
+                            "step": 2,
+                            "action": "パス限定の制約をrulesへ",
+                            "action_en": "Move path-scoped constraints to rules",
+                            "prompt": "frontend配下でだけ効く制約を .claude/rules/frontend.md に paths: フロントマター付きで切り出して。",
+                            "prompt_en": "Extract frontend-only constraints into .claude/rules/frontend.md with a paths: frontmatter.",
+                            "expected": "frontend.md が作成され、paths指定が入る",
+                            "expected_en": "frontend.md is created with a paths frontmatter"
+                        },
+                        {
+                            "step": 3,
+                            "action": "ロード挙動を確認",
+                            "action_en": "Verify load behavior",
+                            "prompt": "無関係なディレクトリのファイルを開いて /context を確認し、次にfrontend配下を開いて /context を確認して。ロードの差を報告して。",
+                            "prompt_en": "Open a file in an unrelated dir and run /context, then open one under frontend and run /context. Report the difference.",
+                            "expected": "frontend作業時のみ frontend.md がロードされることを確認できる",
+                            "expected_en": "frontend.md loads only while working under frontend"
+                        },
+                        {
+                            "step": 4,
+                            "action": "CLAUDE.mdを再構成",
+                            "action_en": "Restructure CLAUDE.md",
+                            "prompt": "手順記述はskillへ、禁止系はhookかmanaged settingsへ移し、CLAUDE.mdを200行以内の事実中心に整理して。",
+                            "prompt_en": "Move procedures to skills, prohibitions to hooks/managed settings, and trim CLAUDE.md to under 200 fact-focused lines.",
+                            "expected": "CLAUDE.mdが短くなり、役割が分離される",
+                            "expected_en": "CLAUDE.md shrinks and responsibilities are separated"
+                        }
+                    ],
+                    "checkpoints": [
+                        "paths: フロントマター付きrulesを作れた",
+                        "対象ディレクトリ作業時のみロードされることを /context で確認した",
+                        "CLAUDE.md・rules・skill・hookの役割分担を説明できる",
+                        "CLAUDE.mdを事実中心に絞れた"
+                    ],
+                    "checkpoints_en": [
+                        "Created a rule with a paths: frontmatter",
+                        "Confirmed it loads only for matching paths via /context",
+                        "Can explain the split across CLAUDE.md/rules/skills/hooks",
+                        "Trimmed CLAUDE.md to facts"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "02_14",
+            "time": "25分",
+            "time_en": "25 min",
+            "number": "02_14",
+            "title": "Claude Code Artifacts - 共有ライブページ",
+            "title_en": "Claude Code Artifacts - Shareable Live Pages",
+            "description": "セッション文脈から共有可能なライブWebページを生成。PRウォークスルーやダッシュボードを単一HTMLで。",
+            "description_en": "Generate shareable live web pages from session context - PR walkthroughs, dashboards - as a single HTML.",
+            "icon": "layers",
+            "tags": [
+                "Artifacts",
+                "共有",
+                "ライブページ"
+            ],
+            "tags_en": [
+                "Artifacts",
+                "Sharing",
+                "Live page"
+            ],
+            "content": {
+                "summary": "2026/6/18にTeam/Enterprise向けβとして登場した新機能。セッションの文脈（コードベース・コネクタ・会話）から、共有できるライブWebページを作る。出力は単一HTMLで、CSSとJSはインライン、画像はdata URIで埋め込まれ、ビルド不要。発行のたびに同じリンクで新バージョンになり、開いているページはその場で更新される。既定は作者のみ閲覧で、組織内の認証メンバーに限定共有でき、一般公開はできない。PRウォークスルー、システム説明、フィルタ可能なダッシュボード、リリースチェックリストなどに向く。専用スラッシュコマンドはなく、会話的に依頼して作る。（出典: 公式ブログ Artifacts in Claude Code）",
+                "summary_en": "A Team/Enterprise beta launched 2026/6/18. It builds a shareable live web page from session context (codebase, connectors, conversation). Output is a single HTML with inline CSS/JS and data-URI images, no build step. Each publish reuses the same link as a new version and open pages update in place. Default is author-only; you can limit-share to authenticated org members, but public sharing is not allowed. Good for PR walkthroughs, system explainers, filterable dashboards, and release checklists. There is no dedicated slash command - you ask conversationally.",
+                "keyPoints": [
+                    "セッション文脈から共有可能なライブWebページを生成（PRウォークスルー・ダッシュボード等）",
+                    "単一HTML出力。CSS/JSインライン、画像data URI、外部依存ゼロ、ビルド不要",
+                    "発行ごとに同一リンクで新バージョン化。開いているページが自動で更新される",
+                    "専用コマンドはなく、会話で「〜をArtifactにして」と依頼して作成・更新する",
+                    "既定は作者のみ閲覧。組織内メンバーへ限定共有でき、一般公開は不可",
+                    "共有範囲は組織管理者のorgレベル設定で制御。Team/Enterprise向けβ、CLI/デスクトップ対応"
+                ],
+                "keyPoints_en": [
+                    "Generate a shareable live web page from session context (PR walkthroughs, dashboards)",
+                    "Single HTML output: inline CSS/JS, data-URI images, zero external deps, no build",
+                    "Each publish reuses the same link as a new version; open pages auto-update",
+                    "No dedicated command - ask conversationally to create/update an Artifact",
+                    "Default author-only; limit-share to org members, no public sharing",
+                    "Org admins control share scope; Team/Enterprise beta, CLI/desktop"
+                ],
+                "commands": [],
+                "handson": {
+                    "title": "実践: 直近の変更をPRウォークスルーArtifactにする",
+                    "title_en": "Practice: Turn recent changes into a PR-walkthrough Artifact",
+                    "goal": "セッション文脈から共有ライブページを作り、更新とバージョン化を体験する",
+                    "goal_en": "Create a shareable live page from context and experience updates and versioning",
+                    "prerequisites": [
+                        "Team/EnterpriseプランのClaude Code",
+                        "直近に変更のあるリポジトリ"
+                    ],
+                    "prerequisites_en": [
+                        "Claude Code on a Team/Enterprise plan",
+                        "A repo with recent changes"
+                    ],
+                    "steps": [
+                        {
+                            "step": 1,
+                            "action": "PRウォークスルーを依頼",
+                            "action_en": "Request a PR walkthrough",
+                            "prompt": "直近のブランチの変更を、レビュアー向けのPRウォークスルーページとしてArtifactにして。各変更の意図と影響範囲を含めて。",
+                            "prompt_en": "Make an Artifact: a reviewer-facing PR walkthrough of this branch's recent changes, including intent and impact per change.",
+                            "expected": "単一HTMLのArtifactが生成され、共有リンクが提示される",
+                            "expected_en": "A single-HTML Artifact is created with a share link"
+                        },
+                        {
+                            "step": 2,
+                            "action": "単一HTML構成を確認",
+                            "action_en": "Inspect the single-HTML structure",
+                            "prompt": "生成されたArtifactのHTMLを開いて、CSS/JSがインラインで外部依存がないこと、画像がdata URIであることを確認して。",
+                            "prompt_en": "Open the Artifact HTML and confirm inline CSS/JS, no external deps, and data-URI images.",
+                            "expected": "外部リソースを読まない自己完結HTMLであることが分かる",
+                            "expected_en": "Confirmed self-contained HTML with no external resources"
+                        },
+                        {
+                            "step": 3,
+                            "action": "内容を追記して再発行",
+                            "action_en": "Add content and republish",
+                            "prompt": "テスト結果のサマリを1セクション追記して再発行して。リンクは変わらず、開いているページが新バージョンに更新されることを確認して。",
+                            "prompt_en": "Append a test-results section and republish. Confirm the link stays the same and open pages update to the new version.",
+                            "expected": "同一リンクのままバージョンが上がり、ページが更新される",
+                            "expected_en": "Same link, version bumps, page updates"
+                        },
+                        {
+                            "step": 4,
+                            "action": "限定共有を設定",
+                            "action_en": "Set limited sharing",
+                            "prompt": "このArtifactを組織内の認証メンバーだけが見られる共有範囲に設定して。一般公開はできないことも確認して。",
+                            "prompt_en": "Set the share scope to authenticated org members only, and confirm public sharing is unavailable.",
+                            "expected": "組織内限定共有が設定され、公開は不可と確認できる",
+                            "expected_en": "Org-only sharing is set; public sharing is unavailable"
+                        }
+                    ],
+                    "checkpoints": [
+                        "セッション文脈からArtifactを生成できた",
+                        "単一HTML・外部依存ゼロを確認した",
+                        "再発行で同一リンク・自動更新・バージョン化を確認した",
+                        "組織内限定共有の範囲を設定できた"
+                    ],
+                    "checkpoints_en": [
+                        "Created an Artifact from session context",
+                        "Verified single-HTML with zero external deps",
+                        "Confirmed same-link auto-update and versioning on republish",
+                        "Set org-only share scope"
+                    ]
+                }
+            }
         }
     ],
     advanced: [
@@ -2900,14 +3204,14 @@ wait`
                     "不要なファイル読み込みを避ける（@指定で必要部分のみ）",
                     "結果はファイルに書き出してコンテキストから解放",
                     "Grepで必要な部分だけ抽出してから渡す",
-                    "モデル選択: 簡単なタスクはHaiku 4.5、日常的なコード生成はSonnet 4.6、複雑な判断はOpus 4.7"
+                    "モデル選択: 簡単なタスクはHaiku 4.5、日常的なコード生成はSonnet 4.6、複雑な判断はOpus 4.8、最難関はFable 5"
                 ],
                 keyPoints_en: [
                     "WSCE Framework: Write → Summarize → Compress → Extract",
                     "Avoid unnecessary file reads (@ specify only needed parts)",
                     "Write results to files to release from context",
                     "Extract only needed parts with Grep before passing",
-                    "Model selection: Haiku 4.5 for simple tasks, Sonnet 4.6 for daily coding, Opus 4.7 for complex decisions"
+                    "Model selection: Haiku 4.5 for simple tasks, Sonnet 4.6 for daily coding, Opus 4.8 for complex decisions, Fable 5 for the hardest"
                 ],
                 wsceFramework: {
                     title: "WSCEフレームワーク",
@@ -4082,7 +4386,7 @@ jobs:
                     "各メンバーは独立したコンテキストウィンドウで作業",
                     "典型パターン: リーダーがスタイル/セキュリティ/パフォーマンスの各専門エージェントに委譲",
                     "トークン消費は約3倍だが、品質は単体を上回る",
-                    "Opus 4.7で最も効果的（xhigh effort + 1Mコンテキストが活きる）",
+                    "Fable 5 / Opus 4.8 で最も効果的（xhigh effort + 1Mコンテキストが活きる）",
                     "/ultrareviewでクラウドベースの並列レビューを最小コストで自動化"
                 ],
                 keyPoints_en: [
@@ -4090,7 +4394,7 @@ jobs:
                     "Each member works with independent context window",
                     "Typical: Leader delegates to style/security/performance specialist agents",
                     "~3x token consumption but quality exceeds single agent",
-                    "Most effective with Opus 4.7 (xhigh effort + 1M context shines)",
+                    "Most effective with Fable 5 / Opus 4.8 (xhigh effort + 1M context shines)",
                     "/ultrareview automates cloud-based parallel reviews at minimal cost"
                 ],
                 handson: {
@@ -4500,6 +4804,458 @@ jobs:
                         "Audit logs no longer pollute the main conversation",
                         "Tiered escalation from light to heavy models is implemented",
                         "Stop/SessionEnd hook persists artifacts to a DB"
+                    ]
+                }
+            }
+        },
+                {
+            id: "03_15",
+            time: "50分",
+            time_en: "50 min",
+            number: "03_15",
+            title: "Dynamic Workflows - 決定的マルチエージェント合成",
+            title_en: "Dynamic Workflows - Deterministic Multi-Agent Composition",
+            description: "agent() / parallel() / pipeline() のスクリプトで数十エージェントを決定的にオーケストレーション（v2.1.154）。",
+            description_en: "Orchestrate dozens of agents deterministically with agent() / parallel() / pipeline() scripts (v2.1.154).",
+            icon: "git-branch",
+            tags: ["Workflows", "オーケストレーション", "並列", "v2.1.154"],
+            tags_en: ["Workflows", "Orchestration", "Parallel", "v2.1.154"],
+            content: {
+                summary: "Dynamic Workflows（v2.1.154）は、モデル任せだったマルチエージェントの制御フローをJavaScriptで決定的に書ける仕組み。agent(prompt, {schema}) でサブエージェントを起動して構造化された戻り値を受け取り、parallel() で同時実行、pipeline() でアイテムごとの多段処理を流す。ループ・条件分岐・集計はただのJSなので、「見つかるまで探す」「全件を検証してから集約」のような制御をプロンプトではなくコードで保証できる。ネストは5階層まで、isolation: 'worktree' でファイル変更を隔離、トークン予算で全体の上限も切れる。fan-out→synthesize、敵対的検証、loop-until-doneなどの合成パターンが定石。",
+                summary_en: "Dynamic Workflows (v2.1.154) lets you write multi-agent control flow deterministically in JavaScript instead of trusting the model. agent(prompt, {schema}) launches a subagent with a validated structured return; parallel() runs concurrently; pipeline() streams items through stages. Loops, branching, aggregation are plain JS, so guarantees like search-until-found or verify-all-then-aggregate live in code, not prompts. Nesting goes 5 levels deep, isolation: 'worktree' sandboxes file edits, and token budgets cap the run. Canonical compositions: fan-out and synthesize, adversarial verification, loop-until-done.",
+                keyPoints: [
+                    "agent(prompt, {schema}) - JSON Schemaで戻り値を強制。パース不要で検証済みオブジェクトが返る",
+                    "parallel([...]) は全完了を待つバリア / pipeline(items, stage1, stage2) はアイテム単位で流す（待ち時間最小）",
+                    "制御フローはJS。while(件数<10){...} のような保証をプロンプトでなくコードに書く",
+                    "isolation: 'worktree' で並列エージェントのファイル編集が衝突しない",
+                    "サブエージェントは5階層までネスト可能（v2.1.172）。トークン予算で全体上限を管理",
+                    "/workflows で実行中ワークフローの進行をツリー表示で監視"
+                ],
+                keyPoints_en: [
+                    "agent(prompt, {schema}) enforces a JSON-Schema return; you get a validated object",
+                    "parallel([...]) is a barrier; pipeline(items, stages...) streams items with minimal idle time",
+                    "Control flow is JS: write guarantees like while(count<10) in code, not prompts",
+                    "isolation: 'worktree' prevents parallel agents from clobbering each other's edits",
+                    "Subagents nest up to 5 levels (v2.1.172); token budgets cap the whole run",
+                    "/workflows shows live progress of running workflows as a tree"
+                ],
+                code: "// 敵対的検証つきバグ探索: 見つける→3人の懐疑者で反証→生き残りだけ採用\nconst found = await parallel(FINDERS.map(f => () =>\n  agent(f.prompt, { schema: BUGS_SCHEMA })));\nconst bugs = found.filter(Boolean).flatMap(r => r.bugs);\n\nconst confirmed = [];\nfor (const bug of bugs) {\n  const votes = await parallel([1,2,3].map(() => () =>\n    agent(`反証を試みて: ${bug.desc}。不確実なら refuted=true`, { schema: VERDICT })));\n  if (votes.filter(v => v && !v.refuted).length >= 2) confirmed.push(bug);\n}\nreturn confirmed;",
+                commands: [
+                    { cmd: "/workflows", desc: "実行中のワークフローと進行ツリーを表示", desc_en: "Show running workflows and progress tree" },
+                    { cmd: "ultracode を含めて依頼", desc: "ワークフロー前提のオーケストレーションを明示的に許可", desc_en: "Explicitly opt in to workflow orchestration" }
+                ],
+                handson: {
+                    title: "実践: fan-out→敵対的検証→統合のワークフローを書く",
+                    title_en: "Practice: Write a fan-out, adversarial-verify, synthesize workflow",
+                    goal: "プロンプト任せでは保証できない「全観点を回って検証済みのものだけ集める」をコードで実現する",
+                    goal_en: "Achieve verify-everything-then-collect guarantees in code instead of prompts",
+                    prerequisites: ["v2.1.154以降のClaude Code", "レビュー対象のプロジェクト"],
+                    prerequisites_en: ["Claude Code v2.1.154+", "A project to review"],
+                    steps: [
+                        { step: 1, action: "観点リストを決めてfan-outを書く", action_en: "Define dimensions and write the fan-out",
+                          prompt: "ultracode このプロジェクトをセキュリティ/性能/可読性の3観点でレビューするワークフローを書いて実行して。各観点は agent() に schema 付きで委譲し、結果を構造化して受け取って。",
+                          prompt_en: "ultracode Write and run a workflow reviewing this project across security/perf/readability. Delegate each via agent() with a schema.",
+                          expected: "3エージェントが並列で走り、構造化された指摘リストが返る",
+                          expected_en: "3 agents run in parallel returning structured findings" },
+                        { step: 2, action: "敵対的検証ステージを足す", action_en: "Add an adversarial verification stage",
+                          prompt: "各指摘に対して3体の懐疑者エージェントを並列起動し、「反証せよ」と指示。2票以上生き残った指摘だけを confirmed に残すロジックを追加して。",
+                          prompt_en: "For each finding, spawn 3 skeptic agents prompted to refute. Keep only findings surviving 2+ votes.",
+                          expected: "もっともらしいだけの指摘が落ち、確度の高いものだけ残る",
+                          expected_en: "Plausible-but-wrong findings get killed; high-confidence ones survive" },
+                        { step: 3, action: "/workflows で進行を観察", action_en: "Watch progress with /workflows",
+                          prompt: "/workflows",
+                          prompt_en: "/workflows",
+                          expected: "フェーズごとのエージェントツリーと進行状況が見える",
+                          expected_en: "Per-phase agent tree and progress are visible" },
+                        { step: 4, action: "pipeline化して待ち時間を削る", action_en: "Convert to pipeline to cut idle time",
+                          prompt: "観点ごとに「レビュー完了したものから順に検証へ進む」pipeline構成に書き換えて、バリア待ちをなくして。",
+                          prompt_en: "Rewrite as a pipeline so each dimension flows into verification as soon as it finishes.",
+                          expected: "遅い観点を待たずに速い観点の検証が始まり、全体時間が縮む",
+                          expected_en: "Fast dimensions verify while slow ones still review; wall-clock shrinks" }
+                    ],
+                    checkpoints: [
+                        "agent() + schema で構造化された戻り値を受け取れた",
+                        "parallel と pipeline の使い分け（バリアの要否）を判断できた",
+                        "敵対的検証で指摘の確度を上げる構成を書けた",
+                        "/workflows で進行を監視できた"
+                    ],
+                    checkpoints_en: [
+                        "Received schema-validated structured returns from agent()",
+                        "Chose between parallel and pipeline based on barrier needs",
+                        "Built adversarial verification to raise finding confidence",
+                        "Monitored progress via /workflows"
+                    ]
+                }
+            }
+        },
+                {
+            id: "03_16",
+            time: "45分",
+            time_en: "45 min",
+            number: "03_16",
+            title: "長時間自律実行 - /goal・/loop・overnight運用",
+            title_en: "Long Autonomous Runs - /goal, /loop, Overnight Operation",
+            description: "完了条件駆動の /goal、定期実行の /loop、クラウド常駐の /schedule。夜間放置で壊れる箇所と対策。",
+            description_en: "Goal-driven /goal, interval /loop, cloud-resident /schedule - plus what breaks overnight and how to fix it.",
+            icon: "clock",
+            tags: ["自律実行", "/goal", "/loop", "overnight"],
+            tags_en: ["Autonomy", "/goal", "/loop", "Overnight"],
+            content: {
+                summary: "長時間の自律実行は3つの道具を使い分ける。/goal <条件> は完了条件を満たすまでマルチターンで自走する（テスト全通過、カバレッジ80%など検証可能な条件が効く）。/loop <間隔> <プロンプト> は定期実行で、ローカルでは最長3日。/schedule はクラウド側のcronでラップトップを閉じても続く。実運用報告で壊れやすいのは (1)コンテキスト超過で当初の指示を忘れる (2)途中失敗で進捗が消える (3)出力ログ肥大。対策は STATUS.md へのチェックポイント書き出し、大タスクのセッション分割、CLAUDE.md に「進捗は必ずファイルに書く」「ログは要約だけ」の規律を明記すること。Ralphパターン（自分の出力を次の入力に食わせる自己改善ループ）も /loop で安全に組める。",
+                summary_en: "Three tools for long autonomy: /goal <condition> self-drives multi-turn until a verifiable condition passes (all tests green, coverage 80%). /loop <interval> <prompt> runs on a schedule, up to 3 days locally. /schedule lives in the cloud and survives a closed laptop. Field reports show three failure modes: forgetting the original brief after context overflow, losing progress on mid-run failures, and log bloat. Fixes: checkpoint progress to STATUS.md, split large tasks across sessions, and write the discipline into CLAUDE.md (always persist progress to files; summarize logs). The Ralph pattern - feeding your own output back as the next input - composes safely on /loop.",
+                keyPoints: [
+                    "/goal は検証可能な完了条件とセットで。曖昧な条件は永遠に終わらないか早期に誤終了する",
+                    "/loop はローカル最長3日。間隔は対象の変化速度に合わせる（CI監視=数分、日次整理=1日）",
+                    "/schedule はクラウド実行。PC電源と無関係に回り続ける定期ジョブに",
+                    "overnight前に STATUS.md チェックポイント方式を CLAUDE.md に明記（進捗をファイルに書かせる）",
+                    "失敗時リトライは上限を切る。無限リトライはトークンを溶かすだけ",
+                    "朝イチは成果物より先に STATUS.md と git log を見る。何が起きたかの監査から入る"
+                ],
+                keyPoints_en: [
+                    "Pair /goal with verifiable conditions; vague ones never finish or finish wrong",
+                    "/loop runs up to 3 days locally; match interval to how fast the target changes",
+                    "/schedule executes in the cloud, independent of your laptop's power state",
+                    "Before overnight runs, mandate STATUS.md checkpointing in CLAUDE.md",
+                    "Cap retries; infinite retry loops just burn tokens",
+                    "Next morning: audit STATUS.md and git log before looking at artifacts"
+                ],
+                code: "# 完了条件駆動: テストが全部通るまで自走\n/goal 全テストがパスし、lintエラーが0になるまで修正を続ける\n\n# 定期実行: 5分おきにCIを監視して落ちたら自動修正\n/loop 5m CIの最新ランを確認し、失敗していたら原因を直してpushする\n\n# CLAUDE.md に書く overnight 規律（抜粋）\n# - 30分ごと、またはタスク完了ごとに STATUS.md に進捗を追記する\n# - 失敗したタスクは2回までリトライし、3回目はスキップして記録する\n# - コマンド出力は要約だけを残し、生ログは logs/ に書く",
+                commands: [
+                    { cmd: "/goal <完了条件>", desc: "条件を満たすまでマルチターン自走", desc_en: "Self-drive until condition passes" },
+                    { cmd: "/loop 5m <プロンプト>", desc: "間隔指定で繰り返し実行（ローカル最長3日）", desc_en: "Repeat at interval (3 days max locally)" },
+                    { cmd: "/schedule", desc: "クラウドcronとして定期エージェントを登録", desc_en: "Register a cloud-cron agent" },
+                    { cmd: "claude agents", desc: "走っている全エージェントを一覧監視", desc_en: "Monitor all running agents" }
+                ],
+                handson: {
+                    title: "実践: /goal で検証駆動の自走を組み、overnight規律を仕込む",
+                    title_en: "Practice: Verification-driven /goal plus overnight discipline",
+                    goal: "放置しても安全に進む自律実行を、検証条件とチェックポイントで設計する",
+                    goal_en: "Design autonomy that progresses safely unattended via conditions and checkpoints",
+                    prerequisites: ["テストスイートのあるプロジェクト"],
+                    prerequisites_en: ["A project with a test suite"],
+                    steps: [
+                        { step: 1, action: "検証可能な条件で /goal を起動", action_en: "Launch /goal with a verifiable condition",
+                          prompt: "/goal npm test が全件パスし、npm run lint がエラー0になるまで、失敗箇所を1つずつ修正し続ける",
+                          prompt_en: "/goal keep fixing failures until npm test fully passes and npm run lint shows zero errors",
+                          expected: "テスト実行→失敗特定→修正→再実行のループが自走する",
+                          expected_en: "The run-fail-fix-rerun loop self-drives" },
+                        { step: 2, action: "STATUS.md 規律を CLAUDE.md に追記", action_en: "Add STATUS.md discipline to CLAUDE.md",
+                          prompt: "CLAUDE.md に「タスク完了ごとに STATUS.md へ 日時/完了内容/次の予定 を追記する」「リトライは2回まで、3回目はスキップして理由を記録」という規律を追加して",
+                          prompt_en: "Add to CLAUDE.md: append timestamp/done/next to STATUS.md per task; max 2 retries then skip with reason",
+                          expected: "以後の自律実行が進捗をファイルに残すようになる",
+                          expected_en: "Future autonomous runs persist progress to files" },
+                        { step: 3, action: "/loop で監視ジョブを組む", action_en: "Build a watch job with /loop",
+                          prompt: "/loop 10m STATUS.md を確認し、30分以上更新がなければ現在のタスク状況を調査して STATUS.md に追記する",
+                          prompt_en: "/loop 10m check STATUS.md; if stale for 30+ min, investigate and append current state",
+                          expected: "自律実行のウォッチドッグが回り、ハング検知が自動化される",
+                          expected_en: "A watchdog detects hangs automatically" },
+                        { step: 4, action: "朝の監査手順を確認", action_en: "Verify the morning audit flow",
+                          prompt: "STATUS.md と git log --oneline -20 を見て、昨夜の実行サマリを3行で報告して",
+                          prompt_en: "Read STATUS.md and git log -20, then report last night's run in 3 lines",
+                          expected: "何が完了し何がスキップされたかが成果物を見る前に分かる",
+                          expected_en: "You know what finished and what was skipped before opening artifacts" }
+                    ],
+                    checkpoints: [
+                        "/goal に検証可能な完了条件を書けた",
+                        "STATUS.md チェックポイント規律を CLAUDE.md に組み込んだ",
+                        "/loop でウォッチドッグを構成できた",
+                        "朝の監査（STATUS.md → git log → 成果物）の順序が身についた"
+                    ],
+                    checkpoints_en: [
+                        "Wrote a verifiable completion condition for /goal",
+                        "Embedded STATUS.md checkpointing into CLAUDE.md",
+                        "Configured a watchdog with /loop",
+                        "Internalized the morning audit order: STATUS.md, git log, artifacts"
+                    ]
+                }
+            }
+        },
+                {
+            id: "03_17",
+            time: "40分",
+            time_en: "40 min",
+            number: "03_17",
+            title: "サンドボックスと企業ガバナンス",
+            title_en: "Sandboxing and Enterprise Governance",
+            description: "OSレベル隔離（Seatbelt/seccomp）で権限プロンプト84%削減。managed settingsによる企業ロックダウンまで。",
+            description_en: "OS-level isolation (Seatbelt/seccomp) cuts permission prompts by 84%. Through to managed-settings enterprise lockdown.",
+            icon: "lock",
+            tags: ["セキュリティ", "サンドボックス", "権限", "企業導入"],
+            tags_en: ["Security", "Sandbox", "Permissions", "Enterprise"],
+            content: {
+                summary: "権限プロンプトの連打は安全性を上げない。クリック疲れで全部許可するようになるだけだ。Anthropicの解はOSレベルのサンドボックス（macOS=Seatbelt、Linux=seccomp/bubblewrap）で、ファイルシステムとネットワークをカーネルで隔離した上で内側の操作を自由にする。社内実測で権限プロンプトが84%減り、かつ実効的な安全性は上がった。企業導入では3層で考える。(1)managed settings（IT管理者がデバイスに配布、ユーザー上書き不可）(2)permissions（allow/deny/askのルール）(3)OSサンドボックス。allowManagedPermissionRulesOnly を有効にすると開発者の自己承認を全面禁止でき、監査要件の厳しい環境にも載せられる。",
+                summary_en: "Permission-prompt fatigue does not improve safety - users just click allow on everything. Anthropic's answer is OS-level sandboxing (Seatbelt on macOS, seccomp/bubblewrap on Linux): isolate filesystem and network at the kernel, then let everything inside run free. Internal measurement: 84% fewer prompts with better effective safety. For enterprise, think in three layers: managed settings (IT-deployed, user-immutable), permission rules (allow/deny/ask), and the OS sandbox. allowManagedPermissionRulesOnly bans developer self-approval entirely, fitting strict audit regimes.",
+                keyPoints: [
+                    "/sandbox でOSレベル隔離を有効化。FSとネットワークの境界をカーネルで強制",
+                    "隔離の内側は自動許可にできるため、権限プロンプトが激減（社内実測84%減）",
+                    "プロンプト疲れこそ最大のリスク。確認回数を減らして1回の確認の質を上げる",
+                    "managed settings は IT管理者がデバイス配布し、ユーザーが上書きできない最上位レイヤ",
+                    "allowManagedPermissionRulesOnly で開発者の自己承認（ローカルallowルール追加）を禁止",
+                    "deny は allow より常に優先。網羅は deny + サンドボックス、利便は allow で組む"
+                ],
+                keyPoints_en: [
+                    "/sandbox enables OS-level isolation; kernel enforces FS and network boundaries",
+                    "Inside the sandbox you can auto-allow, slashing prompts (84% internally)",
+                    "Prompt fatigue is the real risk: fewer asks, higher-quality decisions",
+                    "Managed settings are IT-deployed and user-immutable - the top layer",
+                    "allowManagedPermissionRulesOnly bans developers from self-approving via local allow rules",
+                    "deny always beats allow; coverage via deny + sandbox, convenience via allow"
+                ],
+                code: "// /Library/Application Support/ClaudeCode/managed-settings.json（macOS, IT配布）\n{\n  \"permissions\": {\n    \"deny\": [\n      \"Bash(curl *)\",\n      \"Read(**/.env*)\",\n      \"Read(**/credentials*)\"\n    ],\n    \"allow\": [\n      \"Bash(npm run build:*)\",\n      \"Bash(npm run test:*)\"\n    ]\n  },\n  \"allowManagedPermissionRulesOnly\": true,\n  \"sandbox\": { \"enabled\": true }\n}",
+                commands: [
+                    { cmd: "/sandbox", desc: "OSレベルサンドボックスの有効化・状態確認", desc_en: "Enable / inspect OS-level sandbox" },
+                    { cmd: "/permissions", desc: "allow/deny/askルールの確認と編集", desc_en: "View and edit allow/deny/ask rules" }
+                ],
+                handson: {
+                    title: "実践: 3層防御を構成して権限プロンプトを測る",
+                    title_en: "Practice: Build the 3-layer defense and measure prompt reduction",
+                    goal: "サンドボックス＋permissionsの構成で、安全性を保ったまま確認回数を減らす",
+                    goal_en: "Cut confirmation count while keeping safety via sandbox + permissions",
+                    prerequisites: ["macOS または Linux 環境"],
+                    prerequisites_en: ["macOS or Linux environment"],
+                    steps: [
+                        { step: 1, action: "現在の権限ルールを棚卸し", action_en: "Inventory current permission rules",
+                          prompt: "/permissions",
+                          prompt_en: "/permissions",
+                          expected: "現在のallow/deny/askルール一覧が表示される",
+                          expected_en: "Current allow/deny/ask rules are listed" },
+                        { step: 2, action: "サンドボックスを有効化", action_en: "Enable the sandbox",
+                          prompt: "/sandbox を有効にして、ファイルシステムとネットワークの隔離境界がどう設定されたか説明して",
+                          prompt_en: "Enable /sandbox and explain the resulting FS/network boundaries",
+                          expected: "プロジェクト外への書き込みと未許可ネットワークがカーネルで遮断される",
+                          expected_en: "Out-of-project writes and unapproved network are kernel-blocked" },
+                        { step: 3, action: "denyルールで機密を守る", action_en: "Protect secrets with deny rules",
+                          prompt: ".env や credentials を含むファイルの読み取りを deny するルールを settings.json に追加して",
+                          prompt_en: "Add deny rules for reading .env and credentials files to settings.json",
+                          expected: "サンドボックス内でも機密ファイルだけは読めない多層構成になる",
+                          expected_en: "Secrets stay unreadable even inside the sandbox" },
+                        { step: 4, action: "ビルド/テストをallowして体感比較", action_en: "Allow build/test and compare the feel",
+                          prompt: "npm run build:* と npm run test:* を事前許可に追加し、普段の作業を30分やって権限プロンプトの回数を以前と比べて",
+                          prompt_en: "Pre-allow npm run build:*/test:*, work for 30 minutes, compare prompt counts",
+                          expected: "確認はリスクの高い操作だけに絞られ、作業が止まらなくなる",
+                          expected_en: "Prompts narrow to genuinely risky actions; flow stops breaking" }
+                    ],
+                    checkpoints: [
+                        "サンドボックスの隔離境界（FS/ネットワーク）を説明できる",
+                        "deny > allow の優先順位を理解した",
+                        "機密ファイルへの deny を構成した",
+                        "managed settings と allowManagedPermissionRulesOnly の企業向け用途を説明できる"
+                    ],
+                    checkpoints_en: [
+                        "Can explain the sandbox boundaries (FS / network)",
+                        "Understand deny-over-allow precedence",
+                        "Configured deny rules for secret files",
+                        "Can explain managed settings and allowManagedPermissionRulesOnly for enterprises"
+                    ]
+                }
+            }
+        },
+                {
+            id: "03_18",
+            time: "40分",
+            time_en: "40 min",
+            number: "03_18",
+            title: "検証ハーネスのドメイン別設計",
+            title_en: "Domain-Specific Verification Harnesses",
+            description: "frontend=ブラウザ実機 / backend=bash / mobile=シミュレータ。Boris流「検証手段を与える」を体系化する。",
+            description_en: "Frontend=real browser, backend=bash, mobile=simulator. Systematizing Boris's give-Claude-verification principle.",
+            icon: "check-circle",
+            tags: ["検証", "TDD", "品質", "ハーネス"],
+            tags_en: ["Verification", "TDD", "Quality", "Harness"],
+            content: {
+                summary: "Claude Code開発者Boris Chernyが全Tipsで最重要とするのが「Claudeに自分の成果を検証する手段を与える」こと。フィードバックループがあると成果物の品質は2〜3倍になる。鍵はドメイン別にハーネスを変えることだ。frontendはChrome連携でブラウザを実際に開いてUIを確認させる。backendはbashでテストスイートとcurlを叩かせる。mobileはシミュレータを起動させる。さらにred/green TDD（先に失敗するテストを書かせ、それを通す実装をさせる）はエージェントの出力を簡潔かつ確実にする最強の制約になる。仕上げは検証→簡素化→出荷を1コマンドにした複合Skill（/go）や、code-simplifier→verify-appの二段Subagentで自動化する。",
+                summary_en: "Boris Cherny ranks giving Claude the means to verify its own work as the single most important tip - feedback loops make deliverables 2-3x better. The key is domain-specific harnesses: frontend gets a real browser via Chrome integration; backend gets bash for test suites and curl; mobile gets the simulator. Red/green TDD - write a failing test first, then implement to pass - is the strongest constraint for concise, correct agent output. Finish by automating verify-simplify-ship as one composite Skill (/go) or a two-stage code-simplifier then verify-app subagent chain.",
+                keyPoints: [
+                    "検証手段の有無が品質を2〜3倍変える。ハーネス設計はプロンプト改善より効く",
+                    "frontend: Chrome連携で実ブラウザを開かせ、表示崩れ・動作をスクリーンショットで確認",
+                    "backend: テストスイート＋curlで応答コード・スキーマまで検証させる",
+                    "mobile: シミュレータ起動までやらせる。ビルドが通る≠動く",
+                    "red/green TDD: 先に失敗するテストを書かせると、実装が簡潔で確実になる",
+                    "検証→簡素化→出荷を複合Skill化（/go）し、毎回同じ品質ゲートを通す"
+                ],
+                keyPoints_en: [
+                    "Verification presence changes quality 2-3x; harness design beats prompt tuning",
+                    "Frontend: open a real browser via Chrome integration, verify with screenshots",
+                    "Backend: drive test suites and curl, checking status codes and schemas",
+                    "Mobile: boot the simulator - compiling is not the same as working",
+                    "Red/green TDD: a failing test first makes implementations concise and correct",
+                    "Bundle verify-simplify-ship into one composite Skill (/go) as a repeatable gate"
+                ],
+                code: "---\nname: go\ndescription: 検証→簡素化→出荷の品質ゲートを一括実行\n---\n\n# 手順\n1. ドメインを判定（frontend / backend / mobile）\n2. ドメイン別の検証を実行:\n   - frontend: 開発サーバを起動し、ブラウザで主要画面を開いてスクリーンショット確認\n   - backend: テストスイート実行 + 主要エンドポイントを curl で叩いて応答検証\n   - mobile: シミュレータでビルド・起動確認\n3. 検証が通ったら code-simplifier Subagent で冗長コードを削る\n4. 再度検証（簡素化で壊していないか）\n5. コミットメッセージを生成して報告",
+                commands: [
+                    { cmd: "/go", desc: "検証→簡素化→出荷の複合Skillを実行（自作）", desc_en: "Run the verify-simplify-ship composite Skill (custom)" }
+                ],
+                handson: {
+                    title: "実践: red/green TDD + ドメイン別検証を組み込む",
+                    title_en: "Practice: Wire in red/green TDD plus domain verification",
+                    goal: "「書きっぱなし」を構造的に不可能にするハーネスを自分のプロジェクトに組む",
+                    goal_en: "Make write-and-forget structurally impossible in your project",
+                    prerequisites: ["テスト実行できるプロジェクト（言語不問）"],
+                    prerequisites_en: ["Any project where tests can run"],
+                    steps: [
+                        { step: 1, action: "red: 失敗するテストを先に書かせる", action_en: "Red: write the failing test first",
+                          prompt: "これから実装する機能（例: 入力値の正規化関数）のテストを先に書いて実行し、失敗することを確認して。実装はまだ書かないで。",
+                          prompt_en: "Write tests for the upcoming feature first, run them, confirm they fail. Do not implement yet.",
+                          expected: "テストが追加され、実行して赤（失敗）であることが確認される",
+                          expected_en: "Tests are added and confirmed red" },
+                        { step: 2, action: "green: テストを通す最小実装", action_en: "Green: minimal implementation to pass",
+                          prompt: "さっきのテストを通す最小限の実装をして。テストにない機能は足さないで。",
+                          prompt_en: "Implement the minimum to pass those tests. Add nothing the tests don't require.",
+                          expected: "実装後にテストが緑になり、余計なコードがないことを確認できる",
+                          expected_en: "Tests go green with no extraneous code" },
+                        { step: 3, action: "ドメイン別検証を追加", action_en: "Add domain-specific verification",
+                          prompt: "このプロジェクトのドメイン（frontend/backend/CLI）に合わせて、テスト以外の実機検証手順を提案して実行して。Webなら実際に画面を開いて確認、APIなら curl で応答を検証して。",
+                          prompt_en: "Propose and run a non-test verification for this project's domain - open the page for web, curl the API for backend.",
+                          expected: "ユニットテストでは拾えない見た目・実応答レベルの確認が走る",
+                          expected_en: "Visual / live-response checks beyond unit tests are executed" },
+                        { step: 4, action: "/go 複合Skillにまとめる", action_en: "Bundle into a /go composite Skill",
+                          prompt: "ここまでの検証フロー（テスト→ドメイン検証→簡素化→再検証）を .claude/skills/go/SKILL.md にまとめて、以後 /go の一発で品質ゲートが回るようにして。",
+                          prompt_en: "Capture this flow (tests, domain check, simplify, re-verify) in .claude/skills/go/SKILL.md so /go runs the whole gate.",
+                          expected: "毎回の仕上げが /go 一発で再現可能になる",
+                          expected_en: "The full quality gate reruns with a single /go" }
+                    ],
+                    checkpoints: [
+                        "red→green の順序を守ったTDDフローを回せた",
+                        "自分のプロジェクトのドメインに合う実機検証を選べた",
+                        "テストだけでは拾えない不具合の種類を説明できる",
+                        "検証フローを複合Skill化して再現可能にした"
+                    ],
+                    checkpoints_en: [
+                        "Ran TDD in strict red-then-green order",
+                        "Chose the right live verification for your domain",
+                        "Can explain what bugs tests alone cannot catch",
+                        "Made the verification flow reusable as a composite Skill"
+                    ]
+                }
+            }
+        },
+        {
+            "id": "03_19",
+            "time": "45分",
+            "time_en": "45 min",
+            "number": "03_19",
+            "title": "パラメータ単位の権限と自律実行ガード",
+            "title_en": "Parameter-Level Permissions and Autonomy Guards",
+            "description": "Tool(param:value)権限、auto modeの破壊的gitブロック、acceptEdits保護パス、sandbox.credentialsで自律実行を安全に縛る。",
+            "description_en": "Constrain autonomy safely: Tool(param:value) permissions, auto-mode git blocking, acceptEdits protected paths, sandbox.credentials.",
+            "icon": "lock",
+            "tags": [
+                "権限",
+                "auto mode",
+                "サンドボックス",
+                "安全"
+            ],
+            "tags_en": [
+                "Permissions",
+                "Auto mode",
+                "Sandbox",
+                "Safety"
+            ],
+            "content": {
+                "summary": "2026年6月、自律実行を安全に縛る新しいガードが相次いで入った。権限ルールはパラメータ値で絞れるようになり（Tool(param:value)、v2.1.178）、たとえば Agent(model:opus) でOpusサブエージェントの起動だけを拒否できる。auto modeは破壊的なgit操作（reset --hard / checkout -- . / clean -fd / stash drop）を自動でブロックし、エージェント以外のコミットへのamendを拒否、terraform/pulumi/cdk destroyはスタック名の明示を要求する（v2.1.183）。acceptEditsでも、シェル起動ファイルや .npmrc などコード実行につながるファイルへの書き込みは確認を挟む（v2.1.160）。sandbox.credentials は認証情報ファイルや秘密環境変数の読取を遮断する（v2.1.187）。これらは長時間自律実行（03_16）の安全設計を補完する。",
+                "summary_en": "June 2026 added several guards to constrain autonomy safely. Permission rules now filter by parameter value (Tool(param:value), v2.1.178) - e.g. Agent(model:opus) denies launching Opus subagents only. Auto mode auto-blocks destructive git (reset --hard / checkout -- . / clean -fd / stash drop), refuses amending non-agent commits, and requires explicit stack names for terraform/pulumi/cdk destroy (v2.1.183). Even acceptEdits prompts before writing execution-bearing files like shell init files or .npmrc (v2.1.160). sandbox.credentials blocks reading credential files and secret env vars (v2.1.187). Together they complete the safety design for long autonomous runs (03_16).",
+                "keyPoints": [
+                    "Tool(param:value) でパラメータ値ごとに権限を制御。例 Agent(model:opus) でOpusサブエージェント起動を拒否。*対応、allowは従来構文維持（v2.1.178）",
+                    "auto modeは破壊的gitを自動ブロック: reset --hard / checkout -- . / clean -fd / stash drop。非エージェントのコミットへのamend拒否（v2.1.183）",
+                    "terraform/pulumi/cdk destroy はスタック名の明示を要求。サブエージェント起動前にclassifierが評価（v2.1.183）",
+                    "acceptEditsでもコード実行につながるファイル（.zshenv等シェル起動ファイル、~/.config/git/、.npmrc/.bazelrc/.pre-commit-config.yaml）は書き込み前に確認（v2.1.160）",
+                    "sandbox.credentials で認証情報ファイル・秘密環境変数の読取をブロック（v2.1.187）。リモートMCPは5分でアイドルタイムアウト（v2.1.187）",
+                    "deny は allow より常に優先。長時間自律実行のガードとして deny + サンドボックス + auto modeブロックを重ねる"
+                ],
+                "keyPoints_en": [
+                    "Tool(param:value) controls permissions per parameter; Agent(model:opus) denies Opus subagents. * supported; allow keeps legacy syntax (v2.1.178)",
+                    "Auto mode blocks destructive git: reset --hard / checkout -- . / clean -fd / stash drop; refuses amending non-agent commits (v2.1.183)",
+                    "terraform/pulumi/cdk destroy require an explicit stack name; a classifier evaluates before subagent launch (v2.1.183)",
+                    "acceptEdits still prompts before execution-bearing files (.zshenv, ~/.config/git/, .npmrc/.bazelrc/.pre-commit-config.yaml) (v2.1.160)",
+                    "sandbox.credentials blocks reading credential files and secret env vars (v2.1.187); remote MCP idles out at 5 min (v2.1.187)",
+                    "deny always beats allow; layer deny + sandbox + auto-mode blocking as guards for long autonomous runs"
+                ],
+                "code": "// .claude/settings.json\n{\n  \"permissions\": {\n    \"deny\": [\n      \"Agent(model:opus)\",\n      \"Read(**/.env*)\",\n      \"Bash(git push --force*)\"\n    ]\n  },\n  \"sandbox\": { \"enabled\": true, \"credentials\": false }\n}",
+                "commands": [
+                    {
+                        "cmd": "/permissions",
+                        "desc": "allow/deny/askルールの確認と編集",
+                        "desc_en": "View and edit allow/deny/ask rules"
+                    },
+                    {
+                        "cmd": "/sandbox",
+                        "desc": "OSレベルサンドボックスの有効化・状態確認",
+                        "desc_en": "Enable / inspect the OS sandbox"
+                    }
+                ],
+                "handson": {
+                    "title": "実践: パラメータ権限と自律ガードを重ねる",
+                    "title_en": "Practice: Layer parameter permissions and autonomy guards",
+                    "goal": "自律実行が壊せる範囲をパラメータ権限とブロックで縛り、安全に放置できる構成にする",
+                    "goal_en": "Bound what autonomy can break via parameter permissions and blocks for safe unattended runs",
+                    "prerequisites": [
+                        "v2.1.178以降のClaude Code",
+                        "gitリポジトリ"
+                    ],
+                    "prerequisites_en": [
+                        "Claude Code v2.1.178+",
+                        "A git repository"
+                    ],
+                    "steps": [
+                        {
+                            "step": 1,
+                            "action": "パラメータ権限でOpus起動を拒否",
+                            "action_en": "Deny Opus subagents via parameter permission",
+                            "prompt": "settings.json の permissions.deny に Agent(model:opus) を追加して。その後、Opusサブエージェントを起動しようとして拒否されることを確認して。",
+                            "prompt_en": "Add Agent(model:opus) to permissions.deny, then try to launch an Opus subagent and confirm it is denied.",
+                            "expected": "Opusサブエージェントの起動だけが拒否される",
+                            "expected_en": "Only Opus subagent launches are denied"
+                        },
+                        {
+                            "step": 2,
+                            "action": "auto modeの破壊的gitブロックを観察",
+                            "action_en": "Observe auto-mode git blocking",
+                            "prompt": "auto modeを有効にして、git reset --hard と git clean -fd を実行しようとして、自動ブロックされることを確認して。",
+                            "prompt_en": "Enable auto mode, then attempt git reset --hard and git clean -fd and confirm they are auto-blocked.",
+                            "expected": "破壊的gitが実行前に遮断される",
+                            "expected_en": "Destructive git is blocked before running"
+                        },
+                        {
+                            "step": 3,
+                            "action": "sandbox.credentialsで機密遮断",
+                            "action_en": "Block secrets with sandbox.credentials",
+                            "prompt": "sandbox.credentials を有効化して、サンドボックス内コマンドから .env や秘密環境変数が読めないことを確認して。",
+                            "prompt_en": "Enable sandbox.credentials and confirm sandboxed commands cannot read .env or secret env vars.",
+                            "expected": "サンドボックス内でも機密の読取が遮断される",
+                            "expected_en": "Secrets stay unreadable even inside the sandbox"
+                        },
+                        {
+                            "step": 4,
+                            "action": "acceptEditsの保護パスを確認",
+                            "action_en": "Verify acceptEdits protected paths",
+                            "prompt": "acceptEditsモードで .npmrc への書き込みを試み、自動承認されず確認プロンプトが出ることを確認して。",
+                            "prompt_en": "In acceptEdits mode, try writing to .npmrc and confirm it prompts instead of auto-approving.",
+                            "expected": "コード実行につながるファイルは確認が挟まる",
+                            "expected_en": "Execution-bearing files trigger a prompt"
+                        },
+                        {
+                            "step": 5,
+                            "action": "自律実行のガードに組み込む",
+                            "action_en": "Wire into the autonomy guard",
+                            "prompt": "ここまでの設定を /goal などの長時間自律実行のガードとして1つのsettings.jsonにまとめ、夜間実行で壊れない構成にして。",
+                            "prompt_en": "Consolidate these settings into one settings.json as guards for /goal-style long runs so overnight runs cannot break things.",
+                            "expected": "deny+サンドボックス+auto modeブロックが重なった安全な自律設定になる",
+                            "expected_en": "A layered deny + sandbox + auto-mode-block safe autonomy config"
+                        }
+                    ],
+                    "checkpoints": [
+                        "Tool(param:value) でサブエージェントのモデルを制限できた",
+                        "auto modeが破壊的gitを自動ブロックすることを確認した",
+                        "sandbox.credentials で機密の読取を遮断できた",
+                        "acceptEditsの保護パスで確認が挟まることを確認した",
+                        "長時間自律実行のガードとして重ねて構成できた"
+                    ],
+                    "checkpoints_en": [
+                        "Restricted subagent model via Tool(param:value)",
+                        "Confirmed auto mode blocks destructive git",
+                        "Blocked secret reads with sandbox.credentials",
+                        "Saw acceptEdits prompt on protected paths",
+                        "Layered them as guards for long autonomous runs"
                     ]
                 }
             }
