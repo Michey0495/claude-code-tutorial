@@ -125,7 +125,7 @@
             <p class="hero-description">
                 エージェント型AIコーディングの真髄を学ぶ。<br>
                 公式ベストプラクティスに基づいた全50章 + 13種類のハンズオン。<br>
-                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.197対応 / Fable 5 / Sonnet 5 / Artifacts / .claude/rules / Skills / Hooks / MCP / Agent Teams / /goal / /workflows / /rewind</span>
+                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.210対応 / Fable 5 / Sonnet 5 / Artifacts / .claude/rules / Skills / Hooks / MCP / Agent Teams / /goal / /workflows / /doctor / /dataviz</span>
             </p>
             <div class="hero-stats">
                 <div class="stat">
@@ -661,7 +661,7 @@
                             <tr><td>opusplan</td><td>-</td><td>Plan=Opus / 実行=Sonnet のハイブリッド</td><td>長時間タスクの省コスト運用</td></tr>
                         </tbody>
                     </table>
-                    <h3>2026年7月の主要新機能（v2.1.197）</h3>
+                    <h3>2026年7月の主要新機能（v2.1.210）</h3>
                     <table class="cheat-table">
                         <thead>
                             <tr><th>機能</th><th>概要</th></tr>
@@ -704,9 +704,18 @@
                             <tr><td>enforceAvailableModels</td><td>availableModelsのallowlistをDefaultモデルにも強制。ユーザー/プロジェクト設定で拡張不可（v2.1.175）</td></tr>
                             <tr><td>リモートMCPツールのアイドルタイムアウト</td><td>5分ハングしたリモートMCPツール呼び出しをエラーで中断。CLAUDE_CODE_MCP_TOOL_IDLE_TIMEOUTで上書き可（v2.1.187）</td></tr>
                             <tr><td>Stop/SubagentStop additionalContext</td><td>Stop/SubagentStopフックがhookSpecificOutput.additionalContextを返してClaudeにフィードバックし、ターンを継続させられる（v2.1.163）</td></tr>
+                            <tr><td>/dataviz</td><td>チャート・ダッシュボードのデザインガイダンスとカラーパレット検証スラッシュコマンド（v2.1.198）</td></tr>
+                            <tr><td>サブエージェントのバックグラウンド実行（デフォルト化）</td><td>サブエージェントがデフォルトでバックグラウンド実行に。Claudeはサブエージェント実行中も作業継続可能。extended thinking継承も対応（v2.1.198）</td></tr>
+                            <tr><td>"Default"→"Manual" 権限モード改名</td><td>CLI・--help・VS Code・JetBrainsで "Default" が "Manual" に改名。--permission-mode manual / "defaultMode": "manual" で指定（v2.1.200）</td></tr>
+                            <tr><td>/doctor（/checkup）</td><td>セットアップの完全チェックアップ。問題を診断して修正提案。/checkupがエイリアス（v2.1.202）</td></tr>
+                            <tr><td>デスクトップ版アプリ内ブラウザ</td><td>Claude Codeデスクトップ版にビルトインブラウザ。ドキュメント・デザインなど任意サイトを参照しローカル開発サーバー同様に操作可能（v2.1.202）</td></tr>
+                            <tr><td>--ax-screen-reader / CLAUDE_AX_SCREEN_READER=1</td><td>スクリーンリーダー向けプレーンテキストレンダリング（v2.1.208）</td></tr>
+                            <tr><td>CLAUDE_CODE_PROCESS_WRAPPER</td><td>企業ランチャー向け。Claude Codeの全セルフスポーンプロセスに前置するラッパー指定環境変数（v2.1.208）</td></tr>
+                            <tr><td>Auto modeのBedrock/Vertex/Foundry展開</td><td>opt-in不要でAuto modeが利用可能に。disableAutoMode設定で無効化。外部セッションのAuto modeクラシファイアデフォルトがSonnet 5に（v2.1.207/v2.1.210）</td></tr>
+                            <tr><td>Write/NotebookEdit/Glob(path) 権限ルール廃止</td><td>Write(path)・NotebookEdit(path)・Glob(path)権限ルールは廃止。Edit(path) または Read(path) を使用。起動時に警告が表示される（v2.1.210）</td></tr>
                         </tbody>
                     </table>
-                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年7月1日（月2回自動アップデート）</p>
+                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年7月15日（月2回自動アップデート）</p>
                 </div>
             </div>
         </div>
@@ -720,7 +729,7 @@
                     <span class="footer-logo">Claude Code Tutorial</span>
                 </div>
                 <p class="footer-description">
-                    2026年7月最新版 / Fable 5・Opus 4.8・Sonnet 5・Haiku 4.5 対応 / Claude Code v2.1.197 / Anthropic公式ベストプラクティス準拠
+                    2026年7月最新版 / Fable 5・Opus 4.8・Sonnet 5・Haiku 4.5 対応 / Claude Code v2.1.210 / Anthropic公式ベストプラクティス準拠
                 </p>
             </div>
             <div class="footer-links">
