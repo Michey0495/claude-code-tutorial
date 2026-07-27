@@ -18,9 +18,16 @@
         theme: localStorage.getItem('theme') || 'light',
         lang: localStorage.getItem('lang') || 'ja',
         mobileMenuOpen: false,
-        selectedProjectTracks: [],
+        selectedProjectTracks: JSON.parse(localStorage.getItem('cctSelectedTracks') || '[]'),
         auth: { authenticated: false, org: null, start: null, end: null },
-        pendingSection: null
+        pendingSection: null,
+        progress: JSON.parse(localStorage.getItem('cctChapterProgress') || '{}'),
+        openModal: null,
+        applyingHash: false,
+        searchOpen: false,
+        searchIndex: null,
+        searchResults: [],
+        searchCursor: 0
     };
 
     // ===================================
@@ -38,7 +45,7 @@
             heroBadge: 'Anthropic Best Practices',
             heroTitle1: 'Claude Code',
             heroTitle2: '完全チュートリアル',
-            heroDesc: 'エージェント型AIコーディングの真髄を学ぶ。<br>公式ベストプラクティスに基づいた全50章 + 13種類のハンズオン。<br><span style="font-size:0.85em;opacity:0.8;">2026年7月最新版 / Fable 5 / Opus 4.8 / Sonnet 5 / Haiku 4.5 / v2.1.210対応</span>',
+            heroDesc: 'エージェント型AIコーディングの真髄を学ぶ。<br>公式ベストプラクティスに基づいた全50章 + 13種類のハンズオン。<br><span style="font-size:0.85em;opacity:0.8;">2026年7月最新版 / Opus 5 / Sonnet 5 / Fable 5 / v2.1.220対応</span>',
             heroStatChapters: 'チャプター',
             heroStatHandson: 'ハンズオン',
             heroStatTips: 'Tips',
@@ -132,6 +139,24 @@
             settingsPlacementLabel: '配置',
             settingsSizeLabel: 'サイズ',
             learningTimeLabel: '学習目安',
+            searchPlaceholder: 'チュートリアル・ハンズオン・トラック・設定を検索',
+            searchOpenLabel: '検索',
+            searchHint: 'Enterで開く、↑↓で移動、Escで閉じる',
+            searchNoResult: '該当なし。別のキーワードで試してください',
+            searchKindTutorial: 'チュートリアル',
+            searchKindHandson: 'ハンズオン',
+            searchKindTrack: '開発トラック',
+            searchKindSetting: '設定テンプレート',
+            progressLabel: '完了',
+            progressOfTotal: '章',
+            markDone: 'この章を完了にする',
+            markUndone: '完了を取り消す',
+            doneBadge: '完了',
+            prevChapter: '前の章',
+            nextChapter: '次の章',
+            resetProgress: '進捗をリセット',
+            resetProgressConfirm: '学習進捗をすべて消します。よろしいですか',
+            cheatSearchPlaceholder: '機能名で絞り込み',
             footerAbout: 'サイトについて',
             // 開発トラック
             sectionTagProjects: '開発一貫ハンズオン',
@@ -167,7 +192,7 @@
             heroBadge: 'Anthropic Best Practices',
             heroTitle1: 'Claude Code',
             heroTitle2: 'Complete Tutorial',
-            heroDesc: 'Master agent-based AI coding.<br>50 chapters + 13 hands-on exercises based on official best practices.<br><span style="font-size:0.85em;opacity:0.8;">July 2026 / Fable 5 / Opus 4.8 / Sonnet 5 / Haiku 4.5 / v2.1.210</span>',
+            heroDesc: 'Master agent-based AI coding.<br>50 chapters + 13 hands-on exercises based on official best practices.<br><span style="font-size:0.85em;opacity:0.8;">July 2026 / Opus 5 / Sonnet 5 / Fable 5 / v2.1.220</span>',
             heroStatChapters: 'Chapters',
             heroStatHandson: 'Hands-on',
             heroStatTips: 'Tips',
@@ -261,6 +286,24 @@
             settingsPlacementLabel: 'Placement',
             settingsSizeLabel: 'Size',
             learningTimeLabel: 'Est. time',
+            searchPlaceholder: 'Search tutorials, hands-on, tracks, settings',
+            searchOpenLabel: 'Search',
+            searchHint: 'Enter to open, arrows to move, Esc to close',
+            searchNoResult: 'No match. Try another keyword',
+            searchKindTutorial: 'Tutorial',
+            searchKindHandson: 'Hands-on',
+            searchKindTrack: 'Dev track',
+            searchKindSetting: 'Settings template',
+            progressLabel: 'done',
+            progressOfTotal: 'chapters',
+            markDone: 'Mark this chapter done',
+            markUndone: 'Unmark as done',
+            doneBadge: 'Done',
+            prevChapter: 'Previous',
+            nextChapter: 'Next',
+            resetProgress: 'Reset progress',
+            resetProgressConfirm: 'This clears all learning progress. Continue?',
+            cheatSearchPlaceholder: 'Filter by feature name',
             footerAbout: 'About',
             // Project tracks
             sectionTagProjects: 'End-to-end Hands-on',
@@ -348,6 +391,8 @@
         users: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
         'file-text': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>',
         'check-circle': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
+        circle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>',
+        search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>',
         'alert-triangle': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
         layers: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
         'git-branch': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>',
@@ -389,6 +434,9 @@
         renderProtectedContent();
         setupHelpTabs();
         setupAuth();
+        setupRouting();
+        setupSearch();
+        setupCheatFilter();
         bootstrapAuth();
     }
 
@@ -406,6 +454,8 @@
         renderTroubleshooting();
         renderFAQ();
         renderChecklist();
+        renderProgressUI();
+        state.searchIndex = null; // 言語切替などで作り直す
     }
 
     // ===================================
@@ -421,6 +471,8 @@
 
     function applyAuthedUI(data) {
         state.auth = { authenticated: true, org: data.org, start: data.start, end: data.end };
+        const searchBtn = document.getElementById('navSearchBtn');
+        if (searchBtn) searchBtn.hidden = false;
         const statusEl = document.getElementById('authStatus');
         const loginBtn = document.getElementById('authLoginBtn');
         const logoutBtn = document.getElementById('authLogoutBtn');
@@ -435,6 +487,8 @@
 
     function applyPublicUI() {
         state.auth = { authenticated: false, org: null, start: null, end: null };
+        const searchBtn = document.getElementById('navSearchBtn');
+        if (searchBtn) searchBtn.hidden = true;
         const statusEl = document.getElementById('authStatus');
         const loginBtn = document.getElementById('authLoginBtn');
         const logoutBtn = document.getElementById('authLogoutBtn');
@@ -446,6 +500,8 @@
     // ログイン機能オフ（公開モード）。認証UIは一切出さず全コンテンツ閲覧可。
     function applyDisabledUI() {
         state.auth = { authenticated: true, org: null, start: null, end: null };
+        const searchBtn = document.getElementById('navSearchBtn');
+        if (searchBtn) searchBtn.hidden = false;
         ['authStatus', 'authLoginBtn', 'authLogoutBtn'].forEach(id => {
             const el = document.getElementById(id);
             if (el) el.hidden = true;
@@ -457,11 +513,14 @@
     function loadContentThenRender(afterLogin) {
         const finalize = () => {
             renderProtectedContent();
+            // URLハッシュがあれば最優先で復元（共有リンク・リロード対応）
+            if (!afterLogin && applyHash()) { state.pendingSection = null; return; }
             let target = state.pendingSection;
             if (!target && PROTECTED_SECTIONS.has(state.currentSection)) target = state.currentSection;
             if (!target && afterLogin) target = 'tutorials';
             state.pendingSection = null;
             if (target) window.showSection(target);
+            else if (afterLogin && applyHash()) return;
         };
         if (window.TUTORIALS) { finalize(); return; }
         const s = document.createElement('script');
@@ -590,6 +649,16 @@
             const key = el.dataset.i18n;
             if (key && t[key]) el.textContent = t[key];
         });
+
+        // 検索・進捗まわりのラベル
+        const searchInputEl = document.getElementById('searchInput');
+        if (searchInputEl) searchInputEl.placeholder = t.searchPlaceholder;
+        const cheatInputEl = document.getElementById('cheatSearchInput');
+        if (cheatInputEl) cheatInputEl.placeholder = t.cheatSearchPlaceholder;
+        const navSearchEl = document.getElementById('navSearchBtn');
+        if (navSearchEl) navSearchEl.title = t.searchOpenLabel + '（/）';
+        const resetEl = document.querySelector('.tutorial-progress-reset');
+        if (resetEl) resetEl.textContent = t.resetProgress;
 
         // Update mobile menu
         const mobileLinks = document.querySelectorAll('.mobile-link');
@@ -841,7 +910,9 @@
             if (e.key === 'Escape') {
                 const cheatSheetModal = document.getElementById('cheatSheetModal');
                 const authModal = document.getElementById('authModal');
-                if (authModal && authModal.classList.contains('active')) {
+                if (state.searchOpen) {
+                    window.closeSearch();
+                } else if (authModal && authModal.classList.contains('active')) {
                     closeAuthModal();
                 } else if (cheatSheetModal && cheatSheetModal.classList.contains('active')) {
                     closeCheatSheetModal();
@@ -963,6 +1034,10 @@
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 link.classList.toggle('active', link.dataset.section === sectionId);
             });
+
+            // セクション遷移でモーダル文脈をクリアし、URLへ反映
+            state.openModal = null;
+            updateHash();
         }
     };
 
@@ -979,6 +1054,7 @@
 
         // Re-render tutorials
         renderTutorials(level);
+        renderProgressUI();
     }
 
     // ===================================
@@ -991,10 +1067,13 @@
         elements.tutorialsGrid.innerHTML = tutorials.map((tutorial, index) => {
             const timeText = getLocalizedText(tutorial, 'time');
             return `
-            <div class="tutorial-card" data-level="${level}" onclick="openTutorial('${level}', ${index})" style="animation-delay: ${index * 0.1}s">
+            <div class="tutorial-card${isDone(tutorial.id) ? ' is-done' : ''}" data-level="${level}" data-chapter-id="${tutorial.id}" onclick="openTutorial('${level}', ${index})" style="animation-delay: ${index * 0.1}s">
                 <div class="card-header">
                     <span class="card-number">${tutorial.number}</span>
-                    <div class="card-icon">${icons[tutorial.icon] || icons.rocket}</div>
+                    <div class="card-header-right">
+                        <button type="button" class="card-done-toggle${isDone(tutorial.id) ? ' done' : ''}" title="${isDone(tutorial.id) ? t.markUndone : t.markDone}" aria-label="${isDone(tutorial.id) ? t.markUndone : t.markDone}" onclick="toggleChapterDone('${tutorial.id}', event)">${isDone(tutorial.id) ? icons['check-circle'] : icons.circle}</button>
+                        <div class="card-icon">${icons[tutorial.icon] || icons.rocket}</div>
+                    </div>
                 </div>
                 <h3 class="card-title">${getLocalizedText(tutorial, 'title')}</h3>
                 <p class="card-description">${getLocalizedText(tutorial, 'description')}</p>
@@ -1151,6 +1230,7 @@
         } else {
             state.selectedProjectTracks = state.selectedProjectTracks.filter(x => x !== id);
         }
+        localStorage.setItem('cctSelectedTracks', JSON.stringify(state.selectedProjectTracks));
         renderProjects();
     };
 
@@ -1263,6 +1343,9 @@
         `;
         elements.tutorialModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        elements.modalBody.scrollTop = 0;
+        state.openModal = { kind: 'track', id: track.id };
+        updateHash();
     };
 
     window.openCompareView = function() {
@@ -1317,7 +1400,7 @@
             const items = window.SETTINGS_TEMPLATES.filter(s => s.cat === cat.id);
             if (!items.length) return '';
             const cards = items.map(s => `
-                <div class="settings-card">
+                <div class="settings-card" data-setting-id="${s.id}">
                     <div class="settings-card-head">
                         <h4 class="settings-card-title">${escapeHtml(s.title)}</h4>
                         <span class="settings-card-size">${t.settingsSizeLabel}: ${escapeHtml(s.size)}</span>
@@ -1570,9 +1653,19 @@
             `;
         }
 
+        // 章送りと完了ボタン（同レベル内で前後移動できる）
+        modalContent += chapterNavHtml(level, index);
+
         elements.modalBody.innerHTML = modalContent;
         elements.tutorialModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        elements.modalBody.scrollTop = 0;
+
+        // モーダル文脈を保存してURLに反映、完了ボタンの表示を初期化
+        state.openModal = { kind: 'tutorial', level: level, index: index, id: tutorial.id };
+        updateHash();
+        const doneBtn = document.getElementById('chapterDoneBtn');
+        if (doneBtn) updateDoneButton(doneBtn, tutorial.id);
     };
 
     // ===================================
@@ -1780,6 +1873,9 @@
         elements.modalBody.innerHTML = modalContent;
         elements.tutorialModal.classList.add('active');
         document.body.style.overflow = 'hidden';
+        elements.modalBody.scrollTop = 0;
+        state.openModal = { kind: 'handson', id: String(item.id) };
+        updateHash();
     };
 
     // Preparation file toggle
@@ -1799,9 +1895,11 @@
     window.openTutorialById = function(id) {
         const levels = ['intro', 'basic', 'intermediate', 'advanced'];
         for (const level of levels) {
-            const tutorials = window.TUTORIALS[level];
+            const tutorials = window.TUTORIALS[level] || [];
             const index = tutorials.findIndex(t => t.id === id);
             if (index !== -1) {
+                // 一覧のレベルタブも合わせる（閉じた後に迷子にならない）
+                if (state.currentLevel !== level) setActiveLevel(level);
                 openTutorial(level, index);
                 return;
             }
@@ -1811,6 +1909,8 @@
     window.closeModal = function() {
         elements.tutorialModal.classList.remove('active');
         document.body.style.overflow = '';
+        state.openModal = null;
+        updateHash();
     };
 
     // 複数ファイルの一括ダウンロード
@@ -2129,8 +2229,411 @@
         return div.innerHTML;
     }
 
+
+    // ===================================
+    // 学習進捗（章ごとの完了状態・localStorage）
+    // ===================================
+    const LEVELS = ['intro', 'basic', 'intermediate', 'advanced'];
+
+    function allTutorials() {
+        if (!window.TUTORIALS) return [];
+        return LEVELS.reduce((acc, lv) => acc.concat((window.TUTORIALS[lv] || []).map(c => ({ level: lv, chapter: c }))), []);
+    }
+
+    function isDone(id) {
+        return !!state.progress[id];
+    }
+
+    function saveProgress() {
+        localStorage.setItem('cctChapterProgress', JSON.stringify(state.progress));
+    }
+
+    window.toggleChapterDone = function(id, ev) {
+        if (ev) { ev.stopPropagation(); ev.preventDefault(); }
+        if (state.progress[id]) {
+            state.progress = Object.keys(state.progress)
+                .filter(k => k !== id)
+                .reduce((acc, k) => Object.assign(acc, { [k]: true }), {});
+        } else {
+            state.progress = Object.assign({}, state.progress, { [id]: true });
+        }
+        saveProgress();
+        renderTutorials(state.currentLevel);
+        renderProgressUI();
+        // モーダルが開いていれば完了ボタンの表示も更新
+        if (state.openModal && state.openModal.kind === 'tutorial') {
+            const btn = document.getElementById('chapterDoneBtn');
+            if (btn) updateDoneButton(btn, id);
+        }
+    };
+
+    window.resetChapterProgress = function() {
+        const t = i18n[state.lang];
+        if (!confirm(t.resetProgressConfirm)) return;
+        state.progress = {};
+        saveProgress();
+        renderTutorials(state.currentLevel);
+        renderProgressUI();
+    };
+
+    function updateDoneButton(btn, id) {
+        const t = i18n[state.lang];
+        const done = isDone(id);
+        btn.classList.toggle('done', done);
+        btn.innerHTML = (done ? icons['check-circle'] : icons.circle) +
+            ' <span>' + (done ? t.markUndone : t.markDone) + '</span>';
+    }
+
+    // レベル別・全体の進捗をUIへ反映
+    function renderProgressUI() {
+        if (!window.TUTORIALS) return;
+        const t = i18n[state.lang];
+        const all = allTutorials();
+        const doneCount = all.filter(x => isDone(x.chapter.id)).length;
+
+        // レベルタブに 章数 と 完了数
+        document.querySelectorAll('.level-tab').forEach(tab => {
+            const lv = tab.dataset.level;
+            const list = (window.TUTORIALS[lv] || []);
+            const d = list.filter(c => isDone(c.id)).length;
+            let meta = tab.querySelector('.tab-meta');
+            if (!meta) {
+                meta = document.createElement('span');
+                meta.className = 'tab-meta';
+                tab.appendChild(meta);
+            }
+            meta.textContent = d + '/' + list.length;
+            tab.classList.toggle('level-complete', list.length > 0 && d === list.length);
+        });
+
+        // 全体の進捗バー
+        const bar = document.getElementById('tutorialProgressFill');
+        const label = document.getElementById('tutorialProgressText');
+        if (bar) bar.style.width = all.length ? Math.round(doneCount / all.length * 100) + '%' : '0%';
+        if (label) {
+            label.textContent = doneCount + ' / ' + all.length + ' ' + t.progressOfTotal + ' ' + t.progressLabel +
+                '（' + totalTimeLabel(all.filter(x => !isDone(x.chapter.id))) + '）';
+        }
+    }
+
+    // 残り学習時間の目安（"30分" 表記を合算）
+    function totalTimeLabel(items) {
+        const mins = items.reduce((sum, x) => {
+            const m = String(x.chapter.time || '').match(/(\d+)/);
+            return sum + (m ? parseInt(m[1], 10) : 0);
+        }, 0);
+        if (state.lang === 'en') {
+            return mins >= 60 ? 'about ' + Math.round(mins / 60 * 10) / 10 + ' h left' : mins + ' min left';
+        }
+        return mins >= 60 ? '残り約' + Math.round(mins / 60 * 10) / 10 + '時間' : '残り' + mins + '分';
+    }
+
+    // ===================================
+    // ディープリンク（URLハッシュでセクション・章を復元）
+    // #tutorials / #tutorials/02_05 / #handson/3 / #projects/alpha / #privacy
+    // ===================================
+    function updateHash() {
+        if (state.applyingHash) return;
+        const m = state.openModal;
+        let hash = '#' + state.currentSection;
+        if (m) {
+            if (m.kind === 'tutorial') hash = '#tutorials/' + m.id;
+            else if (m.kind === 'handson') hash = '#handson/' + m.id;
+            else if (m.kind === 'track') hash = '#projects/' + m.id;
+        } else if (state.currentSection === 'hero') {
+            // トップではURLにノイズを残さない
+            if (location.hash) history.replaceState(null, '', location.pathname);
+            return;
+        }
+        if (location.hash !== hash) {
+            history.replaceState(null, '', hash);
+        }
+    }
+
+    function applyHash() {
+        const raw = (location.hash || '').replace(/^#/, '');
+        if (!raw) return false;
+        const [sectionRaw, sub] = raw.split('/');
+        const known = ['hero', 'tutorials', 'handson', 'projects', 'settings', 'bestpractices', 'troubleshooting', 'privacy'];
+        if (known.indexOf(sectionRaw) === -1) return false;
+
+        state.applyingHash = true;
+        window.showSection(sectionRaw);
+        if (sub) {
+            if (sectionRaw === 'tutorials') window.openTutorialById(sub);
+            else if (sectionRaw === 'handson') openHandsonById(sub);
+            else if (sectionRaw === 'projects') window.openProjectTrack(sub);
+        }
+        state.applyingHash = false;
+        return true;
+    }
+
+    function openHandsonById(id) {
+        if (!window.HANDSON) return;
+        const groups = [['non-dev', window.HANDSON.nonDev], ['dev', window.HANDSON.dev]];
+        for (const [type, list] of groups) {
+            const idx = (list || []).findIndex(x => String(x.id) === String(id));
+            if (idx !== -1) {
+                setActiveHandsonType(type);
+                window.openHandson(type, idx);
+                return;
+            }
+        }
+    }
+
+    function setupRouting() {
+        window.addEventListener('hashchange', () => {
+            if (state.applyingHash) return;
+            const raw = (location.hash || '').replace(/^#/, '');
+            if (!raw) { window.closeModal(); return; }
+            applyHash();
+        });
+    }
+
+    // ===================================
+    // モーダル内の章送り（同レベル内で前後移動）
+    // ===================================
+    function chapterNavHtml(level, index) {
+        const t = i18n[state.lang];
+        const list = window.TUTORIALS[level] || [];
+        const prev = index > 0 ? list[index - 1] : null;
+        const next = index < list.length - 1 ? list[index + 1] : null;
+        const doneBtn = '<button type="button" class="chapter-done-btn" id="chapterDoneBtn" ' +
+            'onclick="toggleChapterDone(\'' + list[index].id + '\')"></button>';
+        return '<div class="modal-section chapter-nav">' +
+            doneBtn +
+            '<div class="chapter-nav-links">' +
+            (prev ? '<button type="button" class="chapter-nav-btn" onclick="openTutorial(\'' + level + '\', ' + (index - 1) + ')">' +
+                '<span class="chapter-nav-dir">← ' + t.prevChapter + '</span>' +
+                '<span class="chapter-nav-title">' + escapeHtml(getLocalizedText(prev, 'title')) + '</span></button>' : '<span></span>') +
+            (next ? '<button type="button" class="chapter-nav-btn next" onclick="openTutorial(\'' + level + '\', ' + (index + 1) + ')">' +
+                '<span class="chapter-nav-dir">' + t.nextChapter + ' →</span>' +
+                '<span class="chapter-nav-title">' + escapeHtml(getLocalizedText(next, 'title')) + '</span></button>' : '<span></span>') +
+            '</div></div>';
+    }
+
+    function gotoAdjacentChapter(delta) {
+        const m = state.openModal;
+        if (!m || m.kind !== 'tutorial') return;
+        const list = window.TUTORIALS[m.level] || [];
+        const idx = m.index + delta;
+        if (idx < 0 || idx >= list.length) return;
+        window.openTutorial(m.level, idx);
+    }
+
+    // ===================================
+    // 横断検索（章・ハンズオン・トラック・設定テンプレ）
+    // ===================================
+    function buildSearchIndex() {
+        const t = i18n[state.lang];
+        const idx = [];
+        allTutorials().forEach(({ level, chapter }, i) => {
+            const list = window.TUTORIALS[level] || [];
+            idx.push({
+                kind: 'tutorial', kindLabel: t.searchKindTutorial,
+                id: chapter.id,
+                title: getLocalizedText(chapter, 'title'),
+                desc: getLocalizedText(chapter, 'description') || '',
+                extra: (getLocalizedArray(chapter, 'tags') || []).join(' '),
+                level: level, index: list.findIndex(c => c.id === chapter.id)
+            });
+        });
+        if (window.HANDSON) {
+            [['non-dev', window.HANDSON.nonDev], ['dev', window.HANDSON.dev]].forEach(([type, list]) => {
+                (list || []).forEach((item, i) => {
+                    idx.push({
+                        kind: 'handson', kindLabel: t.searchKindHandson,
+                        id: String(item.id),
+                        title: getLocalizedText(item, 'title'),
+                        desc: getLocalizedText(item, 'description') || '',
+                        extra: (getLocalizedArray(item, 'skills') || []).join(' '),
+                        handsonType: type, index: i
+                    });
+                });
+            });
+        }
+        (window.PROJECT_TRACKS || []).forEach(tr => {
+            idx.push({
+                kind: 'track', kindLabel: t.searchKindTrack,
+                id: tr.id,
+                title: getLocalizedText(tr, 'title'),
+                desc: getLocalizedText(tr, 'tagline') || '',
+                extra: getLocalizedText(tr, 'domain') || ''
+            });
+        });
+        (window.SETTINGS_TEMPLATES || []).forEach(st => {
+            idx.push({
+                kind: 'setting', kindLabel: t.searchKindSetting,
+                id: st.id,
+                title: st.title,
+                desc: st.desc || '',
+                extra: st.zip || ''
+            });
+        });
+        state.searchIndex = idx;
+        return idx;
+    }
+
+    function runSearch(q) {
+        const query = (q || '').trim().toLowerCase();
+        if (!state.searchIndex) buildSearchIndex();
+        if (!query) return [];
+        const terms = query.split(/\s+/).filter(Boolean);
+        return state.searchIndex
+            .map(item => {
+                const hay = (item.title + ' ' + item.desc + ' ' + item.extra + ' ' + item.id).toLowerCase();
+                const hitAll = terms.every(term => hay.indexOf(term) !== -1);
+                if (!hitAll) return null;
+                // タイトル一致を優先
+                const titleHit = terms.some(term => item.title.toLowerCase().indexOf(term) !== -1);
+                return { item, score: titleHit ? 0 : 1 };
+            })
+            .filter(Boolean)
+            .sort((a, b) => a.score - b.score)
+            .slice(0, 30)
+            .map(x => x.item);
+    }
+
+    function renderSearchResults() {
+        const box = document.getElementById('searchResults');
+        if (!box) return;
+        const t = i18n[state.lang];
+        if (!state.searchResults.length) {
+            const q = (document.getElementById('searchInput') || {}).value || '';
+            box.innerHTML = q.trim()
+                ? '<p class="search-empty">' + t.searchNoResult + '</p>'
+                : '<p class="search-empty">' + t.searchHint + '</p>';
+            return;
+        }
+        box.innerHTML = state.searchResults.map((r, i) => {
+            const doneMark = (r.kind === 'tutorial' && isDone(r.id))
+                ? '<span class="search-done">' + t.doneBadge + '</span>' : '';
+            return '<button type="button" class="search-result' + (i === state.searchCursor ? ' active' : '') + '" ' +
+                'data-i="' + i + '" onclick="activateSearchResult(' + i + ')">' +
+                '<span class="search-kind ' + r.kind + '">' + r.kindLabel + '</span>' +
+                '<span class="search-title">' + escapeHtml(r.title) + '</span>' +
+                doneMark +
+                '<span class="search-desc">' + escapeHtml(r.desc) + '</span>' +
+                '</button>';
+        }).join('');
+    }
+
+    window.openSearch = function() {
+        const overlay = document.getElementById('searchOverlay');
+        if (!overlay) return;
+        if (!window.TUTORIALS) { openAuthModal(); return; }
+        state.searchOpen = true;
+        overlay.classList.add('active');
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        const input = document.getElementById('searchInput');
+        if (input) { input.value = ''; setTimeout(() => input.focus(), 30); }
+        state.searchResults = [];
+        state.searchCursor = 0;
+        renderSearchResults();
+    };
+
+    window.closeSearch = function() {
+        const overlay = document.getElementById('searchOverlay');
+        if (!overlay) return;
+        state.searchOpen = false;
+        overlay.classList.remove('active');
+        overlay.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    };
+
+    window.activateSearchResult = function(i) {
+        const r = state.searchResults[i];
+        if (!r) return;
+        window.closeSearch();
+        if (r.kind === 'tutorial') {
+            window.showSection('tutorials');
+            setActiveLevel(r.level);
+            window.openTutorial(r.level, r.index);
+        } else if (r.kind === 'handson') {
+            window.showSection('handson');
+            setActiveHandsonType(r.handsonType);
+            window.openHandson(r.handsonType, r.index);
+        } else if (r.kind === 'track') {
+            window.showSection('projects');
+            window.openProjectTrack(r.id);
+        } else if (r.kind === 'setting') {
+            window.showSection('settings');
+            const card = document.querySelector('[data-setting-id="' + r.id + '"]');
+            if (card) {
+                card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                card.classList.add('flash');
+                setTimeout(() => card.classList.remove('flash'), 1600);
+            }
+        }
+    };
+
+    function setupSearch() {
+        const input = document.getElementById('searchInput');
+        if (!input) return;
+        input.addEventListener('input', () => {
+            state.searchResults = runSearch(input.value);
+            state.searchCursor = 0;
+            renderSearchResults();
+        });
+        input.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault();
+                state.searchCursor = Math.min(state.searchCursor + 1, state.searchResults.length - 1);
+                renderSearchResults();
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault();
+                state.searchCursor = Math.max(state.searchCursor - 1, 0);
+                renderSearchResults();
+            } else if (e.key === 'Enter') {
+                e.preventDefault();
+                window.activateSearchResult(state.searchCursor);
+            }
+        });
+    }
+
+    // ===================================
+    // チートシート内の絞り込み
+    // ===================================
+    function setupCheatFilter() {
+        const input = document.getElementById('cheatSearchInput');
+        if (!input) return;
+        input.addEventListener('input', () => {
+            const q = input.value.trim().toLowerCase();
+            document.querySelectorAll('.cheat-sheet-scroll table.cheat-table').forEach(table => {
+                let visible = 0;
+                table.querySelectorAll('tbody tr').forEach(tr => {
+                    const hit = !q || tr.textContent.toLowerCase().indexOf(q) !== -1;
+                    tr.style.display = hit ? '' : 'none';
+                    if (hit) visible++;
+                });
+                // 見出しごと隠す（該当0のテーブル）
+                const heading = table.previousElementSibling;
+                const hide = q && visible === 0;
+                table.style.display = hide ? 'none' : '';
+                if (heading && heading.tagName === 'H3') heading.style.display = hide ? 'none' : '';
+            });
+        });
+    }
+
     function handleKeydown(e) {
-        // Add keyboard navigation if needed
+        // 入力中は素通し
+        const tag = (e.target && e.target.tagName) || '';
+        const typing = tag === 'INPUT' || tag === 'TEXTAREA' || (e.target && e.target.isContentEditable);
+
+        // / で検索を開く
+        if (!typing && (e.key === '/' || (e.key === 'k' && (e.metaKey || e.ctrlKey)))) {
+            e.preventDefault();
+            window.openSearch();
+            return;
+        }
+        // モーダル表示中は ← → で章送り（検索やチートシートが開いている間は無効）
+        const cheatEl = document.getElementById('cheatSheetModal');
+        const cheatOpen = !!(cheatEl && cheatEl.classList.contains('active'));
+        if (!typing && !state.searchOpen && !cheatOpen && state.openModal && state.openModal.kind === 'tutorial') {
+            if (e.key === 'ArrowLeft') { e.preventDefault(); gotoAdjacentChapter(-1); }
+            else if (e.key === 'ArrowRight') { e.preventDefault(); gotoAdjacentChapter(1); }
+        }
     }
 
     // ===================================
