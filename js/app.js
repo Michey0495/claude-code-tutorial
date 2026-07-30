@@ -469,6 +469,16 @@
         return Math.max(0, Math.ceil((end - Date.now()) / 86400000));
     }
 
+    // 期限の表示。9999-12-31 のような実質無期限は日数を出さない
+    const UNLIMITED_DAYS_THRESHOLD = 3650; // 10年より先は無期限扱い
+    function expiryLabel(endDate) {
+        const left = daysLeft(endDate);
+        if (left > UNLIMITED_DAYS_THRESHOLD) {
+            return state.lang === 'en' ? 'unlimited' : '無期限';
+        }
+        return state.lang === 'en' ? left + ' days left' : '残り' + left + '日';
+    }
+
     function applyAuthedUI(data) {
         state.auth = { authenticated: true, org: data.org, start: data.start, end: data.end };
         const searchBtn = document.getElementById('navSearchBtn');
@@ -477,8 +487,7 @@
         const loginBtn = document.getElementById('authLoginBtn');
         const logoutBtn = document.getElementById('authLogoutBtn');
         if (statusEl) {
-            const left = daysLeft(data.end);
-            statusEl.textContent = `${data.org.name}（残り${left}日）`;
+            statusEl.textContent = `${data.org.name}（${expiryLabel(data.end)}）`;
             statusEl.hidden = false;
         }
         if (loginBtn) loginBtn.hidden = true;
@@ -2433,8 +2442,14 @@
                 kind: 'tutorial', kindLabel: t.searchKindTutorial,
                 id: chapter.id,
                 title: getLocalizedText(chapter, 'title'),
+                titleEn: chapter.title_en || '',
                 desc: getLocalizedText(chapter, 'description') || '',
-                extra: (getLocalizedArray(chapter, 'tags') || []).join(' '),
+                extra: [
+                    (getLocalizedArray(chapter, 'tags') || []).join(' '),
+                    (chapter.tags_en || []).join(' '),
+                    chapter.title_en || '', chapter.description_en || '',
+                    (chapter.content && chapter.content.summary_en) || ''
+                ].join(' '),
                 level: level, index: list.findIndex(c => c.id === chapter.id)
             });
         });
@@ -2445,8 +2460,13 @@
                         kind: 'handson', kindLabel: t.searchKindHandson,
                         id: String(item.id),
                         title: getLocalizedText(item, 'title'),
+                        titleEn: item.title_en || '',
                         desc: getLocalizedText(item, 'description') || '',
-                        extra: (getLocalizedArray(item, 'skills') || []).join(' '),
+                        extra: [
+                            (getLocalizedArray(item, 'skills') || []).join(' '),
+                            (item.skills_en || []).join(' '),
+                            item.title_en || '', item.description_en || ''
+                        ].join(' '),
                         handsonType: type, index: i
                     });
                 });
@@ -2457,8 +2477,12 @@
                 kind: 'track', kindLabel: t.searchKindTrack,
                 id: tr.id,
                 title: getLocalizedText(tr, 'title'),
+                titleEn: tr.title_en || '',
                 desc: getLocalizedText(tr, 'tagline') || '',
-                extra: getLocalizedText(tr, 'domain') || ''
+                extra: [
+                    getLocalizedText(tr, 'domain') || '',
+                    tr.title_en || '', tr.tagline_en || '', tr.deliverable_en || ''
+                ].join(' ')
             });
         });
         (window.SETTINGS_TEMPLATES || []).forEach(st => {
@@ -2484,8 +2508,9 @@
                 const hay = (item.title + ' ' + item.desc + ' ' + item.extra + ' ' + item.id).toLowerCase();
                 const hitAll = terms.every(term => hay.indexOf(term) !== -1);
                 if (!hitAll) return null;
-                // タイトル一致を優先
-                const titleHit = terms.some(term => item.title.toLowerCase().indexOf(term) !== -1);
+                // タイトル一致を優先（英語タイトルも見るので英字キーワードでも順位が崩れない）
+                const titles = (item.title + ' ' + (item.titleEn || '')).toLowerCase();
+                const titleHit = terms.some(term => titles.indexOf(term) !== -1);
                 return { item, score: titleHit ? 0 : 1 };
             })
             .filter(Boolean)
