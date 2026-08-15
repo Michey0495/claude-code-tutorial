@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Claude Code Tutorial</title>
-    <meta name="description" content="2026年8月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全50章 + 13種類のハンズオン。Fable 5 / Opus 5 / Sonnet 5 / Haiku 4.5 / v2.1.220対応。">
+    <meta name="description" content="2026年8月最新版。Anthropic公式ベストプラクティスに基づいた、Claude Codeの実践的なチュートリアル。全50章 + 13種類のハンズオン。Fable 5 / Opus 5 / Sonnet 5 / Haiku 4.5 / v2.1.233対応。">
 
     <!-- Security: 解析/トラッキングなし。外部接続はフォントのみ。
          認証のため同一オリジンの /api と最小限のセッションcookieを使用（connect-src 'self'）。 -->
@@ -131,7 +131,7 @@
             <p class="hero-description">
                 エージェント型AIコーディングの真髄を学ぶ。<br>
                 公式ベストプラクティスに基づいた全50章 + 13種類のハンズオン。<br>
-                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.220対応 / Fable 5 / Sonnet 5 / Artifacts / .claude/rules / Skills / Hooks / MCP / Agent Teams / /goal / /workflows / /doctor / /dataviz</span>
+                <span style="font-size: 0.85em; opacity: 0.8;">v2.1.233対応 / Fable 5 / Sonnet 5 / Artifacts / .claude/rules / Skills / Hooks / MCP / Agent Teams / /goal / /workflows / /doctor / /dataviz / /teleport</span>
             </p>
             <div class="hero-stats">
                 <div class="stat">
@@ -682,7 +682,7 @@
                             <tr><td>レガシー</td><td>-</td><td>Opus 4.8 / 4.7 / 4.6、Sonnet 4.6 など</td><td>引き続き選択できるが現行世代への移行を推奨。Opus 4.1 は2026/8/5に退役</td></tr>
                         </tbody>
                     </table>
-                    <h3>2026年8月の主要新機能（v2.1.220）</h3>
+                    <h3>2026年8月の主要新機能（v2.1.233）</h3>
                     <table class="cheat-table">
                         <thead>
                             <tr><th>機能</th><th>概要</th></tr>
@@ -746,9 +746,22 @@
                             <tr><td>CLAUDE_CODE_PROCESS_WRAPPER</td><td>企業ランチャー向け。Claude Codeの全セルフスポーンプロセスに前置するラッパー指定環境変数（v2.1.208）</td></tr>
                             <tr><td>Auto modeのBedrock/Vertex/Foundry展開</td><td>opt-in不要でAuto modeが利用可能に。disableAutoMode設定で無効化。外部セッションのAuto modeクラシファイアデフォルトがSonnet 5に（v2.1.207/v2.1.210）</td></tr>
                             <tr><td>Write/NotebookEdit/Glob(path) 権限ルール廃止</td><td>Write(path)・NotebookEdit(path)・Glob(path)権限ルールは廃止。Edit(path) または Read(path) を使用。起動時に警告が表示される（v2.1.210）</td></tr>
+                            <tr><td>セッション間メッセージング</td><td>macOS・Linux でClaude Codeセッション同士がメッセージを送受信できる。知見や決定を再説明なく別セッションへ引き継ぎ（v2.1.220〜v2.1.224 / Week 32）</td></tr>
+                            <tr><td>セルフホスト環境（public beta）</td><td>Team・Enterpriseプランで、組織が運営するインフラ上でClaude Codeクラウドセッションを実行できる（Week 32）</td></tr>
+                            <tr><td>Auto modeがデフォルトに</td><td>2026/8/14よりPro・Max・Teamプランの新規セッションでauto modeがデフォルト権限モードに（v2.1.221以降）</td></tr>
+                            <tr><td>/teleport</td><td>クラウドセッションをローカルへ転送。claude.aiのセッションを「/teleport」→ CLIで「claude --teleport &lt;session id&gt;」で継続（v2.1.233）</td></tr>
+                            <tr><td>--forward-subagent-text</td><td>stream-json出力にサブエージェントのテキストと思考を含めるCLIフラグ。環境変数 CLAUDE_CODE_FORWARD_SUBAGENT_TEXT でも指定可（v2.1.233）</td></tr>
+                            <tr><td>--permission-prompt-tool</td><td>権限プロンプトの処理に使うMCPサーバーを指定するCLIフラグ（v2.1.233）</td></tr>
+                            <tr><td>Todoツール廃止と再有効化</td><td>Opus 4.8・Sonnet 5・Fable 5・Mythos 5以降の新モデルではTodo/タスク追跡ツールを削除。再有効化には CLAUDE_CODE_ENABLE_TODO_TOOLS=1 を設定（v2.1.233）</td></tr>
+                            <tr><td>Bash入力リダイレクト権限チェック</td><td>「&lt; file」のような入力リダイレクトも権限チェック対象に（v2.1.233）</td></tr>
+                            <tr><td>サブエージェント制御の新環境変数</td><td>CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION（既定200）・CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION（既定200）・CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS（既定20）・CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH（既定3）でセッション内の上限を設定可能（v2.1.221〜）</td></tr>
+                            <tr><td>CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS</td><td>ワークフロースクリプトのサブエージェント生成をスタガー（分散）させる間隔。既定で有効（0で無効化）（v2.1.221〜）</td></tr>
+                            <tr><td>CLAUDE_CODE_WEBFETCH_CACHE_TTL_MS</td><td>WebFetchセッションURLキャッシュのTTLを設定する環境変数（既定15分）（v2.1.221〜）</td></tr>
+                            <tr><td>Ultraplan廃止</td><td>/ultraplanコマンドを削除（v2.1.221）</td></tr>
+                            <tr><td>VS Code拡張 Focus view</td><td>VS Code拡張にFocus viewを追加（Week 32）</td></tr>
                         </tbody>
                     </table>
-                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年7月27日（月2回自動アップデート）</p>
+                    <p class="cheat-sheet-footer"><a href="https://code.claude.com/docs/en/changelog.md" target="_blank" rel="noopener">公式 Changelog</a> ／ <a href="https://platform.claude.com/docs/en/about-claude/models/overview" target="_blank" rel="noopener">モデル比較</a> で全機能を確認できます。最終更新: 2026年8月15日（月2回自動アップデート）</p>
                 </div>
             </div>
         </div>
@@ -762,7 +775,7 @@
                     <span class="footer-logo">Claude Code Tutorial</span>
                 </div>
                 <p class="footer-description">
-                    2026年8月最新版 / Fable 5・Opus 5・Sonnet 5・Haiku 4.5 対応 / Claude Code v2.1.220 / Anthropic公式ベストプラクティス準拠
+                    2026年8月最新版 / Fable 5・Opus 5・Sonnet 5・Haiku 4.5 対応 / Claude Code v2.1.233 / Anthropic公式ベストプラクティス準拠
                 </p>
             </div>
             <div class="footer-links">
