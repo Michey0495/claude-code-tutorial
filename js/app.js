@@ -138,6 +138,14 @@
             settingsDownloadLabel: 'ZIPでダウンロード',
             settingsPlacementLabel: '配置',
             settingsSizeLabel: 'サイズ',
+            settingsLicenseOwn: '本研修の配布物',
+            settingsLicenseNone: 'ライセンス表記なし',
+            settingsLicenseCheck: '権利者が利用条件を示していません。成果物に組み込む前に原典でご確認ください。',
+            settingsRestrictedBadge: '配布停止',
+            settingsRestrictedNote: '原典が全権利留保のため ZIP 配布を停止しました。原典を直接ご参照ください。',
+            settingsSourceLabel: '原典',
+            settingsSourceOpen: '原典リポジトリを開く',
+            settingsLicenseSummary: '配布は全 %TOTAL% 本です。内訳は %BREAKDOWN%。',
             learningTimeLabel: '学習目安',
             searchPlaceholder: 'チュートリアル・ハンズオン・トラック・設定を検索',
             searchOpenLabel: '検索',
@@ -285,6 +293,14 @@
             settingsDownloadLabel: 'Download (ZIP)',
             settingsPlacementLabel: 'Placement',
             settingsSizeLabel: 'Size',
+            settingsLicenseOwn: 'Provided with this training',
+            settingsLicenseNone: 'No license stated',
+            settingsLicenseCheck: 'The author states no terms of use. Check with the author before shipping it in your own work.',
+            settingsRestrictedBadge: 'Not redistributed',
+            settingsRestrictedNote: 'The original is all rights reserved, so the ZIP is no longer distributed. Please refer to the original.',
+            settingsSourceLabel: 'Source',
+            settingsSourceOpen: 'Open the original repository',
+            settingsLicenseSummary: '%TOTAL% packages in total. Breakdown: %BREAKDOWN%.',
             learningTimeLabel: 'Est. time',
             searchPlaceholder: 'Search tutorials, hands-on, tracks, settings',
             searchOpenLabel: 'Search',
@@ -393,6 +409,7 @@
         'check-circle': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>',
         circle: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/></svg>',
         search: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><line x1="16.5" y1="16.5" x2="21" y2="21"/></svg>',
+        link: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>',
         'alert-triangle': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4"/><path d="M12 17h.01"/></svg>',
         layers: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>',
         'git-branch': '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="6" y1="3" x2="6" y2="15"/><circle cx="18" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><path d="M18 9a9 9 0 0 1-9 9"/></svg>',
@@ -1415,11 +1432,9 @@
                         <span class="settings-card-size">${t.settingsSizeLabel}: ${escapeHtml(s.size)}</span>
                     </div>
                     <p class="settings-card-desc">${escapeHtml(s.desc)}</p>
+                    ${licenseLineHtml(s, t)}
                     <p class="settings-card-placement"><strong>${t.settingsPlacementLabel}:</strong> ${parseInlineCode(s.placement)}</p>
-                    <a class="settings-card-download" href="assets/settings/${encodeURIComponent(s.zip)}" download="${escapeHtml(s.zip)}">
-                        ${icons.download} <span>${t.settingsDownloadLabel}</span>
-                        <span class="settings-card-filename">${escapeHtml(s.zip)}</span>
-                    </a>
+                    ${settingsActionHtml(s, t)}
                 </div>
             `).join('');
             return `
@@ -1429,6 +1444,61 @@
                 </div>
             `;
         }).join('');
+
+        renderLicenseSummary();
+    }
+
+    // 各テンプレートのライセンス種別。表記のないものは利用条件が不明として扱う
+    function licenseLabel(s, t) {
+        if (s.licenseFlag === 'own') return t.settingsLicenseOwn;
+        if (s.licenseFlag === 'restricted') return t.settingsRestrictedBadge;
+        if (!s.license) return t.settingsLicenseNone;
+        return s.license;
+    }
+
+    function licenseLineHtml(s, t) {
+        const attention = (s.licenseFlag === 'unknown' || s.licenseFlag === 'restricted') ? ' attention' : '';
+        const holder = s.holder ? `<span class="settings-card-holder">${escapeHtml(s.holder)}</span>` : '';
+        const source = s.source
+            ? `<a class="settings-card-source" href="${escapeHtml(s.source)}" target="_blank" rel="noopener">${t.settingsSourceLabel}</a>`
+            : '';
+        let note = '';
+        if (s.licenseFlag === 'unknown') note = `<p class="settings-card-note">${t.settingsLicenseCheck}</p>`;
+        if (s.licenseFlag === 'restricted') note = `<p class="settings-card-note">${t.settingsRestrictedNote}</p>`;
+        return `<p class="settings-card-license">
+                        <span class="settings-license-badge${attention}">${escapeHtml(licenseLabel(s, t))}</span>${holder}${source}
+                    </p>${note}`;
+    }
+
+    function settingsActionHtml(s, t) {
+        if (s.licenseFlag === 'restricted') {
+            if (!s.source) return '';
+            return `<a class="settings-card-download outline" href="${escapeHtml(s.source)}" target="_blank" rel="noopener">
+                        ${icons.link} <span>${t.settingsSourceOpen}</span>
+                    </a>`;
+        }
+        return `<a class="settings-card-download" href="assets/settings/${encodeURIComponent(s.zip)}" download="${escapeHtml(s.zip)}">
+                        ${icons.download} <span>${t.settingsDownloadLabel}</span>
+                        <span class="settings-card-filename">${escapeHtml(s.zip)}</span>
+                    </a>`;
+    }
+
+    function renderLicenseSummary() {
+        const el = document.getElementById('licenseSummary');
+        if (!el || !window.SETTINGS_TEMPLATES) return;
+        const t = i18n[state.lang];
+        const counts = {};
+        window.SETTINGS_TEMPLATES.forEach(s => {
+            const key = licenseLabel(s, t);
+            counts[key] = (counts[key] || 0) + 1;
+        });
+        const breakdown = Object.keys(counts)
+            .sort((a, b) => counts[b] - counts[a])
+            .map(k => `${k} ${counts[k]}`)
+            .join(' / ');
+        el.textContent = t.settingsLicenseSummary
+            .replace('%TOTAL%', String(window.SETTINGS_TEMPLATES.length))
+            .replace('%BREAKDOWN%', breakdown);
     }
 
     // インラインの `code` 部分だけタグに置換（XSS安全のため他はエスケープ）
