@@ -9326,7 +9326,7 @@ const SETTINGS_TEMPLATES = [
       license: 'MIT', holder: 'Shayan Rais' },
     { id: 'claude-code-tips', cat: 'reference', title: 'Claude Code Tips 40+',
       desc: 'status line / voice / Gemini minion など 40 以上の Tips。',
-      placement: '参照用。気に入った Tips の設定だけを自分の `~/.claude/` にコピー。',
+      placement: '原典リポジトリを直接ご参照ください。設定を取り入れる場合は、原典の利用条件をご確認のうえ判断してください。',
       zip: 'claude-code-tips.zip', size: '9.3 MB',
       license: '', holder: 'YK Sugi', source: 'https://github.com/ykdojo/claude-code-tips', licenseFlag: 'restricted' },
     { id: 'everything-claude-code', cat: 'reference', title: 'Everything Claude Code（総合カタログ）',

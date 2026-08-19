@@ -1429,7 +1429,7 @@
                 <div class="settings-card" data-setting-id="${s.id}">
                     <div class="settings-card-head">
                         <h4 class="settings-card-title">${escapeHtml(s.title)}</h4>
-                        <span class="settings-card-size">${t.settingsSizeLabel}: ${escapeHtml(s.size)}</span>
+                        ${s.licenseFlag === 'restricted' ? '' : `<span class="settings-card-size">${t.settingsSizeLabel}: ${escapeHtml(s.size)}</span>`}
                     </div>
                     <p class="settings-card-desc">${escapeHtml(s.desc)}</p>
                     ${licenseLineHtml(s, t)}
