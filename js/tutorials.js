@@ -495,14 +495,14 @@ const TUTORIALS = {
             number: "00_07",
             title: "2026年のClaude Code - 最新モデルと新機能",
             title_en: "Claude Code in 2026 - Latest Models & Features",
-            description: "Opus 5 / Sonnet 5 / Fable 5 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.233までの新機能群を把握する。",
-            description_en: "Understand Opus 5 / Sonnet 5 / Fable 5 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.233.",
+            description: "Opus 5 / Sonnet 5 / Fable 5 / Haiku 4.5の性能差、1Mトークンコンテキスト、v2.1.252までの新機能群を把握する。",
+            description_en: "Understand Opus 5 / Sonnet 5 / Fable 5 / Haiku 4.5 performance differences, 1M token context, and new features up to v2.1.252.",
             icon: "zap",
-            tags: ["2026年8月最新", "モデル", "v2.1.233"],
-            tags_en: ["August 2026 Latest", "Models", "v2.1.233"],
+            tags: ["2026年9月最新", "モデル", "v2.1.252"],
+            tags_en: ["September 2026 Latest", "Models", "v2.1.252"],
             content: {
-                summary: "2026年8月時点でClaude Codeはv2.1.233（2026/8/14リリース）。モデル構成はOpus 5（v2.1.219でデフォルトに、複雑なエージェントコーディング・企業業務向け、1Mコンテキスト・128K最大出力、$5/$25 per MTok）、Sonnet 5（速度と知性のバランスが良く日常向き、1Mコンテキスト、$3/$15 per MTok・2026/8/31まで$2/$10の導入価格）、Fable 5（2026/6/9 GA、最も高性能な一般公開モデル、Adaptive Thinking常時有効）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 5・Sonnet 5はAdaptive Thinking対応でeffort既定はhigh（/effort xhighでさらに強化）。Opus 4.8以前はレガシー扱いで、Opus 4.1は2026/8/5に退役。コマンド面ではv2.1.202で/doctor（セットアップチェックアップ）、v2.1.198で/dataviz（チャート設計ガイダンス）が追加。v2.1.200では権限モード名称が「Default」→「Manual」に変更。v2.1.198でサブエージェントがデフォルトでバックグラウンド実行に。v2.1.207ではBedrock/Vertex/Foundryでのauto modeがopt-in不要に。v2.1.210ではWrite(path)/NotebookEdit(path)/Glob(path)権限ルールが廃止（Edit/Read使用）。v2.1.212では/subtask・/forkのバックグラウンド複製、v2.1.219でOpus 5がデフォルトになった。2026年8月の主要追加（v2.1.220〜v2.1.233）：セッション間メッセージング（macOS/Linux）、セルフホスト環境パブリックβ（Team/Enterprise）、auto modeがPro/Max/Teamの新規セッションでデフォルトに（2026/8/14〜）、/teleportコマンド（クラウドセッションをローカルへ転送）、--forward-subagent-text・--permission-prompt-toolフラグ、CLAUDE_CODE_ENABLE_TODO_TOOLS=1（新モデルでTodoツールが廃止されたため再有効化用）、Bash入力リダイレクト権限チェック（v2.1.233）、サブエージェント制御の新環境変数群（CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION等）、VS Code FocusビューがWeek 32で追加。",
-                summary_en: "As of August 2026, Claude Code is at v2.1.233 (released 2026/8/14). Model lineup: Opus 5 (default since v2.1.219, for complex agentic coding and enterprise work, 1M context, 128k max output, $5/$25 per MTok), Sonnet 5 (best speed/intelligence balance for daily work, 1M context, $3/$15 per MTok with introductory $2/$10 until 2026/8/31), Fable 5 (GA 2026/6/9, most capable widely released model, Adaptive Thinking always on), Haiku 4.5 (200k context, lightweight). Opus 5 and Sonnet 5 support Adaptive Thinking with effort defaulting to high. Opus 4.8 and earlier are legacy; Opus 4.1 retires 2026/8/5. Key additions in v2.1.220–v2.1.233: cross-session messaging (macOS/Linux), self-hosted environments in public beta (Team/Enterprise), auto mode now the default for new sessions on Pro/Max/Team (from 2026/8/14), /teleport command (transfer cloud sessions to local), --forward-subagent-text and --permission-prompt-tool flags, CLAUDE_CODE_ENABLE_TODO_TOOLS=1 (todo tools removed from newer models), Bash input-redirection permission checks (v2.1.233), new subagent-control env vars (CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION etc.), Ultraplan removed (v2.1.221), VS Code Focus view (Week 32).",
+                summary: "2026年9月時点でClaude Codeはv2.1.252（2026/8/31リリース）。モデル構成はOpus 5（v2.1.219でデフォルトに、複雑なエージェントコーディング・企業業務向け、1Mコンテキスト・128K最大出力、$5/$25 per MTok）、Sonnet 5（速度と知性のバランスが良く日常向き、1Mコンテキスト、$3/$15 per MTok・2026/8/31まで$2/$10の導入価格）、Fable 5（2026/6/9 GA、最も高性能な一般公開モデル、Adaptive Thinking常時有効）、Haiku 4.5（200kコンテキスト、軽量高速）。Opus 5・Sonnet 5はAdaptive Thinking対応でeffort既定はhigh（/effort xhighでさらに強化）。Opus 4.8以前はレガシー扱いで、Opus 4.1は2026/8/5に退役。コマンド面ではv2.1.202で/doctor（セットアップチェックアップ）、v2.1.198で/dataviz（チャート設計ガイダンス）が追加。v2.1.200では権限モード名称が「Default」→「Manual」に変更。v2.1.198でサブエージェントがデフォルトでバックグラウンド実行に。v2.1.207ではBedrock/Vertex/Foundryでのauto modeがopt-in不要に。v2.1.210ではWrite(path)/NotebookEdit(path)/Glob(path)権限ルールが廃止（Edit/Read使用）。v2.1.212では/subtask・/forkのバックグラウンド複製、v2.1.219でOpus 5がデフォルトになった。2026年8月の主要追加（v2.1.220〜v2.1.233）：セッション間メッセージング（macOS/Linux）、セルフホスト環境パブリックβ（Team/Enterprise）、auto modeがPro/Max/Teamの新規セッションでデフォルトに（2026/8/14〜）、/teleportコマンド（クラウドセッションをローカルへ転送）、--forward-subagent-text・--permission-prompt-toolフラグ、CLAUDE_CODE_ENABLE_TODO_TOOLS=1（新モデルでTodoツールが廃止されたため再有効化用）、Bash入力リダイレクト権限チェック（v2.1.233）、サブエージェント制御の新環境変数群（CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION等）、VS Code FocusビューがWeek 32で追加。2026年9月（v2.1.234〜v2.1.252）では/design（Claude DesignのアートボードワークフローをCLI/Desktopに統合、リサーチプレビュー）、Concise output style（Preambleを省略して結果から始める組み込み出力スタイル）、Remote Controlデバイスカード（スマートフォンから接続済みマシンにセッション開始）、ANTHROPIC_DEFAULT_MODEL環境変数（v2.1.234 Week 34）、--restrictedフラグ（コマンド・コード実行ツールを除去する制限モード、CLAUDE_CODE_RESTRICTED=1でも指定可、v2.1.248）、PreModelSwitch/PostModelSwitchフック（モデル切替前後に発火する新フックイベント、v2.1.251）、/costにセッション別プロンプトキャッシュヒット率・再キャッシュ情報を追加（v2.1.251）、/usageにスペンドリミットバーとusage-credits情報を追加（v2.1.251）が加わった。なおSonnet 5は2026/8/31でプロモ価格期間が終了し、正式価格$2/$10 per MTokが確定。",
+                summary_en: "As of September 2026, Claude Code is at v2.1.252 (released 2026/8/31). Model lineup: Opus 5 (default since v2.1.219, for complex agentic coding and enterprise work, 1M context, 128k max output, $5/$25 per MTok), Sonnet 5 (best speed/intelligence balance for daily work, 1M context, $2/$10 per MTok), Fable 5 (GA 2026/6/9, most capable widely released model, Adaptive Thinking always on), Haiku 4.5 (200k context, lightweight). Opus 5 and Sonnet 5 support Adaptive Thinking with effort defaulting to high. Opus 4.8 and earlier are legacy. Key additions in v2.1.234–v2.1.252: /design (artboard UI design research preview in CLI/Desktop), Concise output style (built-in style that leads with results), Remote Control device cards (start sessions on connected machines from phone), ANTHROPIC_DEFAULT_MODEL env var (v2.1.234 Week 34), --restricted flag (removes command/code-execution tools; also CLAUDE_CODE_RESTRICTED=1, v2.1.248), PreModelSwitch/PostModelSwitch hooks (v2.1.251), /cost with per-session prompt cache hit-rate and re-caching info (v2.1.251), /usage spend limit bar with usage-credits info (v2.1.251).",
                 keyPoints: [
                     "Fable 5: 1Mコンテキスト、最も高性能な一般公開モデル、Adaptive Thinking常時有効、$10/$50 per MTok",
                     "Opus 5: 1Mコンテキスト、デフォルトモデル（v2.1.219以降）。複雑なエージェントコーディング・企業業務向け、effort既定high、$5/$25 per MTok",
@@ -512,7 +512,7 @@ const TUTORIALS = {
                     "プロンプトキャッシュで90%、Batch APIで50%のコスト削減が可能",
                     "Opus 5 / Opus 4.8 は Fast mode 対応。/effort xhighで最大思考",
                     "dynamic workflows: 数十〜数百のサブエージェントをスクリプトでオーケストレーション",
-                    "v2.1.220〜v2.1.233の主要新機能: セッション間メッセージング（macOS/Linux）、セルフホスト環境β（Team/Enterprise）、auto modeがPro/Max/Teamでデフォルトに（2026/8/14〜）、/teleport、--forward-subagent-text、CLAUDE_CODE_ENABLE_TODO_TOOLS=1、CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION等の制御環境変数、Ultraplan廃止（v2.1.221）"
+                    "v2.1.234〜v2.1.252の主要新機能: /design（アートボードUI設計リサーチプレビュー）、ANTHROPIC_DEFAULT_MODEL環境変数、Concise output style（簡潔出力）、--restrictedフラグ（コマンド実行ツール除去）、PreModelSwitch/PostModelSwitchフック（v2.1.251）、/costにプロンプトキャッシュヒット率追加、/usageにスペンドリミットバー追加（v2.1.251）"
                 ],
                 keyPoints_en: [
                     "Fable 5: 1M context, most capable widely released model, Adaptive Thinking always on, $10/$50 per MTok",
@@ -523,7 +523,7 @@ const TUTORIALS = {
                     "90% cost reduction with prompt caching, 50% with Batch API",
                     "Opus 5 / Opus 4.8 support Fast mode; /effort xhigh for max thinking",
                     "dynamic workflows: orchestrate dozens-hundreds of subagents from a script",
-                    "v2.1.220–v2.1.233 highlights: cross-session messaging (macOS/Linux), self-hosted environments beta (Team/Enterprise), auto mode default on Pro/Max/Team (from 2026/8/14), /teleport, --forward-subagent-text, CLAUDE_CODE_ENABLE_TODO_TOOLS=1, subagent control env vars, Ultraplan removed (v2.1.221)"
+                    "v2.1.234–v2.1.252 highlights: /design (artboard UI design research preview), ANTHROPIC_DEFAULT_MODEL env var, Concise output style, --restricted flag (removes command-execution tools), PreModelSwitch/PostModelSwitch hooks (v2.1.251), /cost with per-session prompt cache metrics, /usage spend limit bar (v2.1.251)"
                 ],
                 newFeatures: [
                     { name: "Claude Sonnet 5（新デフォルト）", desc: "2026/6/30リリース（v2.1.197）。デフォルトモデルに昇格。1Mコンテキスト・128K最大出力、Adaptive Thinking対応。$3/$15 per MTok（2026/8/31まで$2/$10プロモ価格）。API ID: claude-sonnet-5" },
@@ -576,7 +576,16 @@ const TUTORIALS = {
                     { name: "Bash入力リダイレクト権限チェック", desc: "「< file」のような入力リダイレクトも権限チェック対象に（v2.1.233）" },
                     { name: "サブエージェント制御の新環境変数", desc: "CLAUDE_CODE_MAX_WEB_SEARCHES_PER_SESSION（既定200）・CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION（既定200）・CLAUDE_CODE_MAX_CONCURRENT_SUBAGENTS（既定20）・CLAUDE_CODE_MAX_SUBAGENT_SPAWN_DEPTH（既定3、v2.1.219で有効化）・CLAUDE_CODE_WORKFLOW_PREFIX_STAGGER_MS（既定有効、0で無効化）でセッション内の上限を細かく制御（v2.1.221〜）" },
                     { name: "Ultraplan廃止", desc: "/ultraplanコマンドを削除（v2.1.221）" },
-                    { name: "VS Code拡張 Focus view", desc: "VS Code拡張にFocus viewを追加（Week 32）" }
+                    { name: "VS Code拡張 Focus view", desc: "VS Code拡張にFocus viewを追加（Week 32）" },
+                    { name: "/design", desc: "Claude DesignのアートボードワークフローをCLIとDesktopアプリに統合。UIをアートボードとして下書きし選択・実装できるリサーチプレビュー（v2.1.234 / Week 34）" },
+                    { name: "Concise output style（簡潔出力）", desc: "ClaudeがPreambleを省略して結果から始めるBuilt-in出力スタイル（v2.1.234 / Week 34）" },
+                    { name: "Remote Controlデバイスカード", desc: "claude remote-control実行中のマシンがスマートフォンに端末カードとして表示され、Codeタブからセッション開始できる（v2.1.234 / Week 34）" },
+                    { name: "ANTHROPIC_DEFAULT_MODEL", desc: "新規セッションのデフォルトモデルを設定する環境変数（v2.1.234 / Week 34）" },
+                    { name: "--restricted フラグ / CLAUDE_CODE_RESTRICTED=1", desc: "コマンド・コードを実行するBuilt-inツールを除去し、ワーキングディレクトリ内ファイルツールのみ残す制限モード（v2.1.248）" },
+                    { name: "experimental.cacheTtl エージェント設定", desc: "エージェントごとのプロンプトキャッシュTTLを個別設定できる設定キー（v2.1.248）" },
+                    { name: "PreModelSwitch / PostModelSwitch フック", desc: "モデル切替前後に発火する新フックイベント。モデル切替を制御できる（v2.1.251）" },
+                    { name: "/cost にプロンプトキャッシュ指標追加", desc: "セッション別プロンプトキャッシュのヒット率・トークン再キャッシュ情報を/costで確認可能（v2.1.251）" },
+                    { name: "/usage にスペンドリミットバー追加", desc: "/usageコマンドにスペンドリミットバーとusage-credits情報が追加（v2.1.251）" }
                 ],
                 handson: {
                     title: "モデルとバージョンを確認する",
@@ -2824,16 +2833,16 @@ wait`
             time: "30分",
             time_en: "30 min",
             number: "02_11",
-            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /doctor, /dataviz, /teleport（v2.1.233）",
-            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /doctor, /dataviz, /teleport (v2.1.233)",
-            description: "v2.1〜v2.1.233で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定・ワークフロー・セットアップ診断・チャート設計ガイダンス・クラウドセッション転送。",
-            description_en: "New commands added between v2.1 and v2.1.233: voice, periodic execution, session transfer, thinking depth, cloud-backed review, agent view, goal setting, workflows, setup checkup, dataviz guidance, cloud-to-local session teleport.",
+            title: "新コマンド群 - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /doctor, /dataviz, /teleport, /design（v2.1.252）",
+            title_en: "New Commands - /voice, /loop, /effort, /ultrareview, /goal, /workflows, /doctor, /dataviz, /teleport, /design (v2.1.252)",
+            description: "v2.1〜v2.1.252で追加された新コマンド群。音声・定期実行・セッション転送・思考深度・クラウド連携・エージェントビュー・完了条件設定・ワークフロー・セットアップ診断・チャート設計ガイダンス・クラウドセッション転送・UI設計。",
+            description_en: "New commands added between v2.1 and v2.1.252: voice, periodic execution, session transfer, thinking depth, cloud-backed review, agent view, goal setting, workflows, setup checkup, dataviz guidance, cloud-to-local session teleport, UI design.",
             icon: "radio",
-            tags: ["v2.1.233新機能", "Voice", "Loop", "/teleport", "/workflows", "/doctor", "/dataviz"],
-            tags_en: ["v2.1.233 New", "Voice", "Loop", "/teleport", "/workflows", "/doctor", "/dataviz"],
+            tags: ["v2.1.252新機能", "Voice", "Loop", "/teleport", "/workflows", "/doctor", "/design"],
+            tags_en: ["v2.1.252 New", "Voice", "Loop", "/teleport", "/workflows", "/doctor", "/design"],
             content: {
-                summary: "Claude Code v2.1〜v2.1.233で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はクラウドセッションをローカルへ転送する（claude.ai側で「/teleport」→ CLIで「claude --teleport <session id>」）。/effort は矢印キーのスライダーUIで思考深度を調整し、xhighで最大思考が可能。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /team-onboarding、/powerupが登場（/ultraplanはv2.1.221で廃止）。v2.1.139では`claude agents`、`/goal`、`/scroll-speed`が追加。v2.1.149では/usageにカテゴリ別内訳が追加。v2.1.152では/code-review（/simplifyを改名）が追加。v2.1.154ではOpus 4.8がデフォルトになりdynamic workflows（/workflows）が登場。v2.1.157ではプラグインの.claude/skills自動ロードと/reload-skillsが追加。v2.1.166では--fallback-model（最大3モデルの代替）、v2.1.169では/cd（ワーキングディレクトリ変更）と--safe-modeが追加。v2.1.181〜183では/config key=value（プロンプトから設定変更）、v2.1.186ではclaude mcp login/logoutが加わった。v2.1.191では/rewind（/clear前の会話状態から再開）が追加。v2.1.197ではSonnet 5が新デフォルトモデルになった。v2.1.198では/dataviz（チャート・ダッシュボード設計ガイダンス）が追加され、サブエージェントがデフォルトでバックグラウンド実行になった。v2.1.200では権限モード名称が「Default」→「Manual」に変更（--permission-mode manual）。v2.1.202では/doctor（セットアップ完全チェックアップ、/checkupがエイリアス）とデスクトップ版アプリ内ブラウザが追加。v2.1.207ではBedrock/Vertex/Foundryでのauto modeがopt-in不要に。v2.1.210ではWrite(path)/NotebookEdit(path)/Glob(path)権限ルールが廃止（Edit(path)/Read(path)を使用）。2026年8月（v2.1.220〜v2.1.233）では、/teleportコマンド（クラウドセッションをCLIへ転送）、--forward-subagent-text・--permission-prompt-toolフラグ、セッション間メッセージング（macOS/Linux）、セルフホスト環境β（Team/Enterprise）、auto modeがPro/Max/Teamでデフォルトに（2026/8/14〜）が加わった。",
-                summary_en: "Many commands were added between v2.1 and v2.1.233. /voice enables push-to-talk via spacebar. /loop repeats prompts at intervals; omitting the interval enters a dynamic self-paced mode. /teleport transfers cloud sessions to local ('/teleport' in claude.ai → 'claude --teleport <session id>' in CLI). /effort got a slider UI with xhigh for max thinking. April 2026 introduced /ultrareview, /team-onboarding, and /powerup (/ultraplan was removed in v2.1.221). v2.1.139 added `claude agents`, `/goal`, and `/scroll-speed`. v2.1.149 added category breakdown to /usage. v2.1.152 added /code-review (renamed from /simplify). v2.1.154 made Opus 4.8 the default and introduced dynamic workflows (/workflows). v2.1.157 added plugin auto-loading from .claude/skills and /reload-skills. v2.1.166 added --fallback-model (up to 3); v2.1.169 added /cd and --safe-mode; v2.1.181-183 added /config key=value; v2.1.186 added claude mcp login/logout. v2.1.191 added /rewind (resume from before /clear). v2.1.197 made Sonnet 5 the new default model. v2.1.198 added /dataviz (chart and dashboard design guidance) and made subagents run in background by default. v2.1.200 renamed 'Default' permission mode to 'Manual' (--permission-mode manual). v2.1.202 added /doctor (full setup checkup; /checkup alias) and in-app browser on Desktop. v2.1.207 expanded auto mode to Bedrock/Vertex/Foundry without opt-in. v2.1.210 deprecated Write(path)/NotebookEdit(path)/Glob(path) permission rules (use Edit(path)/Read(path)). August 2026 (v2.1.220–v2.1.233) added /teleport command (transfer cloud session to local CLI), --forward-subagent-text and --permission-prompt-tool flags, cross-session messaging (macOS/Linux), self-hosted environments beta (Team/Enterprise), and auto mode as default on Pro/Max/Team (from 2026/8/14).",
+                summary: "Claude Code v2.1〜v2.1.233で多数のコマンドが拡充された。/voice はスペースバーのpush-to-talk方式で音声入力ができる。/loop は指定間隔でプロンプトを繰り返す軽量cronで、間隔を省略するとモデルが自己ペースで動く動的モードになる。/teleport はクラウドセッションをローカルへ転送する（claude.ai側で「/teleport」→ CLIで「claude --teleport <session id>」）。/effort は矢印キーのスライダーUIで思考深度を調整し、xhighで最大思考が可能。2026年4月にはクラウド連携の /ultrareview（並列マルチエージェントコードレビュー）と /team-onboarding、/powerupが登場（/ultraplanはv2.1.221で廃止）。v2.1.139では`claude agents`、`/goal`、`/scroll-speed`が追加。v2.1.149では/usageにカテゴリ別内訳が追加。v2.1.152では/code-review（/simplifyを改名）が追加。v2.1.154ではOpus 4.8がデフォルトになりdynamic workflows（/workflows）が登場。v2.1.157ではプラグインの.claude/skills自動ロードと/reload-skillsが追加。v2.1.166では--fallback-model（最大3モデルの代替）、v2.1.169では/cd（ワーキングディレクトリ変更）と--safe-modeが追加。v2.1.181〜183では/config key=value（プロンプトから設定変更）、v2.1.186ではclaude mcp login/logoutが加わった。v2.1.191では/rewind（/clear前の会話状態から再開）が追加。v2.1.197ではSonnet 5が新デフォルトモデルになった。v2.1.198では/dataviz（チャート・ダッシュボード設計ガイダンス）が追加され、サブエージェントがデフォルトでバックグラウンド実行になった。v2.1.200では権限モード名称が「Default」→「Manual」に変更（--permission-mode manual）。v2.1.202では/doctor（セットアップ完全チェックアップ、/checkupがエイリアス）とデスクトップ版アプリ内ブラウザが追加。v2.1.207ではBedrock/Vertex/Foundryでのauto modeがopt-in不要に。v2.1.210ではWrite(path)/NotebookEdit(path)/Glob(path)権限ルールが廃止（Edit(path)/Read(path)を使用）。2026年8月（v2.1.220〜v2.1.233）では、/teleportコマンド（クラウドセッションをCLIへ転送）、--forward-subagent-text・--permission-prompt-toolフラグ、セッション間メッセージング（macOS/Linux）、セルフホスト環境β（Team/Enterprise）、auto modeがPro/Max/Teamでデフォルトに（2026/8/14〜）が加わった。2026年9月（v2.1.234〜v2.1.252）では/design（Claude DesignアートボードをCLI/Desktopに統合、リサーチプレビュー）、ANTHROPIC_DEFAULT_MODEL環境変数、Concise output style、Remote Controlデバイスカード（Week 34 / v2.1.234）、--restrictedフラグ・CLAUDE_CODE_RESTRICTED=1（コマンド実行ツール除去の制限モード）、experimental.cacheTtlエージェント設定（v2.1.248）、PreModelSwitch/PostModelSwitchフック・/costプロンプトキャッシュ指標・/usageスペンドリミットバー（v2.1.251）が加わった。",
+                summary_en: "Many commands were added between v2.1 and v2.1.252. /voice enables push-to-talk via spacebar. /loop repeats prompts at intervals; omitting the interval enters a dynamic self-paced mode. /teleport transfers cloud sessions to local ('/teleport' in claude.ai → 'claude --teleport <session id>' in CLI). /effort got a slider UI with xhigh for max thinking. April 2026 introduced /ultrareview, /team-onboarding, and /powerup (/ultraplan was removed in v2.1.221). v2.1.139 added `claude agents`, `/goal`, and `/scroll-speed`. v2.1.149 added category breakdown to /usage. v2.1.152 added /code-review (renamed from /simplify). v2.1.154 made Opus 4.8 the default and introduced dynamic workflows (/workflows). v2.1.157 added plugin auto-loading from .claude/skills and /reload-skills. v2.1.166 added --fallback-model (up to 3); v2.1.169 added /cd and --safe-mode; v2.1.181-183 added /config key=value; v2.1.186 added claude mcp login/logout. v2.1.191 added /rewind (resume from before /clear). v2.1.197 made Sonnet 5 the new default model. v2.1.198 added /dataviz (chart and dashboard design guidance) and made subagents run in background by default. v2.1.200 renamed 'Default' permission mode to 'Manual' (--permission-mode manual). v2.1.202 added /doctor (full setup checkup; /checkup alias) and in-app browser on Desktop. v2.1.207 expanded auto mode to Bedrock/Vertex/Foundry without opt-in. v2.1.210 deprecated Write(path)/NotebookEdit(path)/Glob(path) permission rules (use Edit(path)/Read(path)). August 2026 (v2.1.220–v2.1.233) added /teleport command (transfer cloud session to local CLI), --forward-subagent-text and --permission-prompt-tool flags, cross-session messaging (macOS/Linux), self-hosted environments beta (Team/Enterprise), and auto mode as default on Pro/Max/Team (from 2026/8/14). September 2026 (v2.1.234–v2.1.252) added /design (Claude Design artboard workflow in CLI/Desktop, research preview), ANTHROPIC_DEFAULT_MODEL env var, Concise output style, Remote Control device cards (Week 34 / v2.1.234), --restricted flag / CLAUDE_CODE_RESTRICTED=1 (removes command-execution tools), experimental.cacheTtl agent setting (v2.1.248), PreModelSwitch/PostModelSwitch hooks, /cost per-session prompt cache metrics, and /usage spend limit bar (v2.1.251).",
                 keyPoints: [
                     "/rewind: /clearを実行する前の会話状態から再開（v2.1.191）",
                     "/cd: セッションを新しいワーキングディレクトリに移動（v2.1.169）",
@@ -2863,7 +2872,13 @@ wait`
                     "セッション間メッセージング: macOS・Linux でセッション同士がメッセージを送受信（Week 32）",
                     "auto modeがデフォルトに: 2026/8/14よりPro・Max・Teamの新規セッションで自動有効化（v2.1.221以降）",
                     "CLAUDE_CODE_ENABLE_TODO_TOOLS=1: 新モデルで廃止されたTodoツールを再有効化する環境変数（v2.1.233）",
-                    "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION: セッション内のサブエージェント起動上限を設定（既定200、v2.1.221〜）"
+                    "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION: セッション内のサブエージェント起動上限を設定（既定200、v2.1.221〜）",
+                    "/design: Claude DesignのアートボードワークフローをCLI/Desktopに統合。UIアートボード下書き→選択→実装のリサーチプレビュー（v2.1.234 / Week 34）",
+                    "ANTHROPIC_DEFAULT_MODEL: 新規セッションのデフォルトモデルを設定する環境変数（v2.1.234）",
+                    "--restricted / CLAUDE_CODE_RESTRICTED=1: コマンド・コード実行ツールを除去する制限モード（v2.1.248）",
+                    "PreModelSwitch / PostModelSwitch フック: モデル切替前後に発火する新フックイベント（v2.1.251）",
+                    "/cost にプロンプトキャッシュ指標追加: セッション別キャッシュヒット率・再キャッシュ情報を表示（v2.1.251）",
+                    "/usage にスペンドリミットバー追加: スペンドリミットバーとusage-credits情報が追加（v2.1.251）"
                 ],
                 keyPoints_en: [
                     "/rewind: Resume conversation from before /clear was run (v2.1.191)",
@@ -2894,7 +2909,13 @@ wait`
                     "Cross-session messaging: Claude Code sessions can message each other on macOS and Linux (Week 32)",
                     "auto mode as default: New sessions on Pro/Max/Team default to auto mode from 2026/8/14 (v2.1.221+)",
                     "CLAUDE_CODE_ENABLE_TODO_TOOLS=1: Re-enable todo tools removed from newer models (v2.1.233)",
-                    "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION: Cap subagent spawns per session (default 200, v2.1.221+)"
+                    "CLAUDE_CODE_MAX_SUBAGENTS_PER_SESSION: Cap subagent spawns per session (default 200, v2.1.221+)",
+                    "/design: Claude Design artboard workflow in CLI/Desktop — draft artboard UI, pick, and implement; research preview (v2.1.234 / Week 34)",
+                    "ANTHROPIC_DEFAULT_MODEL: Set default model for new sessions via environment variable (v2.1.234)",
+                    "--restricted / CLAUDE_CODE_RESTRICTED=1: Removes command/code-execution built-in tools, keeps only file tools in working directory (v2.1.248)",
+                    "PreModelSwitch / PostModelSwitch hooks: New hook events that fire before and after model switching (v2.1.251)",
+                    "/cost with prompt cache metrics: Shows per-session cache hit ratios and token re-caching info (v2.1.251)",
+                    "/usage spend limit bar: Spend limit bar and usage-credits info added to /usage (v2.1.251)"
                 ],
                 handson: {
                     title: "新コマンドを試す",
@@ -3295,7 +3316,7 @@ wait`
                     ]
                 },
                 modelSelection: {
-                    title: "タスク別モデル選択ガイド（2026年8月）",
+                    title: "タスク別モデル選択ガイド（2026年9月）",
                     models: [
                         {
                             model: "Haiku 4.5",
@@ -3305,7 +3326,7 @@ wait`
                         },
                         {
                             model: "Sonnet 5",
-                            cost: "1Mコンテキスト・$3/$15 per MTok（2026/8/31まで$2/$10の導入価格）",
+                            cost: "1Mコンテキスト・$2/$10 per MTok",
                             useCase: "日常的なコード生成、分析、レビュー。速度と知性のバランス重視",
                             examples: ["新機能の実装", "コードレビュー", "バグ修正"]
                         },
