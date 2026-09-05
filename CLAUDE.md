@@ -68,6 +68,17 @@ T1案件健全性ダッシュボード / T2議事録ToDo / T3提案QA / T4監査
 - チートシート内絞り込み: 機能名で98行のテーブルを行フィルタ、該当0のテーブルは見出しごと非表示
 - 開発トラック選択の永続化: 保存キー `cctSelectedTracks`
 
+## 配布テンプレートのライセンス（2026-08 追加）
+
+`assets/settings/*.zip` を追加するときは、必ず `SETTINGS_TEMPLATES`（js/tutorials.js）に `license` / `holder` を書く。
+- `license`: SPDX 表記（MIT / Apache-2.0 / MIT-0 など）。原典に表記がなければ空文字にして `licenseFlag: 'unknown'` を付ける
+- `licenseFlag`: `'own'`（ギブリー作成）/ `'unknown'`（表記なし）/ `'restricted'`（全権利留保。ZIP を配布せず原典リンクのみ）
+- `source`: 原典リポジトリの URL。実在を確認してから書く
+- ZIP には原典の LICENSE ファイルを含めたまま同梱する
+- 全権利留保のものは配布しない。掲載済みなら `restricted` に切り替え、ZIP をリポジトリから外す
+
+内訳は `renderLicenseSummary()` が自動集計して「ライセンスと商用利用」欄に出す。件数を手書きしない。
+
 ## チュートリアル構成
 | レベル | 章数 | ID範囲 | 内容 |
 |--------|------|---------|------|
